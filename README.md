@@ -2,6 +2,16 @@
 
 ---
 
-**Autores:** 
+**Asignatura:** Gestión Sistemas de Información (GSI)
 
-**Asignatura:** Gestión de Proyectos Informáticos
+| **Autores**                 |                                               
+|-------------------------|
+| **Yeray Aller** 	        |
+| **Julen Huarte**    		 |
+| **Luis Azcoiti**	              |
+| **Iván Isusi**		     |
+| **Javier Aranguren**	    | 
+| **Raúl Itoiz**	             | 
+| **Javier Artazcoz**	               | 
+| **Ekaitz Arribillaga**	     |
+| **Fermin Sola**	     |
