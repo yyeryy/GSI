@@ -10,4 +10,5 @@ package GSILabs.BModel;
  */
 public class Usuario {
     
+
 }
