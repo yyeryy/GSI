@@ -23,7 +23,7 @@ import java.time.LocalTime;
  *
  * @author yeray
  */
-public class BusinessSystem implements LeisureOffice{
+public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean nuevoUsuario(Usuario u) {
@@ -42,7 +42,7 @@ public class BusinessSystem implements LeisureOffice{
 
     @Override
     public boolean existeNick(String nick) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return true;
     }
 
     @Override
@@ -51,8 +51,15 @@ public class BusinessSystem implements LeisureOffice{
     }
 
     @Override
-    public boolean nuevaReview(Review r) { //GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean nuevaReview(Review r) {
+        if(existeNick(r.getUsuario().getNick()) /*&& obtenerLocal(r.getLocal().getDireccion()*/){
+            if(existeRewiew(r.getUsuario(), r.getLocal(), LocalDate.now())){
+                return false;
+            }
+            //Guardar Review
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -61,12 +68,25 @@ public class BusinessSystem implements LeisureOffice{
     }
 
     @Override
-    public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
+        Review reviews[] = verReviews(l);
+        if(reviews.length == 0){
+            return false;
+        }
+        for(int i = 0; i < reviews.length; i++){
+            if(reviews[i].getUsuario().getNick().equalsIgnoreCase(u.getNick())){
+                if(reviews[i].getFechaReview() == ld){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean nuevaContestacion(Contestacion c, Review r) {//GRUPO2
+        //Almacenar fecha contestacion
+        //Comprobar si tiene contestacion
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -167,6 +187,46 @@ public class BusinessSystem implements LeisureOffice{
 
     @Override
     public Pub[] listarPubs(String ciudad, String provincia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public float obtenerValoracionMedia(Local l) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public float obtenerValoracionMedia(Propietario p) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public float obtenerValoracionMedia(Local l, int edadEntre, int edadHasta) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Local[] obtenerLocalesOrdenados(String ciudad, String provincia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Local[] obtenerLocalesOrdenados(String provincia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Bar[] obtenerBaresOrdenados(String ciudad, String provincia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Restaurante[] obtenerRestaurantesOrdenados(String ciudad, String provincia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Pub[] obtenerPubOrdenados(String ciudad, String provincia) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

@@ -16,11 +16,55 @@ public class Review {
     private String comentario;
     private LocalDate fechaReview;
     private Local local;
-    
-    Review(Local local, int valoracion, String comentario, LocalDate fechaReview) {
-        this.local = local;
-        this.comentario = comentario;
+    private Usuario usuario;
+
+    public Review(int valoracion, String comentario, LocalDate fechaReview, Local local, Usuario usuario) {
         this.valoracion = valoracion;
+        this.comentario = comentario;
+        this.fechaReview = fechaReview;
+        this.local = local;
+        this.usuario = usuario;
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="getters and setters">
+    public int getValoracion() {
+        return valoracion;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public LocalDate getFechaReview() {
+        return fechaReview;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setValoracion(int valoracion) {
+        this.valoracion = valoracion;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public void setFechaReview(LocalDate fechaReview) {
         this.fechaReview = fechaReview;
     }
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+//</editor-fold>
 }

@@ -5,12 +5,15 @@
 package GSILabs.BModel;
 
 import java.time.LocalDate;
+import GSILabs.BSystem.BusinessSystem;
 
 /**
  *
  * @author 34636
  */
 public class Propietario extends Usuario{
+    
+    BusinessSystem businessSystem = new BusinessSystem();
 
     public Propietario(String n, String c, LocalDate f, tipoUsuario t) {
         super(n, c, f, t);
@@ -18,7 +21,8 @@ public class Propietario extends Usuario{
     
     /*El dueño puede realizar una Contestación a una Review, 
     siempre y cuand oel local al que se refiera sea suyo.*/
-    public void realizarContestacion() {
-
+    public void realizarContestacion(Contestacion c, Review r) {
+        
+        businessSystem.nuevaContestacion(c, r);
     }
 }
