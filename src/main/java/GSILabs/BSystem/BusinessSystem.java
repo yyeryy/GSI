@@ -18,12 +18,20 @@ import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+
+
 
 /**
  *
  * @author yeray
  */
 public class BusinessSystem implements LeisureOffice, LookupService{
+    
+    private static final int TAMANO_LISTAS = 100;
+    Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
+    Review[] reviews = new Review[TAMANO_LISTAS];
+    Local[] locales = new Local[TAMANO_LISTAS];
 
     @Override
     public boolean nuevoUsuario(Usuario u) {
@@ -56,20 +64,29 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             if(existeRewiew(r.getUsuario(), r.getLocal(), LocalDate.now())){
                 return false;
             }
-            //Guardar Review
+            reviews[reviews.length] = r;
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean eliminaReview(Review r) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminaReview(Review r) {
+        if(reviews.length == 0){
+            return false;
+        }
+        for(int i = 0; i < reviews.length; i++){
+            if(reviews[i].getUsuario().getNick().equalsIgnoreCase(r.getUsuario().getNick()) && reviews[i].getFechaReview() == (r.getFechaReview()) && reviews[i].getLocal().equals(r.getLocal())){
+                //Eliminar review
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
-        Review reviews[] = verReviews(l);
+        Review[] reviews = verReviews(l);
         if(reviews.length == 0){
             return false;
         }

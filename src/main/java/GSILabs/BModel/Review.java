@@ -17,6 +17,7 @@ public class Review {
     private LocalDate fechaReview;
     private Local local;
     private Usuario usuario;
+    private Contestacion contestacion;
 
     public Review(int valoracion, String comentario, LocalDate fechaReview, Local local, Usuario usuario) {
         this.valoracion = valoracion;
@@ -25,6 +26,8 @@ public class Review {
         this.local = local;
         this.usuario = usuario;
     }
+
+    
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
     public int getValoracion() {
@@ -46,6 +49,10 @@ public class Review {
     public Usuario getUsuario() {
         return usuario;
     }
+    
+    public Contestacion getContestacion() {
+        return contestacion;
+    }
 
     public void setValoracion(int valoracion) {
         this.valoracion = valoracion;
@@ -66,5 +73,11 @@ public class Review {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    
+    public void setContestacion(Contestacion contestacion) {
+        this.contestacion = contestacion;
+    }
 //</editor-fold>
+
+    
 }

@@ -21,6 +21,31 @@ public class Contestacion {
         this.fechaReview = fechaReview;
         this.local = local;
     }
-    
+
+    //<editor-fold defaultstate="collapsed" desc="getters and setters">
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public LocalDate getFechaReview() {
+        return fechaReview;
+    }
+
+    public void setFechaReview(LocalDate fechaReview) {
+        this.fechaReview = fechaReview;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+    //</editor-fold>
     
 }
