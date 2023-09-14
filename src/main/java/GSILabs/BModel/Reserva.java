@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package GSILabs.BModel;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  *
  * @author 34636
@@ -13,79 +17,37 @@ public class Reserva {
     de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
     se efectuará, así como un posible porcentaje de descuento.
      */
-    private int dia;
-    private int mes;
-    private int ano;
-    private int hora;
-    private int minuto;
-    private float descuento;
-
-    public Reserva(int dia, int mes, int ano, int hora, int minuto, int descuento)
-    {
-        setDia(dia);
-        setMes(mes);
-        setAno(ano);
-        setHora(hora);
-        setMinuto(minuto);
+    private LocalDate fecha;
+    private LocalTime hora;
+    private int descuento;
+    
+    public Reserva(LocalDate fecha, LocalTime hora, int descuento) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.descuento = descuento;
     }
 
-    public int getDia() {
-        return dia;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    public int getMes() {
-        return mes;
-    }
-
-    public int getAno() {
-        return ano;
-    }
-
-    public int getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public int getMinuto() {
-        return minuto;
-    }
-
-    public float getDescuento() {
+    public int getDescuento() {
         return descuento;
     }
 
-    public void setDia(int dia) {
-        this.dia = dia;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-
-    public void setHora(int hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
-    public void setMinuto(int minuto) {
-        this.minuto = minuto;
-    }
-
-    public void setDescuento(float descuento) {
+    public void setDescuento(int descuento) {
         this.descuento = descuento;
-    }
-    
-    public int[] getFecha()
-    {
-        int[] fecha = {getDia(),getHora(),getAno()};
-        return fecha;
-    }
-    
-    public int[] getHoraYMinuto()
-    {
-        int[] horaYMinuto = {getHora(), getMinuto()};
-        return horaYMinuto;
-    }
+    }   
 }
