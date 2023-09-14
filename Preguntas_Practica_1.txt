@@ -1,0 +1,4 @@
+PREGUNTAS PARA LA PRÁCTICA 1 DE GSI
+
+- ¿Donde se almacenan los datos?
+- ¿Utilizamos arrays estáticos o podemos utilizar arraylist?
