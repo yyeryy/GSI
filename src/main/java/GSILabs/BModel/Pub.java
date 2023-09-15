@@ -9,5 +9,23 @@ package GSILabs.BModel;
  * @author 34636
  */
 public class Pub extends Local{
-    
+    private String horaApertura;
+    private String horaClausura;
+
+    public Pub(String horaApertura, String horaClausura) {
+        this.horaApertura = horaApertura;
+        this.horaClausura = horaClausura;
+    }
+
+    public String getHoraApertura() {
+        return horaApertura;
+    }
+
+    public String getHoraClausura() {
+        return horaClausura;
+    }
+
+    public static void main(String[] args) {
+        Pub miPub = new Pub("18:00", "02:00");
+    }
 }
