@@ -32,7 +32,7 @@ import java.util.List;
 public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
-    List<Usuario> usuarios;
+    HashSet<Usuario> usuarios;
     //Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
     ArrayList<Local> locales = new ArrayList<Local>();
