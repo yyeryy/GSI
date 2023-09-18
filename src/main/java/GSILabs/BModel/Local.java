@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author 34636
  */
-public final class Local {
+public class Local {
     /*El sistema almacena información de locales de ocio en España. Un local tienen un nombre y está
     en una localización concreta. (Localidad, Provincia, Calle y Número). No puede haber dos locales
     en la misma dirección. Los locales pueden almacenar una breve descripción de no más de 300
