@@ -11,7 +11,7 @@ public class Local {
     en una localización concreta. (Localidad, Provincia, Calle y Número). No puede haber dos locales
     en la misma dirección. Los locales pueden almacenar una breve descripción de no más de 300
     caracteres.*/
-    private String nombre;
+    String nombre;
     private Direccion direccion;
     private String descripcion;
     private tipoLocal tipo;

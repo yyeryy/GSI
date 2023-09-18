@@ -22,6 +22,7 @@ import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -32,8 +33,8 @@ import java.util.ArrayList;
 public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
-    // List<Usuario> usuarios;
-    Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
+    List<Usuario> usuarios;
+    //Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
     Local[] locales = new Local[TAMANO_LISTAS];
     private Local.tipoLocal PUB;
@@ -42,27 +43,47 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     public boolean nuevoUsuario(Usuario u) {
         if (existeNick(u.getNick()))
 	    return false;
-	//usuarios.add(u)
+	usuarios.add(u);
+	return true;
     }
 
     @Override
     public boolean eliminaUsuario(Usuario u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (existeNick(u.getNick())){
+	    usuarios.remove(u);
+	    return true;
+	}
+	return false;
     }
 
     @Override
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (existeNick(u.getNick())){
+	    u.setNick(nuevoU.getNick());
+	    u.setContraseña(nuevoU.getContraseña());
+	    u.setFechaNacimiento(nuevoU.getFechaNacimiento());
+	    u.setTipo(nuevoU.getTipo());
+	    return true;
+	}
+	return false;
     }
 
     @Override
     public boolean existeNick(String nick) {
-        return true;
+	for (Usuario u : usuarios) {
+	    if (u.getNick().equals(nick))
+		return true;
+	}
+	return false;
     }
 
     @Override
     public Usuario obtenerUsuario(String nick) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Usuario u : usuarios) {
+	    if (u.getNick().equals(nick))
+		return u;
+	}
+	return null;
     }
 
     @Override
