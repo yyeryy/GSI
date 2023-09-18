@@ -32,7 +32,7 @@ import java.util.List;
 public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
-    List<Usuario> usuarios;
+    ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     //Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
     ArrayList<Local> locales = new ArrayList<Local>();
@@ -234,7 +234,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         int user = 0;
         Cliente cliente = null;
         while (encontradoCliente == 0 && user < TAMANO_LISTAS){
-            if (usuarios[user] != c){
+            if (usuarios.get(user) != c){
                 user++;
             }else{
                 encontradoCliente = 1;
@@ -251,7 +251,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         int encontradoLocal = 0;
         int local = 0;
         while (encontradoLocal == 0 && local < TAMANO_LISTAS){
-            if (locales[local] != r){
+            if (locales.get(local) != r){
                 local++;
             }else{
                 encontradoLocal = 1;
@@ -309,7 +309,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         int user = 0;
         Cliente cliente = null;
         while (encontradoCliente == 0 && user < TAMANO_LISTAS){
-            if (usuarios[user] != c){
+            if (usuarios.get(user) != c){
                 user++;
             }else{
                 encontradoCliente = 1;
@@ -326,12 +326,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         int local = 0;
         ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
         while ( local < TAMANO_LISTAS){
-            if (locales[local].getTipo() != PUB){
+            if (locales.get(local).getTipo() != PUB){
                 Reservable elLocalR = null;
-                if (locales[local].getTipo() == BAR){
-                    elLocalR = (Bar) locales[local];
+                if (locales.get(local).getTipo() == BAR){
+                    elLocalR = (Bar) locales.get(local);
                 }else{
-                    elLocalR = (Restaurante) locales[local];
+                    elLocalR = (Restaurante) locales.get(local);
                 }
                 Reserva[] reservasUnLocal = elLocalR.reservasDeCliente(c);
                 if(reservasUnLocal != null){
