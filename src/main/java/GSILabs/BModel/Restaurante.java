@@ -14,7 +14,7 @@ public class Restaurante extends Local implements Reservable{
     private double precioMenu;
     private Integer capacidad;
     private Integer capacidadMesa;
-    private ArrayList<ClienteReserva> reservas;
+    private ArrayList<Reserva> reservas;
 
 
     public Restaurante(String nombre, Direccion direccion, String descripcion, double precioMenu, Integer capacidad, Integer capacidadMesa){
@@ -22,7 +22,7 @@ public class Restaurante extends Local implements Reservable{
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
-        this.reservas = new ArrayList<ClienteReserva>();
+        this.reservas = new ArrayList<Reserva>();
 
     }
     
@@ -31,7 +31,7 @@ public class Restaurante extends Local implements Reservable{
         this.precioMenu = 0;
         this.capacidad = 0;
         this.capacidadMesa = 0;
-        this.reservas = new ArrayList<ClienteReserva>();
+        this.reservas = new ArrayList<Reserva>();
     }
     
     public double getPrecioMenu(){
