@@ -24,7 +24,7 @@ determinado, a escoger entre Propietario y Cliente.*/
     }
 
     public Usuario(String n, String c, LocalDate f, tipoUsuario t) {
-	nickValido(n); // this.nick = nick;
+        nickValido(n); // this.nick = nick;
 	contraseñaValido(c); // this.contraseña = password;
 	fechaNacimientoValido(f); // this.fechaNacimiento = fechaNacimiento;
 	tipo = t;
@@ -65,21 +65,21 @@ determinado, a escoger entre Propietario y Cliente.*/
 //</editor-fold>
 
     public void nickValido(String n) {
-        if (this.nick.length() < 3) {
+        if (n.length() < 3) {
             throw new IllegalArgumentException("El nombre debe tener al menos 3 caracteres."); // revisar esto que hace y sino solo sout
         }
         this.nick = n;
     }
     
     public void contraseñaValido(String c) {
-        if (this.contraseña.length() < 1) {
+        if (c.length() < 1) {
             throw new IllegalArgumentException("La contraseña no puede ser nula."); // revisar esto que hace y sino solo sout
         }
         this.contraseña = c;
     }
     
     public void fechaNacimientoValido(LocalDate f) {
-        if (this.fechaNacimiento.getYear() > LocalDate.now().getYear()-14) {
+        if (f.getYear() > LocalDate.now().getYear()-14) {
             throw new IllegalArgumentException("La contraseña no puede ser nula."); // revisar esto que hace y sino solo sout
         }
         this.fechaNacimiento = f;
