@@ -15,13 +15,8 @@ public class Bar extends Local implements Reservable{
     private List<String> especialidades;
     private ArrayList<ClienteReserva> listaReserva ;
 
-<<<<<<< HEAD
     public Bar(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion, tipoLocal.BAR);
-=======
-    public Bar(String nombre, Direccion direccion, String descripcion, tipoLocal tipoLocal) {
-        super(nombre, direccion, descripcion, tipoLocal);
->>>>>>> 7786380aea6821bb74d51debd686dcef5336be78
         this.especialidades = new ArrayList<>();
         this.listaReserva = new ArrayList<>();
     }
