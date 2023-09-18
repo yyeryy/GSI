@@ -35,8 +35,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     // List<Usuario> usuarios;
     Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
-    Local[] locales = new Local[TAMANO_LISTAS];
-    private Local.tipoLocal PUB;
+    ArrayList<Local> locales = new ArrayList<Local>();
 
     @Override
     public boolean nuevoUsuario(Usuario u) {
@@ -136,32 +135,55 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean nuevoLocal(Local l) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        locales.add(l);
+        return true;
     }
 
     @Override
     public boolean eliminarLocal(Local l) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(locales.size() < 1) {
+            return false;
+        }
+        for(int i = 0; i < locales.size(); i++){
+            if(locales.get(i).equals(l)){
+                locales.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public Local obtenerLocal(Direccion d) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(locales.size() < 1) {
+            return null;
+        }
+        for(int i = 0; i < locales.size(); i++){
+            if(locales.get(i).getDireccion().equals(d)){
+                return locales.get(i);
+            }
+        }
+        return null;
     }
 
     @Override
     public boolean asociarLocal(Local l, Propietario p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return l.addPropietario(p);
     }
 
     @Override
     public boolean desasociarLocal(Local l, Propietario p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return l.removePropietario(p);
     }
 
     @Override
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(locales.size() < 1) {
+            return false;
+        }
+        locales.remove(viejoL);
+        locales.add(nuevoL);
+        return true;
     }
 
     @Override
