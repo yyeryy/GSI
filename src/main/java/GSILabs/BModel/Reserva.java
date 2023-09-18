@@ -18,15 +18,25 @@ public class Reserva {
     de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
     se efectuará, así como un posible porcentaje de descuento.
      */
+    /*
+    Un cliente no pude tener la misma fecha en una reserva, por lo que se puede utilizar la combinacion de los atributos como una supuesta ID
+    */
+    private Cliente cliente;
     private LocalDate fecha;
     private LocalTime hora;
     private int descuento;
-    
-    public Reserva(LocalDate fecha, LocalTime hora, int descuento) {
+
+    public Reserva(Cliente cliente, LocalDate fecha, LocalTime hora, int descuento) {
+        this.cliente = cliente;
         this.fecha = fecha;
         this.hora = hora;
         this.descuento = descuento;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
 
     public LocalDate getFecha() {
         return fecha;
@@ -55,7 +65,7 @@ public class Reserva {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fecha,hora, descuento);
+        return Objects.hash(cliente,fecha);
     }
 
     @Override
@@ -68,9 +78,8 @@ public class Reserva {
           return false;
         Reserva other = (Reserva) obj;
         boolean result = (
-            Objects.equals(fecha, other.fecha)&&
-            Objects.equals(hora,other.hora) &&
-            Objects.equals(descuento, other.descuento)
+            Objects.equals(cliente, other.cliente)&&
+            Objects.equals(fecha, other.fecha)
         );
         return result;
     }

@@ -13,12 +13,10 @@ import java.util.List;
  */
 public class Bar extends Local implements Reservable{
     private List<String> especialidades;
-    private ArrayList<ClienteReserva> listaReserva ;
 
-    public Bar(String nombre, Direccion direccion, String descripcion, tipoLocal tipoLocal) {
-        super(nombre, direccion, descripcion, tipoLocal);
+    public Bar(String nombre, Direccion direccion, String descripcion) {
+        super(nombre, direccion, descripcion, tipoLocal.BAR);
         this.especialidades = new ArrayList<>();
-        this.listaReserva = new  ArrayList<ClienteReserva>();
     }
 
     public void agregarEspecialidad(String especialidad) {

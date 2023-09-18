@@ -6,7 +6,6 @@ package GSILabs.BSystem;
 
 import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
-import GSILabs.BModel.ClienteReserva;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
@@ -22,6 +21,7 @@ import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -32,8 +32,8 @@ import java.util.ArrayList;
 public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
-    // List<Usuario> usuarios;
-    Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
+    List<Usuario> usuarios;
+    //Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
     ArrayList<Local> locales = new ArrayList<Local>();
 
@@ -41,27 +41,47 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     public boolean nuevoUsuario(Usuario u) {
         if (existeNick(u.getNick()))
 	    return false;
-	//usuarios.add(u)
+	usuarios.add(u);
+	return true;
     }
 
     @Override
     public boolean eliminaUsuario(Usuario u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (existeNick(u.getNick())){
+	    usuarios.remove(u);
+	    return true;
+	}
+	return false;
     }
 
     @Override
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (existeNick(u.getNick())){
+	    u.setNick(nuevoU.getNick());
+	    u.setContraseña(nuevoU.getContraseña());
+	    u.setFechaNacimiento(nuevoU.getFechaNacimiento());
+	    u.setTipo(nuevoU.getTipo());
+	    return true;
+	}
+	return false;
     }
 
     @Override
     public boolean existeNick(String nick) {
-        return true;
+	for (Usuario u : usuarios) {
+	    if (u.getNick().equals(nick))
+		return true;
+	}
+	return false;
     }
 
     @Override
     public Usuario obtenerUsuario(String nick) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Usuario u : usuarios) {
+	    if (u.getNick().equals(nick))
+		return u;
+	}
+	return null;
     }
 
     @Override
@@ -282,6 +302,27 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(Cliente c) {
+        /*
+        Comprobar si el usuario existe y es cliente
+        */
+        int encontradoCliente = 0;
+        int user = 0;
+        Cliente cliente = null;
+        while (encontradoCliente == 0 && user < TAMANO_LISTAS){
+            if (usuarios[user] != c){
+                user++;
+            }else{
+                encontradoCliente = 1;
+                cliente = c;
+            }
+        }
+        if(encontradoCliente == 0 || cliente.getTipo() != CLIENTE){
+            return null;
+        }
+
+
+
+
         int local = 0;
         ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
         while ( local < TAMANO_LISTAS){
@@ -305,11 +346,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
 
         if(0 < listaReserva.size()){
-        
+            Reserva[] reservas = new Reserva[listaReserva.size()]; 
+            int pos = 0;
+            while(pos < listaReserva.size()){
+                reservas[pos] = (listaReserva.get(pos));
+                pos++;
+            }
+            return reservas;
         }
-
-
-         
+        return null; 
     }
 
     /**

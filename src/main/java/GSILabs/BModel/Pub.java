@@ -12,7 +12,8 @@ public class Pub extends Local{
     private String horaApertura;
     private String horaClausura;
 
-    public Pub(String horaApertura, String horaClausura) {
+    public Pub(String horaApertura, String horaClausura, String nombre, Direccion direccion, String descripcion) {
+        super(nombre, direccion, descripcion, tipoLocal.PUB);
         this.horaApertura = horaApertura;
         this.horaClausura = horaClausura;
     }
