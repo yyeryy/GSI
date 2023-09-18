@@ -33,7 +33,6 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
     ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    //Review[] reviews = new Review[TAMANO_LISTAS];
     ArrayList<Review> reviews = new ArrayList<Review>();
     ArrayList<Local> locales = new ArrayList<Local>();
 
