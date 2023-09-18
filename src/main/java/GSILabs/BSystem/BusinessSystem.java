@@ -6,7 +6,6 @@ package GSILabs.BSystem;
 
 import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
-import GSILabs.BModel.ClienteReserva;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
