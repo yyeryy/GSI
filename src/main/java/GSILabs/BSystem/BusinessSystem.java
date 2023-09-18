@@ -32,6 +32,7 @@ import java.util.ArrayList;
 public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
+    // List<Usuario> usuarios;
     Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
     Local[] locales = new Local[TAMANO_LISTAS];
@@ -39,7 +40,9 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean nuevoUsuario(Usuario u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (existeNick(u.getNick()))
+	    return false;
+	//usuarios.add(u)
     }
 
     @Override
