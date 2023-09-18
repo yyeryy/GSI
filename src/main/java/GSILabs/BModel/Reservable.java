@@ -72,23 +72,9 @@ se efectuará, así como un posible porcentaje de descuento.
     }
 
     default boolean eliminarReserva(Reserva r){
-        if(comprobarReserva(r)){
-            int pos = 0;
-            int encontrada = 0;
-            while(pos < listaReserva.size() && encontrada == 0){
-                if(listaReserva.get(pos).equals(r)){
-                    listaReserva.remove(pos);
-                    encontrada = 1;
-                }
-                pos++;
-            }
-            if(encontrada == 1){
-                return true;
-            }
-        }
-        return false;
-    }
+        return listaReserva.remove(r);
 
+    }
     default Reserva[] todasReserva(){
         if(listaReserva.size() > 0){
             Reserva[] reservas = new Reserva[listaReserva.size()];

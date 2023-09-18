@@ -233,7 +233,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         int encontradoCliente = 0;
         int user = 0;
         Cliente cliente = null;
-        while (encontradoCliente == 0 && user < TAMANO_LISTAS){
+        while (encontradoCliente == 0 && user < usuarios.size()){
             if (usuarios.get(user) != c){
                 user++;
             }else{
@@ -250,7 +250,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         */
         int encontradoLocal = 0;
         int local = 0;
-        while (encontradoLocal == 0 && local < TAMANO_LISTAS){
+        while (encontradoLocal == 0 && local < locales.size()){
             if (locales.get(local) != r){
                 local++;
             }else{
@@ -279,7 +279,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         Reserva[] localReservas = obtenerReservas(r);
         int encontradoReserva = 0;
         int reserva = 0;
-        while (encontradoReserva == 0 && reserva < TAMANO_LISTAS){
+        while (encontradoReserva == 0 && reserva < localReservas.length){
             if (!localReservas[reserva].getFecha().equals(ld)){
                 reserva++;
             }else{
@@ -308,7 +308,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         int encontradoCliente = 0;
         int user = 0;
         Cliente cliente = null;
-        while (encontradoCliente == 0 && user < TAMANO_LISTAS){
+        while (encontradoCliente == 0 && user < usuarios.size()){
             if (usuarios.get(user) != c){
                 user++;
             }else{
@@ -325,7 +325,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
         int local = 0;
         ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
-        while ( local < TAMANO_LISTAS){
+        while ( local < locales.size()){
             if (locales.get(local).getTipo() != PUB){
                 Reservable elLocalR = null;
                 if (locales.get(local).getTipo() == BAR){
@@ -364,7 +364,23 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(Reservable r) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        /*
+        Comprobar si el local reservable existe (Bar/Restaurante)
+        */
+        int encontradoLocal = 0;
+        int local = 0;
+        while (encontradoLocal == 0 && local < locales.size()){
+            if (locales.get(local) != r){
+                local++;
+            }else{
+                encontradoLocal = 1;
+            }
+        }
+        if(encontradoLocal == 0){
+            return null;
+        }
+        return r.todasReserva();
+
     }
 
     /**
@@ -384,8 +400,22 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public boolean eliminarReserva(Reserva r) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int local = 0;
+        int encontrado = 0;
+        while(local < locales.size() && encontrado == 0){
+            if(locales.get(local).getTipo() != PUB){
+                Reservable elLocal = (Reservable) locales.get(local);
+                if(elLocal.comprobarReserva(r)){
+                   return elLocal.eliminarReserva(r);
+                }
+                
+            }
+            local++;
+        }
+        return false;
     }
+
+
 
     @Override
     public Local[] listarLocales(String ciudad, String provincia) {
