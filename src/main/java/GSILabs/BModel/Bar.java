@@ -4,15 +4,20 @@
  */
 package GSILabs.BModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author 34636
  */
 public class Bar extends Local implements Reservable{
     private List<String> especialidades;
+    private ArrayList<ClienteReserva> listaReserva ;
 
     public Bar() {
         this.especialidades = new ArrayList<>();
+        this.listaReserva = new  ArrayList<ClienteReserva>();
     }
 
     public void agregarEspecialidad(String especialidad) {

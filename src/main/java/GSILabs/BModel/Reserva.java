@@ -6,6 +6,7 @@ package GSILabs.BModel;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 /**
  *
@@ -49,5 +50,29 @@ public class Reserva {
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
-    }   
+    }  
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fecha,hora, descuento);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Reserva other = (Reserva) obj;
+        boolean result = (
+            Objects.equals(fecha, other.fecha)&&
+            Objects.equals(hora,other.hora) &&
+            Objects.equals(descuento, other.descuento)
+        );
+        return result;
+    }
+     
 }

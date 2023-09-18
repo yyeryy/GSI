@@ -22,18 +22,69 @@ de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha
 se efectuará, así como un posible porcentaje de descuento.
 */
 
-    ArrayList<ClienteReserva> listaReserva = new  ArrayList<ClienteReserva>();
+    public ArrayList<ClienteReserva> listaReserva = new  ArrayList<ClienteReserva>();
 
-    public void nuevaReserva(Cliente c, LocalDate ld, LocalTime lt);
+    default void nuevaReserva(Cliente cliente, LocalDate fecha, LocalTime hora){
 
-    public Reserva[] reservasDeCliente(Cliente c);
+        int descuento = 0;
+        Reserva reservaEntrante = new Reserva(fecha, hora, descuento);
+        ClienteReserva nuevoClienteReserva = new ClienteReserva(cliente, reservaEntrante);
+        listaReserva.add(nuevoClienteReserva);
 
-    public boolean estaReserva(Reserva r);
+    };
 
-    public boolean eliminarReserva(Reserva r);
+    default Reserva[] reservasDeCliente(Cliente c){
+        return null;
+    }
 
-    public Reserva[] todasReserva();
+    default boolean comprobarReserva(Reserva r){
+        int pos = 0;
+        int encontrada = 0;
+        while(pos < listaReserva.size() && encontrada == 0){
+            if(listaReserva.get(pos).getR().equals(r)){
+                encontrada = 1;
+            }
+            pos++;
+        }
+        if(encontrada == 1){
+        return true;
+        }
+        return false;
+    }
+
+    default boolean eliminarReserva(Reserva r){
+        if(comprobarReserva(r)){
+            int pos = 0;
+            int encontrada = 0;
+            while(pos < listaReserva.size() && encontrada == 0){
+                if(listaReserva.get(pos).getR().equals(r)){
+                    listaReserva.remove(pos);
+                    encontrada = 1;
+                }
+                pos++;
+            }
+            if(encontrada == 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    default Reserva[] todasReserva(){
+        if(listaReserva.size() > 0){
+            Reserva[] reservas = new Reserva[listaReserva.size()];
+            int pos = 0;
+            while(pos < listaReserva.size()){
+                reservas[pos] = (listaReserva.get(pos).getR());
+                pos++;
+            }
+            return reservas;
+        }
+        return null;
+    }
     
-    public Reserva[] reservasDeDia(LocalDate ld);
+    default Reserva[] reservasDeDia(LocalDate ld){
+        return null;
+    }
 
 }

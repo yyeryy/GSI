@@ -16,6 +16,7 @@ import GSILabs.BModel.Reservable;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
+import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -162,26 +163,125 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+
+    /** Locales **/
+    
+    /**
+     * Anota una nueva reserva para un cliente dado, en un local reservable
+     * para una fecha y hora concreta. El cliente y el local deben existir,
+     * y la fecha y hora debe ser futura. El cliente no debe tener otra reserva para el
+     * mismo local en la misma fecha.
+     * @param c Cliente que hace la reserva
+     * @param r Local donde se efectua la reserva
+     * @param ld Fecha de la reserva
+     * @param lt Hora de la reserva
+     * @return True si y solo si la operacion fue completada.
+     */
     @Override
     public boolean nuevaReserva(Cliente c, Reservable r, LocalDate ld, LocalTime lt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        /*
+        Comprobar si el usuario existe y es cliente
+        */
+        int encontradoCliente = 0;
+        int user = 0;
+        Cliente cliente = null;
+        while (encontradoCliente == 0 && user < TAMANO_LISTAS){
+            if (usuarios[user] != c){
+                user++;
+            }else{
+                encontradoCliente = 1;
+                cliente = c;
+            }
+        }
+        if(encontradoCliente == 0 || cliente.getTipo() != CLIENTE){
+            return false;
+        }
+
+        /*
+        Comprobar si el local reservable existe (Bar/Restaurante)
+        */
+        int encontradoLocal = 0;
+        int local = 0;
+        while (encontradoLocal == 0 && local < TAMANO_LISTAS){
+            if (locales[local] != r){
+                local++;
+            }else{
+                encontradoLocal = 1;
+            }
+        }
+        if(encontradoLocal == 0){
+            return false;
+        }
+
+        /*
+        Comrpobar si la fecha es futura
+        */
+        LocalDate fechaActual = LocalDate.now();
+        if(fechaActual.isAfter(ld)){
+            return false;
+        }
+        LocalTime horaActual = LocalTime.now();
+        if(horaActual.isAfter(lt)){
+            return false;
+        }
+
+        /*
+        Comprobar si existe alguna reserva en la misma fecha
+        */
+        Reserva[] localReservas = obtenerReservas(r);
+        int encontradoReserva = 0;
+        int reserva = 0;
+        while (encontradoReserva == 0 && reserva < TAMANO_LISTAS){
+            if (!localReservas[reserva].getFecha().equals(ld)){
+                reserva++;
+            }else{
+                encontradoReserva = 1;
+            }
+        }
+        if(encontradoReserva == 1){
+            return false;
+        }
+
+        r.nuevaReserva(c, ld, lt);
+        return true;
+
     }
 
+    /**
+     * Obtiene todas las reservas (futuras y pasadas) del cliente.
+     * @param c El cliente a consultar
+     * @return La lista de las reservas, o null si el cliente no existe.
+     */
     @Override
     public Reserva[] obtenerReservas(Cliente c) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Obtiene todas las reservas (futuras y pasadas) del local.
+     * @param r El local a consultar
+     * @return La lista de las reservas, o null si el local no existe.
+     */
     @Override
     public Reserva[] obtenerReservas(Reservable r) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Obtiene todas las reservas del dia usado como argumento
+     * @param ld la fecha a consultar
+     * @return La lista de las reservas.
+     */
     @Override
     public Reserva[] obtenerReservas(LocalDate ld) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Elimina una reserva del sistema, en caso de que esta exista
+     * @param r La reserva a eliminar.
+     * @return True si y solo si la operacion fue completada.
+     */
     @Override
     public boolean eliminarReserva(Reserva r) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

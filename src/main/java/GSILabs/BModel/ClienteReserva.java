@@ -10,4 +10,20 @@ package GSILabs.BModel;
  */
 public class ClienteReserva {
     
+    private Cliente c;
+    private Reserva R;
+
+    public ClienteReserva(Cliente c, Reserva R) {
+        this.c = c;
+        this.R = R;
+    }
+
+    public Cliente getC() {
+        return c;
+    }
+
+    public Reserva getR() {
+        return R;
+    }
+
 }
