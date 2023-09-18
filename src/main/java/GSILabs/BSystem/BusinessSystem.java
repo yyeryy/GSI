@@ -6,9 +6,11 @@ package GSILabs.BSystem;
 
 import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
+import GSILabs.BModel.ClienteReserva;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import static GSILabs.BModel.Local.tipoLocal.*;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reserva;
@@ -33,6 +35,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
     Review[] reviews = new Review[TAMANO_LISTAS];
     Local[] locales = new Local[TAMANO_LISTAS];
+    private Local.tipoLocal PUB;
 
     @Override
     public boolean nuevoUsuario(Usuario u) {
@@ -254,7 +257,34 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(Cliente c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int local = 0;
+        ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
+        while ( local < TAMANO_LISTAS){
+            if (locales[local].getTipo() != PUB){
+                Reservable elLocalR = null;
+                if (locales[local].getTipo() == BAR){
+                    elLocalR = (Bar) locales[local];
+                }else{
+                    elLocalR = (Restaurante) locales[local];
+                }
+                Reserva[] reservasUnLocal = elLocalR.reservasDeCliente(c);
+                if(reservasUnLocal != null){
+                    int pos = 0;
+                    while ( pos < reservasUnLocal.length){
+                        listaReserva.add(reservasUnLocal[pos]);
+                    pos++;
+                    }
+                }
+            }
+            local++;
+        }
+
+        if(0 < listaReserva.size()){
+        
+        }
+
+
+         
     }
 
     /**
