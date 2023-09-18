@@ -15,7 +15,8 @@ public class Bar extends Local implements Reservable{
     private List<String> especialidades;
     private ArrayList<ClienteReserva> listaReserva ;
 
-    public Bar() {
+    public Bar(String nombre, Direccion direccion, String descripcion, tipoLocal tipoLocal) {
+        super(nombre, direccion, descripcion, tipoLocal);
         this.especialidades = new ArrayList<>();
         this.listaReserva = new  ArrayList<ClienteReserva>();
     }
@@ -25,14 +26,9 @@ public class Bar extends Local implements Reservable{
     }
 
     public void mostrarEspecialidades() {
-        System.out.println("Especialidades de " + nombre + ":");
+        System.out.println("Especialidades de " + super.getNombre() + ":");
         for (String especialidad : especialidades) {
             System.out.println("- " + especialidad);
         }
-    }
-
-    public static void main(String[] args) {
-        miBar.agregarEspecialidad("Cerveza artesanal");
-        miBar.agregarEspecialidad("Cócteles de autor");
     }
 }
