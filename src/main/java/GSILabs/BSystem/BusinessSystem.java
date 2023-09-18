@@ -257,6 +257,27 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(Cliente c) {
+        /*
+        Comprobar si el usuario existe y es cliente
+        */
+        int encontradoCliente = 0;
+        int user = 0;
+        Cliente cliente = null;
+        while (encontradoCliente == 0 && user < TAMANO_LISTAS){
+            if (usuarios[user] != c){
+                user++;
+            }else{
+                encontradoCliente = 1;
+                cliente = c;
+            }
+        }
+        if(encontradoCliente == 0 || cliente.getTipo() != CLIENTE){
+            return null;
+        }
+
+
+
+
         int local = 0;
         ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
         while ( local < TAMANO_LISTAS){
@@ -280,11 +301,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
 
         if(0 < listaReserva.size()){
-        
+            Reserva[] reservas = new Reserva[listaReserva.size()]; 
+            int pos = 0;
+            while(pos < listaReserva.size()){
+                reservas[pos] = (listaReserva.get(pos));
+                pos++;
+            }
+            return reservas;
         }
-
-
-         
+        return null; 
     }
 
     /**
