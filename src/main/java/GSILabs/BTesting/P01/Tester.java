@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package GSILabs.BTesting.P01;
 
 import GSILabs.BModel.Usuario;
-import GSILabs.BModel.Usuario.tipoUsuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
@@ -39,4 +34,35 @@ public class Tester {
         }
         return false;
     }
+    
+    
+    /*
+    * Si busca a un usuario que no existe con ObtenerUsuario, el resultado es null
+    */
+    public boolean testS2() {
+        System.out.println("Test 2");
+	bs.nuevoUsuario(new Usuario("Marilin", "1234", LocalDate.of(2000,1,1), CLIENTE)); // añadimos usuario al sistema
+        if(bs.obtenerUsuario("Vega") == null)
+        {
+            System.out.println("Usuario es null si no existe");
+            return true;
+        }
+        return false;
+    }
+    
+    /* 
+    * No se puede introducir un usuario menor de edad
+    */
+    public boolean testS5() {
+        System.out.println("Test 5");
+	Usuario usuario = new Usuario("Marilin", "1234", LocalDate.of(2020,1,1), CLIENTE); 
+        if(bs.nuevoUsuario(usuario)) // si es true es que el usuario se ha añadido
+        {
+            System.out.println("Usuario menor de edad añadido");
+            return false;
+        }
+	System.out.println("No se ha añadido al usuario menor de edad");
+        return true;
+    }
+    
 }

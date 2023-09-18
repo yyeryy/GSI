@@ -31,10 +31,9 @@ import java.util.List;
  */
 public class BusinessSystem implements LeisureOffice, LookupService{
     
-    private static final int TAMANO_LISTAS = 100;
-    ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    ArrayList<Review> reviews = new ArrayList<Review>();
-    ArrayList<Local> locales = new ArrayList<Local>();
+    ArrayList<Usuario> usuarios = new ArrayList<>();
+    ArrayList<Review> reviews = new ArrayList<>();
+    ArrayList<Local> locales = new ArrayList<>();
 
     @Override
     public boolean nuevoUsuario(Usuario u) {
