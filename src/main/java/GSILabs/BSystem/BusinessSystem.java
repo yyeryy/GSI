@@ -168,13 +168,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         if(locales.size() < 1) {
             return false;
         }
-        for(int i = 0; i < locales.size(); i++){
-            if(locales.get(i).equals(l)){
-                locales.remove(i);
-                return true;
-            }
-        }
-        return false;
+        return locales.remove(l);
     }
 
     @Override
