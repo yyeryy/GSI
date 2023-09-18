@@ -22,14 +22,13 @@ de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha
 se efectuará, así como un posible porcentaje de descuento.
 */
 
-    public ArrayList<ClienteReserva> listaReserva = new  ArrayList<ClienteReserva>();
+    public ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
 
     default void nuevaReserva(Cliente cliente, LocalDate fecha, LocalTime hora){
 
         int descuento = 0;
-        Reserva reservaEntrante = new Reserva(fecha, hora, descuento);
-        ClienteReserva nuevoClienteReserva = new ClienteReserva(cliente, reservaEntrante);
-        listaReserva.add(nuevoClienteReserva);
+        Reserva reserva = new Reserva(cliente, fecha, hora, descuento);
+        listaReserva.add(reserva);
 
     };
 
@@ -38,8 +37,8 @@ se efectuará, así como un posible porcentaje de descuento.
             int pos = 0;
             ArrayList<Reserva> todasReservas = new  ArrayList<Reserva>();
             while(pos < listaReserva.size()){
-                if(listaReserva.get(pos).getC().equals(c)){
-                    todasReservas.add(listaReserva.get(pos).getR());
+                if(listaReserva.get(pos).getCliente().equals(c)){
+                    todasReservas.add(listaReserva.get(pos));
                 }
                 pos++;
             }
@@ -61,7 +60,7 @@ se efectuará, así como un posible porcentaje de descuento.
         int pos = 0;
         int encontrada = 0;
         while(pos < listaReserva.size() && encontrada == 0){
-            if(listaReserva.get(pos).getR().equals(r)){
+            if(listaReserva.get(pos).equals(r)){
                 encontrada = 1;
             }
             pos++;
@@ -77,7 +76,7 @@ se efectuará, así como un posible porcentaje de descuento.
             int pos = 0;
             int encontrada = 0;
             while(pos < listaReserva.size() && encontrada == 0){
-                if(listaReserva.get(pos).getR().equals(r)){
+                if(listaReserva.get(pos).equals(r)){
                     listaReserva.remove(pos);
                     encontrada = 1;
                 }
@@ -95,7 +94,7 @@ se efectuará, así como un posible porcentaje de descuento.
             Reserva[] reservas = new Reserva[listaReserva.size()];
             int pos = 0;
             while(pos < listaReserva.size()){
-                reservas[pos] = (listaReserva.get(pos).getR());
+                reservas[pos] = listaReserva.get(pos);
                 pos++;
             }
             return reservas;
@@ -108,8 +107,8 @@ se efectuará, así como un posible porcentaje de descuento.
             int pos = 0;
             ArrayList<Reserva> diaReservas = new  ArrayList<Reserva>();
             while(pos < listaReserva.size()){
-                if(listaReserva.get(pos).getR().getFecha().equals(ld)){
-                    diaReservas.add(listaReserva.get(pos).getR());
+                if(listaReserva.get(pos).getFecha().equals(ld)){
+                    diaReservas.add(listaReserva.get(pos));
                 }
                 pos++;
             }

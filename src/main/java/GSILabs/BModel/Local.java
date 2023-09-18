@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -15,6 +16,7 @@ public class Local {
     private Direccion direccion;
     private String descripcion;
     private tipoLocal tipo;
+    private ArrayList<Usuario> propietarios;
 
     public enum tipoLocal {
         BAR,
@@ -27,6 +29,7 @@ public class Local {
         this.direccion = direccion;
         descripcionValida(descripcion);
         this.tipo = tipo;
+        this.propietarios = new ArrayList<>();
     }
     
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
@@ -44,6 +47,10 @@ public class Local {
 
     public tipoLocal getTipo() {
         return tipo;
+    }
+    
+    public ArrayList<Usuario> getPropietarios() {
+        return propietarios;
     }
 
     public void setNombre(String nombre) {
@@ -70,6 +77,27 @@ public class Local {
             throw new IllegalArgumentException("La descripción debe tener como máximo 300 caracteres.");
         }
         this.descripcion = desc;
+    }
+    
+    public boolean addPropietario(Propietario propietario) {
+        if(this.propietarios.size() > 2) {
+            throw new IllegalArgumentException("Número máximo de propietarios alcanzado.");
+        }
+        this.propietarios.add(propietario);
+        return true;
+    }
+    
+    public boolean removePropietario(Propietario propietario) {
+        if(this.propietarios.size() < 1) {
+            throw new IllegalArgumentException("El local no tiene propietarios.");
+        }
+        for(int i = 0; i < this.propietarios.size(); i++){
+            if(this.propietarios.get(i).equals(propietario)){
+                this.propietarios.remove(i);
+                return true;
+            }
+        }
+        throw new IllegalArgumentException("Esa persona no es propietaria de ese local.");
     }
     
     @Override
