@@ -33,8 +33,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     
     private static final int TAMANO_LISTAS = 100;
     ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    //Usuario[] usuarios = new Usuario[TAMANO_LISTAS];
-    Review[] reviews = new Review[TAMANO_LISTAS];
+    ArrayList<Review> reviews = new ArrayList<Review>();
     ArrayList<Local> locales = new ArrayList<Local>();
 
     @Override
@@ -90,7 +89,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             if(existeRewiew(r.getUsuario(), r.getLocal(), LocalDate.now())){
                 return false;
             }
-            reviews[reviews.length] = r;
+            reviews.add(r);
             return true;
         }
         return false;
@@ -98,16 +97,10 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean eliminaReview(Review r) {
-        if(reviews.length == 0){
+        if(reviews.size() == 0){
             return false;
         }
-        for(int i = 0; i < reviews.length; i++){
-            if(reviews[i].getUsuario().getNick().equalsIgnoreCase(r.getUsuario().getNick()) && reviews[i].getFechaReview() == (r.getFechaReview()) && reviews[i].getLocal().equals(r.getLocal())){
-                //Eliminar review
-                return true;
-            }
-        }
-        return false;
+        return reviews.remove(r);
     }
 
     @Override
@@ -164,13 +157,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         if(locales.size() < 1) {
             return false;
         }
-        for(int i = 0; i < locales.size(); i++){
-            if(locales.get(i).equals(l)){
-                locales.remove(i);
-                return true;
-            }
-        }
-        return false;
+        return locales.remove(l);
     }
 
     @Override
