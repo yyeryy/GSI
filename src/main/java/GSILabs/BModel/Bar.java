@@ -30,9 +30,4 @@ public class Bar extends Local implements Reservable{
             System.out.println("- " + especialidad);
         }
     }
-
-    public static void main(String[] args) {
-        miBar.agregarEspecialidad("Cerveza artesanal");
-        miBar.agregarEspecialidad("Cócteles de autor");
-    }
 }
