@@ -24,8 +24,4 @@ public class Pub extends Local{
     public String getHoraClausura() {
         return horaClausura;
     }
-
-    public static void main(String[] args) {
-        Pub miPub = new Pub("18:00", "02:00");
-    }
 }
