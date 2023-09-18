@@ -377,7 +377,32 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(LocalDate ld) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        /*
+        Comprobar si el local reservable existe (Bar/Restaurante)
+        */
+        int local = 0;
+        ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
+        while ( local < locales.size()){
+            if(locales.get(local).getTipo() != PUB){
+                Reservable elLocal = (Reservable) locales.get(local);
+                Reserva[] reservasUnLocal = elLocal.reservasDeDia(ld);
+                if(reservasUnLocal != null){
+                    int pos = 0;
+                    while ( pos < reservasUnLocal.length){
+                        listaReserva.add(reservasUnLocal[pos]);
+                    pos++;
+                    }
+                }        
+            }
+            local++;
+        }
+        int pos = 0;
+        Reserva[] reservas = new Reserva[listaReserva.size()];
+        while(pos < listaReserva.size()){
+            reservas[pos] = (listaReserva.get(pos));
+            pos++;
+        }
+        return reservas;
     }
 
     /**
