@@ -16,14 +16,23 @@ public class Restaurante extends Local implements Reservable{
     private Integer capacidadMesa;
     private ArrayList<ClienteReserva> reservas;
 
-    public Restaurante(double precioMenu, Integer capacidad, Integer capacidadMesa){
+    public Restaurante(double precioMenu, Integer capacidad, Integer capacidadMesa, String nombre, Direccion direccion, String descripcion, tipoLocal tipoLocal){
+        super(nombre, direccion, descripcion, tipoLocal);
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
         this.reservas = new ArrayList<ClienteReserva>();
 
     }
-
+    
+    public Restaurante(String nombre, Direccion direccion, String descripcion, tipoLocal tipoLocal){
+        super(nombre, direccion, descripcion, tipoLocal);
+        this.precioMenu = 0;
+        this.capacidad = 0;
+        this.capacidadMesa = 0;
+        this.reservas = new ArrayList<ClienteReserva>();
+    }
+    
     public double getPrecioMenu(){
         return this.precioMenu;
     }
