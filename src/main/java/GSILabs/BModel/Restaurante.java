@@ -16,8 +16,9 @@ public class Restaurante extends Local implements Reservable{
     private Integer capacidadMesa;
     private ArrayList<ClienteReserva> reservas;
 
-    public Restaurante(double precioMenu, Integer capacidad, Integer capacidadMesa, String nombre, Direccion direccion, String descripcion, tipoLocal tipoLocal){
-        super(nombre, direccion, descripcion, tipoLocal);
+
+    public Restaurante(String nombre, Direccion direccion, String descripcion, double precioMenu, Integer capacidad, Integer capacidadMesa){
+        super(nombre, direccion, descripcion, tipoLocal.BAR);
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
