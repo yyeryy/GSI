@@ -1,5 +1,7 @@
 package GSILabs.BModel;
 
+import java.util.Objects;
+
 /**
  *
  * @author 34636
@@ -70,4 +72,20 @@ public class Local {
         this.descripcion = desc;
     }
     
+    @Override
+    public int hashCode() {
+        return Objects.hash(direccion);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Local other = (Local) obj;
+        return Objects.equals(direccion, other.direccion);
+    }
 }

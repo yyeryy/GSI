@@ -34,6 +34,26 @@ se efectuará, así como un posible porcentaje de descuento.
     };
 
     default Reserva[] reservasDeCliente(Cliente c){
+        if(listaReserva.size() > 0){
+            int pos = 0;
+            ArrayList<Reserva> todasReservas = new  ArrayList<Reserva>();
+            while(pos < listaReserva.size()){
+                if(listaReserva.get(pos).getC().equals(c)){
+                    todasReservas.add(listaReserva.get(pos).getR());
+                }
+                pos++;
+            }
+
+            if(todasReservas.size() > 0){
+                pos = 0;
+                Reserva[] reservas = new Reserva[todasReservas.size()];
+                while(pos < todasReservas.size()){
+                    reservas[pos] = (todasReservas.get(pos));
+                    pos++;
+                }
+                return reservas;
+            }
+        }
         return null;
     }
 
@@ -84,6 +104,26 @@ se efectuará, así como un posible porcentaje de descuento.
     }
     
     default Reserva[] reservasDeDia(LocalDate ld){
+        if(listaReserva.size() > 0){
+            int pos = 0;
+            ArrayList<Reserva> diaReservas = new  ArrayList<Reserva>();
+            while(pos < listaReserva.size()){
+                if(listaReserva.get(pos).getR().getFecha().equals(ld)){
+                    diaReservas.add(listaReserva.get(pos).getR());
+                }
+                pos++;
+            }
+
+            if(diaReservas.size() > 0){
+                pos = 0;
+                Reserva[] reservas = new Reserva[diaReservas.size()];
+                while(pos < diaReservas.size()){
+                    reservas[pos] = (diaReservas.get(pos));
+                    pos++;
+                }
+                return reservas;
+            }
+        }
         return null;
     }
 

@@ -14,13 +14,13 @@ public class Restaurante extends Local implements Reservable{
     private double precioMenu;
     private Integer capacidad;
     private Integer capacidadMesa;
-    private ArrayList<Reserva> reservas;
+    private ArrayList<ClienteReserva> reservas;
 
     public Restaurante(double precioMenu, Integer capacidad, Integer capacidadMesa){
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
-        this.reservas = new ArrayList<>();
+        this.reservas = new ArrayList<ClienteReserva>();
 
     }
 

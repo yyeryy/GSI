@@ -6,6 +6,7 @@ package GSILabs.BModel;
 
 import java.time.LocalDate;
 import GSILabs.BSystem.BusinessSystem;
+import java.util.Objects;
 
 /**
  *
@@ -38,4 +39,6 @@ public class Cliente extends Usuario {
         Local locales[] = businessSystem.listarLocales(ciudad, provincia);
         //Imprimir locales
     }
+
+
 }

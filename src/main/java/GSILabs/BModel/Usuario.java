@@ -2,6 +2,7 @@ package GSILabs.BModel;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Objects;
 
 /**
  *
@@ -83,4 +84,22 @@ determinado, a escoger entre Propietario y Cliente.*/
         }
         this.fechaNacimiento = f;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nick);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Usuario other = (Usuario) obj;
+        return Objects.equals(nick, other.nick);
+    }
+
 }
