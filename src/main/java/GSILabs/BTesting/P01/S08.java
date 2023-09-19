@@ -18,7 +18,7 @@ public class S08 {
     BusinessSystem bs = new BusinessSystem();
     
     boolean testS8() {
-        bs.
+        
         return false;
     }
 }
