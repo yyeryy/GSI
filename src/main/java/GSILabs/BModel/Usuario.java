@@ -80,7 +80,7 @@ determinado, a escoger entre Propietario y Cliente.*/
     
     public void fechaNacimientoValido(LocalDate f) {
         if (f.getYear() > LocalDate.now().getYear()-14) {
-            throw new IllegalArgumentException("La contraseña no puede ser nula."); // revisar esto que hace y sino solo sout
+            throw new IllegalArgumentException("La fecha de nacimiento no cumple con la edad minima permitida por el sistema."); // revisar esto que hace y sino solo sout
         }
         this.fechaNacimiento = f;
     }
