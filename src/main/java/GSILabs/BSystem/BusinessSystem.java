@@ -213,7 +213,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return l.removePropietario(p);
     }
 
-    
+    /**
+     * 
+     * @param viejoL
+     * @param nuevoL
+     * @return 
+     */
     @Override
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
         if(locales.size() < 1) {
