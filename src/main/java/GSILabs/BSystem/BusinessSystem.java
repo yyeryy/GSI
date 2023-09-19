@@ -86,9 +86,13 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean nuevaReview(Review r) {
-        if(existeNick(r.getUsuario().getNick()) /*&& obtenerLocal(r.getLocal().getDireccion()*/){
+        if(existeNick(r.getUsuario().getNick())){
             if(existeRewiew(r.getUsuario(), r.getLocal(), LocalDate.now())){
-                return false;
+                for(Local l : locales){
+                    if(l.getDireccion().equals(r.getLocal().getDireccion())){
+                        return false;
+                    }
+                }
             }
             reviews.add(r);
             return true;
@@ -98,7 +102,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean eliminaReview(Review r) {
-        if(reviews.size() == 0){
+        if(reviews.isEmpty()){
             return false;
         }
         return reviews.remove(r);
@@ -106,13 +110,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
-        Review[] reviews = verReviews(l);
-        if(reviews.length == 0){
+        if(reviews.isEmpty()){
             return false;
         }
-        for(int i = 0; i < reviews.length; i++){
-            if(reviews[i].getUsuario().getNick().equalsIgnoreCase(u.getNick())){
-                if(reviews[i].getFechaReview() == ld){
+        for(Review review : reviews){
+            if(review.getUsuario().getNick().equalsIgnoreCase(u.getNick())){
+                if(review.getFechaReview() == ld){
                     return true;
                 }
             }
@@ -121,30 +124,62 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     }
 
     @Override
-    public boolean nuevaContestacion(Contestacion c, Review r) {//GRUPO2
-        //Almacenar fecha contestacion
-        //Comprobar si tiene contestacion
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean nuevaContestacion(Contestacion c, Review r) {
+        if(existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
+            if(r.getContestacion() == null){
+                r.setContestacion(c);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public boolean tieneContestacion(Review r) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean tieneContestacion(Review r) {
+        if(existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
+            if(r.getContestacion() != null){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public Contestacion obtenerContestacion(Review r) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Contestacion obtenerContestacion(Review r) {
+        if(existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
+            if(r.getContestacion() != null){
+               return r.getContestacion(); 
+            }
+        }
+        return null;
     }
 
     @Override
-    public boolean eliminaContestacion(Contestacion c) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminaContestacion(Contestacion c) {
+        if(reviews.isEmpty()){
+            return false;
+        }
+        for (Review review : reviews) {
+            if (review.getContestacion().getComentario().equalsIgnoreCase(c.getComentario())){
+                review.setContestacion(null);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public boolean eliminaContestacion(Review r) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminaContestacion(Review r) {
+        if(reviews.isEmpty()){
+            return false;
+        }
+        for (Review review : reviews) {
+            if (review.getContestacion().getComentario().equalsIgnoreCase(r.getContestacion().getComentario())){
+                review.setContestacion(null);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -154,6 +189,8 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public boolean nuevoLocal(Local l) {
+        if(null != obtenerLocal(l.getDireccion()))
+            return false;
         locales.add(l);
         return true;
     }
@@ -230,8 +267,17 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     }
 
     @Override
-    public Review[] verReviews(Local l) {//GRUPO2
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Review> verReviews(Local l) {
+        ArrayList<Review> reviewsLocal = new ArrayList<>();
+        if(obtenerLocal(l.getDireccion()) != null){
+            for(Review r : reviews){
+                if(r.getLocal().equals(l)){
+                    reviewsLocal.add(r);
+                }
+            }
+            return reviewsLocal;
+        }
+        return null;
     }
 
 
@@ -342,10 +388,6 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         if(encontradoCliente == 0 || cliente.getTipo() != CLIENTE){
             return null;
         }
-
-
-
-
         int local = 0;
         ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
         while ( local < locales.size()){
@@ -367,7 +409,6 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             }
             local++;
         }
-
         if(0 < listaReserva.size()){
             Reserva[] reservas = new Reserva[listaReserva.size()]; 
             int pos = 0;
