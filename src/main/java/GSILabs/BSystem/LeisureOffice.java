@@ -10,6 +10,7 @@ package GSILabs.BSystem;
 import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  * Interfaz de acceso a BSystem
@@ -193,10 +194,7 @@ public interface LeisureOffice {
      * @return Lista de reviews del sistema. En caso de que el Local no exista, sera
      *  el valor null.
      */
-    public Review[] verReviews(Local l);
- 
-    
-    
+    public ArrayList<Review> verReviews(Local l);
     
     /** Locales **/
     

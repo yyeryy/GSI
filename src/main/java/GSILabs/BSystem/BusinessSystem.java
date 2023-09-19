@@ -280,7 +280,6 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return null;
     }
 
-
     /** Locales **/
     
     /**
