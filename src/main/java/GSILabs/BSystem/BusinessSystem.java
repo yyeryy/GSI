@@ -9,6 +9,7 @@ import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Local.tipoLocal;
 import static GSILabs.BModel.Local.tipoLocal.*;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
@@ -20,8 +21,9 @@ import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 
 
@@ -145,12 +147,22 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Añade un local al sistema, siempre que no exista otro en la misma direccion.
+     * @param l El nuevo local
+     * @return True si y solo si la operacion fue completada.
+     */
     @Override
     public boolean nuevoLocal(Local l) {
         locales.add(l);
         return true;
     }
 
+    /**
+     * Elimina un local determinado, si este existe como tal en el sistema.
+     * @param l EL local a eliminar
+     * @return True si y solo si la operacion fue completada.
+     */
     @Override
     public boolean eliminarLocal(Local l) {
         if(locales.size() < 1) {
@@ -159,6 +171,11 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return locales.remove(l);
     }
 
+    /**
+     * Obtiene los datos del local instalado en una determinada direccion fisica
+     * @param d Direccion del local.
+     * @return El local almacenado en el sistema, o null si no existe.
+     */
     @Override
     public Local obtenerLocal(Direccion d) {
         if(locales.size() < 1) {
@@ -172,16 +189,31 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return null;
     }
 
+    /**
+     * Asocia un local a un propietario, en caso de que ambos existan y no se haya llegado
+     * al limite de Propietarios por local
+     * @param l Local existente en en sistema
+     * @param p Propietario existente en el sistema
+     * @return True si y solo si la operacion fue completada.
+     */
     @Override
     public boolean asociarLocal(Local l, Propietario p) {
         return l.addPropietario(p);
     }
 
+    /**
+     * Desliga un local de un propietario, en caso de que ambos existan y estén
+     * ya relacionados
+     * @param l Local existente en en sistema
+     * @param p Propietario existente en el sistema
+     * @return True si y solo si la operacion fue completada.
+     */
     @Override
     public boolean desasociarLocal(Local l, Propietario p) {
         return l.removePropietario(p);
     }
 
+    
     @Override
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
         if(locales.size() < 1) {
@@ -428,64 +460,258 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
 
 
+    /**
+     * Lista los locales en una ciudad dada
+     * @param ciudad Ciudad de interes
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return La lista de locales, potencialmente de longitud 0.
+     */
     @Override
     public Local[] listarLocales(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        return (Local[])lista.toArray();
     }
 
+    /**
+     * Lista los bares en una ciudad dada
+     * @param ciudad Ciudad de interes
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return La lista de bares, potencialmente de longitud 0.
+     */
     @Override
     public Bar[] listarBares(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getTipo().equals(tipoLocal.BAR)) && (locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        return (Bar[])lista.toArray();
     }
 
+    /**
+     * Lista los restaurantes en una ciudad dada
+     * @param ciudad Ciudad de interes
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return La lista de bares, potencialmente de longitud 0.
+     */
     @Override
     public Restaurante[] listarRestaurantes(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getTipo().equals(tipoLocal.RESTAURANTE)) && (locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        return (Restaurante[])lista.toArray();
     }
 
+    /**
+     * Lista los pubs en una ciudad dada
+     * @param ciudad Ciudad de interes
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return La lista de bares, potencialmente de longitud 0.
+     */
     @Override
     public Pub[] listarPubs(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getTipo().equals(tipoLocal.PUB)) && (locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        return (Pub[])lista.toArray();
     }
 
+    /**
+     * Obtiene la valoración media de un local, o -1 si éste no existe.
+     * @param l Local de interés.
+     * @return La valoración media de las reviews asociadas, o 0 si no existen reviews.
+     */
     @Override
     public float obtenerValoracionMedia(Local l) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int valoracionTotal = 0;
+        int reviewsLocal = 0;
+        if(!locales.contains(l)) return -1;
+        for(int i = 0; i < reviews.size(); i++) {
+            if(reviews.get(i).getLocal().equals(l)) {
+                valoracionTotal += reviews.get(i).getValoracion();
+                reviewsLocal++;
+            }
+        }
+        if(reviewsLocal == 0) return 0;
+        return ((float)valoracionTotal / (float)reviewsLocal);
     }
 
+    /**
+     * Obtiene la valoración media de un propietario, o -1 si éste no existe.
+     * @param p El propietario a investigar
+     * @return La valoración media de las reviews asociadas a sus locales, o 0 si no existen reviews.
+     */
     @Override
     public float obtenerValoracionMedia(Propietario p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int valoracionTotal = 0;
+        int reviewsPropietario = 0;
+        if(!usuarios.contains(p)) return -1;
+        for(int i = 0; i < reviews.size(); i++) {
+            if(reviews.get(i).getLocal().getPropietarios().contains(p)) {
+                valoracionTotal += reviews.get(i).getValoracion();
+                reviewsPropietario++;
+            }
+        }
+        if(reviewsPropietario == 0) return 0;
+        return ((float)valoracionTotal / (float)reviewsPropietario);
     }
 
+    /**
+     * Obtiene la valoración media de un local realizadas por gente que,
+     * en el momento de la valoración, estaba en un rango de edad determinado, 
+     * o null si éste no existe, o -1 si éste no existe.
+     * @param l Local de interés.
+     * @param edadEntre Edad minima del rango (incluida)
+     * @param edadHasta Edad maxima del rango (incluida)
+     * @return 
+     */
     @Override
     public float obtenerValoracionMedia(Local l, int edadEntre, int edadHasta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int valoracionTotal = 0;
+        int reviewsLocal = 0;
+        if(!locales.contains(l)) return -1;
+        for(int i = 0; i < reviews.size(); i++) {
+            if(reviews.get(i).getLocal().equals(l)) {
+                int edad = Period.between(reviews.get(i).getUsuario().getFechaNacimiento(), reviews.get(i).getFechaReview()).getYears();
+                if(edadEntre <= edad && edad <= edadHasta) {
+                    valoracionTotal += reviews.get(i).getValoracion();
+                    reviewsLocal++;
+                }
+            }
+        }
+        if(reviewsLocal == 0) return 0;
+        return ((float)valoracionTotal / (float)reviewsLocal);
     }
 
+    /**
+     * Obtiene los locales de una ciudad y provincia ordenados por su valoración media
+     * en las reviews asociadas. Los locales que no tienen reviews serán valorados
+     * con 0.
+     * @param ciudad Ciudad de interés
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return Los locales ordenados por nota descendente
+     */
     @Override
     public Local[] obtenerLocalesOrdenados(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        Collections.sort(lista, (Local local1, Local local2) -> {
+            float valoracionMedia1 = obtenerValoracionMedia(local1);
+            float valoracionMedia2 = obtenerValoracionMedia(local2);
+            return Float.compare(valoracionMedia1, valoracionMedia2);
+        });
+        return (Local[])lista.toArray();
     }
 
+    /**
+     * Obtiene los locales de una provincia ordenados por su valoración media
+     * en las reviews asociadas. Los locales que no tienen reviews serán valorados
+     * con 0.
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return Los locales ordenados por nota descendente
+     */
     @Override
     public Local[] obtenerLocalesOrdenados(String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if(locales.get(i).getDireccion().getProvincia().equals(provincia)){
+                lista.add(locales.get(i));
+            }
+        }
+        Collections.sort(lista, (Local local1, Local local2) -> {
+            float valoracionMedia1 = obtenerValoracionMedia(local1);
+            float valoracionMedia2 = obtenerValoracionMedia(local2);
+            return Float.compare(valoracionMedia1, valoracionMedia2);
+        });
+        return (Local[])lista.toArray();
     }
 
+    /**
+     * Obtiene los bares de una ciudad y provincia ordenados por su valoración media
+     * en las reviews asociadas. Los locales que no tienen reviews serán valorados
+     * con 0.
+     * @param ciudad Ciudad de interés
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return Los bares ordenados por nota descendente
+     */
     @Override
     public Bar[] obtenerBaresOrdenados(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getTipo().equals(tipoLocal.BAR)) && (locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        Collections.sort(lista, (Local local1, Local local2) -> {
+            float valoracionMedia1 = obtenerValoracionMedia(local1);
+            float valoracionMedia2 = obtenerValoracionMedia(local2);
+            return Float.compare(valoracionMedia1, valoracionMedia2);
+        });
+        return (Bar[])lista.toArray();
     }
 
+    /**
+     * Obtiene los restaurantes de una ciudad y provincia ordenados por su valoración media
+     * en las reviews asociadas. Los locales que no tienen reviews serán valorados
+     * con 0.
+     * @param ciudad Ciudad de interés
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return Los restaurantes ordenados por nota descendente
+     */
     @Override
     public Restaurante[] obtenerRestaurantesOrdenados(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getTipo().equals(tipoLocal.RESTAURANTE)) && (locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        Collections.sort(lista, (Local local1, Local local2) -> {
+            float valoracionMedia1 = obtenerValoracionMedia(local1);
+            float valoracionMedia2 = obtenerValoracionMedia(local2);
+            return Float.compare(valoracionMedia1, valoracionMedia2);
+        });
+        return (Restaurante[])lista.toArray();
     }
 
+    /**
+     * Obtiene los pubs de una ciudad y provincia ordenados por su valoración media
+     * en las reviews asociadas. Los locales que no tienen reviews serán valorados
+     * con 0.
+     * @param ciudad Ciudad de interés
+     * @param provincia Provincia en la que se encuentra la ciudad
+     * @return Los pubs ordenados por nota descendente
+     */
     @Override
     public Pub[] obtenerPubOrdenados(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Local> lista = new ArrayList<>();
+        for(int i = 0; i < locales.size(); i++){
+            if((locales.get(i).getTipo().equals(tipoLocal.PUB)) && (locales.get(i).getDireccion().getProvincia().equals(provincia)) && (locales.get(i).getDireccion().getLocalidad().equals(ciudad))){
+                lista.add(locales.get(i));
+            }
+        }
+        Collections.sort(lista, (Local local1, Local local2) -> {
+            float valoracionMedia1 = obtenerValoracionMedia(local1);
+            float valoracionMedia2 = obtenerValoracionMedia(local2);
+            return Float.compare(valoracionMedia1, valoracionMedia2);
+        });
+        return (Pub[])lista.toArray();
     }
     
 }
