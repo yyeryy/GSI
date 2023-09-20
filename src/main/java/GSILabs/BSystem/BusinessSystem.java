@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-
 /**
  * Clase BusinessSystem
  * Clase que define los métodos implementados de LeisureOffice y LookupService
