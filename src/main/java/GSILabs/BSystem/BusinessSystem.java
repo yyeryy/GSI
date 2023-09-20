@@ -267,7 +267,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     }
 
     @Override
-    public ArrayList<Review> verReviews(Local l) {
+    public Review[] verReviews(Local l) {
         ArrayList<Review> reviewsLocal = new ArrayList<>();
         if(obtenerLocal(l.getDireccion()) != null){
             for(Review r : reviews){
@@ -275,7 +275,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                     reviewsLocal.add(r);
                 }
             }
-            return reviewsLocal;
+            return (Review[])reviewsLocal.toArray();
         }
         return null;
     }
@@ -309,7 +309,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                 cliente = c;
             }
         }
-        if(encontradoCliente == 0 || cliente.getTipo() != CLIENTE){
+        if(encontradoCliente == 0 || cliente == null || cliente.getTipo() != CLIENTE){
             return false;
         }
 
@@ -384,14 +384,14 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                 cliente = c;
             }
         }
-        if(encontradoCliente == 0 || cliente.getTipo() != CLIENTE){
+        if(encontradoCliente == 0 || cliente == null || cliente.getTipo() != CLIENTE){
             return null;
         }
         int local = 0;
-        ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
+        ArrayList<Reserva> listaReserva = new  ArrayList<>();
         while ( local < locales.size()){
             if (locales.get(local).getTipo() != PUB){
-                Reservable elLocalR = null;
+                Reservable elLocalR;
                 if (locales.get(local).getTipo() == BAR){
                     elLocalR = (Bar) locales.get(local);
                 }else{
@@ -408,7 +408,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             }
             local++;
         }
-        if(0 < listaReserva.size()){
+        if(!listaReserva.isEmpty()){
             Reserva[] reservas = new Reserva[listaReserva.size()]; 
             int pos = 0;
             while(pos < listaReserva.size()){
@@ -457,7 +457,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         Comprobar si el local reservable existe (Bar/Restaurante)
         */
         int local = 0;
-        ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
+        ArrayList<Reserva> listaReserva = new  ArrayList<>();
         while ( local < locales.size()){
             if(locales.get(local).getTipo() != PUB){
                 Reservable elLocal = (Reservable) locales.get(local);

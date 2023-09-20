@@ -194,7 +194,7 @@ public interface LeisureOffice {
      * @return Lista de reviews del sistema. En caso de que el Local no exista, sera
      *  el valor null.
      */
-    public ArrayList<Review> verReviews(Local l);
+    public Review[] verReviews(Local l);
     
     /** Locales **/
     
