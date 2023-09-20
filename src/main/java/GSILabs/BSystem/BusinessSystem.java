@@ -40,6 +40,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
     ArrayList<Review> reviews = new ArrayList<>();
     ArrayList<Local> locales = new ArrayList<>();
 
+    /** Usuarios **/
+    
+    /**
+     * Da de alta un usuario, en caso de que su informacion no incumpla las 
+     * normas referentes al nick o edad.
+     * @param u El nuevo usuario
+     * @return Cierto si el usuario pudo ser añadido.
+     */
+    
     @Override
     public boolean nuevoUsuario(Usuario u) {
         if (existeNick(u.getNick()))
@@ -47,6 +56,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	usuarios.add(u);
 	return true;
     }
+    
+    /**
+     * Elimina al usuario que se pase como argument.
+     * @param u El usuario
+     * @return True si y solo si el usuario existia y pudo ser eliminado.
+     */
 
     @Override
     public boolean eliminaUsuario(Usuario u) {
@@ -56,6 +71,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	}
 	return false;
     }
+    
+    /**
+     * Reemplaza en el sistema al usuario viejo por el nuevo. Para que esto suceda debe
+     * Cumplirse que el usuario viejo exista y que el nuevo no incumpla normas
+     * relativas a las politicas de Usuarios (nick y/o edad)
+     * @param u El usuario
+     * @param nuevoU El nuevo usuario
+     * @return True si el usuario se encontro y pudo ser modificado
+     */
 
     @Override
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
@@ -69,6 +93,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	return false;
     }
 
+    /**
+     * Comprueba si existe algun usuario con ese mismo nick
+     * @param nick
+     * @return True si existe un usuario con ese nick
+     */
+    
     @Override
     public boolean existeNick(String nick) {
 	for (Usuario u : usuarios) {
@@ -78,6 +108,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	return false;
     }
 
+    /**
+     * Recupera el usuario asociado a un nick, en caso de que exista.
+     * @param nick
+     * @return El usuario con el nick. Debe devolver null si existeNick(nick) es falso.
+     */
+    
     @Override
     public Usuario obtenerUsuario(String nick) {
         for (Usuario u : usuarios) {
@@ -86,6 +122,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	}
 	return null;
     }
+    
+    /** Reviews **/
+    
+    /**
+     * Incorpora una nueva review al sistema, en caso de que sus datos (Usuario, 
+     *  Local) sean correctos y no haya otra introducida para la misma fecha.
+     * @param r La review a introducir al sistema.
+     * @return True si y solo si la operacion fue completada.
+     */
 
     @Override
     public boolean nuevaReview(Review r) {
@@ -102,6 +147,13 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return false;
     }
+    
+    /**
+     * Elimina una review del sistema, siempre y cuando exista y no tenga una 
+     * contestacion asociada.
+     * @param r Review a eliminar
+     * @return True si y solo si la operacion fue completada.
+     */
 
     @Override
     public boolean eliminaReview(Review r) {
@@ -111,6 +163,16 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return reviews.remove(r);
     }
 
+    /**
+     * Comprueba si la visita de un usuario a un local en una fecha dada ha sido 
+     * comentada. En caso deque alguno de los datos sea incorrecto, o inexistente, el 
+     * resultado sera false.
+     * @param u el usuario
+     * @param l el local visitadl
+     * @param ld la fecha de visita
+     * @return True si y solo si la review existe.
+     */
+    
     @Override
     public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
         if(reviews.isEmpty()){
@@ -125,6 +187,16 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return false;
     }
+    
+    /** Contestaciones **/
+    
+    /**
+     * Añade una contestacion a una review, en caso de que la review exista y no este 
+     * ya comentada.
+     * @param c Contestacion a añadir
+     * @param r Review
+     * @return True si y solo si la operacion fue completada y se pudo añadir la review.
+     */
 
     @Override
     public boolean nuevaContestacion(Contestacion c, Review r) {
@@ -136,6 +208,14 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return false;
     }
+    
+    /**
+     * Consulta la existencia de una contestacion para una review. Devolvera
+     * falso si la contestacion no existe, o si la Review no esta registrada en
+     * el sistema.
+     * @param r Review a añadir
+     * @return True si y solo si la Review existe y tiene contestacion
+     */
 
     @Override
     public boolean tieneContestacion(Review r) {
@@ -146,6 +226,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return false;
     }
+    
+    /**
+     * Recupera la contestacion para una review dada, si esta existe.
+     * @param r Review a consultar
+     * @return La contestacion, o null si esta, o la propia review, no existen
+     */
 
     @Override
     public Contestacion obtenerContestacion(Review r) {
@@ -156,6 +242,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return null;
     }
+    
+    /**
+     * Elimina la contestacion pasada como argumento
+     * @param c Contestacion a eliminar
+     * @return True si y solo si la operacion fue completada.
+     */
 
     @Override
     public boolean eliminaContestacion(Contestacion c) {
@@ -171,6 +263,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return false;
     }
 
+    /**
+     * Elimina la contestacion asociada a una review
+     * @param r La review cuya contestacion hay que elimnar
+     * @return True si y solo si la operacion fue completada.
+     */
+    
     @Override
     public boolean eliminaContestacion(Review r) {
         if(reviews.isEmpty()){
@@ -184,6 +282,8 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return false;
     }
+    
+    /** Locales **/
 
     /**
      * Añade un local al sistema, siempre que no exista otro en la misma direccion.
@@ -268,6 +368,13 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         locales.add(nuevoL);
         return true;
     }
+    
+    /**
+     * Ver las review asociadas a un local
+     * @param l Local existente en en sistema
+     * @return Lista de reviews del sistema. En caso de que el Local no exista, sera
+     *  el valor null.
+     */
 
     @Override
     public Review[] verReviews(Local l) {
@@ -283,7 +390,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         return null;
     }
 
-    /** Locales **/
+    /** Reservas **/
     
     /**
      * Anota una nueva reserva para un cliente dado, en un local reservable
@@ -505,8 +612,6 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         return false;
     }
-
-
 
     /**
      * Lista los locales en una ciudad dada
