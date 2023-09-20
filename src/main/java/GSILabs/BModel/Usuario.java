@@ -5,8 +5,10 @@ import java.time.Month;
 import java.util.Objects;
 
 /**
- *
- * @author 34636
+ * Clase Usuario
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class Usuario {
     /*El sistema almacena información de usarios. Cada usuario tiene un nick único de al menos tres

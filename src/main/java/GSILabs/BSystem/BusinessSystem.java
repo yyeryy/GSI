@@ -28,8 +28,11 @@ import java.util.Collections;
 
 
 /**
- *
- * @author yeray
+ * Clase BusinessSystem
+ * Clase que define los métodos implementados de LeisureOffice y LookupService
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class BusinessSystem implements LeisureOffice, LookupService{
     
