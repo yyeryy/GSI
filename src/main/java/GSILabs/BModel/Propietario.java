@@ -42,4 +42,11 @@ public class Propietario extends Usuario{
         
         businessSystem.nuevaContestacion(c, r);
     }
+
+    @Override
+    public String toString() {
+        return "Propietario{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + " | Tipo de Usuario= " + this.getTipo().toString() + "}";
+    }
+    
+    
 }

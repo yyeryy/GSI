@@ -64,5 +64,11 @@ public class Contestacion {
         this.local = local;
     }
     //</editor-fold>
+
+    @Override
+    public String toString() {
+        return "Contestacion{" + "comentario=" + comentario + ", fechaReview=" + fechaReview + ", local=" + local + '}';
+    }
+    
     
 }

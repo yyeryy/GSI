@@ -63,5 +63,12 @@ public class Cliente extends Usuario {
         //Imprimir locales
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + " | Tipo de Usuario= " + this.getTipo().toString() + "}";
+    }
+    
+    
+
 
 }

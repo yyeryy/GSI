@@ -107,5 +107,10 @@ public class Review {
     }
 //</editor-fold>
 
+    @Override
+    public String toString() {
+        return "Review{" + "valoracion=" + valoracion + ", comentario=" + comentario + ", fechaReview=" + fechaReview + ", local=" + local + ", usuario=" + usuario + ", contestacion=" + contestacion + '}';
+    }
+
     
 }
