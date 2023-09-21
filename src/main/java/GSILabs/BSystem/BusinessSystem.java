@@ -133,7 +133,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     @Override
     public boolean nuevaReview(Review r) {
-        if(existeNick(r.getUsuario().getNick())){
+        if(existeNick(r.getUsuario().getNick()) && (r.getValoracion() >= 0) && (r.getValoracion() <= 5) && r.getComentario().length() >= 0 && r.getComentario().length() <= 500){
             if(existeRewiew(r.getUsuario(), r.getLocal(), LocalDate.now())){
                 for(Local l : locales){
                     if(l.getDireccion().equals(r.getLocal().getDireccion())){
