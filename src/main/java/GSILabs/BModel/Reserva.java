@@ -83,5 +83,9 @@ public class Reserva {
         );
         return result;
     }
-     
+
+    @Override
+    public String toString() {
+        return "Reserva{" + "cliente=" + this.cliente.toString() + ", fechaReserva=" + this.fecha.toString() + ", hora=" + this.hora.toString() + ", descuento=" + this.descuento + '}';
+    }
 }
