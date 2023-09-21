@@ -86,7 +86,7 @@ public class Contestacion {
     
     @Override
     public String toString() {
-        return "Contestacion{" + "comentario=" + comentario + ", fechaReview=" + fechaReview + ", local=" + local + '}';
+        return "Contestacion{" + "comentario=" + comentario + ", fechaReview=" + fechaReview.toString() + ", local=" + local.toString() + '}';
     }
     
     

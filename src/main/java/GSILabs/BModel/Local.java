@@ -131,9 +131,4 @@ public class Local {
         Local other = (Local) obj;
         return Objects.equals(direccion, other.direccion);
     }
-
-    @Override
-    public String toString() {
-        return "Local{" + "nombre=" + nombre + ", direccion=" + direccion + ", descripcion=" + descripcion + ", tipo=" + tipo + ", propietarios=" + propietarios + '}';
-    }
 }

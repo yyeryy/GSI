@@ -46,4 +46,9 @@ public class Bar extends Local implements Reservable{
             System.out.println("- " + especialidad);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() +  ", especialidades=" + this.especialidades.toString() + ", reservas=" + this.reservas.toString() + '}';
+    }
 }

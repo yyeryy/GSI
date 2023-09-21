@@ -54,5 +54,9 @@ caracteres.*/
 	this.numero = numero;
     }
 //</editor-fold>
-  
+
+    @Override
+    public String toString() {
+        return "Dirección{" + "localidad=" + localidad + ", provincia=" + provincia + ", calle=" + calle + ", numero=" + numero + '}';
+    }
 }

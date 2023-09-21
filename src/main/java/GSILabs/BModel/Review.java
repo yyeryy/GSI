@@ -129,7 +129,7 @@ public class Review {
     
     @Override
     public String toString() {
-        return "Review{" + "valoracion=" + valoracion + ", comentario=" + comentario + ", fechaReview=" + fechaReview + ", local=" + local + ", usuario=" + usuario + ", contestacion=" + contestacion + '}';
+        return "Review{" + "valoracion=" + valoracion + ", comentario=" + comentario + ", fechaReview=" + fechaReview.toString() + ", local=" + local.toString() + ", usuario=" + usuario.toString() + ", contestacion=" + contestacion.toString() + '}';
     }
 
     

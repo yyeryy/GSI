@@ -39,4 +39,9 @@ public class Pub extends Local{
         return horaClausura;
     }
 //</editor-fold>
+
+    @Override
+    public String toString() {
+        return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", hora Apertura=" + this.horaApertura + ", hora Clausura=" + this.horaClausura + '}';
+    }
 }

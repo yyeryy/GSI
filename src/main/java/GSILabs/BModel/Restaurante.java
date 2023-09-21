@@ -57,4 +57,9 @@ public class Restaurante extends Local implements Reservable{
         this.capacidadMesa=capacidadMesa;
     }
 //</editor-fold>
+
+    @Override
+    public String toString() {
+        return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", precioMenu=" + this.precioMenu + ", capacidad=" + this.capacidad + ", capacidad Mesa=" + this.capacidadMesa + ", capacidad=" + this.reservas.toString() + '}';
+    }
 }
