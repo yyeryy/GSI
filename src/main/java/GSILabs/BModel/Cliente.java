@@ -5,6 +5,7 @@
 package GSILabs.BModel;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Clase Cliente
@@ -23,6 +24,23 @@ public class Cliente extends Usuario {
      */
     public Cliente(String n, String c, LocalDate f, tipoUsuario t) {
         super(n, c, f, t);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNick());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Cliente other = (Cliente) obj;
+        return Objects.equals(getNick(), other.getNick());
     }
 
     @Override

@@ -5,6 +5,7 @@
 package GSILabs.BModel;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Clase Contestacion
@@ -65,6 +66,24 @@ public class Contestacion {
     }
     //</editor-fold>
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(fechaReview, local, comentario);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Contestacion other = (Contestacion) obj;
+        return Objects.equals(fechaReview, other.fechaReview) &&
+               Objects.equals(local, other.local) &&
+               Objects.equals(comentario, other.comentario);
+    }
+    
     @Override
     public String toString() {
         return "Contestacion{" + "comentario=" + comentario + ", fechaReview=" + fechaReview + ", local=" + local + '}';
