@@ -4,7 +4,6 @@ import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
 import static GSILabs.BModel.Local.tipoLocal.PUB;
 import GSILabs.BModel.Propietario;
-import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
@@ -24,7 +23,8 @@ public class S09 {
         }
         // Creo un local para añadirle dueños
         Direccion direccion = new Direccion("a","b","c",1);
-        Local local = new Local("Pruebas", direccion, "Pub de prueba", PUB);
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Local local = new Local("Pruebas", direccion, "Pub de prueba", PUB, propietario);
         // Añado los dueños
         try{
             for(int i = 0; i<4; i++)
