@@ -22,9 +22,10 @@ public class Bar extends Local implements Reservable{
      * @param nombre Nombre del bar
      * @param direccion Dirección del bar
      * @param descripcion Descripción del bar
+     * @param propietario Propietario del bar
      */
-    public Bar(String nombre, Direccion direccion, String descripcion) {
-        super(nombre, direccion, descripcion, tipoLocal.BAR);
+    public Bar(String nombre, Direccion direccion, String descripcion, Propietario propietario) {
+        super(nombre, direccion, descripcion, tipoLocal.BAR, propietario);
         this.especialidades = new ArrayList<>();
         this.reservas = new ArrayList<Reserva>();
     }

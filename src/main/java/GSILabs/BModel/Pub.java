@@ -21,9 +21,10 @@ public class Pub extends Local{
      * @param nombre Nombre del pub
      * @param direccion Dirección del pub
      * @param descripcion Descripción del pub
+     * @param propietario Propietario del pub
      */
-    public Pub(String horaApertura, String horaClausura, String nombre, Direccion direccion, String descripcion) {
-        super(nombre, direccion, descripcion, tipoLocal.PUB);
+    public Pub(String horaApertura, String horaClausura, String nombre, Direccion direccion, String descripcion, Propietario propietario) {
+        super(nombre, direccion, descripcion, tipoLocal.PUB, propietario);
         this.horaApertura = horaApertura;
         this.horaClausura = horaClausura;
     }

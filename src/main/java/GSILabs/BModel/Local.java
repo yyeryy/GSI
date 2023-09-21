@@ -28,13 +28,15 @@ public class Local {
      * @param direccion Dirección del local
      * @param descripcion Descripción del local
      * @param tipo Tipo del local (Bar, Restaurante o Pub)
+     * @param propietario Propietario del local
      */
-    public Local(String nombre, Direccion direccion, String descripcion, tipoLocal tipo) {
+    public Local(String nombre, Direccion direccion, String descripcion, tipoLocal tipo, Propietario propietario) {
         this.nombre = nombre;
         this.direccion = direccion;
         descripcionValida(descripcion);
         this.tipo = tipo;
         this.propietarios = new ArrayList<>();
+        this.propietarios.add(propietario);
     }
     
     //<editor-fold defaultstate="collapsed" desc="getters and setters">

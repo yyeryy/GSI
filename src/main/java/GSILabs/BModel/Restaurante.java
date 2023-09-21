@@ -19,12 +19,13 @@ public class Restaurante extends Local implements Reservable{
      * @param nombre Nombre del restaurante
      * @param direccion Dirección del restaurante
      * @param descripcion Descripción del restaurante
+     * @param propietario Propietario del restaurante
      * @param precioMenu Precio del menu del restaurante
      * @param capacidad Capacidad del restaurante
      * @param capacidadMesa Capacidad de las mesas del restaurante
      */
-    public Restaurante(String nombre, Direccion direccion, String descripcion, double precioMenu, Integer capacidad, Integer capacidadMesa){
-        super(nombre, direccion, descripcion, tipoLocal.RESTAURANTE);
+    public Restaurante(String nombre, Direccion direccion, String descripcion, Propietario propietario, double precioMenu, Integer capacidad, Integer capacidadMesa){
+        super(nombre, direccion, descripcion, tipoLocal.RESTAURANTE, propietario);
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
