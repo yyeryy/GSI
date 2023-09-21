@@ -3,8 +3,10 @@ package GSILabs.BModel;
 import java.util.ArrayList;
 
 /**
- *
- * @author 34636
+ * Clase Restaurante
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class Restaurante extends Local implements Reservable{
     private double precioMenu;
@@ -12,7 +14,15 @@ public class Restaurante extends Local implements Reservable{
     private Integer capacidadMesa;
     private ArrayList<Reserva> reservas;
 
-
+    /**
+     * Constructor Restaurante
+     * @param nombre Nombre del restaurante
+     * @param direccion Dirección del restaurante
+     * @param descripcion Descripción del restaurante
+     * @param precioMenu Precio del menu del restaurante
+     * @param capacidad Capacidad del restaurante
+     * @param capacidadMesa Capacidad de las mesas del restaurante
+     */
     public Restaurante(String nombre, Direccion direccion, String descripcion, double precioMenu, Integer capacidad, Integer capacidadMesa){
         super(nombre, direccion, descripcion, tipoLocal.RESTAURANTE);
         this.precioMenu = precioMenu;
@@ -21,27 +31,29 @@ public class Restaurante extends Local implements Reservable{
         this.reservas = new ArrayList<Reserva>();
     }
     
+    //<editor-fold defaultstate="collapsed" desc="getters and setters">
     public double getPrecioMenu(){
         return this.precioMenu;
     }
-
-    public Integer capacidad(){
+    
+    public Integer getCapacidad(){
         return this.capacidad;
     }
-
-    public Integer capacidadMesa(){
+    
+    public Integer getCapacidadMesa(){
         return this.capacidadMesa;
     }
-
+    
     public void setPrecioMenu(double precioMenu){
         this.precioMenu = precioMenu;
     }
-
+    
     public void setCapacidad(Integer capacidad){
         this.capacidad=capacidad;
     }
-
+    
     public void setCapacidadMesa(Integer capacidadMesa){
         this.capacidadMesa=capacidadMesa;
     }
+//</editor-fold>
 }

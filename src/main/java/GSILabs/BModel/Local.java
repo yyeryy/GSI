@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- *
- * @author 34636
+ * Clase Local
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class Local {
-    /*El sistema almacena información de locales de ocio en España. Un local tienen un nombre y está
-    en una localización concreta. (Localidad, Provincia, Calle y Número). No puede haber dos locales
-    en la misma dirección. Los locales pueden almacenar una breve descripción de no más de 300
-    caracteres.*/
-    String nombre;
+    private String nombre;
     private Direccion direccion;
     private String descripcion;
     private tipoLocal tipo;
@@ -24,6 +22,13 @@ public class Local {
         PUB
     }
 
+    /**
+     * Constructor Local
+     * @param nombre Nombre del local
+     * @param direccion Dirección del local
+     * @param descripcion Descripción del local
+     * @param tipo Tipo del local (Bar, Restaurante o Pub)
+     */
     public Local(String nombre, Direccion direccion, String descripcion, tipoLocal tipo) {
         this.nombre = nombre;
         this.direccion = direccion;
@@ -71,14 +76,19 @@ public class Local {
     //</editor-fold>
     
     
-    // Función que comprueba que la descripción del local no supere los 300 caracteres.
-    public void descripcionValida(String desc) {
+    /**
+     * Función que comprueba que la descripción del local no supere los 300 caracteres.
+     */
+    public final void descripcionValida(String desc) {
         if (desc.length() > 300) {
             throw new IllegalArgumentException("La descripción debe tener como máximo 300 caracteres.");
         }
         this.descripcion = desc;
     }
     
+     /**
+     * Función que añade un propietario al local.
+     */
     public boolean addPropietario(Propietario propietario) {
         if(this.propietarios.size() > 2) {
             throw new IllegalArgumentException("Número máximo de propietarios alcanzado.");
@@ -87,6 +97,9 @@ public class Local {
         return true;
     }
     
+     /**
+     * Función que elimina un propietario del local.
+     */
     public boolean removePropietario(Propietario propietario) {
         if(this.propietarios.size() < 1) {
             throw new IllegalArgumentException("El local no tiene propietarios.");
@@ -115,5 +128,10 @@ public class Local {
           return false;
         Local other = (Local) obj;
         return Objects.equals(direccion, other.direccion);
+    }
+
+    @Override
+    public String toString() {
+        return "Local{" + "nombre=" + nombre + ", direccion=" + direccion + ", descripcion=" + descripcion + ", tipo=" + tipo + ", propietarios=" + propietarios + '}';
     }
 }
