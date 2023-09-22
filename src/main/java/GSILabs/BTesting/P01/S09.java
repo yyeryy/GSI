@@ -23,7 +23,7 @@ public class S09 {
         }
         // Creo un local para añadirle dueños
         Direccion direccion = new Direccion("a","b","c",1);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local = new Local("Pruebas", direccion, "Pub de prueba", PUB, propietario);
         // Añado los dueños
         try{

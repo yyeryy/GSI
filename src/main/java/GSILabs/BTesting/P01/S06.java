@@ -20,7 +20,7 @@ public class S06 {
         Cliente cliente = new Cliente("Prueba", "1234", LocalDate.of(2000,1,1),CLIENTE);
         bs.nuevoUsuario(cliente);
         Direccion direccion = new Direccion("a","b","c",1);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Bar bar = new Bar("Bar", direccion, "Local para el ejemplo S06", propietario);
         return !bs.nuevaReserva(cliente, bar, LocalDate.MIN, LocalTime.MIN);
     }

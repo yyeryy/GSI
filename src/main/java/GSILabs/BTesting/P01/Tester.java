@@ -98,15 +98,4 @@ public class Tester {
             System.out.println("\n\tINCOMPLETO");
 	
     }
-    
-    public boolean testS2() {
-        System.out.println("Test 2");
-	bs.nuevoUsuario(new Usuario("Marilin", "1234", LocalDate.of(2000,1,1), CLIENTE)); // añadimos usuario al sistema
-        if(bs.obtenerUsuario("Vega") == null)
-        {
-            System.out.println("Usuario es null si no existe");
-            return true;
-        }
-        return false;
-    }
 }

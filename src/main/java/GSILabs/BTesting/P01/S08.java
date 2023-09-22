@@ -19,7 +19,7 @@ public class S08 {
     
     boolean testS8() {
         Usuario usuario = new Usuario("Prueba", "1234", LocalDate.of(2000,1,1), CLIENTE);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", Local.tipoLocal.BAR, propietario);
         Contestacion contestacion = new Contestacion("comentario", LocalDate.now(), local);
         return !bs.nuevaContestacion(contestacion, new Review(3, "coment1", LocalDate.now(), local, usuario));

@@ -19,7 +19,7 @@ public class S10 {
 
     boolean testS10() {
         Usuario usuario = new Usuario("Prueba", "1234", LocalDate.of(2000,1,1), CLIENTE);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", tipoLocal.BAR, propietario);
         Review review1 = new Review(3, "coment1", LocalDate.now(), local, usuario);
         bs.nuevaReview(review1);

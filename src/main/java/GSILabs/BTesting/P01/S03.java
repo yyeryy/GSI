@@ -17,7 +17,7 @@ public class S03 {
     
     boolean testS3() {
         Direccion direccion = new Direccion("a","b","c",1);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local1 = new Local("Local1", direccion, "Local 1 para el ejemplo S03", BAR, propietario);
         Local local2 = new Local("Local2", direccion, "Local 2 para el ejemplo S03", RESTAURANTE, propietario);   
         bs.nuevoLocal(local1);

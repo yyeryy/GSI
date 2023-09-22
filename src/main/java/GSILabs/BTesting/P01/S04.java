@@ -16,7 +16,7 @@ public class S04 {
     BusinessSystem bs = new BusinessSystem();
     boolean testS4() {
         Direccion direccion = new Direccion("a","b","c",1);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local = new Local("Local", direccion, "Local para el ejemplo S03", BAR, propietario);
         bs.nuevoLocal(local);
         bs.eliminarLocal(local);
