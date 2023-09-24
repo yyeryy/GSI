@@ -133,4 +133,9 @@ public class Usuario {
         return Objects.equals(nick, other.nick);
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "nick=" + nick + ", contrasena=" + contraseña + ", fechaNacimiento=" + fechaNacimiento + ", tipo=" + tipo + '}';
+    }
+
 }

@@ -7,12 +7,13 @@ import java.util.Objects;
  * @author Grupo 3 - GSI
  * @version 1.0
  * @since 04.09.2023
+ * El sistema almacena información de locales de ocio en España. Un local tienen un nombre y está
+ * en una localización concreta. (Localidad, Provincia, Calle y Número). No puede haber dos locales
+ * en la misma dirección. Los locales pueden almacenar una breve descripción de no más de 300
+ * caracteres.
  */
 public class Direccion {
-    /*El sistema almacena información de locales de ocio en España. Un local tienen un nombre y está
-en una localización concreta. (Localidad, Provincia, Calle y Número). No puede haber dos locales
-en la misma dirección. Los locales pueden almacenar una breve descripción de no más de 300
-caracteres.*/
+
     public String localidad;
     public String provincia;
     public String calle;
