@@ -9,93 +9,90 @@ import GSILabs.BSystem.BusinessSystem;
  * @since 04.09.2023
  */
 public class Tester {
-    BusinessSystem bs;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         System.out.println("Inicio de test");
-        Tester tester = new Tester();
 	
 	//Test 1
         S01 s01 = new S01();
-        System.out.print("Test 1:");
+        System.out.print("Test 1: ");
         if(s01.testS1())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 2
         S02 s02 = new S02();
-        System.out.print("Test 2:");
+        System.out.print("Test 2: ");
         if(s02.testS2())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 3
         S03 s03 = new S03();
-        System.out.print("Test 3:");
+        System.out.print("Test 3: ");
         if(s03.testS3())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 4
         S04 s04 = new S04();
-        System.out.print("Test 4:");
+        System.out.print("Test 4: ");
         if(s04.testS4())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 5
         S05 s05 = new S05();
-        System.out.print("Test 5:");
+        System.out.print("Test 5: ");
         if(s05.testS5())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 6
         S06 s06 = new S06();
-        System.out.print("Test 6:");
+        System.out.print("Test 6: ");
         if(s06.testS6())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 7
         S07 s07 = new S07();
-        System.out.print("Test 7:");
+        System.out.print("Test 7: ");
         if(s07.testS7())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 8
         S08 s08 = new S08();
-        System.out.print("Test 8:");
+        System.out.print("Test 8: ");
         if(s08.testS8())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 9
         S09 s09 = new S09();
-        System.out.print("Test 9:");
+        System.out.print("Test 9: ");
         if(s09.testS9())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
 
         //Test 10
         S10 s10 = new S10();
-        System.out.print("Test 10:");
+        System.out.print("Test 10: ");
         if(s10.testS10())
-            System.out.println("\tcompleto");
+            System.out.println("completo");
         else
             System.out.println("\n\tINCOMPLETO");
-	
     }
 }
