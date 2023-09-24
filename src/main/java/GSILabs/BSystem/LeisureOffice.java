@@ -48,14 +48,14 @@ public interface LeisureOffice {
     
     /**
      * Comprueba si existe algun usuario con ese mismo nick
-     * @param nick
+     * @param nick id del usuario a comprobar
      * @return True si existe un usuario con ese nick
      */
     public boolean existeNick(String nick);
     
     /**
      * Recupera el usuario asociado a un nick, en caso de que exista.
-     * @param nick
+     * @param nick id del usuario a obtener
      * @return El usuario con el nick. Debe devolver null si existeNick(nick) es falso.
      */
     public Usuario obtenerUsuario(String nick);
