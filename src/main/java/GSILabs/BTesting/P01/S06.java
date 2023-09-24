@@ -11,7 +11,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * No se pueden hacer reservas para un local inexistente;
+ * Clase S06
+ * No se pueden hacer reservas para un local inexistente
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S06 {
     BusinessSystem bs = new BusinessSystem();

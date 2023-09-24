@@ -5,26 +5,25 @@
 package GSILabs.BModel;
 
 import java.util.ArrayList;
-import GSILabs.BModel.Reserva;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
+import GSILabs.BModel.Reserva;
 
 /**
- *
- * @author 34636
+ * Clase Reservable
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
+ * Tanto los restaurantes como los Bares son Reservables. El sistema debe poder almacenar Reservas
+ * de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
+ * se efectuará, así como un posible porcentaje de descuento.
  */
 public interface Reservable {
-/*
-    Tanto los restaurantes como los Bares son Reservables. El sistema debe poder almacenar Reservas
-    de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
-    se efectuará, así como un posible porcentaje de descuento.
-*/
+    
     /**
      * Lista de Reservas de un Local Reservable (Bar o Restaurante)
      */
-    public ArrayList<Reserva> listaReserva = new  ArrayList<Reserva>();
+    public ArrayList<Reserva> listaReserva = new ArrayList<Reserva>();
 
     /**
      * Dado un Cliente existente sin ninguna reserva en ese día, una fecha y hora futura,
@@ -32,7 +31,6 @@ public interface Reservable {
      * @param cliente El Cliente
      * @param fecha Fecha de la reserva
      * @param hora Hora de la reserva
-     * @return void
      */
     default void nuevaReserva(Cliente cliente, LocalDate fecha, LocalTime hora){
 
@@ -107,7 +105,6 @@ public interface Reservable {
 
     /**
      * Obtener todas las Reservas (pasadas y futuras) del Local Reservable
-     * @param void
      * @return La lista de las reservas, o null si no existe ninguna reserva.
      */
     default Reserva[] todasReserva(){

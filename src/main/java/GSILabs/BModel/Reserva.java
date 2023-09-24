@@ -9,17 +9,18 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 /**
- *
- * @author 34636
+ * Clase Reservable
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
+ * Tanto los restaurantes como los Bares son Reservables. El sistema debe poder almacenar Reservas
+ * de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
+ * se efectuará, así como un posible porcentaje de descuento.
  */
 public class Reserva {
-    /*
-    Tanto los restaurantes como los Bares son Reservables. El sistema debe poder almacenar Reservas
-    de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
-    se efectuará, así como un posible porcentaje de descuento.
-     */
-    /*
-    Un cliente no pude tener la misma fecha en una reserva, por lo que se puede utilizar la combinacion de los atributos como una supuesta ID
+
+    /**
+     * Un cliente no pude tener la misma fecha en una reserva, por lo que se puede utilizar la combinacion de los atributos como una supuesta ID
     */
     private Cliente cliente;
     private LocalDate fecha;

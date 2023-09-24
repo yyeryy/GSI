@@ -9,7 +9,11 @@ import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
 /**
- * No se puede introducir los Locales en la misma dirección;
+ * Clase S03
+ * No se puede introducir los Locales en la misma dirección
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S03 {
     BusinessSystem bs = new BusinessSystem();

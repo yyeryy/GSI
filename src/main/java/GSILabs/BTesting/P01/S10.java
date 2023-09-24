@@ -12,7 +12,11 @@ import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import java.time.LocalDate;
 
 /**
+ * Clase S10
  * No se pueden añadir dos Reviews del mismo usuario, el mismo día para el mismo local.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S10 {
     BusinessSystem bs = new BusinessSystem();
