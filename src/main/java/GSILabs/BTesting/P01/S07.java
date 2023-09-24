@@ -21,6 +21,10 @@ import java.time.LocalTime;
 public class S07 {
     BusinessSystem bs = new BusinessSystem();
     
+    /**
+     * Ejecucion del test S07
+     * @return Estado de la ejecución del Test
+     */
     boolean testS7() {
         // Creo al cliente
         Cliente cliente = new Cliente("Prueba", "1234", LocalDate.of(2000,1,1),CLIENTE);

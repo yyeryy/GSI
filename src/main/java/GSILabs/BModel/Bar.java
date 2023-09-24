@@ -32,6 +32,7 @@ public class Bar extends Local implements Reservable{
 
     /**
      * Función que agrega especialidades al bar.
+     * @param especialidad Especialidad del bar
      */
     public void agregarEspecialidad(String especialidad) {
         especialidades.add(especialidad);

@@ -18,6 +18,10 @@ import java.time.LocalDate;
 public class S09 {
     BusinessSystem bs = new BusinessSystem();
     
+    /**
+     * Ejecucion del test S09
+     * @return Estado de la ejecución del Test
+     */
     boolean testS9() {
         // Creo los 4 dueños y los añado al sistema
         for(int i = 0; i<4; i++)

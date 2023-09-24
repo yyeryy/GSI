@@ -15,10 +15,14 @@ import java.time.LocalDate;
 public class S01 {
     BusinessSystem bs = new BusinessSystem();
     
+    /**
+     * Ejecucion del test S01
+     * @return Estado de la ejecución del Test
+     */
     public boolean testS1() {
         String nick = "Prueba";
         
-        Usuario usuario = new Usuario("Prueba", "1234", LocalDate.of(2000,1,1), CLIENTE);
+        Usuario usuario = new Usuario(nick, "1234", LocalDate.of(2000,1,1), CLIENTE);
         if(bs.nuevoUsuario(usuario)) //Se crea el usuario con exito
             if(bs.obtenerUsuario(nick) == usuario)
                 return true;

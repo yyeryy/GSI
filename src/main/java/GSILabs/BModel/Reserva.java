@@ -27,6 +27,13 @@ public class Reserva {
     private LocalTime hora;
     private int descuento;
 
+    /**
+     * Constructor Local
+     * @param cliente Cliente que quiere reservar
+     * @param fecha Fecha de la reserva
+     * @param hora Hora de la reserva
+     * @param descuento Descuento de la reserva
+     */
     public Reserva(Cliente cliente, LocalDate fecha, LocalTime hora, int descuento) {
         this.cliente = cliente;
         this.fecha = fecha;

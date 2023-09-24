@@ -21,6 +21,10 @@ import java.time.LocalDate;
 public class S08 {
     BusinessSystem bs = new BusinessSystem();
     
+    /**
+     * Ejecucion del test S08
+     * @return Estado de la ejecución del Test
+     */
     boolean testS8() {
         Usuario usuario = new Usuario("Prueba", "1234", LocalDate.of(2000,1,1), CLIENTE);
         Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 

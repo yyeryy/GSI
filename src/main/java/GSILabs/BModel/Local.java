@@ -80,6 +80,7 @@ public class Local {
     
     /**
      * Función que comprueba que la descripción del local no supere los 300 caracteres.
+     * @param desc Descripciónde del local
      */
     public final void descripcionValida(String desc) {
         if (desc.length() > 300) {
@@ -90,6 +91,8 @@ public class Local {
     
      /**
      * Función que añade un propietario al local.
+     * @param propietario Propietario a añadir
+     * @return Booleano que indica si la operacion ha tenido éxito.
      */
     public boolean addPropietario(Propietario propietario) {
         if(this.propietarios.size() > 2) {
@@ -101,6 +104,8 @@ public class Local {
     
      /**
      * Función que elimina un propietario del local.
+     * @param propietario Propietario a eliminar.
+     * @return Booleano que indica si la operacion ha tenido éxito.
      */
     public boolean removePropietario(Propietario propietario) {
         if(this.propietarios.size() < 1) {

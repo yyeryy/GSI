@@ -7,7 +7,6 @@ package GSILabs.BModel;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import GSILabs.BModel.Reserva;
 
 /**
  * Clase Reservable

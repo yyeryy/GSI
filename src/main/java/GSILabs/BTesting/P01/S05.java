@@ -15,6 +15,10 @@ import java.time.LocalDate;
 public class S05 {
     BusinessSystem bs = new BusinessSystem();
     
+    /**
+     * Ejecucion del test S05
+     * @return Estado de la ejecución del Test
+     */
     boolean testS5() {
         try{
             new Usuario("Marilin", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), CLIENTE); 

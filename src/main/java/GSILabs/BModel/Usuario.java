@@ -20,8 +20,17 @@ public class Usuario {
     private LocalDate fechaNacimiento;
     private tipoUsuario tipo;
 
+    /**
+     * Tipo de usuario que se permiten en la aplicación.
+     */
     public enum tipoUsuario {
+        /**
+         * Indica si el usuario es propietario de un local.
+         */
         PROPIETARIO,
+        /**
+         * Indica si un usuario es cliente de un local.
+         */
         CLIENTE
     }
 
@@ -74,6 +83,10 @@ public class Usuario {
     }
 //</editor-fold>
 
+    /**
+     * Función que comprueba que el nick proporcionado supere los 2 caracteres.
+     * @param n Nick del usuario a comprobar.
+     */
     public void nickValido(String n) {
         if (n.length() < 3) {
             throw new IllegalArgumentException("El nombre debe tener al menos 3 caracteres."); // revisar esto que hace y sino solo sout
@@ -81,6 +94,10 @@ public class Usuario {
         this.nick = n;
     }
     
+    /**
+     * Función que comprueba que la contraseña no sea nula
+     * @param c Contraseña del usuario a comprobar.
+     */
     public void contraseñaValido(String c) {
         if (c.length() < 1) {
             throw new IllegalArgumentException("La contraseña no puede ser nula."); // revisar esto que hace y sino solo sout
@@ -88,6 +105,10 @@ public class Usuario {
         this.contraseña = c;
     }
     
+    /**
+     * Función que comprueba que la fecha de nacimiento cumpla con la edad minima permitida por el sistema
+     * @param f Fecha de nacimiento del usuario a comprobar.
+     */
     public void fechaNacimientoValido(LocalDate f) {
         if (f.getYear() > LocalDate.now().getYear()-14) {
             throw new IllegalArgumentException("La fecha de nacimiento no cumple con la edad minima permitida por el sistema."); // revisar esto que hace y sino solo sout

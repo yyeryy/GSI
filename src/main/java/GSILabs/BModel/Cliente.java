@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BModel;
 
 import java.time.LocalDate;
@@ -47,5 +43,4 @@ public class Cliente extends Usuario {
     public String toString() {
         return "Cliente{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + " | Tipo de Usuario= " + this.getTipo().toString() + "}";
     }
-    
 }

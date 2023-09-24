@@ -15,6 +15,10 @@ import java.time.LocalDate;
 public class S02 {
     BusinessSystem bs = new BusinessSystem();
     
+    /**
+     * Ejecucion del test S02
+     * @return Estado de la ejecución del Test
+     */
     boolean testS2() {
         bs.nuevoUsuario(new Usuario("Marilin", "1234", LocalDate.of(2000,1,1), CLIENTE)); // añadimos usuario al sistema
         if(bs.obtenerUsuario("Vega") == null)
