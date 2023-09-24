@@ -1,8 +1,10 @@
 package GSILabs.BModel;
 
 /**
- *
- * @author 34636
+ * Clase Direccion
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class Direccion {
     /*El sistema almacena información de locales de ocio en España. Un local tienen un nombre y está
