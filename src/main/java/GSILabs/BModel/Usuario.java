@@ -1,7 +1,6 @@
 package GSILabs.BModel;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Objects;
 
 /**
@@ -9,12 +8,13 @@ import java.util.Objects;
  * @author Grupo 3 - GSI
  * @version 1.0
  * @since 04.09.2023
+ * El sistema almacena información de usuarios. Cada usuario tiene un nick único de al menos tres
+ * caracteres y una contraseña. Además, se debe almacenar la información de la fecha de nacimiento
+ * del mismo. No se permiten usuario de menos de 14 años. Cada usuario debe tener un perfil
+ * determinado, a escoger entre Propietario y Cliente.
  */
 public class Usuario {
-    /*El sistema almacena información de usarios. Cada usuario tiene un nick único de al menos tres
-caracteres y una contraseña. Además, se debe almacenar la información de la fecha de nacimiento
-del mismo. No se permiten usuario de menos de 14 años. Cada usuario debe tener un perfil
-determinado, a escoger entre Propietario y Cliente.*/
+
     private String nick;
     private String contraseña;
     private LocalDate fechaNacimiento;

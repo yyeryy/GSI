@@ -11,8 +11,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
+ * Clase S07
  * No se pueden hacer reservas para un local inexistente, aunque esté en la misma dirección que
-otro existente;
+ * otro existente
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S07 {
     BusinessSystem bs = new BusinessSystem();

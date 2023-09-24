@@ -10,7 +10,6 @@ package GSILabs.BSystem;
 import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 /**
  * Interfaz de acceso a BSystem

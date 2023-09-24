@@ -6,8 +6,12 @@ import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
 /**
-     * Si introduce a un usuario, este puede ser luego localizado a partir de su ID
-*/
+ * Clase S01
+ * Si introduce a un usuario, este puede ser luego localizado a partir de su ID
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
+ */
 public class S01 {
     BusinessSystem bs = new BusinessSystem();
     

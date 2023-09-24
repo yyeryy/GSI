@@ -9,7 +9,11 @@ import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
 /**
- * No se pueden añadir cuatro dueños a un bar;
+ * Clase S09
+ * No se pueden añadir cuatro dueños a un bar
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S09 {
     BusinessSystem bs = new BusinessSystem();

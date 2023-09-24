@@ -6,7 +6,11 @@ import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
 /**
- * No se puede introducir un usuario menor de edad;
+ * Clase S05
+ * No se puede introducir un usuario menor de edad
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S05 {
     BusinessSystem bs = new BusinessSystem();

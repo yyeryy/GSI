@@ -12,7 +12,11 @@ import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
 /**
- * No se pueden añadir comentarios para Reviews que no existen;
+ * Clase S08
+ * No se pueden añadir comentarios para Reviews que no existen
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 04.09.2023
  */
 public class S08 {
     BusinessSystem bs = new BusinessSystem();
