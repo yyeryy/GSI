@@ -122,7 +122,7 @@ public class Local {
     
     @Override
     public int hashCode() {
-        return Objects.hash(direccion);
+        return Objects.hash(getDireccion());
     }
 
     @Override
@@ -134,6 +134,6 @@ public class Local {
         if (getClass() != obj.getClass())
           return false;
         Local other = (Local) obj;
-        return Objects.equals(direccion, other.direccion);
+        return Objects.equals(getDireccion(), other.getDireccion());
     }
 }

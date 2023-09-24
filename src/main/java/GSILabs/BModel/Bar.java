@@ -6,6 +6,7 @@ package GSILabs.BModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Clase Bar
@@ -46,6 +47,23 @@ public class Bar extends Local implements Reservable{
         for (String especialidad : especialidades) {
             System.out.println("- " + especialidad);
         }
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDireccion());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Bar other = (Bar) obj;
+        return Objects.equals(getDireccion(), other.getDireccion());
     }
 
     @Override

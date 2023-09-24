@@ -1,6 +1,7 @@
 package GSILabs.BModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Clase Restaurante
@@ -58,6 +59,24 @@ public class Restaurante extends Local implements Reservable{
     }
 //</editor-fold>
 
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDireccion());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Restaurante other = (Restaurante) obj;
+        return Objects.equals(getDireccion(), other.getDireccion());
+    }
+    
     @Override
     public String toString() {
         return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", precioMenu=" + this.precioMenu + ", capacidad=" + this.capacidad + ", capacidad Mesa=" + this.capacidadMesa + ", capacidad=" + this.reservas.toString() + '}';

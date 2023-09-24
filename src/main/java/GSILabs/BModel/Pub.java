@@ -4,6 +4,8 @@
  */
 package GSILabs.BModel;
 
+import java.util.Objects;
+
 /**
  * Clase Pub
  * @author Grupo 3 - GSI
@@ -40,6 +42,24 @@ public class Pub extends Local{
     }
 //</editor-fold>
 
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDireccion());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Pub other = (Pub) obj;
+        return Objects.equals(getDireccion(), other.getDireccion());
+    }
+    
     @Override
     public String toString() {
         return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", hora Apertura=" + this.horaApertura + ", hora Clausura=" + this.horaClausura + '}';

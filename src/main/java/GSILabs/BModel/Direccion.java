@@ -1,5 +1,7 @@
 package GSILabs.BModel;
 
+import java.util.Objects;
+
 /**
  * Clase Direccion
  * @author Grupo 3 - GSI
@@ -64,7 +66,27 @@ caracteres.*/
 	this.numero = numero;
     }
 //</editor-fold>
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(localidad, provincia, calle, numero);
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Direccion other = (Direccion) obj;
+        return Objects.equals(getLocalidad(), other.getLocalidad()) &&
+                Objects.equals(getProvincia(), other.getProvincia()) &&
+                Objects.equals(getCalle(), other.getCalle()) &&
+                Objects.equals(getNumero(), other.getNumero());
+    }
+    
     @Override
     public String toString() {
         return "Dirección{" + "localidad=" + localidad + ", provincia=" + provincia + ", calle=" + calle + ", numero=" + numero + '}';
