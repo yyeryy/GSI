@@ -15,12 +15,20 @@ caracteres.*/
     public String provincia;
     public String calle;
     public int numero;
+    
+    /**
+     * Constructor Cliente
+     * @param l localidad donde se encuentra el local
+     * @param p provincia donde está situado el local
+     * @param c su calle
+     * @param n el numero de portal
+     */
 
-    public Direccion(String localidad, String provincia, String calle, int numero) {
-	this.localidad = localidad;
-	this.provincia = provincia;
-	this.calle = calle;
-	this.numero = numero;
+    public Direccion(String l, String p, String c, int n) {
+	this.localidad = l;
+	this.provincia = p;
+	this.calle = c;
+	this.numero = n;
     }
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters">

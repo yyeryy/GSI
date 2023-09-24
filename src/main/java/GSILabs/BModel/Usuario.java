@@ -25,6 +25,14 @@ determinado, a escoger entre Propietario y Cliente.*/
         CLIENTE
     }
 
+    /**
+     * Constructor Cliente
+     * @param n id o nombre del usuario
+     * @param c su contraseña para iniciar sesion
+     * @param f su fecha de nacimiento
+     * @param t si el usuario es cliente o propietario
+     */
+    
     public Usuario(String n, String c, LocalDate f, tipoUsuario t) {
         nickValido(n); // this.nick = nick;
 	contraseñaValido(c); // this.contraseña = password;
