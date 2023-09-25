@@ -33,6 +33,7 @@ public class S06 {
 	    System.out.println("Se ha creado una reserva para un local inexistente");
 	    return false;
 	}
-	return !;
+	System.out.println("No se pueden hacer reservas para un local inexistente");
+	return true;
     }
 }
