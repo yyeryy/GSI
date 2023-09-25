@@ -36,7 +36,7 @@ public class S03 {
 	    }
 	    System.out.println("No se pueden introducir dos locales en la misma direccion");
 	    return true;
-	}catch (IllegalArgumentException e){
+	}catch (IllegalArgumentException e){ // comprobamos que la descripcion del local sea valida
 	    System.out.println(e);
 	    return false;
 	}
