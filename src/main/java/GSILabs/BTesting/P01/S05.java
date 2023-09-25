@@ -21,12 +21,14 @@ public class S05 {
      */
     boolean testS5() {
         try{
-            new Usuario("Marilin", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), CLIENTE); 
+            new Usuario("Prueba", "1234", LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), CLIENTE); 
         }
         catch(IllegalArgumentException e)
         {
+	    System.out.println(e);
             return true;
         }
+	System.out.println("El usuario es mayor de edad y se ha creado correctamente");
         return false;
     } 
 }
