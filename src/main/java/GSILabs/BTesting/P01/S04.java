@@ -24,11 +24,16 @@ public class S04 {
      * @return Estado de la ejecución del Test
      */
     boolean testS4() {
-        Direccion direccion = new Direccion("a","b","c",1);
+        Direccion direccion = new Direccion("Pamplona","Navarra","kalea",1);
         Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local = new Local("Local", direccion, "Local para el ejemplo S03", BAR, propietario);
         bs.nuevoLocal(local);
         bs.eliminarLocal(local);
-        return bs.nuevoLocal(local);
+	if (bs.nuevoLocal(local)){
+	    System.out.println("El bar introducido en la misma direccion");
+	    return true;
+	}
+	System.out.println("");
+        return false;
     }
 }

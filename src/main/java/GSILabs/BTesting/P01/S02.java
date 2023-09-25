@@ -24,10 +24,12 @@ public class S02 {
             bs.nuevoUsuario(new Usuario("Juan", "1234", LocalDate.of(2000,1,1), CLIENTE));} // añadimos usuario al sistema
         catch(IllegalArgumentException e){
             System.out.println(e);}
-        if(bs.obtenerUsuario("Vega") == null)
+        if(bs.obtenerUsuario("Pepe") == null)
         {
+	    System.out.println("El usuario introducido no existe");
             return true;
         }
+	System.out.println("El usuario con ese nick existe");
         return false;
     }
 }
