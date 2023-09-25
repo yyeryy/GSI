@@ -30,10 +30,10 @@ public class S04 {
         bs.nuevoLocal(local);
         bs.eliminarLocal(local);
 	if (bs.nuevoLocal(local)){
-	    System.out.println("El bar introducido en la misma direccion");
+	    System.out.println("El bar se ha introducido en la misma direccion");
 	    return true;
 	}
-	System.out.println("");
+	System.out.println("No se ha podido introducir el bar");
         return false;
     }
 }
