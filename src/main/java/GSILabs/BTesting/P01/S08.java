@@ -30,6 +30,11 @@ public class S08 {
         Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
         Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", Local.tipoLocal.BAR, propietario);
         Contestacion contestacion = new Contestacion("comentario", LocalDate.now(), local);
-        return !bs.nuevaContestacion(contestacion, new Review(3, "coment1", LocalDate.now(), local, usuario));
+        if(!bs.nuevaContestacion(contestacion, new Review(3, "coment1", LocalDate.now(), local, usuario))){
+            System.out.println("No se pueden añadir comentarios para Reviews que no existen");
+            return true;
+        }
+        System.out.println("Se ha añadido el comentario correctamente");
+        return false;
     }
 }

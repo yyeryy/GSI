@@ -38,7 +38,10 @@ public class S09 {
             for(int i = 0; i<4; i++)
                 bs.asociarLocal(local, (Propietario) bs.obtenerUsuario("dueno"+i+""));
         }catch(IllegalArgumentException e){
-            return true;}
+            System.out.println(e);
+            return true;
+        }
+        System.out.println("Dueños añadidos correctamente");
         return false;
     }
 }

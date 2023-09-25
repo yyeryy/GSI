@@ -31,6 +31,11 @@ public class S10 {
         Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", tipoLocal.BAR, propietario);
         Review review1 = new Review(3, "coment1", LocalDate.now(), local, usuario);
         bs.nuevaReview(review1);
-        return !bs.nuevaReview(review1);
+        if(!bs.nuevaReview(review1)){
+            System.out.println("No se pueden añadir dos Reviews del mismo usuario, el mismo día para el mismo local");
+            return true;
+        }
+        System.out.println("Review añadida correctamente");
+        return false;
     }
 }
