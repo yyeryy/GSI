@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 /**
- * Clase Reservable
+ * Clase Reserva
  * @author Grupo 3 - GSI
  * @version 1.0
  * @since 04.09.2023
@@ -28,7 +28,7 @@ public class Reserva {
     private int descuento;
 
     /**
-     * Constructor Local
+     * Constructor Reserva
      * @param cliente Cliente que quiere reservar
      * @param fecha Fecha de la reserva
      * @param hora Hora de la reserva

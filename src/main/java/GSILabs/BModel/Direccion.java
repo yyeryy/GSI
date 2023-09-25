@@ -20,7 +20,7 @@ public class Direccion {
     public int numero;
     
     /**
-     * Constructor Cliente
+     * Constructor Direccion
      * @param l localidad donde se encuentra el local
      * @param p provincia donde está situado el local
      * @param c su calle

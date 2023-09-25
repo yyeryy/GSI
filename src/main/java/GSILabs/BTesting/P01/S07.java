@@ -7,7 +7,6 @@ import GSILabs.BModel.Propietario;
 import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Clase S07

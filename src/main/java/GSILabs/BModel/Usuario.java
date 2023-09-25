@@ -35,7 +35,7 @@ public class Usuario {
     }
 
     /**
-     * Constructor Cliente
+     * Constructor Usuario
      * @param n id o nombre del usuario
      * @param c su contraseña para iniciar sesion
      * @param f su fecha de nacimiento
