@@ -21,11 +21,18 @@ public class S01 {
      */
     public boolean testS1() {
         String nick = "Prueba";
-        
-        Usuario usuario = new Usuario(nick, "1234", LocalDate.of(2000,1,1), CLIENTE);
-        if(bs.nuevoUsuario(usuario)) //Se crea el usuario con exito
+        try{
+            Usuario usuario = new Usuario(nick, "1234", LocalDate.of(2000,1,1), CLIENTE);
+            if(bs.nuevoUsuario(usuario)) //Se crea el usuario con exito
             if(bs.obtenerUsuario(nick) == usuario)
                 return true;
+            else{
+                System.out.println("El usuario no se ha localizado");
+                return false;
+            }
+        }
+        catch(IllegalArgumentException e){
+            System.out.println(e);}
         return false;
     }
 }

@@ -20,7 +20,10 @@ public class S02 {
      * @return Estado de la ejecución del Test
      */
     boolean testS2() {
-        bs.nuevoUsuario(new Usuario("Marilin", "1234", LocalDate.of(2000,1,1), CLIENTE)); // añadimos usuario al sistema
+        try{
+            bs.nuevoUsuario(new Usuario("Juan", "1234", LocalDate.of(2000,1,1), CLIENTE));} // añadimos usuario al sistema
+        catch(IllegalArgumentException e){
+            System.out.println(e);}
         if(bs.obtenerUsuario("Vega") == null)
         {
             return true;

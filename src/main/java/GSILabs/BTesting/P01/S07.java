@@ -27,7 +27,7 @@ public class S07 {
      */
     boolean testS7() {
         // Creo al cliente
-        Cliente cliente = new Cliente("Prueba", "1234", LocalDate.of(2000,1,1),CLIENTE);
+        Cliente cliente = new Cliente("Prueba", "1234", LocalDate.of(2000,1,1));
         bs.nuevoUsuario(cliente);
         // Creo el local
         Direccion direccion = new Direccion("a","b","c",1);

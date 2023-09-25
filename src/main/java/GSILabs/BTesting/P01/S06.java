@@ -25,7 +25,7 @@ public class S06 {
      * @return Estado de la ejecución del Test
      */
     boolean testS6() {
-        Cliente cliente = new Cliente("Prueba", "1234", LocalDate.of(2000,1,1),CLIENTE);
+        Cliente cliente = new Cliente("Prueba", "1234", LocalDate.of(2000,1,1));
         bs.nuevoUsuario(cliente);
         Direccion direccion = new Direccion("a","b","c",1);
         Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 

@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,10 +17,9 @@ public class Cliente extends Usuario {
      * @param n Nick del cliente
      * @param c Contraseña del cliente
      * @param f Fecha de nacimiento del cliente
-     * @param t Tipo de usuario
      */
-    public Cliente(String n, String c, LocalDate f, tipoUsuario t) {
-        super(n, c, f, t);
+    public Cliente(String n, String c, LocalDate f) {
+        super(n, c, f, CLIENTE);
     }
     
     @Override

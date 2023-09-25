@@ -23,7 +23,7 @@ public class Propietario extends Usuario{
      * @param t Tipo de Usuario
      */
     public Propietario(String n, String c, LocalDate f, tipoUsuario t) {
-        super(n, c, f, t);
+        super(n, c, f, tipoUsuario.PROPIETARIO);
     }
     
     @Override
