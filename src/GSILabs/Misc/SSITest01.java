@@ -28,7 +28,7 @@ public class SSITest01 {
         // Llenar la hoja de cálculo con los valores de la matriz
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-                sheet.setValueAt(matriz[i][j], j, i);
+                sheet.setValueAt(matriz[i][j], i, j);
             }
         }
 
@@ -37,6 +37,7 @@ public class SSITest01 {
             doc.saveAs(new File("test01.ods"));
             System.out.println("Matriz guardada en test01.ods.");
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
