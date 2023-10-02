@@ -14,12 +14,12 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
 public class SSTest01 {
     public static void main(String[] args) {
         // Crear una matriz de 4x6 números enteros (como en el ejemplo anterior)
-        int[][] matriz = new int[4][6];
-        for (int fila = 0; fila < 4; fila++) {
-            for (int columna = 0; columna < 6; columna++) {
-                matriz[fila][columna] = fila * 10 + columna;
-            }
-        }
+        int[][] matriz = {
+                {7, 4, 7, 5, 9, 5},
+                {4, 7, 6, 8, 1, 6},
+                {3, 1, 6, 5, 8, 9},
+                {9, 8, 7, 2, 7, 3}
+        };
         
         try {
             // Crear un documento de hoja de cálculo ODS
@@ -39,9 +39,5 @@ public class SSTest01 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        
-
     }
 }
