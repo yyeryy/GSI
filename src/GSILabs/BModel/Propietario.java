@@ -20,9 +20,8 @@ public class Propietario extends Usuario{
      * @param n Nick del propietario
      * @param c Contraseña del propietario
      * @param f Fecha de Nacimiento del propietario
-     * @param t Tipo de Usuario
      */
-    public Propietario(String n, String c, LocalDate f, tipoUsuario t) {
+    public Propietario(String n, String c, LocalDate f) {
         super(n, c, f, tipoUsuario.PROPIETARIO);
     }
     
@@ -45,7 +44,7 @@ public class Propietario extends Usuario{
 
     @Override
     public String toString() {
-        return "Propietario{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + " | Tipo de Usuario= " + this.getTipo().toString() + "}";
+        return "Propietario{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + "}";
     }
     
 }

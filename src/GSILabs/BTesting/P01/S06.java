@@ -4,7 +4,6 @@ import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Propietario;
-import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,7 +26,7 @@ public class S06 {
         Cliente cliente = new Cliente("Alfonso", "1234", LocalDate.of(2000,1,1));
         bs.nuevoUsuario(cliente);
         Direccion direccion = new Direccion("Pamplona","Navarra","kalea",1);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth())); 
         Bar bar = new Bar("Bar", direccion, "Local para el ejemplo S06", propietario);
         if (bs.nuevaReserva(cliente, bar, LocalDate.MIN, LocalTime.MIN)){
 	    System.out.println("Se ha creado una reserva para un local inexistente");

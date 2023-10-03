@@ -4,7 +4,6 @@ import GSILabs.BModel.Local;
 import GSILabs.BModel.Direccion;
 import static GSILabs.BModel.Local.tipoLocal.*;
 import GSILabs.BModel.Propietario;
-import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
@@ -24,7 +23,7 @@ public class S03 {
      */
     boolean testS3() {
         Direccion direccion = new Direccion("Pamplona","Navarra","kalea",1);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth())); 
         
 	try{
 	    Local local1 = new Local("Local1", direccion, "Local 1 para el ejemplo S03", BAR, propietario);

@@ -7,7 +7,6 @@ import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
-import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import java.time.LocalDate;
 
@@ -27,7 +26,7 @@ public class S08 {
      */
     boolean testS8() {
         Usuario usuario = new Usuario("Prueba", "1234", LocalDate.of(2000,1,1), CLIENTE);
-        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), PROPIETARIO); 
+        Propietario propietario = new Propietario("Juanjo", "1234", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth())); 
         Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", Local.tipoLocal.BAR, propietario);
         Contestacion contestacion = new Contestacion("comentario", LocalDate.now(), local);
         if(!bs.nuevaContestacion(contestacion, new Review(3, "coment1", LocalDate.now(), local, usuario))){
