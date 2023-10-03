@@ -25,13 +25,11 @@ public class SSTest03 {
             Sheet sheet = spreadSheet.getSheet(0);
 
             // Obtener la matriz desde la hoja de cálculo
-            int numRows = sheet.getRowCount() - 3;
-            int numCols = sheet.getColumnCount() - 5;
-            int[][] matriz = new int[numRows][numCols];
-
-            for (int i = 3; i < sheet.getRowCount(); i++) {
-                for (int j = 5; j < sheet.getColumnCount(); j++) {
-                    matriz[i - 3][j - 5] = Integer.parseInt(sheet.getValueAt(j, i).toString());
+            int[][] matriz = new int[sheet.getRowCount() - 5][sheet.getColumnCount() - 3];
+            
+            for (int i = 5; i < sheet.getRowCount(); i++) {
+                for (int j = 3; j < sheet.getColumnCount(); j++) {
+                    matriz[i - 5][j - 3] = Integer.parseInt(sheet.getValueAt(j, i).toString());
                 }
             }
 
