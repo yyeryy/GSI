@@ -10,6 +10,14 @@
 <project name="GSIGR03" default="default" basedir=".">
     <description>Builds, tests, and runs the project GSIGR03.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <!-- Define tarea de generación de Javadoc -->
+    <target name="-javadoc">
+        <javadoc sourcepath="${src.dir}" destdir="${dist.javadoc.dir}">
+            <!-- Establece la versión del JDK a utilizar (JDK 1.8) -->
+            <source>1.8</source>
+        </javadoc>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
