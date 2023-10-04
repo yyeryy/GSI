@@ -11,8 +11,20 @@ import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
 
 /**
- *
- * @author yeray
+ * Clase SSTest02
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.10.2023
+ * cree una clase ejecutable llamada SSTest02. En el
+ * método main de dicha clase debe crear un array bidimensional de 4 × 6 números 
+ * enteros. Esta matriz se almacenará en un fichero de nombre test02.ods, 
+ * dejando que las primeras 5 filas y 3 columnas estén vacías. Es decir, el 
+ * elemento de la primera fila y columna (de la matriz) aparecerá en la cuarta 
+ * fila, sexta columna (de la primera página de la hoja de cálculo). Además, el 
+ * color de fondo de las celdas donde se almacena el array bidimensional estará 
+ * determinado por el valor de los enteros. En caso de que los números sean 
+ * mayores o iguales que 10, el fondo será azul, siendo rojo en caso contrario. 
+ * Cualquier tono de azul y rojo será valido.
  */
 public class SSTest02 {
 

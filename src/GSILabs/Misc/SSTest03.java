@@ -4,15 +4,21 @@
  */
 package GSILabs.Misc;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
 
 /**
- *
- * @author luisazcoitipena
+ * Clase SSTest03
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.10.2023
+ * cree una clase de nombre SSTest03 cuyo método main sea capaz de leer los 
+ * datos almacenados en el archivo test02.ods creado en el ejercicio anterior 
+ * (el colores innecesario, pero los datos numéricos han de recuperarse). 
+ * La posición donde se encuentra la matriz en la hoja de cálculo puede ser 
+ * codificada de manera explícita (hard-coded) en la clase SSTest03.
  */
 public class SSTest03 {
     public static void main(String[] args) {
