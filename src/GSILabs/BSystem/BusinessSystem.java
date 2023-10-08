@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BSystem;
 
 import GSILabs.BModel.Bar;
@@ -19,11 +15,15 @@ import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
+import org.jopendocument.dom.spreadsheet.Sheet;
+import org.jopendocument.dom.spreadsheet.SpreadSheet;
 
 
 /**
@@ -865,5 +865,44 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         });
         return (Pub[])lista.toArray();
     }
+    
+    
+    /*
+    Ejercicio 6. Incorpore a la clase GSILabs.BSystem.BusinessSystem un método importaPubs(File
+    f):int que cargue un listado de Bares desde un fichero ods. Para ello, f debe apuntar a un fichero existente.
+    Dicho fichero debe tener una única página, tal que el nombre del bar al que se refiere se almacene en
+    la primera columna. El resto de información se almacenará a partir de la segunda columna, incluyendo
+    su dirección. Los bares deben comenzar en la primera fila de la hoja, y se considerará que no hay bares
+    más allá de la primera fila cuya primera columna esté vacía. Puede descargar un ejemplo de fichero
+    desde MiAulario, con el nombre P02Ej05.ods. El valor que devuelve el método es el número de bares
+    incorporados con éxito al sistema (nótese que el fichero podría no cumplir con las normas de la política
+    de negocio). Nota: En caso de que la lógica de negocio implementada en la Práctica 01 no sea acorde
+    a la información del fichero P02Ej05.ods, consúltelo con el docente.
+    */
+    
+    public int importaPubs(File f){	
+        try {
+	    
+            SpreadSheet spreadSheet = SpreadSheet.createFromFile(f);
+
+            // Obtener la hoja de la hoja de cálculo
+            Sheet sheet = spreadSheet.getSheet(0);
+	   
+	    // recorremos por filas
+	    for (int i = 0; i < sheet.getRowCount(); i++) {
+		// comprobamos cual es la primera fila cuya primera columna este vacía y devolvemos ese valor de fila
+                if (sheet.getValueAt(0, i).toString().isEmpty()){
+		    return i;
+		}
+            }
+	    return sheet.getRowCount();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	return 0;
+	
+    }
+    
     
 }
