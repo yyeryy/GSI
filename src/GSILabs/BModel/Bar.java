@@ -38,6 +38,10 @@ public class Bar extends Local implements Reservable{
     public void agregarEspecialidad(String especialidad) {
         especialidades.add(especialidad);
     }
+    
+    public List<String> getEspecialidades() {
+        return this.especialidades;
+    }
 
     /**
      * Función que muestra las especialidades del bar.
