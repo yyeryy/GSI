@@ -22,15 +22,15 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  */
 public class SSTest03 {
     public static void main(String[] args) {
-        // Cargar el documento desde el archivo
+        //Cargado del documento
         File file = new File("test02.ods");
         try {
             SpreadSheet spreadSheet = SpreadSheet.createFromFile(file);
 
-            // Obtener la hoja de la hoja de cálculo
+            //Obtención de la hoja de cálculo
             Sheet sheet = spreadSheet.getSheet(0);
 
-            // Obtener la matriz desde la hoja de cálculo
+            //Obtención de la matriz desde la hoja de cálculo
             int[][] matriz = new int[sheet.getRowCount() - 5][sheet.getColumnCount() - 3];
             
             for (int i = 5; i < sheet.getRowCount(); i++) {
@@ -39,7 +39,7 @@ public class SSTest03 {
                 }
             }
 
-            // Imprimir la matriz recuperada
+            //Impresión de la matriz recuperada
             for (int[] row : matriz) {
                 for (int value : row) {
                     System.out.print(value + " ");

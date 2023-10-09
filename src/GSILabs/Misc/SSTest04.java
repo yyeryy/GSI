@@ -117,7 +117,7 @@ public class SSTest04 {
         bs.nuevoLocal(pub4);
         
         try {
-            // Crear un documento de hoja de cálculo ODS con 3 hojas
+            //Creación de un documento de hoja de cálculo ODS con 3 hojas
             SpreadSheet spreadSheet = SpreadSheet.create(3, 50, 50);
             Sheet sheetBares = spreadSheet.getSheet(0);
             sheetBares.setName("Bar");
@@ -127,7 +127,7 @@ public class SSTest04 {
             sheetPubs.setName("Pub");
 
             int j;
-            // Llenar la hoja de cálculo con los valores de los locales
+            //Llenado de la hoja de cálculo con los valores de los locales
             for (int i = 0; i < 4; i++) {
                 Direccion direccion = direcciones.get(i);
                 sheetBares.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i);
@@ -167,7 +167,7 @@ public class SSTest04 {
                 sheetPubs.setValueAt(((Pub)bs.obtenerLocal(direccion)).getHoraClausura(), 6 + j, i - 8);
             }
             
-            // Guardar el documento en un archivo
+            //Almacenamiento del documento
             spreadSheet.saveAs(new File("test03.ods"));
             System.out.println("Locales guardados en test03.ods.");
         } catch (IOException e) {
