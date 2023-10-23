@@ -31,7 +31,6 @@ public class SSTest04 {
         //Creación de la lista de direcciones
         List<Direccion> direcciones = new ArrayList<>();
         
-        // Crear restaurantes, pubs y bares asociados a propietarios y direcciones
         //Creación de direcciones
         Direccion direccion1 = new Direccion("Pamplona", "Navarra", "Calle Monasterio de Urdax", 22);
         Direccion direccion2 = new Direccion("Pamplona", "Navarra", "Calle Navarrería", 10);
@@ -46,6 +45,7 @@ public class SSTest04 {
         Direccion direccion11 = new Direccion("Pamplona", "Navarra", "Calle Yanguas y Miranda", 2);
         Direccion direccion12 = new Direccion("Pamplona", "Navarra", "Calle de Juan de Labrit", 0);
         
+        //Creación de restaurantes, pubs y bares asociados a propietarios y direcciones
         //Creación de propietarios
         Propietario propietario1 = new Propietario("Miguel Artazcoz", "1234", LocalDate.of(LocalDate.now().getYear()-45, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth())); 
         Propietario propietario2 = new Propietario("María Chen", "1234", LocalDate.of(LocalDate.now().getYear()-32, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth())); 
