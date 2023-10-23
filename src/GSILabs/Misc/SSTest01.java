@@ -24,6 +24,7 @@ public class SSTest01 {
         //Declarar una matriz de 4x6
         int[][] matriz = new int[4][6];
 
+        //Geneamos una matriz con numeros aleatorios
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
                 int numeroAleatorio = random.nextInt(20) + 1;
