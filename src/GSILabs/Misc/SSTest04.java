@@ -130,7 +130,26 @@ public class SSTest04 {
             sheetBares.setValueAt("Calle", 1, 0);
             sheetBares.setValueAt("Localidad", 2, 0);
             sheetBares.setValueAt("Provincia", 3, 0);
-                
+            sheetBares.setValueAt("Propietario", 4, 0);
+            sheetBares.setValueAt("Especialidades", 6, 0);
+            
+            sheetRestaurantes.setValueAt("Nombre", 0, 0);
+            sheetRestaurantes.setValueAt("Calle", 1, 0);
+            sheetRestaurantes.setValueAt("Localidad", 2, 0);
+            sheetRestaurantes.setValueAt("Provincias", 3, 0);
+            sheetRestaurantes.setValueAt("Propietarios", 4, 0);
+            sheetRestaurantes.setValueAt("Precio Menu", 6, 0);
+            sheetRestaurantes.setValueAt("Capacidad", 7, 0);
+            sheetRestaurantes.setValueAt("Capacidad Mesa", 8, 0);
+            
+            sheetPubs.setValueAt("Nombre", 0, 0);
+            sheetPubs.setValueAt("Calle", 1, 0);
+            sheetPubs.setValueAt("Localidad", 2, 0);
+            sheetPubs.setValueAt("Provincias", 3, 0);
+            sheetPubs.setValueAt("Propietarios", 4, 0);
+            sheetPubs.setValueAt("Hora Apertura", 6, 0);
+            sheetPubs.setValueAt("Hora Clausura", 7, 0);
+
 
             int j;
             //Llenado de la hoja de cálculo con los valores de los locales
@@ -149,28 +168,28 @@ public class SSTest04 {
             }
             for (int i = 4; i < 8; i++) {
                 Direccion direccion = direcciones.get(i);
-                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i - 4);
-                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getDireccion().getCalle() + " " + bs.obtenerLocal(direccion).getDireccion().getNumero(), 1, i - 4);
-                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getDireccion().getLocalidad(), 2, i - 4);
-                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getDireccion().getProvincia(), 3, i - 4);
+                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i - 3);
+                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getDireccion().getCalle() + " " + bs.obtenerLocal(direccion).getDireccion().getNumero(), 1, i - 3);
+                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getDireccion().getLocalidad(), 2, i - 3);
+                sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getDireccion().getProvincia(), 3, i - 3);
                 for (j = 0; j < bs.obtenerLocal(direccion).getPropietarios().size(); j++) {
-                    sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getPropietarios().get(j).getNick(), 4 + j, i - 4);
+                    sheetRestaurantes.setValueAt(bs.obtenerLocal(direccion).getPropietarios().get(j).getNick(), 4 + j, i - 3);
                 }
-                sheetRestaurantes.setValueAt(((Restaurante)bs.obtenerLocal(direccion)).getPrecioMenu(), 5 + j, i - 4);
-                sheetRestaurantes.setValueAt(((Restaurante)bs.obtenerLocal(direccion)).getCapacidad(), 6 + j, i - 4);
-                sheetRestaurantes.setValueAt(((Restaurante)bs.obtenerLocal(direccion)).getCapacidadMesa(), 7 + j, i - 4);
+                sheetRestaurantes.setValueAt(((Restaurante)bs.obtenerLocal(direccion)).getPrecioMenu(), 5 + j, i - 3);
+                sheetRestaurantes.setValueAt(((Restaurante)bs.obtenerLocal(direccion)).getCapacidad(), 6 + j, i - 3);
+                sheetRestaurantes.setValueAt(((Restaurante)bs.obtenerLocal(direccion)).getCapacidadMesa(), 7 + j, i - 3);
             }
             for (int i = 8; i < 12; i++) {
                 Direccion direccion = direcciones.get(i);
-                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i - 8);
-                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getDireccion().getCalle() + " " + bs.obtenerLocal(direccion).getDireccion().getNumero(), 1, i - 8);
-                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getDireccion().getLocalidad(), 2, i - 8);
-                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getDireccion().getProvincia(), 3, i - 8);
+                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i - 7);
+                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getDireccion().getCalle() + " " + bs.obtenerLocal(direccion).getDireccion().getNumero(), 1, i - 7);
+                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getDireccion().getLocalidad(), 2, i - 7);
+                sheetPubs.setValueAt(bs.obtenerLocal(direccion).getDireccion().getProvincia(), 3, i - 7);
                 for (j = 0; j < bs.obtenerLocal(direccion).getPropietarios().size(); j++) {
-                    sheetPubs.setValueAt(bs.obtenerLocal(direccion).getPropietarios().get(j).getNick(), 4 + j, i - 8);
+                    sheetPubs.setValueAt(bs.obtenerLocal(direccion).getPropietarios().get(j).getNick(), 4 + j, i - 7);
                 }
-                sheetPubs.setValueAt(((Pub)bs.obtenerLocal(direccion)).getHoraApertura(), 5 + j, i - 8);
-                sheetPubs.setValueAt(((Pub)bs.obtenerLocal(direccion)).getHoraClausura(), 6 + j, i - 8);
+                sheetPubs.setValueAt(((Pub)bs.obtenerLocal(direccion)).getHoraApertura(), 5 + j, i - 7);
+                sheetPubs.setValueAt(((Pub)bs.obtenerLocal(direccion)).getHoraClausura(), 6 + j, i - 7);
             }
             
             //Almacenamiento del documento
