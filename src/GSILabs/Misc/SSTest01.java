@@ -2,6 +2,7 @@ package GSILabs.Misc;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
 
@@ -17,13 +18,20 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  */
 public class SSTest01 {
     public static void main(String[] args) {
-        //Creación de matriz de 4x6 números enteros
-        int[][] matriz = {
-                {7, 4, 7, 5, 9, 5},
-                {4, 7, 6, 8, 1, 6},
-                {3, 1, 6, 5, 8, 9},
-                {9, 8, 7, 2, 7, 3}
-        };
+        
+        Random random = new Random();
+
+        // Declarar una matriz de 4x6
+        int[][] matriz = new int[4][6];
+
+        // Llenar la matriz con números aleatorios
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 6; j++) {
+                // Generar un número aleatorio entre 1 y 100 (puedes ajustar el rango según tus necesidades)
+                int numeroAleatorio = random.nextInt(20) + 1;
+                matriz[i][j] = numeroAleatorio;
+            }
+        }
         
         try {
             //Creación de un documento de hoja de cálculo ODS
