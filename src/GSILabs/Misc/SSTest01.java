@@ -21,13 +21,11 @@ public class SSTest01 {
         
         Random random = new Random();
 
-        // Declarar una matriz de 4x6
+        //Declarar una matriz de 4x6
         int[][] matriz = new int[4][6];
 
-        // Llenar la matriz con números aleatorios
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-                // Generar un número aleatorio entre 1 y 100 (puedes ajustar el rango según tus necesidades)
                 int numeroAleatorio = random.nextInt(20) + 1;
                 matriz[i][j] = numeroAleatorio;
             }
