@@ -125,20 +125,26 @@ public class SSTest04 {
             sheetRestaurantes.setName("Restaurante");
             Sheet sheetPubs = spreadSheet.getSheet(2);
             sheetPubs.setName("Pub");
+            
+            sheetBares.setValueAt("Nombre", 0, 0);
+            sheetBares.setValueAt("Calle", 1, 0);
+            sheetBares.setValueAt("Localidad", 2, 0);
+            sheetBares.setValueAt("Provincia", 3, 0);
+                
 
             int j;
             //Llenado de la hoja de cálculo con los valores de los locales
             for (int i = 0; i < 4; i++) {
                 Direccion direccion = direcciones.get(i);
-                sheetBares.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i);
-                sheetBares.setValueAt(bs.obtenerLocal(direccion).getDireccion().getCalle() + " " + bs.obtenerLocal(direccion).getDireccion().getNumero(), 1, i);
-                sheetBares.setValueAt(bs.obtenerLocal(direccion).getDireccion().getLocalidad(), 2, i);
-                sheetBares.setValueAt(bs.obtenerLocal(direccion).getDireccion().getProvincia(), 3, i);
+                sheetBares.setValueAt(bs.obtenerLocal(direccion).getNombre(), 0, i+1);
+                sheetBares.setValueAt(bs.obtenerLocal(direccion).getDireccion().getCalle() + " " + bs.obtenerLocal(direccion).getDireccion().getNumero(), 1, i+1);
+                sheetBares.setValueAt(bs.obtenerLocal(direccion).getDireccion().getLocalidad(), 2, i+1);
+                sheetBares.setValueAt(bs.obtenerLocal(direccion).getDireccion().getProvincia(), 3, i+1);
                 for (j = 0; j < bs.obtenerLocal(direccion).getPropietarios().size(); j++) {
-                    sheetBares.setValueAt(bs.obtenerLocal(direccion).getPropietarios().get(j).getNick(), 4 + j, i);
+                    sheetBares.setValueAt(bs.obtenerLocal(direccion).getPropietarios().get(j).getNick(), 4 + j, i+1);
                 }
                 for (int k = 0; k < ((Bar)bs.obtenerLocal(direccion)).getEspecialidades().size(); k++) {
-                    sheetBares.setValueAt(((Bar)bs.obtenerLocal(direccion)).getEspecialidades().get(k), 5 + j + k, i);
+                    sheetBares.setValueAt(((Bar)bs.obtenerLocal(direccion)).getEspecialidades().get(k), 5 + j + k, i+1);
                 }
             }
             for (int i = 4; i < 8; i++) {
