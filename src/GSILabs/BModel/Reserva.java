@@ -7,6 +7,8 @@ package GSILabs.BModel;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
 
 /**
  * Clase Reserva
@@ -18,6 +20,7 @@ import java.util.Objects;
  * se efectuará, así como un posible porcentaje de descuento.
  */
 public class Reserva {
+public class Reserva implements XMLRepresentable{
 
     /**
      * Un cliente no pude tener la misma fecha en una reserva, por lo que se puede utilizar la combinacion de los atributos como una supuesta ID
@@ -95,5 +98,27 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva{" + "cliente=" + this.cliente.toString() + ", fechaReserva=" + this.fecha.toString() + ", hora=" + this.hora.toString() + ", descuento=" + this.descuento + "%" + '}';
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Reserva>\n";
+        xmlData += "    <cliente>" + this.getCliente() + "</cliente>\n";
+        xmlData += "    <hora>" + this.getHora() + "</hora>\n";
+        xmlData += "    <fecha>" + this.getFecha() + "</fecha>\n";
+        xmlData += "    <descuento>" + this.getDescuento() + "</descuento>\n";
+        xmlData += "</Reserva>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

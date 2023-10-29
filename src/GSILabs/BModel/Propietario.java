@@ -6,6 +6,8 @@ package GSILabs.BModel;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
 
 /**
  * Clase Propietario
@@ -13,7 +15,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Propietario extends Usuario{
+public class Propietario extends Usuario implements XMLRepresentable{
     
     /**
      * Constructor Propietario
@@ -45,6 +47,27 @@ public class Propietario extends Usuario{
     @Override
     public String toString() {
         return "Propietario{" + "nick=" + this.getNick() + ", contraseña=" + this.getContraseña() + ", fecha_de_nacimiento=" + this.getFechaNacimiento().toString() + "}";
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Propietario>\n";
+        xmlData += "    <nick>" + this.getNick() + "</nick>\n";
+        xmlData += "    <contraseña>" + this.getContraseña() + "</contraseña>\n";
+        xmlData += "    <fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        xmlData += "</Propietario>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -1,6 +1,8 @@
 package GSILabs.BModel;
 
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
 
 /**
  * Clase Direccion
@@ -13,6 +15,7 @@ import java.util.Objects;
  * caracteres.
  */
 public class Direccion {
+public class Direccion implements XMLRepresentable{
 
     public String localidad;
     public String provincia;
@@ -91,5 +94,26 @@ public class Direccion {
     @Override
     public String toString() {
         return "Dirección{" + "localidad=" + localidad + ", provincia=" + provincia + ", calle=" + calle + ", numero=" + numero + '}';
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Direccion>\n";
+        xmlData += "    <localidad>" + this.getLocalidad() + "</direccion>\n";
+        xmlData += "    <provincia>" + this.getProvincia() + "</provincia>\n";
+        xmlData += "    <calle>" + this.getCalle() + "</calle>\n";
+        xmlData += "    <numero>" + this.getNumero() + "</numero>\n";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

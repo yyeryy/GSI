@@ -6,6 +6,10 @@ package GSILabs.BModel;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Clase Review
@@ -14,6 +18,7 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Review {
+public class Review implements XMLRepresentable{
 
     /**
      * Valoración que un usuario hace a un local.
@@ -132,5 +137,37 @@ public class Review {
         return "Review{" + "valoracion=" + valoracion + ", comentario=" + comentario + ", fechaReview=" + fechaReview.toString() + ", local=" + local.toString() + ", usuario=" + usuario.toString() + ", contestacion=" + contestacion.toString() + '}';
     }
 
-    
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Review>\n";
+        xmlData += "    <valoracion>" + this.getValoracion() + "</valoracion>\n";
+        xmlData += "    <comentario>" + this.getComentario() + "</comentario>\n";
+        xmlData += "    <fechaReview>" + this.getFechaReview() + "</fechaReview>\n";
+        xmlData += "    <local>" + this.getLocal() + "</local>\n";
+        xmlData += "    <usuario>" + this.getUsuario() + "</usuario>\n";
+        xmlData += "    <contestacion>" + this.getContestacion() + "</contestacion>\n";
+        xmlData += "</Review>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        try {
+        String xmlData = toXML();
+            try (FileWriter writer = new FileWriter(f)) {
+                writer.write(xmlData);
+            }
+        return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        File file = new File(filePath);
+        return saveToXML(file);
+    }
+
 }

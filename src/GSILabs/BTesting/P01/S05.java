@@ -26,6 +26,7 @@ public class S05 {
         catch(IllegalArgumentException e)
         {
 	    System.out.println(e);
+            System.out.println(e);
             return true;
         }
 	System.out.println("El usuario es mayor de edad y se ha creado correctamente");

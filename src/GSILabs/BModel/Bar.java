@@ -4,6 +4,10 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +19,7 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Bar extends Local implements Reservable{
+public class Bar extends Local implements Reservable, XMLRepresentable{
     private List<String> especialidades;
     private ArrayList<Reserva> reservas;
 
@@ -73,5 +78,41 @@ public class Bar extends Local implements Reservable{
     @Override
     public String toString() {
         return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() +  ", especialidades=" + this.especialidades.toString() + ", reservas=" + this.reservas.toString() + "}";
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Bar>\n";
+        xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
+        xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
+        xmlData += "    <descripcion>" + this.getDireccion() + "</descripcion>\n";
+        for(int i = 0;i<this.getPropietarios().size();i++){
+            xmlData += "    <propietario>"+i + this.getPropietarios().get(i) + "</propietario>+i\n";
+        }
+        for(int i = 0;i<this.getEspecialidades().size();i++){
+            xmlData += "    <especialidad>"+i + this.getEspecialidades().get(i) + "</especialidad>+i\n";
+        }
+        xmlData += "</Bar>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        try {
+        String xmlData = toXML();
+            try (FileWriter writer = new FileWriter(f)) {
+                writer.write(xmlData);
+            }
+        return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        File file = new File(filePath);
+        return saveToXML(file);
     }
 }

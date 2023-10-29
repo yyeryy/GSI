@@ -2,6 +2,8 @@ package GSILabs.BModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
 
 /**
  * Clase Restaurante
@@ -10,6 +12,7 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Restaurante extends Local implements Reservable{
+public class Restaurante extends Local implements Reservable, XMLRepresentable{
     private double precioMenu;
     private Integer capacidad;
     private Integer capacidadMesa;
@@ -80,5 +83,30 @@ public class Restaurante extends Local implements Reservable{
     @Override
     public String toString() {
         return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", precioMenu=" + this.precioMenu + ", capacidad=" + this.capacidad + ", capacidad Mesa=" + this.capacidadMesa + ", capacidad=" + this.reservas.toString() + '}';
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Restaurante>\n";
+        xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
+        xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
+        xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
+        xmlData += "    <propietario>" + this.getPropietarios() + "</propietario>\n";
+        xmlData += "    <precioMenu>" + this.getPrecioMenu() + "</precioMenu>\n";
+        xmlData += "    <capacidad>" + this.getCapacidad() + "</capacidad>\n";
+        xmlData += "    <capacidadMesa>" + this.getCapacidadMesa() + "</capacidadMesa>\n";
+        xmlData += "</Restaurante>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

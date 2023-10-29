@@ -5,6 +5,8 @@
 package GSILabs.BModel;
 
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
 
 /**
  * Clase Pub
@@ -12,7 +14,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Pub extends Local{
+public class Pub extends Local implements XMLRepresentable{
     private String horaApertura;
     private String horaClausura;
 
@@ -63,5 +65,29 @@ public class Pub extends Local{
     @Override
     public String toString() {
         return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", hora Apertura=" + this.horaApertura + ", hora Clausura=" + this.horaClausura + '}';
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Pub>\n";
+        xmlData += "    <horaApertura>" + this.getHoraApertura() + "</horaApertura>\n";
+        xmlData += "    <horaClausura>" + this.getHoraClausura() + "</horaClausura>\n";
+        xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
+        xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
+        xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
+        xmlData += "    <propietario>" + this.getPropietarios() + "</propietario>\n";
+        xmlData += "</Pub>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

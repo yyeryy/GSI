@@ -6,6 +6,8 @@ package GSILabs.BModel;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import GSILabs.serializable.XMLRepresentable;
+import java.io.File;
 
 /**
  * Clase Contestacion
@@ -14,6 +16,7 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Contestacion {
+public class Contestacion implements XMLRepresentable{
     
     /**
      * Comentario que realiza un propietario a una review.
@@ -87,6 +90,27 @@ public class Contestacion {
     @Override
     public String toString() {
         return "Contestacion{" + "comentario=" + comentario + ", fechaReview=" + fechaReview.toString() + ", local=" + local.toString() + '}';
+    }
+
+    @Override
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Contestacion>\n";
+        xmlData += "    <comentario>" + this.getComentario() + "</comentario>\n";
+        xmlData += "    <fechaReview>" + this.getFechaReview() + "</fechaReview>\n";
+        xmlData += "    <local>" + this.getLocal() + "</local>\n";
+        xmlData += "</Contestacion>";
+        return xmlData;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

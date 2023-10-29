@@ -10,6 +10,7 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Local {
+public class Local{
     private String nombre;
     private Direccion direccion;
     private String descripcion;
