@@ -44,7 +44,7 @@ public class Propietario extends Usuario{
 
     @Override
     public String toString() {
-        return "Propietario{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + "}";
+        return "Propietario{" + "nick=" + this.getNick() + ", contraseña=" + this.getContraseña() + ", fecha_de_nacimiento=" + this.getFechaNacimiento().toString() + "}";
     }
     
 }

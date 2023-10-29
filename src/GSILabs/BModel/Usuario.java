@@ -135,7 +135,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nick=" + nick + ", contrasena=" + contraseña + ", fechaNacimiento=" + fechaNacimiento + ", tipo=" + tipo + '}';
+        return "Usuario{" + "nick=" + nick + ", contrasena=" + contraseña + ", fechaNacimiento=" + fechaNacimiento.toString() + ", tipo=" + tipo + '}';
     }
 
 }

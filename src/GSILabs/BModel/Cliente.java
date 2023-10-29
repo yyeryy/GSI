@@ -41,6 +41,6 @@ public class Cliente extends Usuario {
 
     @Override
     public String toString() {
-        return "Cliente{" + "Nick=" + this.getNick() + " | Contraseña= " + this.getContraseña() + " | Fecha de Nacimiento= " + this.getFechaNacimiento().toString() + " | Tipo de Usuario= " + this.getTipo().toString() + "}";
+        return "Cliente{" + "nick=" + this.getNick() + ", contraseña=" + this.getContraseña() + ", fecha_de_nacimiento=" + this.getFechaNacimiento().toString() + ", tipo=" + this.getTipo().toString() + "}";
     }
 }

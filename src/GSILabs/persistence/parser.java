@@ -25,6 +25,8 @@ public class parser {
         String strDireccion = null;
         String strDescripcion = null;
         String strPropietario = null;
+        //String str = null;
+        //String str = null;
         
         // Campos del atributo Bar
         for(String trozo: strTroceado){
@@ -93,7 +95,10 @@ public class parser {
     
     // Propietario
     public static Propietario parsePropietario(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+        String strFiltrado = str.substring(4, str.length()-1); //Elimino Bar{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        //Al trocear va a dar por culo
+        
     }
     public static Propietario parsePropietario(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
