@@ -31,7 +31,19 @@ public class Usuario {
         /**
          * Indica si un usuario es cliente de un local.
          */
-        CLIENTE
+        CLIENTE;
+        
+        public static tipoUsuario parse(String text){
+            if(PROPIETARIO.name().equals(text)){
+                return PROPIETARIO;
+            }
+            else if(CLIENTE.name().equals(text)){
+                return CLIENTE;
+            }
+            else{
+                throw new IllegalArgumentException("El argumento es inválido.");
+            }
+        }
     }
 
     /**
@@ -135,7 +147,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nick=" + nick + ", contrasena=" + contraseña + ", fechaNacimiento=" + fechaNacimiento.toString() + ", tipo=" + tipo + '}';
+        return "Usuario{" + "nick=" + nick + ", contraseña=" + contraseña + ", fecha_de_nacimiento=" + fechaNacimiento.toString() + ", tipo=" + tipo + '}';
     }
 
 }

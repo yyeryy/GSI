@@ -11,6 +11,7 @@ import GSILabs.BModel.Reserva;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
+import GSILabs.BModel.Usuario.tipoUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -63,8 +64,40 @@ public class parser {
     }
     
     // Cliente
-    public static Cliente parseCliente(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Cliente parseCliente(String str) throws IOException{
+        String strFiltrado = str.substring(8, str.length()-1); //Elimino Cliente{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strNick = null;
+        String strContraseña = null;
+        String strFecha = null;
+        
+        // Campos del atributo Bar
+        for(String trozo: strTroceado){
+            String[] atributoValor = trozo.split("=");
+            if(null != atributoValor[0])switch (atributoValor[0]) {
+                case "nick":
+                    strNick = atributoValor[1];
+                    break;
+                case "contraseña":
+                    strContraseña = atributoValor[1];
+                    break;
+                case "fecha_de_nacimiento":
+                    strFecha = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        // Comprobar si los datos son validos
+        if(strNick == null || strContraseña == null || strFecha == null)
+        {throw new IOException("Uno de los campos necesarios esta vacio");}
+        
+        // Crear objetos que se usan para crear propietario
+        Cliente cliente = new Cliente(strNick, strContraseña, LocalDate.parse(strFecha));
+        
+        return cliente;
     }
     public static Cliente parseCliente(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -79,8 +112,46 @@ public class parser {
     }
     
     // Direccion
-    public static Direccion parseDireccion(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Direccion parseDireccion(String str) throws IOException{
+        String strFiltrado = str.substring(10, str.length()-1); //Elimino Dirección{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strLocalidad = null;
+        String strProvincia = null;
+        String strCalle = null;
+        String strNumero = null;
+        
+        // Campos del atributo Bar
+        for(String trozo: strTroceado){
+            String[] atributoValor = trozo.split("=");
+            if(null != atributoValor[0])switch (atributoValor[0]) {
+                case "localidad":
+                    strLocalidad = atributoValor[1];
+                    break;
+                case "provincia":
+                    strProvincia = atributoValor[1];
+                    break;
+                case "calle":
+                    strCalle = atributoValor[1];
+                    break;
+                case "numero":
+                    strNumero = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // Comprobar si los datos son validos
+        if(strLocalidad == null || strProvincia == null || strCalle == null || strNumero == null)
+        {throw new IOException("Uno de los campos necesarios esta vacio");}
+        
+        // Crear objetos que se usan para crear propietario
+        Direccion direccion = new Direccion(strLocalidad, strProvincia, strCalle, Integer.parseInt(strNumero));
+        
+        return direccion;
+        
     }
     public static Direccion parseDireccion(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -168,8 +239,45 @@ public class parser {
     }
     
     // Usuario
-    public static Usuario parseUsuario(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Usuario parseUsuario(String str) throws IOException{
+        String strFiltrado = str.substring(8, str.length()-1); //Elimino Usuario{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strNick = null;
+        String strContraseña = null;
+        String strFecha = null;
+        String strTipo = null;
+        
+        // Campos del atributo Bar
+        for(String trozo: strTroceado){
+            String[] atributoValor = trozo.split("=");
+            if(null != atributoValor[0])switch (atributoValor[0]) {
+                case "nick":
+                    strNick = atributoValor[1];
+                    break;
+                case "contraseña":
+                    strContraseña = atributoValor[1];
+                    break;
+                case "fecha_de_nacimiento":
+                    strFecha = atributoValor[1];
+                    break;
+                case "tipo":
+                    strTipo = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        // Comprobar si los datos son validos
+        if(strNick == null || strContraseña == null || strFecha == null || strTipo == null)
+        {throw new IOException("Uno de los campos necesarios esta vacio");}
+
+        // Crear objetos que se usan para crear propietario
+        Usuario usuario = new Usuario(strNick, strContraseña, LocalDate.parse(strFecha), tipoUsuario.parse(strTipo));
+        
+        // Devuelvo el usuario
+        return usuario;
     }
     public static Usuario parseUsuario(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
