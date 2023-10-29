@@ -13,6 +13,7 @@ import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class parser {
     // Bar
@@ -94,11 +95,41 @@ public class parser {
     }
     
     // Propietario
-    public static Propietario parsePropietario(String str){
-        String strFiltrado = str.substring(4, str.length()-1); //Elimino Bar{ y }.
+    public static Propietario parsePropietario(String str) throws IOException{
+        String strFiltrado = str.substring(12, str.length()-1); //Elimino Propietario{ y }.
         String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
-        //Al trocear va a dar por culo
         
+        // Atributos a almacenar
+        String strNick = null;
+        String strContraseña = null;
+        String strFecha = null;
+        
+        // Campos del atributo Bar
+        for(String trozo: strTroceado){
+            String[] atributoValor = trozo.split("=");
+            if(null != atributoValor[0])switch (atributoValor[0]) {
+                case "nick":
+                    strNick = atributoValor[1];
+                    break;
+                case "contraseña":
+                    strContraseña = atributoValor[1];
+                    break;
+                case "fecha_de_nacimiento":
+                    strFecha = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // Comprobar si los datos son validos
+        if(strNick == null || strContraseña == null || strFecha == null)
+        {throw new IOException("Uno de los campos necesarios esta vacio");}
+        
+        // Crear objetos que se usan para crear propietario
+        Propietario propietario = new Propietario(strNick, strContraseña, LocalDate.parse(strFecha));
+        
+        return propietario;
     }
     public static Propietario parsePropietario(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
