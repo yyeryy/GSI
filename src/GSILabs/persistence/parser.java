@@ -159,7 +159,66 @@ public class parser {
     
     // Local
     public static Local parseLocal(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+        
+        String strFiltrado = str.substring(6, str.length()-1); //Elimino Local{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strNick = null;
+        String strContraseña = null;
+        String strFecha = null;
+        String strTipo = null;
+        String strPropietarios = null;
+        
+        // Campos del atributo Local
+        for(int i = 0; i < strTroceado.length; i++){
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0])switch (atributoValor[0]) {
+                case "nombre":
+                    strNick = atributoValor[1];
+                    break;
+                case "direcion":
+                    strContraseña = atributoValor[1];
+                    break;
+                case "descripción":
+                    strFecha = atributoValor[1];
+                    break;
+                case "tipo":
+                    strTipo = atributoValor[1];
+                    break;
+
+                case "Propietarios":    // [0] no, [1] es {Propietario , [2] es el dato de ese Propietario{aaa ,   nada mas
+                    String unPropietario = atributoValor[2];
+                    while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
+                        unPropietario = unPropietario + ", " + strTroceado[i];
+                        i++;
+                    }
+                    unPropietario = unPropietario + ", " + strTroceado[i];
+
+
+
+
+
+                    strFecha = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // Comprobar si los datos son validos
+        if(strNick == null || strContraseña == null || strFecha == null)
+        {throw new IOException("Uno de los campos necesarios esta vacio");}
+        
+        // Crear objetos que se usan para crear propietario
+        Propietario propietario = new Propietario(strNick, strContraseña, LocalDate.parse(strFecha));
+        
+        Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", Local.tipoLocal.BAR, propietario);
+
+        return local;
+
+
+
     }
     public static Local parseLocal(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");

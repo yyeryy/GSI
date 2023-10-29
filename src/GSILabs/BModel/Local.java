@@ -139,7 +139,18 @@ public class Local {
 
     @Override
     public String toString() {
-        return "Local{" + "nombre=" + nombre + ", direccion=" + direccion + ", descripcion=" + descripcion + ", tipo=" + tipo + ", propietarios=" + propietarios + '}';
+
+        String propietariosTOString = "";
+        for(int i = 0; i < this.propietarios.size(); i++){
+            propietariosTOString = propietariosTOString + "Propietario="+ propietarios.get(i).toString();
+            if(i != this.propietarios.size()-1){
+                propietariosTOString = propietariosTOString + ", ";
+            }
+        }
+
+
+
+        return "Local{" + "nombre=" + nombre + ", direccion=" + direccion.toString() + ", descripción=" + descripcion + ", tipo=" + tipo + ", Propietarios="+ propietariosTOString + '}';
     }
     
 }
