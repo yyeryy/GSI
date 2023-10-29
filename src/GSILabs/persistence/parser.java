@@ -179,14 +179,14 @@ public class parser {
                 case "nombre":
                     strNombre = atributoValor[1];
                     break;
-                case "direcion":
-                    String unaDireccion = atributoValor[2];
+                case "direccion":
+                    String unaDireccion = atributoValor[1] + "=" + atributoValor[2];
+                    i++;
                     while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
                         unaDireccion = unaDireccion + ", " + strTroceado[i];
                         i++;
                     }
                     unaDireccion = unaDireccion + ", " + strTroceado[i];
-
                     direccion = parser.parseDireccion(unaDireccion);
                     break;
                 case "descripción":
@@ -195,24 +195,22 @@ public class parser {
                 case "tipo":
                     strTipo = atributoValor[1];
                     break;
-
                 case "Propietario": 
-                    String unPropietario = atributoValor[1];
+                    String unPropietario = atributoValor[1] + "=" + atributoValor[2];
+                    i++;
                     while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
                         unPropietario = unPropietario + ", " + strTroceado[i];
                         i++;
                     }
                     unPropietario = unPropietario + ", " + strTroceado[i];
-                    Propietario propietario = parser.parsePropietario(str);
+                    Propietario propietario = parser.parsePropietario(unPropietario);
                     propietarios.add(propietario);
-
                     break;
                 default:
                     break;
             }
         }
         
-
         Local local = new Local(strNombre, direccion, strdescripción, tipoLocal.parse(strTipo), (Propietario) propietarios.get(0));
 
         for(int i = 1; i < propietarios.size();i++){
