@@ -5,6 +5,7 @@ import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reserva;
@@ -15,6 +16,7 @@ import GSILabs.BModel.Usuario.tipoUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class parser {
     // Bar
@@ -158,62 +160,64 @@ public class parser {
     }
     
     // Local
-    public static Local parseLocal(String str){
+    public static Local parseLocal(String str) throws IOException{
         
         String strFiltrado = str.substring(6, str.length()-1); //Elimino Local{ y }.
         String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
         
         // Atributos a almacenar
-        String strNick = null;
-        String strContraseña = null;
-        String strFecha = null;
+        String strNombre = null;
+        Direccion direccion = null;
+        String strdescripción = null;
         String strTipo = null;
-        String strPropietarios = null;
+        ArrayList<Usuario> propietarios = new ArrayList<>();
         
         // Campos del atributo Local
         for(int i = 0; i < strTroceado.length; i++){
             String[] atributoValor = strTroceado[i].split("=");
             if(null != atributoValor[0])switch (atributoValor[0]) {
                 case "nombre":
-                    strNick = atributoValor[1];
+                    strNombre = atributoValor[1];
                     break;
                 case "direcion":
-                    strContraseña = atributoValor[1];
+                    String unaDireccion = atributoValor[2];
+                    while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
+                        unaDireccion = unaDireccion + ", " + strTroceado[i];
+                        i++;
+                    }
+                    unaDireccion = unaDireccion + ", " + strTroceado[i];
+
+                    direccion = parser.parseDireccion(unaDireccion);
                     break;
                 case "descripción":
-                    strFecha = atributoValor[1];
+                    strdescripción = atributoValor[1];
                     break;
                 case "tipo":
                     strTipo = atributoValor[1];
                     break;
 
-                case "Propietarios":    // [0] no, [1] es {Propietario , [2] es el dato de ese Propietario{aaa ,   nada mas
-                    String unPropietario = atributoValor[2];
+                case "Propietario": 
+                    String unPropietario = atributoValor[1];
                     while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
                         unPropietario = unPropietario + ", " + strTroceado[i];
                         i++;
                     }
                     unPropietario = unPropietario + ", " + strTroceado[i];
+                    Propietario propietario = parser.parsePropietario(str);
+                    propietarios.add(propietario);
 
-
-
-
-
-                    strFecha = atributoValor[1];
                     break;
                 default:
                     break;
             }
         }
         
-        // Comprobar si los datos son validos
-        if(strNick == null || strContraseña == null || strFecha == null)
-        {throw new IOException("Uno de los campos necesarios esta vacio");}
-        
-        // Crear objetos que se usan para crear propietario
-        Propietario propietario = new Propietario(strNick, strContraseña, LocalDate.parse(strFecha));
-        
-        Local local = new Local("Casa pepe", new Direccion("Pamplona", "Navarra", "calle", 7), "el local", Local.tipoLocal.BAR, propietario);
+
+        Local local = new Local(strNombre, direccion, strdescripción, tipoLocal.parse(strTipo), (Propietario) propietarios.get(0));
+
+        for(int i = 1; i < propietarios.size();i++){
+            local.addPropietario((Propietario) propietarios.get(i));
+        }
 
         return local;
 

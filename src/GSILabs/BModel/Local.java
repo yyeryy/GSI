@@ -19,7 +19,23 @@ public class Local {
     public enum tipoLocal {
         BAR,
         RESTAURANTE,
-        PUB
+        PUB;
+
+        public static tipoLocal parse(String text){
+            if(BAR.name().equals(text)){
+                return BAR;
+            }
+            else if(RESTAURANTE.name().equals(text)){
+                return RESTAURANTE;
+            }
+            else if(PUB.name().equals(text)){
+                return PUB;
+            }
+            else{
+                throw new IllegalArgumentException("El argumento es inválido.");
+            }
+        }
+
     }
 
     /**
@@ -150,7 +166,7 @@ public class Local {
 
 
 
-        return "Local{" + "nombre=" + nombre + ", direccion=" + direccion.toString() + ", descripción=" + descripcion + ", tipo=" + tipo + ", Propietarios="+ propietariosTOString + '}';
+        return "Local{" + "nombre=" + nombre + ", direccion=" + direccion.toString() + ", descripción=" + descripcion + ", tipo=" + tipo + ", "+ propietariosTOString + '}';
     }
     
 }
