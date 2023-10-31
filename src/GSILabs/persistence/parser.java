@@ -5,7 +5,6 @@ import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
-import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reserva;
@@ -16,7 +15,6 @@ import GSILabs.BModel.Usuario.tipoUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class parser {
     // Bar
@@ -160,67 +158,8 @@ public class parser {
     }
     
     // Local
-    public static Local parseLocal(String str) throws IOException{
-        
-        String strFiltrado = str.substring(6, str.length()-1); //Elimino Local{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
-        
-        // Atributos a almacenar
-        String strNombre = null;
-        Direccion direccion = null;
-        String strdescripción = null;
-        String strTipo = null;
-        ArrayList<Usuario> propietarios = new ArrayList<>();
-        
-        // Campos del atributo Local
-        for(int i = 0; i < strTroceado.length; i++){
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0])switch (atributoValor[0]) {
-                case "nombre":
-                    strNombre = atributoValor[1];
-                    break;
-                case "direccion":
-                    String unaDireccion = atributoValor[1] + "=" + atributoValor[2];
-                    i++;
-                    while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
-                        unaDireccion = unaDireccion + ", " + strTroceado[i];
-                        i++;
-                    }
-                    unaDireccion = unaDireccion + ", " + strTroceado[i];
-                    direccion = parser.parseDireccion(unaDireccion);
-                    break;
-                case "descripción":
-                    strdescripción = atributoValor[1];
-                    break;
-                case "tipo":
-                    strTipo = atributoValor[1];
-                    break;
-                case "Propietario": 
-                    String unPropietario = atributoValor[1] + "=" + atributoValor[2];
-                    i++;
-                    while(!(strTroceado[i].substring(strTroceado[i].length()-1).equals("}"))){
-                        unPropietario = unPropietario + ", " + strTroceado[i];
-                        i++;
-                    }
-                    unPropietario = unPropietario + ", " + strTroceado[i];
-                    Propietario propietario = parser.parsePropietario(unPropietario);
-                    propietarios.add(propietario);
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        Local local = new Local(strNombre, direccion, strdescripción, tipoLocal.parse(strTipo), (Propietario) propietarios.get(0));
-
-        for(int i = 1; i < propietarios.size();i++){
-            local.addPropietario((Propietario) propietarios.get(i));
-        }
-
-        return local;
-
-
-
+    public static Local parseLocal(String str){
+        throw new UnsupportedOperationException("Este método aún no está implementado");
     }
     public static Local parseLocal(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
