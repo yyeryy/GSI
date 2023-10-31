@@ -14,7 +14,6 @@ import java.util.Objects;
  * determinado, a escoger entre Propietario y Cliente.
  */
 public class Usuario {
-public class Usuario{
 
     private String nick;
     private String contraseña;
