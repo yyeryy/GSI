@@ -17,7 +17,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Review {
+
 public class Review implements XMLRepresentable{
 
     /**

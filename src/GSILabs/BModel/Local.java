@@ -9,7 +9,6 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Local {
 public class Local{
     private String nombre;
     private Direccion direccion;

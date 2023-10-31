@@ -18,7 +18,6 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Bar extends Local implements Reservable{
 public class Bar extends Local implements Reservable, XMLRepresentable{
     private List<String> especialidades;
     private ArrayList<Reserva> reservas;

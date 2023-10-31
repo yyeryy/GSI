@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Clase Propietario
@@ -62,12 +64,21 @@ public class Propietario extends Usuario implements XMLRepresentable{
 
     @Override
     public boolean saveToXML(File f) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+        String xmlData = toXML();
+            try (FileWriter writer = new FileWriter(f)) {
+                writer.write(xmlData);
+            }
+        return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     @Override
     public boolean saveToXML(String filePath) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        File file = new File(filePath);
+        return saveToXML(file);
     }
     
 }
