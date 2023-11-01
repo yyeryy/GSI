@@ -5,6 +5,7 @@ import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reserva;
@@ -15,6 +16,10 @@ import GSILabs.BModel.Usuario.tipoUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class parser {
     // Bar
@@ -158,8 +163,60 @@ public class parser {
     }
     
     // Local
-    public static Local parseLocal(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Local parseLocal(String str) throws IOException{
+        String strFiltrado = str.substring(6, str.length()-1); //Eliminar "Propietario{" y "}".
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strNombre = null;
+        String strDescripcion = null;
+        String strTipoLocal = null;
+        List<String> listaStrDirecciones = new ArrayList<>();
+        List<String> listaStrPropietarios = new ArrayList<>();
+        
+        // Obtener String basicos
+        for(String trozo: strTroceado)
+        {
+            String[] atributoValor = trozo.split("=");
+            if(null != atributoValor[0]) switch (atributoValor[0]){
+                case "nombre":
+                    strNombre = atributoValor[1];
+                    break;
+                case "descripción":
+                    strDescripcion = atributoValor[1];
+                    break;
+                case "tipo":
+                    strTipoLocal = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // Obtener strings de otros objetos
+        listaStrDirecciones = (ArrayList<String>) extraerObjecto(strFiltrado, "Dirección");
+        listaStrPropietarios = (ArrayList<String>) extraerObjecto(strFiltrado, "Propietario");
+        
+        // Comprobar si los datos son válidos
+        if (strNombre == null || strDescripcion == null || strTipoLocal == null || listaStrDirecciones.isEmpty() || listaStrPropietarios.isEmpty()) {
+            throw new IOException("Uno de los campos necesarios está vacío");
+        }
+        
+        // Obtener objetos
+        Direccion direccion = parseDireccion(listaStrDirecciones.get(0));
+        List<Propietario> listaPropietarios = new ArrayList<>();
+        for(int i = 0; i < listaStrPropietarios.size(); i++)
+            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
+        
+        // Crear el objeto Local
+        Local local = new Local(strNombre, direccion, strDescripcion, tipoLocal.parse(strTipoLocal), listaPropietarios.get(0));
+        
+        // Añadir el resto de propietarios
+        for(int i = 1; i < listaStrPropietarios.size();i++){
+            local.addPropietario((Propietario) listaPropietarios.get(i));
+        }
+        
+        return local;
     }
     public static Local parseLocal(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -281,5 +338,15 @@ public class parser {
     }
     public static Usuario parseUsuario(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
+    }
+    
+    public static List<String> extraerObjecto(String strEntrada, String strABuscar) {
+        List<String> strSalida = new ArrayList<>();
+        Pattern patron = Pattern.compile(strABuscar + "\\{[^\\{\\}]*\\}");
+        Matcher emparejador = patron.matcher(strEntrada);
+        while (emparejador.find()) {
+            strSalida.add(emparejador.group());
+        }
+        return strSalida;
     }
 }
