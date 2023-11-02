@@ -134,7 +134,12 @@ public class Review implements XMLRepresentable{
     
     @Override
     public String toString() {
-        return "Review{" + "valoracion=" + valoracion + ", comentario=" + comentario + ", fechaReview=" + fechaReview.toString() + ", local=" + local.toString() + ", usuario=" + usuario.toString() + ", contestacion=" + contestacion.toString() + '}';
+        String salida = "Review{" + "valoracion=" + valoracion + ", comentario=" + comentario + ", fechaReview=" + fechaReview.toString() + ", local=" + local.toString() + ", usuario=" + usuario.toString();
+    
+        if(this.contestacion != null){
+            salida = salida + ", contestacion=" + contestacion.toString();
+        }
+        return salida + '}';
     }
 
     @Override

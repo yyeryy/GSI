@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public class Bar extends Local implements Reservable, XMLRepresentable{
     private List<String> especialidades;
-    private ArrayList<Reserva> reservas;
+    // listaReserva se incia en Reservable
 
     /**
      * Constructor Bar
@@ -32,7 +32,7 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
     public Bar(String nombre, Direccion direccion, String descripcion, Propietario propietario) {
         super(nombre, direccion, descripcion, tipoLocal.BAR, propietario);
         this.especialidades = new ArrayList<>();
-        this.reservas = new ArrayList<Reserva>();
+        // listaReserva se incia en Reservable
     }
 
     /**
@@ -76,7 +76,46 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
 
     @Override
     public String toString() {
-        return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() +  ", especialidades=" + this.especialidades.toString() + ", reservas=" + this.reservas.toString() + "}";
+
+        // String de Propietarios
+        String strPropietarios = "";
+        for(int i = 0; i < this.getPropietarios().size(); i++){
+            strPropietarios = strPropietarios + "propietario=" + this.getPropietarios().get(i).toString();
+            if(i != this.getPropietarios().size() - 1)
+                strPropietarios = strPropietarios + ", ";
+        }
+
+        // String de Especialidades
+        String strEspecialidades = "";
+        for(int i = 0; i < this.especialidades.size(); i++){
+            strEspecialidades = strEspecialidades + "especialidad=" + this.especialidades.get(i).toString();
+            if(i != this.especialidades.size() - 1)
+                strEspecialidades = strEspecialidades + ", ";
+        }
+
+        // String de Reservas
+        String strReservas = "";
+        for(int i = 0; i < this.listaReserva.size(); i++){
+            strReservas = strReservas + "reserva=" + this.listaReserva.get(i).toString();
+            if(i != this.listaReserva.size() - 1)
+                strReservas = strReservas + ", ";
+        }
+
+
+        String salida = "Bar{" + "nombre=" + this.getNombre() + ", dirección=" + this.getDireccion().toString() + ", descripción=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString();
+
+
+        if(getPropietarios().size() > 0){
+            salida = salida + ", " + strPropietarios; 
+        }
+        if(this.especialidades.size() >0){
+            salida = salida + ", " + strEspecialidades; 
+        }
+        if(this.listaReserva.size() > 0){
+            salida = salida + ", " + strReservas; 
+        }
+
+        return salida + "}";
     }
 
     @Override

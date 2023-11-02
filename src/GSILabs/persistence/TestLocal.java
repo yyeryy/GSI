@@ -8,7 +8,7 @@ public class TestLocal {
         String str = ""
                 + "Local{"
                 + "nombre=ISusiIvana, "
-                + "direccion=Dirección{"
+                + "dirección=Dirección{"
                     + "localidad=Pamplona, "
                     + "provincia=Gran_Reino_De_Navarra, "
                     + "calle=Suuuuu, numero=1}, "

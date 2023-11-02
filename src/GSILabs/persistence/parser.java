@@ -16,6 +16,7 @@ import GSILabs.BModel.Usuario.tipoUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -31,38 +32,116 @@ public class parser {
         String strNombre = null;
         String strDireccion = null;
         String strDescripcion = null;
-        String strPropietario = null;
-        //String str = null;
-        //String str = null;
+        String strTipoLocal = null;
+        List<String> listaStrPropietarios = new ArrayList<>();
+        List<String> strEspecialidades = new ArrayList<>();
+        ArrayList<String> strReservas = new ArrayList<>();
+
         
-        // Campos del atributo Bar
-        for(String trozo: strTroceado){
-            String[] atributoValor = trozo.split("=");
-            if("nombre".equals(atributoValor[0])){ strNombre = atributoValor[1];}
-            else if("direccion".equals(atributoValor[0])){ strDireccion = atributoValor[1];}
-            else if("descripcion".equals(atributoValor[0])){ strDescripcion = atributoValor[1];}
-            else if("propietario".equals(atributoValor[0])){ strPropietario = atributoValor[1];}
-            // especialidades
-            // reservas
+        // Obtener String basicos
+        for(int i = 0; i < strTroceado.length ; i++)
+        {
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0]) 
+                switch (atributoValor[0]){
+                case "nombre":
+                    strNombre = atributoValor[1];
+                    break;
+                case "dirección":
+                    strDireccion = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        strDireccion = strDireccion + ", " + strTroceado[i];
+                        i++;
+                    }
+                    strDireccion = strDireccion + ", " + strTroceado[i];
+                    break;
+                case "descripción":
+                    strDescripcion = atributoValor[1];
+                    break;
+                case "tipo":
+                    strTipoLocal = atributoValor[1];
+                    break;
+                case "propietario":
+                    String pro = null;
+                    pro = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        pro = pro + ", " + strTroceado[i];
+                        i++;
+                    }
+                    pro = pro + ", " + strTroceado[i];
+
+                    listaStrPropietarios.add(pro);
+                    break;
+                case "especialidad":
+                    String esp = null;
+                    esp = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        esp = esp + ", " + strTroceado[i];
+                        i++;
+                    }
+                    esp = esp + ", " + strTroceado[i];
+
+                    strEspecialidades.add(esp);
+                    break;
+                case "reserva":
+                    String res = null;
+                    res = atributoValor[1] +"="+ atributoValor[2] + "=" + atributoValor[3];
+                    i++;
+                    int j = 0;
+
+                    while(j != 2){
+                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                            res = res + ", " + strTroceado[i];
+                            i++;
+                        }
+                        res = res + ", " + strTroceado[i];
+                        j++;
+                        i++;
+                    }
+                    i--;
+                    strReservas.add(res);
+                    break;
+                default:
+                    break;
+            }
         }
-        
-        // Comprobar si los datos son validos
-        if(strNombre == null || strDireccion == null || strDescripcion == null || strPropietario == null)
-        {throw new IOException("Uno de los campos necesarios esta vacio");}
-        
-        // Crear objetos que se usan para crear bar
+
+
+        // Comprobar si los datos son válidos
+        if (strNombre == null || strDescripcion == null || strTipoLocal == null || strDireccion == null
+                || listaStrPropietarios.isEmpty()) {
+            throw new IOException("Uno de los campos necesarios está vacío");
+        }
+        // Obtener objetos
         Direccion direccion = parseDireccion(strDireccion);
-        
-        // Obtengo la lista de propietarios
-        
-        // Creo el objeto bar
-        
-        // Relleno el resto de campos usando otras funciones
-        //      Especialidades
-        //      Reservas
-        
-        // Devuelvo el objeto generado
-        return null;
+        List<Propietario> listaPropietarios = new ArrayList<>();
+        for(int i = 0; i < listaStrPropietarios.size(); i++)
+            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
+
+        // Crear Bar
+        Bar bar =new Bar(strNombre, direccion, strDescripcion, listaPropietarios.get(0));
+        for(int i = 1; i < listaPropietarios.size(); i++)
+            bar.addPropietario(listaPropietarios.get(i));
+
+        // Introducir Reservas 
+        for(int i = 0; i < strReservas.size(); i++){
+
+            Reserva r = parseReserva(strReservas.get(i));
+            bar.nuevaReserva(r.getCliente(), r.getFecha(), r.getHora());
+        }
+
+        // Introducir Especialidades
+        for(int i = 0; i < strEspecialidades.size(); i++){
+            System.out.println(strEspecialidades.size());
+            bar.agregarEspecialidad(strEspecialidades.get(i));
+        }
+
+        return bar;
     }
     public static Bar parseBar(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -109,8 +188,62 @@ public class parser {
     }
     
     // Contestacion
-    public static Contestacion parseContestacion(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Contestacion parseContestacion(String str) throws IOException{
+        String strFiltrado = str.substring(13, str.length()-1); //Elimino Dirección{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strComentario = null;
+        String strFecha = null;
+        String strLocal = null;
+        
+        // Campos del atributo Bar
+        // Obtener String basicos
+        for(int i = 0; i < strTroceado.length ; i++)
+        {
+
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0]) 
+
+                switch (atributoValor[0]){
+                case "comentario":
+                    strComentario = atributoValor[1];
+                    break;
+                case "fechaReview":
+                    strFecha = atributoValor[1];
+                    break;
+                case "local":
+                    String res = null;
+                    res = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    int j = 0;
+
+                    while(j != 2){
+                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                            res = res + ", " + strTroceado[i];
+                            i++;
+                        }
+                        res = res + ", " + strTroceado[i];
+                        j++;
+                        i++;
+                    }
+                    i--;
+                    strLocal = res + "}";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Comprobar si los datos son validos
+        if(strComentario == null || strFecha == null || strLocal == null){
+            throw new IOException("Uno de los campos necesarios esta vacio");
+        }
+        Local local = parseLocal(strLocal);
+        // Crear objetos que se usan para crear propietario
+        Contestacion contestacion = new Contestacion(strComentario, LocalDate.parse(strFecha), local);
+        
+        return contestacion;
     }
     public static Contestacion parseContestacion(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -264,32 +397,381 @@ public class parser {
     }
     
     // Pub
-    public static Pub parsePub(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Pub parsePub(String str) throws IOException{
+        String strFiltrado = str.substring(4, str.length()-1); //Elimino PUB{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strHoraA = null;
+        String strHoraC = null;
+        String strNombre = null;
+        String strDireccion = null;
+        String strDescripcion = null;
+        String strTipoLocal = null;
+        List<String> listaStrPropietarios = new ArrayList<>();
+
+
+        
+        // Obtener String basicos
+        for(int i = 0; i < strTroceado.length ; i++)
+        {
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0]) 
+                switch (atributoValor[0]){
+                case "nombre":
+                    strNombre = atributoValor[1];
+                    break;
+                case "dirección":
+                    strDireccion = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        strDireccion = strDireccion + ", " + strTroceado[i];
+                        i++;
+                    }
+                    strDireccion = strDireccion + ", " + strTroceado[i];
+                    break;
+                case "descripción":
+                    strDescripcion = atributoValor[1];
+                    break;
+                case "tipo":
+                    strTipoLocal = atributoValor[1];
+                    break;
+                case "propietario":
+                    String pro = null;
+                    pro = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        pro = pro + ", " + strTroceado[i];
+                        i++;
+                    }
+                    pro = pro + ", " + strTroceado[i];
+
+                    listaStrPropietarios.add(pro);
+                    break;
+                case "hora Apertura":
+                    strHoraA = atributoValor[1];
+                    break;
+                case "hora Clausura":
+                    strHoraC = atributoValor[1];
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Comprobar si los datos son válidos
+        if (strNombre == null || strDescripcion == null || strTipoLocal == null || strDireccion == null
+                || strHoraA == null || strHoraC == null || listaStrPropietarios.isEmpty()) {
+            throw new IOException("Uno de los campos necesarios está vacío");
+        }
+        // Obtener objetos
+        Direccion direccion = parseDireccion(strDireccion);
+        List<Propietario> listaPropietarios = new ArrayList<>();
+        for(int i = 0; i < listaStrPropietarios.size(); i++)
+            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
+
+        // Crear Bar
+        Pub pub = new Pub(strHoraA, strHoraC,strNombre, direccion, strDescripcion, listaPropietarios.get(0));
+        for(int i = 1; i < listaPropietarios.size(); i++)
+            pub.addPropietario(listaPropietarios.get(i));
+
+        return pub;
     }
     public static Pub parsePub(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
     }
     
     // Reserva
-    public static Reserva parseReserva(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Reserva parseReserva(String str) throws IOException{
+        
+        String strFiltrado = str.substring(8, str.length()-1); //Eliminar "Propietario{" y "}".
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strCliente = null;
+        String strFecha = null;
+        String strHora = null;
+        String strDescuento = null;
+        
+        // Obtener String basicos
+        for(int i = 0; i < strTroceado.length ; i++)
+        {
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0]) 
+                switch (atributoValor[0]){
+                case "cliente":
+                    strCliente = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        strCliente = strCliente + ", " + strTroceado[i];
+                        i++;
+                    }
+                    strCliente = strCliente + ", " + strTroceado[i];
+
+                    break;
+                case "fechaReserva":
+                    strFecha = atributoValor[1];
+                    break;
+                case "hora":
+                    strHora = atributoValor[1];
+                    break;
+                case "descuento":
+                    strDescuento = atributoValor[1];
+                    strDescuento = strDescuento.substring(0, strDescuento.length() - 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+ 
+        // Comprobar si los datos son válidos
+        if (strCliente == null || strFecha == null || strHora == null || strDescuento == null) {
+            throw new IOException("Uno de los campos necesarios está vacío");
+        }
+        // System.out.println(strCliente);
+        // Obtener objetos
+        Cliente cliente = parseCliente(strCliente);   
+        // Crear el objeto Local
+        Reserva reserva = new Reserva(cliente, LocalDate.parse(strFecha), LocalTime.parse(strHora), Integer.parseInt(strDescuento));
+    
+        return reserva;
+
     }
     public static Reserva parseReserva(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
     }
     
     // Restarurante
-    public static Restaurante parseRestaurante(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Restaurante parseRestaurante(String str) throws IOException{
+
+        String strFiltrado = str.substring(12, str.length()-1); //Eliminar "Restaurante{" y "}".
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+
+        // Atributos a almacenar
+        String strNombre = null;
+        String strDireccion = null;
+        String strDescripcion = null;
+        String strTipoLocal = null;
+        String strPrecioMenu = null;  
+        String strCapacidad = null;
+        String strCapacidadMesa = null;
+        List<String> listaStrPropietarios = new ArrayList<>();
+        ArrayList<String> strReservas = new ArrayList<>();
+
+        
+        // Obtener String basicos
+        for(int i = 0; i < strTroceado.length ; i++)
+        {
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0]) 
+                switch (atributoValor[0]){
+                case "nombre":
+                    strNombre = atributoValor[1];
+                    break;
+                case "dirección":
+                    strDireccion = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        strDireccion = strDireccion + ", " + strTroceado[i];
+                        i++;
+                    }
+                    strDireccion = strDireccion + ", " + strTroceado[i];
+                    break;
+                case "descripción":
+                    strDescripcion = atributoValor[1];
+                    break;
+                case "tipo":
+                    strTipoLocal = atributoValor[1];
+                    break;
+                case "propietario":
+                    String pro = null;
+                    pro = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+
+                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                        pro = pro + ", " + strTroceado[i];
+                        i++;
+                    }
+                    pro = pro + ", " + strTroceado[i];
+
+                    listaStrPropietarios.add(pro);
+                    break;
+                case "precioMenu":
+                    strPrecioMenu = atributoValor[1];
+                    break;
+                case "capacidad":
+                    strCapacidad = atributoValor[1];
+                    break;
+                case "capacidad Mesa":
+                    strCapacidadMesa = atributoValor[1];
+                    break;
+                case "reserva":
+                    String res = null;
+                    res = atributoValor[1] +"="+ atributoValor[2] + "=" + atributoValor[3];
+                    i++;
+                    int j = 0;
+
+                    while(j != 2){
+                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                            res = res + ", " + strTroceado[i];
+                            i++;
+                        }
+                        res = res + ", " + strTroceado[i];
+                        j++;
+                        i++;
+                    }
+                    i--;
+                    strReservas.add(res);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        // Comprobar si los datos son válidos
+        if (strNombre == null || strDescripcion == null || strTipoLocal == null || strDireccion == null
+                || listaStrPropietarios.isEmpty()) {
+            throw new IOException("Uno de los campos necesarios está vacío");
+        }
+        // Obtener objetos
+        Direccion direccion = parseDireccion(strDireccion);
+        List<Propietario> listaPropietarios = new ArrayList<>();
+        for(int i = 0; i < listaStrPropietarios.size(); i++)
+            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
+
+        // Crear Bar
+        Restaurante restaurante =new Restaurante(strNombre, direccion, strDescripcion, listaPropietarios.get(0),
+                 Double.parseDouble(strPrecioMenu), Integer.parseInt(strCapacidad), Integer.parseInt(strCapacidadMesa));
+        for(int i = 1; i < listaPropietarios.size(); i++)
+            restaurante.addPropietario(listaPropietarios.get(i));
+
+        // Introducir Reservas 
+        for(int i = 0; i < strReservas.size(); i++){
+            Reserva r = parseReserva(strReservas.get(i));
+            restaurante.nuevaReserva(r.getCliente(), r.getFecha(), r.getHora());
+        }
+
+
+        return restaurante;
     }
     public static Restaurante parseRestaurante(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
     }
     
     // Review
-    public static Review parseRevies(String str){
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Review parseReview(String str) throws IOException{
+        String strFiltrado = str.substring(7, str.length()-1); //Elimino Dirección{ y }.
+        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        
+        // Atributos a almacenar
+        String strValoracion = null;
+        String strComentario = null;
+        String strFecha = null;
+        String strLocal = null;
+        String strUsuario = null;
+        String strConstestacion = null;
+        
+        int j;
+        // Campos del atributo Bar
+        // Obtener String basicos
+        for(int i = 0; i < strTroceado.length ; i++)
+        {
+
+            String[] atributoValor = strTroceado[i].split("=");
+            if(null != atributoValor[0]) 
+
+                switch (atributoValor[0]){
+                case "valoracion":
+                    strValoracion = atributoValor[1];
+                    break;
+                case "comentario":
+                    strComentario = atributoValor[1];
+                    break;
+                case "fechaReview":
+                    strFecha = atributoValor[1];
+                    break;
+                case "local":
+                    String res = null;
+                    res = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    j = 0;
+
+                    while(j != 2){
+                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                            res = res + ", " + strTroceado[i];
+                            i++;
+                        }
+                        res = res + ", " + strTroceado[i];
+                        j++;
+                        i++;
+                    }
+                    i--;
+                    strLocal = res + "}";
+                    break;
+                case "usuario":
+                    String usu = null;
+                    usu = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    j = 0;
+
+                    while(j != 1){
+                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                            usu = usu + ", " + strTroceado[i];
+                            i++;
+                        }
+                        usu = usu + ", " + strTroceado[i];
+                        j++;
+                        i++;
+                    }
+                    i--;
+                    strUsuario = usu;
+                    break;
+                case "contestacion":
+                    String con = null;
+                    con = atributoValor[1] +"="+ atributoValor[2];
+                    i++;
+                    j = 0;
+
+                    while(j != 2){
+                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
+                            con = con + ", " + strTroceado[i];
+                            i++;
+                        }
+                        con = con + ", " + strTroceado[i];
+                        j++;
+                        i++;
+                    }
+                    i--;
+                    strConstestacion = con;
+                    break; 
+                default:
+                    break;
+            }
+        }
+/*
+        System.out.println(strValoracion);
+        System.out.println(strComentario);
+        System.out.println(strFecha);
+        System.out.println(strLocal);
+        System.out.println(strUsuario);
+        System.out.println(strConstestacion);
+*/
+
+        // Comprobar si los datos son validos
+        if(strValoracion == null || strComentario == null || strFecha == null
+            || strLocal == null || strUsuario == null || strConstestacion == null){
+            throw new IOException("Uno de los campos necesarios esta vacio");
+        }
+        Usuario usuario = parseUsuario(strUsuario);
+        Local local = parseLocal(strLocal);
+        Contestacion contestacion = parseContestacion(strConstestacion);
+        // Crear objetos que se usan para crear propietario
+        Review review = new Review(Integer.parseInt(strValoracion), strComentario, LocalDate.parse(strFecha), local, usuario);
+        review.setContestacion(contestacion);     
+
+        return review;
     }
     public static Review parseReview(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -340,6 +822,8 @@ public class parser {
         throw new UnsupportedOperationException("Este método aún no está implementado");
     }
     
+
+    // creo que no funcionaria en el caso de Review -,-
     public static List<String> extraerObjecto(String strEntrada, String strABuscar) {
         List<String> strSalida = new ArrayList<>();
         Pattern patron = Pattern.compile(strABuscar + "\\{[^\\{\\}]*\\}");

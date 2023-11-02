@@ -66,7 +66,23 @@ public class Pub extends Local implements XMLRepresentable{
     
     @Override
     public String toString() {
-        return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", hora Apertura=" + this.horaApertura + ", hora Clausura=" + this.horaClausura + '}';
+
+        // String de Propietarios
+        String strPropietarios = "";
+        for(int i = 0; i < this.getPropietarios().size(); i++){
+            strPropietarios = strPropietarios + "propietario=" + this.getPropietarios().get(i).toString();
+            if(i != this.getPropietarios().size() - 1)
+                strPropietarios = strPropietarios + ", ";
+        }
+
+        String salida = "Pub{" + "nombre=" + this.getNombre() + ", dirección=" + this.getDireccion().toString() + ", descripción=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString();
+
+        if(getPropietarios().size() > 0){
+            salida = salida + ", " + strPropietarios; 
+        }
+
+        return salida + ", hora Apertura=" + this.horaApertura + ", hora Clausura=" + this.horaClausura + '}';
+        
     }
 
     @Override

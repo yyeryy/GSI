@@ -154,7 +154,7 @@ public class Local{
 
     @Override
     public String toString() {
-        String salida = "Local{" + "nombre=" + nombre + ", direccion=" + direccion + ", descripción=" + descripcion + ", tipo=" + tipo + ", ";
+        String salida = "Local{" + "nombre=" + nombre + ", dirección=" + direccion.toString() + ", descripción=" + descripcion + ", tipo=" + tipo + ", ";
         for(int i = 0; i < propietarios.size(); i++){
             salida = salida + "Propietario=" + propietarios.get(i).toString();
             if(i != propietarios.size() - 1)

@@ -18,7 +18,7 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
     private double precioMenu;
     private Integer capacidad;
     private Integer capacidadMesa;
-    private ArrayList<Reserva> reservas;
+    // listaReserva se incia en Reservable
 
     /**
      * Constructor Restaurante
@@ -35,7 +35,7 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
-        this.reservas = new ArrayList<Reserva>();
+        // listaReserva se incia en Reservable
     }
     
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
@@ -84,7 +84,40 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
     
     @Override
     public String toString() {
-        return "Local{" + "nombre=" + this.getNombre() + ", direccion=" + this.getDireccion().toString() + ", descripcion=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString() + ", propietarios=" + this.getPropietarios().toString() + ", precioMenu=" + this.precioMenu + ", capacidad=" + this.capacidad + ", capacidad Mesa=" + this.capacidadMesa + ", capacidad=" + this.reservas.toString() + '}';
+
+        // String de Propietarios
+        String strPropietarios = "";
+        for(int i = 0; i < this.getPropietarios().size(); i++){
+            strPropietarios = strPropietarios + "propietario=" + this.getPropietarios().get(i).toString();
+            if(i != this.getPropietarios().size() - 1)
+                strPropietarios = strPropietarios + ", ";
+        }
+
+        // String de Reservas
+        String strReservas = "";
+        for(int i = 0; i < this.listaReserva.size(); i++){
+            strReservas = strReservas + "reserva=" + this.listaReserva.get(i).toString();
+            if(i != this.listaReserva.size() - 1)
+                strReservas = strReservas + ", ";
+        }
+
+
+        String salida = "Restaurante{" + "nombre=" + this.getNombre() + ", dirección=" + this.getDireccion().toString() 
+                + ", descripción=" + this.getDescripcion() + ", tipo=" + this.getTipo().toString();
+
+        if(getPropietarios().size() > 0){
+            salida = salida + ", " + strPropietarios; 
+        }
+        salida = salida + ", precioMenu=" + this.precioMenu 
+                        + ", capacidad=" + this.capacidad 
+                        + ", capacidad Mesa=" + this.capacidadMesa;
+        if(listaReserva.size() > 0){
+            salida = salida + ", " + strReservas; 
+        }
+
+        return salida + "}";
+
+
     }
 
     @Override
