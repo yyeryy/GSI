@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Direccion>
-    <localidad>Pamplona</direccion>
-    <provincia>Provincia</provincia>
-    <calle>Avenida Cataluña</calle>
-    <numero>1</numero>

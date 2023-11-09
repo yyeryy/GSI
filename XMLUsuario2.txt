@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Usuario>
+	<nick>Pepe</nick>
+	<contraseña>1234</contraseña>
+	<fechaNacimiento>2005-11-09</fechaNacimiento>
+	<tipo>PROPIETARIO</tipo>
+</Usuario>

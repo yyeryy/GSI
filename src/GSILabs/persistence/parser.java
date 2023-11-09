@@ -295,7 +295,7 @@ public class parser {
     
     // Local
     public static Local parseLocal(String str) throws IOException{
-        String strFiltrado = str.substring(6, str.length()-1); //Eliminar "Propietario{" y "}".
+        /*String strFiltrado = str.substring(6, str.length()-1); //Eliminar "Propietario{" y "}".
         String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
         
         // Atributos a almacenar
@@ -347,7 +347,8 @@ public class parser {
             local.addPropietario((Propietario) listaPropietarios.get(i));
         }
         
-        return local;
+        return local;*/
+        return null;
     }
     public static Local parseLocal(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");
@@ -776,66 +777,43 @@ public class parser {
     }
     
     // Usuario
+    // COMPLETADO
     public static Usuario parseUsuario(String str) throws IOException{
-        String strFiltrado = str.substring(8, str.length()-1); //Elimino Usuario{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        // Obtener datos del XML
+        String strNick = obtenerContenidoEtiqueta(str,"nick");
+        String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
+        String strFechaNacimiento = obtenerContenidoEtiqueta(str, "fechaNacimiento");
+        String strTipo = obtenerContenidoEtiqueta(str, "tipo");
         
-        // Atributos a almacenar
-        String strNick = null;
-        String strContraseña = null;
-        String strFecha = null;
-        String strTipo = null;
+        // Comprobar validez XML
+        if(null == strNick) throw new IllegalArgumentException("Nick vacio o invalido.");
+        if(null == strContrasena) throw new IllegalArgumentException("Contraseña vacia o invalida.");
+        if(null == strFechaNacimiento) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
+        if(null == strTipo) throw new IllegalArgumentException("Tipo vacio o invalido.");
         
-        // Campos del atributo Bar
-        for(String trozo: strTroceado){
-            String[] atributoValor = trozo.split("=");
-            if(null != atributoValor[0])switch (atributoValor[0]) {
-                case "nick":
-                    strNick = atributoValor[1];
-                    break;
-                case "contraseña":
-                    strContraseña = atributoValor[1];
-                    break;
-                case "fecha_de_nacimiento":
-                    strFecha = atributoValor[1];
-                    break;
-                case "tipo":
-                    strTipo = atributoValor[1];
-                    break;
-                default:
-                    break;
-            }
-        }
-        // Comprobar si los datos son validos
-        if(strNick == null || strContraseña == null || strFecha == null || strTipo == null)
-        {throw new IOException("Uno de los campos necesarios esta vacio");}
-
-        // Crear objetos que se usan para crear propietario
-        Usuario usuario = new Usuario(strNick, strContraseña, LocalDate.parse(strFecha), tipoUsuario.parse(strTipo));
-        
-        // Devuelvo el usuario
-        return usuario;
+        // Conversion de datos
+        String[] strLocalDate = strFechaNacimiento.split("-");
+        LocalDate fechaNacimiento = LocalDate.of(Integer.parseInt(strLocalDate[0]),Integer.parseInt(strLocalDate[1]),Integer.parseInt(strLocalDate[2]));
+        tipoUsuario tipo = tipoUsuario.parse(strTipo);
+        // Construccion objeto
+        return new Usuario(strNick, strContrasena, fechaNacimiento, tipo);
     }
-    public static Usuario parseUsuario(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
-    }
-    
-
-    // creo que no funcionaria en el caso de Review -,-
-    public static List<String> extraerObjecto(String strEntrada, String strABuscar) {
-        List<String> strSalida = new ArrayList<>();
-        Pattern patron = Pattern.compile(strABuscar + "\\{[^\\{\\}]*\\}");
-        Matcher emparejador = patron.matcher(strEntrada);
-        while (emparejador.find()) {
-            strSalida.add(emparejador.group());
-        }
-        return strSalida;
+    public static Usuario parseUsuario(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseUsuario(contenido));
     }
     
     // Estrae el string contenido por la etiqueta xml indicada
     public static String obtenerContenidoEtiqueta(String contenidoOriginal, String etiqueta) {
     int posicionInicioEtiqueta = contenidoOriginal.indexOf("<" + etiqueta + ">");
-    // Posicion inicial
+    
+// Posicion inicial
     if (posicionInicioEtiqueta == -1) {
         return null;
     }

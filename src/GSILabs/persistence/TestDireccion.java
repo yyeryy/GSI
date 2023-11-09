@@ -2,9 +2,7 @@ package GSILabs.persistence;
 
 import GSILabs.BModel.Direccion;
 import static GSILabs.persistence.parser.parseDireccion;
-import com.sun.org.apache.xerces.internal.util.URI;
 import java.io.File;
-import jdk.javadoc.internal.doclets.toolkit.taglets.snippet.Style.Link;
 
 public class TestDireccion {
     public static void main(String[] args) throws Exception{
