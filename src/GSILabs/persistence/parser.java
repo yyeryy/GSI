@@ -294,13 +294,13 @@ public class parser {
         String strDireccion = obtenerContenidoEtiqueta(str, "direccion");
         String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
         String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
+        
         // Obtengo la lista de propietarios
         List<String> strPropietarios = new ArrayList<>();
-        System.out.println("Busco </Propietario>");
-        for(String strPropietario : str.split("</Propietario>")){
-            System.out.println(strPropietario);
-            strPropietarios.add(obtenerContenidoEtiqueta(strPropietario, "propietario"));
+        for(String strPropietario : str.split("<propietario>")){
+            strPropietarios.add(obtenerContenidoEtiqueta(strPropietario, "Propietario"));
         }
+        strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
         
         // Comprobar validez
         if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
@@ -323,8 +323,15 @@ public class parser {
             local.addPropietario(propietarios.get(i));}
         return local;
     }
-    public static Local parseLocal(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Local parseLocal(File f) throws FileNotFoundException, IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseLocal(contenido));
     }
     
     // Propietario
