@@ -14,7 +14,7 @@ public class Local{
     private Direccion direccion;
     private String descripcion;
     private tipoLocal tipo;
-    private ArrayList<Usuario> propietarios;
+    private ArrayList<Propietario> propietarios;
 
     public enum tipoLocal {
         BAR,
@@ -71,7 +71,7 @@ public class Local{
         return tipo;
     }
     
-    public ArrayList<Usuario> getPropietarios() {
+    public ArrayList<Propietario> getPropietarios() {
         return propietarios;
     }
 

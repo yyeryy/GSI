@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bar>
+    <nombre>Ana</nombre>
+    <direccion><?xml version="1.0" encoding="UTF-8"?>
+<Direccion>
+    <localidad>Chusmalandia</localidad>
+    <provincia>Marruecos</provincia>
+    <calle>PerezaDeVida</calle>
+    <numero>66</numero>
+</Direccion>
+</direccion>
+    <descripcion>Dirección{localidad=Chusmalandia, provincia=Marruecos, calle=PerezaDeVida, numero=66}</descripcion>
+    <propietario><?xml version="1.0" encoding="UTF-8"?>
+<Propietario>
+    <nick>Maria</nick>
+    <contraseña>1234</contraseña>
+    <fechaNacimiento>2005-11-09</fechaNacimiento>
+</Propietario></propietario>
+    <propietario><?xml version="1.0" encoding="UTF-8"?>
+<Propietario>
+    <nick>Carmen</nick>
+    <contraseña>4321</contraseña>
+    <fechaNacimiento>1973-11-09</fechaNacimiento>
+</Propietario></propietario>
+</Bar>

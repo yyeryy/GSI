@@ -51,6 +51,7 @@ public class Propietario extends Usuario implements XMLRepresentable{
         return "Propietario{" + "nick=" + this.getNick() + ", contraseña=" + this.getContraseña() + ", fecha_de_nacimiento=" + this.getFechaNacimiento().toString() + "}";
     }
 
+    
     @Override
     public String toXML() {
         String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";

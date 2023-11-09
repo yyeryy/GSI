@@ -123,13 +123,13 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
         String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         xmlData += "<Bar>\n";
         xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
-        xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
+        xmlData += "    <direccion>" + this.getDireccion().toXML() + "</direccion>\n";
         xmlData += "    <descripcion>" + this.getDireccion() + "</descripcion>\n";
-        for(int i = 0;i<this.getPropietarios().size();i++){
-            xmlData += "    <propietario>"+i + this.getPropietarios().get(i) + "</propietario>+i\n";
+        for(int i = 0; i<this.getPropietarios().size(); i++){
+            xmlData += "    <propietario>" + this.getPropietarios().get(i).toXML() + "</propietario>\n";
         }
         for(int i = 0;i<this.getEspecialidades().size();i++){
-            xmlData += "    <especialidad>"+i + this.getEspecialidades().get(i) + "</especialidad>+i\n";
+            xmlData += "    <especialidad>" + this.getEspecialidades().get(i) + "</especialidad>\n";
         }
         xmlData += "</Bar>";
         return xmlData;

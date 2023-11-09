@@ -5,10 +5,7 @@ import GSILabs.BModel.Local;
 import GSILabs.BModel.Local.tipoLocal;
 import static GSILabs.BModel.Local.tipoLocal.PUB;
 import GSILabs.BModel.Propietario;
-import GSILabs.BModel.Usuario;
-import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import static GSILabs.persistence.parser.parseLocal;
-import static GSILabs.persistence.parser.parseUsuario;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 
 public class TestLocal {
     public static void main(String[] args) throws IOException {
-    // Variables
+        // Variables
         String nombre = "Pepe";
         Direccion direccion = new Direccion("Burlada", "Melilla", "Pereza", 33);
         String descripcion = "El mejor local de Pamplona";
