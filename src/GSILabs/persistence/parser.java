@@ -289,60 +289,39 @@ public class parser {
     
     // Local
     public static Local parseLocal(String str) throws IOException{
-        /*String strFiltrado = str.substring(6, str.length()-1); //Eliminar "Propietario{" y "}".
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
-        
-        // Atributos a almacenar
-        String strNombre = null;
-        String strDescripcion = null;
-        String strTipoLocal = null;
-        List<String> listaStrDirecciones = new ArrayList<>();
-        List<String> listaStrPropietarios = new ArrayList<>();
-        
-        // Obtener String basicos
-        for(String trozo: strTroceado)
-        {
-            String[] atributoValor = trozo.split("=");
-            if(null != atributoValor[0]) switch (atributoValor[0]){
-                case "nombre":
-                    strNombre = atributoValor[1];
-                    break;
-                case "descripción":
-                    strDescripcion = atributoValor[1];
-                    break;
-                case "tipo":
-                    strTipoLocal = atributoValor[1];
-                    break;
-                default:
-                    break;
-            }
+        // Obtener datos del XML
+        String strNombre = obtenerContenidoEtiqueta(str, "nombre");
+        String strDireccion = obtenerContenidoEtiqueta(str, "direccion");
+        String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
+        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
+        // Obtengo la lista de propietarios
+        List<String> strPropietarios = new ArrayList<>();
+        System.out.println("Busco </Propietario>");
+        for(String strPropietario : str.split("</Propietario>")){
+            System.out.println(strPropietario);
+            strPropietarios.add(obtenerContenidoEtiqueta(strPropietario, "propietario"));
         }
         
-        // Obtener strings de otros objetos
-        listaStrDirecciones = (ArrayList<String>) extraerObjecto(strFiltrado, "Dirección");
-        listaStrPropietarios = (ArrayList<String>) extraerObjecto(strFiltrado, "Propietario");
+        // Comprobar validez
+        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
+        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
         
-        // Comprobar si los datos son válidos
-        if (strNombre == null || strDescripcion == null || strTipoLocal == null || listaStrDirecciones.isEmpty() || listaStrPropietarios.isEmpty()) {
-            throw new IOException("Uno de los campos necesarios está vacío");
+        // Conversion de datos
+        Direccion direccion = parseDireccion(strDireccion);
+        List<Propietario> propietarios = new ArrayList<>();
+        for(String strPropietario : strPropietarios){
+            propietarios.add(parsePropietario(strPropietario));
         }
+        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
         
-        // Obtener objetos
-        Direccion direccion = parseDireccion(listaStrDirecciones.get(0));
-        List<Propietario> listaPropietarios = new ArrayList<>();
-        for(int i = 0; i < listaStrPropietarios.size(); i++)
-            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
-        
-        // Crear el objeto Local
-        Local local = new Local(strNombre, direccion, strDescripcion, tipoLocal.parse(strTipoLocal), listaPropietarios.get(0));
-        
-        // Añadir el resto de propietarios
-        for(int i = 1; i < listaStrPropietarios.size();i++){
-            local.addPropietario((Propietario) listaPropietarios.get(i));
-        }
-        
-        return local;*/
-        return null;
+        // Construccion objeto
+        Local local = new Local(strNombre, direccion, strDescripcion, tipo, propietarios.get(0));
+        for(int i = 1; i < propietarios.size(); i++){
+            local.addPropietario(propietarios.get(i));}
+        return local;
     }
     public static Local parseLocal(File f) {
         throw new UnsupportedOperationException("Este método aún no está implementado");

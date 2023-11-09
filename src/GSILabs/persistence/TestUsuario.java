@@ -65,6 +65,6 @@ public class TestUsuario {
         
         // Obtener objeto del fichero XML
         Usuario usuario3 = parseUsuario(new File("XMLUsuario2.txt"));
-        System.out.println("Test 2 (File: toXML + parseDireccion(direccion)): " + (usuario.equals(usuario3)));
+        System.out.println("Test 2 (File: toXML + parselocal(direccion)): " + (usuario.equals(usuario3)));
     }
 }
