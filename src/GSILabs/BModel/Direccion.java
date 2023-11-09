@@ -101,10 +101,11 @@ public class Direccion implements XMLRepresentable{
     public String toXML() {
         String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         xmlData += "<Direccion>\n";
-        xmlData += "    <localidad>" + this.getLocalidad() + "</direccion>\n";
+        xmlData += "    <localidad>" + this.getLocalidad() + "</localidad>\n";
         xmlData += "    <provincia>" + this.getProvincia() + "</provincia>\n";
         xmlData += "    <calle>" + this.getCalle() + "</calle>\n";
         xmlData += "    <numero>" + this.getNumero() + "</numero>\n";
+        xmlData += "</Direccion>\n";
         return xmlData;
     }
 

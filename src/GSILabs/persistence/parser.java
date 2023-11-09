@@ -13,14 +13,23 @@ import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import GSILabs.BModel.Usuario.tipoUsuario;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.xml.parsers.DocumentBuilderFactory;
+import jdk.internal.org.xml.sax.InputSource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class parser {
     // Bar
@@ -250,49 +259,38 @@ public class parser {
     }
     
     // Direccion
-    public static Direccion parseDireccion(String str) throws IOException{
-        String strFiltrado = str.substring(10, str.length()-1); //Elimino Dirección{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+    // COMPLETADO
+    // TESTEADO
+    public static Direccion parseDireccion(String str){
+        // Obtener datos del XML
+        String strLocalidad = obtenerContenidoEtiqueta(str, "localidad");
+        String strProvincia = obtenerContenidoEtiqueta(str, "provincia");
+        String strCalle = obtenerContenidoEtiqueta(str, "calle");
+        String  strNumero = obtenerContenidoEtiqueta(str, "numero");
         
-        // Atributos a almacenar
-        String strLocalidad = null;
-        String strProvincia = null;
-        String strCalle = null;
-        String strNumero = null;
+        // Comprobar validez XML
+        if(null == strLocalidad) throw new IllegalArgumentException("Localidad vacia o invalida.");
+        if(null == strProvincia) throw new IllegalArgumentException("Provincia vacia o invalida.");
+        if(null == strCalle) throw new IllegalArgumentException("Provincia vacia o invalida.");
+        if(null == strNumero) throw new IllegalArgumentException("Número vacio o invalido.");
         
-        // Campos del atributo Bar
-        for(String trozo: strTroceado){
-            String[] atributoValor = trozo.split("=");
-            if(null != atributoValor[0])switch (atributoValor[0]) {
-                case "localidad":
-                    strLocalidad = atributoValor[1];
-                    break;
-                case "provincia":
-                    strProvincia = atributoValor[1];
-                    break;
-                case "calle":
-                    strCalle = atributoValor[1];
-                    break;
-                case "numero":
-                    strNumero = atributoValor[1];
-                    break;
-                default:
-                    break;
-            }
-        }
+        // Conversion de datos
+        int numero = Integer.parseInt(strNumero);
         
-        // Comprobar si los datos son validos
-        if(strLocalidad == null || strProvincia == null || strCalle == null || strNumero == null)
-        {throw new IOException("Uno de los campos necesarios esta vacio");}
-        
-        // Crear objetos que se usan para crear propietario
-        Direccion direccion = new Direccion(strLocalidad, strProvincia, strCalle, Integer.parseInt(strNumero));
-        
-        return direccion;
-        
+        // Contruccion objeto
+        return new Direccion(strLocalidad, strProvincia, strCalle, numero);
     }
-    public static Direccion parseDireccion(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    // COMPLETADO
+    // TESTEADO
+    public static Direccion parseDireccion(File f) throws FileNotFoundException, IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseDireccion(contenido));
     }
     
     // Local
@@ -832,5 +830,22 @@ public class parser {
             strSalida.add(emparejador.group());
         }
         return strSalida;
+    }
+    
+    // Estrae el string contenido por la etiqueta xml indicada
+    public static String obtenerContenidoEtiqueta(String contenidoOriginal, String etiqueta) {
+    int posicionInicioEtiqueta = contenidoOriginal.indexOf("<" + etiqueta + ">");
+    // Posicion inicial
+    if (posicionInicioEtiqueta == -1) {
+        return null;
+    }
+    
+    // Posicion final
+    int posicionCierreEtiqueta = contenidoOriginal.indexOf("</" + etiqueta + ">");
+    if (posicionCierreEtiqueta == -1) {
+        return null;
+    }
+
+    return contenidoOriginal.substring(posicionInicioEtiqueta + etiqueta.length() + 2 /*<>*/, posicionCierreEtiqueta);
     }
 }
