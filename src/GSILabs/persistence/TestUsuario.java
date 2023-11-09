@@ -45,7 +45,7 @@ public class TestUsuario {
         /* FIN A BORRAR */
         
         // XMLRepresentable: saveToXML a partir de su direccion
-        /*String filepath = "XMLDireccion2.txt";
+        /*String filepath = "XMLUsuario2.txt";
         boolean esFicheroCreado2 = direccion.saveToXML(filepath);
         if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
         else System.out.println("Error en la creacion del fichero 2");*/
