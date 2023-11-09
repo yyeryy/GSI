@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Propietario>
+    <nick>marcos</nick>
+    <contraseña>4321134</contraseña>
+    <fechaNacimiento>2001-11-09</fechaNacimiento>
+</Propietario>

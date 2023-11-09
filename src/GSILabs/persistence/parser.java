@@ -349,44 +349,37 @@ public class parser {
     }
     
     // Propietario
+    // COMPLETADO
+    // TESTEADO
     public static Propietario parsePropietario(String str) throws IOException{
-        String strFiltrado = str.substring(12, str.length()-1); //Elimino Propietario{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        // Obtener datos del XML
+        String strNick = obtenerContenidoEtiqueta(str, "nick");
+        String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
+        String strFechaNacimiento = obtenerContenidoEtiqueta(str, "fechaNacimiento");
         
-        // Atributos a almacenar
-        String strNick = null;
-        String strContraseña = null;
-        String strFecha = null;
+        // Comprobar validez XML
+        if(null == strNick) throw new IllegalArgumentException("Nick vacio o invalido.");
+        if(null == strContrasena) throw new IllegalArgumentException("Contraseña vacia o invalida.");
+        if(null == strFechaNacimiento) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
+                
+        // Conversion de datos
+        String[] strLocalDate = strFechaNacimiento.split("-");
+        LocalDate fechaNacimiento = LocalDate.of(Integer.parseInt(strLocalDate[0]),Integer.parseInt(strLocalDate[1]),Integer.parseInt(strLocalDate[2]));
         
-        // Campos del atributo Bar
-        for(String trozo: strTroceado){
-            String[] atributoValor = trozo.split("=");
-            if(null != atributoValor[0])switch (atributoValor[0]) {
-                case "nick":
-                    strNick = atributoValor[1];
-                    break;
-                case "contraseña":
-                    strContraseña = atributoValor[1];
-                    break;
-                case "fecha_de_nacimiento":
-                    strFecha = atributoValor[1];
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        // Comprobar si los datos son validos
-        if(strNick == null || strContraseña == null || strFecha == null)
-        {throw new IOException("Uno de los campos necesarios esta vacio");}
-        
-        // Crear objetos que se usan para crear propietario
-        Propietario propietario = new Propietario(strNick, strContraseña, LocalDate.parse(strFecha));
-        
-        return propietario;
+        // Construccion objeto
+        return new Propietario(strNick, strContrasena, fechaNacimiento);
     }
-    public static Propietario parsePropietario(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    // COMPLETADO
+    // TESTEADO
+    public static Propietario parsePropietario(File f) throws FileNotFoundException, IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parsePropietario(contenido));
     }
     
     // Pub
