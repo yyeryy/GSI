@@ -399,7 +399,6 @@ public class parser {
         if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
         if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
         if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
         if(null == strPrecioMenu) throw new IllegalArgumentException("PrecioMenu vacia o invalida");
         if(null == strCapacidad) throw new IllegalArgumentException("Capacidad vacio o invalido");
         if(null == strCapacidadMesa) throw new IllegalArgumentException("CapacidadMesa vacio o invalido");
@@ -414,8 +413,6 @@ public class parser {
         for(String strPropietario : strPropietarios){
             propietarios.add(parsePropietario(strPropietario));
         }
-        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
-        
 
         // Construccion objeto
         Restaurante restaurante =new Restaurante(strNombre, direccion, strDescripcion, propietarios.get(0),

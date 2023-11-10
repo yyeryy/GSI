@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Restaurante>
+<precioMenu>15.99</precioMenu>
+<capacidad>100</capacidad>
+<capacidadMesa>4</capacidadMesa>
+<nombre>The Beer Garden</nombre>
+<Direccion>
+    <localidad>Pamplona</localidad>
+    <provincia>Navarra</provincia>
+    <calle>Calle Ermitagaña</calle>
+    <numero>19</numero>
+</Direccion>
+<descripcion>Restaurante con los mejores cocteles de la ciudad</descripcion>
+<Propietario>
+    <nick>Pedro</nick>
+    <contraseña>1234</contraseña>
+    <fechaNacimiento>2005-11-10</fechaNacimiento>
+</Propietario>
+<Propietario>
+    <nick>Anna</nick>
+    <contraseña>4321</contraseña>
+    <fechaNacimiento>1973-11-10</fechaNacimiento>
+</Propietario>
+</Restaurante>

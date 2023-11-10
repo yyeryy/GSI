@@ -1,6 +1,5 @@
 package GSILabs.BModel;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;

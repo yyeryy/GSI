@@ -1,10 +1,8 @@
 package GSILabs.persistence;
 
 import GSILabs.BModel.Direccion;
-import GSILabs.BModel.Local;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
-import static GSILabs.persistence.parser.parseLocal;
 import static GSILabs.persistence.parser.parsePub;
 import java.io.File;
 import java.io.FileWriter;
@@ -48,8 +46,8 @@ public class TestPub {
         // Las substring son para quital el  <?xml version=\"1.0\" encoding=\"UTF-8\"?>
         String XMLPub = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         XMLPub += "<Pub>\n";
-        XMLPub += "<horaApertura>" + pub.getHoraApertura() + "</horaApertura>";
-        XMLPub += "<horaClausura>" + pub.getHoraClausura() + "</horaClausura>";
+        XMLPub += "<horaApertura>" + pub.getHoraApertura() + "</horaApertura>\n";
+        XMLPub += "<horaClausura>" + pub.getHoraClausura() + "</horaClausura>\n";
         XMLPub += "<nombre>" + pub.getNombre() + "</nombre>\n";
         XMLPub += "" + direccion.toXML().substring(39, direccion.toXML().length()) + "\n";
         XMLPub += "<descripcion>" + descripcion + "</descripcion>\n";
