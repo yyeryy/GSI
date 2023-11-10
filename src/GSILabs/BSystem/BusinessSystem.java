@@ -15,6 +15,7 @@ import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
+import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,8 +23,13 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
+import org.w3c.dom.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -908,5 +914,63 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	
     }
     
+    /**
+     * Parse XML File (Ejercicio 5 - Práctica 3)
+     * @param f Fichero XML
+     * @return Clase BusinessSystem
+     * @throws XMLParsingException
+     * Parsea un fichero XML.
+     */
+    public static BusinessSystem parseXMLFile(File f) throws XMLParsingException {
+        try {
+            //Instancia de BusinessSystem
+            BusinessSystem businessSystem = new BusinessSystem();
+            //Creación de un constructor de documentos
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
+            //Análisis del archivo XML
+            Document doc = dBuilder.parse(f);
+
+            //Normalización del documento
+            doc.getDocumentElement().normalize();
+
+            //Si el fichero XML se ha cargado correctamente devolvemos true
+            return businessSystem;
+        
+        //Si por el contrario ocurre algún error devolvemos false.
+        } catch (Exception e) {
+            // Lanzar una excepción personalizada XMLParsingException
+            throw new XMLParsingException("Error al analizar el archivo XML");
+        }
+    }
     
+    /**
+     * Load XML File (Ejercicio 5 - Práctica 4)
+     * @param f Fichero XML
+     * @return Booleano que indica si el fichero XML se ha cargado correctamente.
+     * Carga un fichero XML.
+     * @throws GSILabs.persistence.XMLParsingException
+     */
+    public static boolean loadXMLFile(File f) throws XMLParsingException {
+        try {
+            //Creación de un constructor de documentos
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
+            //Análisis del archivo XML
+            Document document = (Document) dBuilder.parse(f);
+
+            //Normalización del documento
+            document.getDocumentElement().normalize();
+
+            //Si el fichero XML se ha cargado correctamente devolvemos true
+            return true;
+            
+        //Si por el contrario ocurre algún error devolvemos false.
+        } catch(Exception exception) {
+            return false;
+            //throw new XMLParsingException("Error al analizar el archivo XML");
+        }
+    }
 }
