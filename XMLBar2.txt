@@ -8,6 +8,7 @@
     <calle>PerezaDeVida</calle>
     <numero>66</numero>
 </Direccion>
+
 <descripcion>Quiero dormir</descripcion>
 <?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
@@ -15,10 +16,12 @@
     <contraseña>1234</contraseña>
     <fechaNacimiento>2005-11-10</fechaNacimiento>
 </Propietario>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Carmen</nick>
     <contraseña>4321</contraseña>
     <fechaNacimiento>1973-11-10</fechaNacimiento>
 </Propietario>
+
 </Bar>

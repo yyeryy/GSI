@@ -132,7 +132,7 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
         xmlData += "    <precioMenu>" + this.getPrecioMenu() + "</precioMenu>\n";
         xmlData += "    <capacidad>" + this.getCapacidad() + "</capacidad>\n";
         xmlData += "    <capacidadMesa>" + this.getCapacidadMesa() + "</capacidadMesa>\n";
-        xmlData += "</Restaurante>";
+        xmlData += "</Restaurante>\n";
         return xmlData;
     }
 

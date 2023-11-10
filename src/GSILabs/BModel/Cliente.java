@@ -55,7 +55,7 @@ public class Cliente extends Usuario implements XMLRepresentable{
         xmlData += "    <nick>" + this.getNick() + "</nick>\n";
         xmlData += "    <contraseña>" + this.getContraseña() + "</contraseña>\n";
         xmlData += "    <fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
-        xmlData += "</Cliente>";
+        xmlData += "</Cliente>\n";
         return xmlData;
     }
 

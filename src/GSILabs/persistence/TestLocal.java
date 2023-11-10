@@ -32,7 +32,7 @@ public class TestLocal {
         
         // XMLRepresentable: toXML
         /*String XMLlocal = local.toXML();
-        System.out.println("String generado por direccion.toXML():\n" + XMLlocal);*/
+        System.out.println("String generado por local.toXML():\n" + XMLlocal);*/
         System.out.println("local.toXML() NO EXISTE AUN");
         
         // XMLRepresentable: saveToXML a partir de File

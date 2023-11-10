@@ -7,6 +7,7 @@
     <calle>Pereza</calle>
     <numero>33</numero>
 </Direccion>
+
 <descripcion>El mejor local de Pamplona</descripcion>
 <tipo>PUB</tipo>
 <Propietario>
@@ -14,9 +15,11 @@
     <contraseña>1234</contraseña>
     <fechaNacimiento>2005-11-10</fechaNacimiento>
 </Propietario>
+
 <Propietario>
     <nick>Pepa</nick>
     <contraseña>4321</contraseña>
     <fechaNacimiento>1973-11-10</fechaNacimiento>
 </Propietario>
+
 </Local>

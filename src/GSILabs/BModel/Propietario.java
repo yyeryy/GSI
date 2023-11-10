@@ -59,7 +59,7 @@ public class Propietario extends Usuario implements XMLRepresentable{
         xmlData += "    <nick>" + this.getNick() + "</nick>\n";
         xmlData += "    <contraseña>" + this.getContraseña() + "</contraseña>\n";
         xmlData += "    <fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
-        xmlData += "</Propietario>";
+        xmlData += "</Propietario>\n";
         return xmlData;
     }
 

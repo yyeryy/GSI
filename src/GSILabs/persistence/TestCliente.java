@@ -1,10 +1,7 @@
 package GSILabs.persistence;
 
 import GSILabs.BModel.Cliente;
-import GSILabs.BModel.Usuario;
-import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import static GSILabs.persistence.parser.parseCliente;
-import static GSILabs.persistence.parser.parseUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;

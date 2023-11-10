@@ -105,7 +105,7 @@ public class Direccion implements XMLRepresentable{
         xmlData += "    <provincia>" + this.getProvincia() + "</provincia>\n";
         xmlData += "    <calle>" + this.getCalle() + "</calle>\n";
         xmlData += "    <numero>" + this.getNumero() + "</numero>\n";
-        xmlData += "</Direccion>";
+        xmlData += "</Direccion>\n";
         return xmlData;
     }
 

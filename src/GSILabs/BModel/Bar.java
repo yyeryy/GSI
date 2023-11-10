@@ -132,7 +132,7 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
         for(int i = 0;i<this.getEspecialidades().size();i++){
             xmlData += "<especialidad>" + this.getEspecialidades().get(i) + "</especialidad>\n";
         }
-        xmlData += "</Bar>";
+        xmlData += "</Bar>\n";
         return xmlData;
     }
 

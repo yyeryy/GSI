@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reserva>
+    <cliente><?xml version="1.0" encoding="UTF-8"?>
+<Cliente>
+    <nick>Yeray</nick>
+    <contraseña>6666</contraseña>
+    <fechaNacimiento>2003-11-10</fechaNacimiento>
+</Cliente>
+</cliente>
+    <hora>12:47</hora>
+    <fecha>2024-11-10</fecha>
+    <descuento>10</descuento>
+</Reserva>

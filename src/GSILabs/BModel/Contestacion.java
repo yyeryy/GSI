@@ -100,7 +100,7 @@ public class Contestacion implements XMLRepresentable{
         xmlData += "    <comentario>" + this.getComentario() + "</comentario>\n";
         xmlData += "    <fechaReview>" + this.getFechaReview() + "</fechaReview>\n";
         xmlData += "    <local>" + this.getLocal() + "</local>\n";
-        xmlData += "</Contestacion>";
+        xmlData += "</Contestacion>\n";
         return xmlData;
     }
 

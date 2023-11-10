@@ -152,7 +152,7 @@ public class Review implements XMLRepresentable{
         xmlData += "    <local>" + this.getLocal() + "</local>\n";
         xmlData += "    <usuario>" + this.getUsuario() + "</usuario>\n";
         xmlData += "    <contestacion>" + this.getContestacion() + "</contestacion>\n";
-        xmlData += "</Review>";
+        xmlData += "</Review>\n";
         return xmlData;
     }
 

@@ -95,7 +95,7 @@ public class Pub extends Local implements XMLRepresentable{
         xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
         xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
         xmlData += "    <propietario>" + this.getPropietarios() + "</propietario>\n";
-        xmlData += "</Pub>";
+        xmlData += "</Pub>\n";
         return xmlData;
     }
 
