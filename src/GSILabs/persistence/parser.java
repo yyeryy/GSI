@@ -37,8 +37,9 @@ public class parser {
      * @param str String que contiene el XML.
      * @return Objeto bar creado a partir del XML 
      * @throws java.io.IOException Problema con la lista de propietarios
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Bar parseBar(String str) throws IOException {
+    public static Bar parseBar(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
@@ -66,10 +67,10 @@ public class parser {
         strEspecialidades.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
 
         // Comprobar validez
-        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
-        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
-        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        if(null == strNombre) throw new XMLParsingException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new XMLParsingException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new XMLParsingException("Descripcion vacia o invalida");
+        if(strPropietarios.isEmpty()) throw new XMLParsingException("Propietarios vacio o invalido");
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
@@ -100,16 +101,17 @@ public class parser {
      * Crea un objeto Bar a partir de un fichero XML que le represente.
      * @param f SFile que contiene el XML.
      * @return Objeto bar creado a partir del fichero XML .
-     * @throws java.io.IOException Problema con la lista de propietarios.
+     * @throws java.io.IOException
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Bar parseBar(File f) throws IOException {
+    public static Bar parseBar(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseBar(contenido));
     }
     
@@ -117,17 +119,18 @@ public class parser {
      * Crea un objeto Cliente a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Cliente creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Cliente parseCliente(String str){
+    public static Cliente parseCliente(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strNick = obtenerContenidoEtiqueta(str, "nick");
         String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
         String strFechaNacimiento = obtenerContenidoEtiqueta(str, "fechaNacimiento");
         
         // Comprobar validez XML
-        if(null == strNick) throw new IllegalArgumentException("Nick vacio o invalido.");
-        if(null == strContrasena) throw new IllegalArgumentException("Contraseña vacia o invalida.");
-        if(null == strFechaNacimiento) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
+        if(null == strNick) throw new XMLParsingException("Nick vacio o invalido.");
+        if(null == strContrasena) throw new XMLParsingException("Contraseña vacia o invalida.");
+        if(null == strFechaNacimiento) throw new XMLParsingException("Fecha de nacimiento vacia o invalida.");
                 
         // Conversion de datos
         String[] strLocalDate = strFechaNacimiento.split("-");
@@ -142,15 +145,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto cliente creado a partir del XML .
      * @throws java.io.IOException Problema al trabajar con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Cliente parseCliente(File f) throws IOException {
+    public static Cliente parseCliente(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseCliente(contenido));
     }
     
@@ -159,17 +163,18 @@ public class parser {
      * @param str String que contiene el XML.
      * @return Objeto Local creado a partir del XML.
      * @throws java.io.IOException Problema al tratar con el Local.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Contestacion parseContestacion(String str) throws IOException{
+    public static Contestacion parseContestacion(String str) throws IOException, XMLParsingException{
 
         String strComentario = obtenerContenidoEtiqueta(str, "comentario");
         String strFecha = obtenerContenidoEtiqueta(str, "fecha");
         String strLocal = obtenerContenidoEtiqueta(str, "Local");
         
         // Comprobar validez XML
-        if(null == strComentario) throw new IllegalArgumentException("Comentario vacio o invalido.");
-        if(null == strFecha) throw new IllegalArgumentException("Fecha vacia o invalida.");
-        if(null == strLocal) throw new IllegalArgumentException("Local  vacia o invalida.");
+        if(null == strComentario) throw new XMLParsingException("Comentario vacio o invalido.");
+        if(null == strFecha) throw new XMLParsingException("Fecha vacia o invalida.");
+        if(null == strLocal) throw new XMLParsingException("Local  vacia o invalida.");
 
         Local local = parseLocal(strLocal);
         // Crear objetos que se usan para crear propietario
@@ -184,15 +189,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Fichero creado a partir del XML.
      * @throws java.io.IOException Problema al trabajar con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Contestacion parseContestacion(File f) throws IOException {
+    public static Contestacion parseContestacion(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseContestacion(contenido));
     }
     
@@ -200,8 +206,9 @@ public class parser {
      * Crea un objeto Direccion a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Direccion creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Direccion parseDireccion(String str){
+    public static Direccion parseDireccion(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strLocalidad = obtenerContenidoEtiqueta(str, "localidad");
         String strProvincia = obtenerContenidoEtiqueta(str, "provincia");
@@ -209,10 +216,10 @@ public class parser {
         String  strNumero = obtenerContenidoEtiqueta(str, "numero");
         
         // Comprobar validez XML
-        if(null == strLocalidad) throw new IllegalArgumentException("Localidad vacia o invalida.");
-        if(null == strProvincia) throw new IllegalArgumentException("Provincia vacia o invalida.");
-        if(null == strCalle) throw new IllegalArgumentException("Provincia vacia o invalida.");
-        if(null == strNumero) throw new IllegalArgumentException("Número vacio o invalido.");
+        if(null == strLocalidad) throw new XMLParsingException("Localidad vacia o invalida.");
+        if(null == strProvincia) throw new XMLParsingException("Provincia vacia o invalida.");
+        if(null == strCalle) throw new XMLParsingException("Provincia vacia o invalida.");
+        if(null == strNumero) throw new XMLParsingException("Número vacio o invalido.");
         
         // Conversion de datos
         int numero = Integer.parseInt(strNumero);
@@ -226,15 +233,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Direccion creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Direccion parseDireccion(File f) throws IOException {
+    public static Direccion parseDireccion(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseDireccion(contenido));
     }
     
@@ -243,8 +251,9 @@ public class parser {
      * @param str String que contiene el XML.
      * @return Objeto Local creado a partir del XML.
      * @throws java.io.IOException
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Local parseLocal(String str) throws IOException{
+    public static Local parseLocal(String str) throws IOException, XMLParsingException{
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
@@ -259,11 +268,11 @@ public class parser {
         strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
         
         // Comprobar validez
-        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
-        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
-        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
-        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        if(null == strNombre) throw new XMLParsingException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new XMLParsingException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new XMLParsingException("Descripcion vacia o invalida");
+        if(null == strTipoLocal) throw new XMLParsingException("TipoLocal vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new XMLParsingException("Propietarios vacio o invalido");
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
@@ -285,15 +294,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Local creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Local parseLocal(File f) throws IOException {
+    public static Local parseLocal(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseLocal(contenido));
     }
     
@@ -301,17 +311,18 @@ public class parser {
      * Crea un objeto Propietario a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Propietario creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Propietario parsePropietario(String str){
+    public static Propietario parsePropietario(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strNick = obtenerContenidoEtiqueta(str, "nick");
         String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
         String strFechaNacimiento = obtenerContenidoEtiqueta(str, "fechaNacimiento");
         
         // Comprobar validez XML
-        if(null == strNick) throw new IllegalArgumentException("Nick vacio o invalido.");
-        if(null == strContrasena) throw new IllegalArgumentException("Contraseña vacia o invalida.");
-        if(null == strFechaNacimiento) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
+        if(null == strNick) throw new XMLParsingException("Nick vacio o invalido.");
+        if(null == strContrasena) throw new XMLParsingException("Contraseña vacia o invalida.");
+        if(null == strFechaNacimiento) throw new XMLParsingException("Fecha de nacimiento vacia o invalida.");
                 
         // Conversion de datos
         String[] strLocalDate = strFechaNacimiento.split("-");
@@ -326,15 +337,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Propietario creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Propietario parsePropietario(File f) throws IOException {
+    public static Propietario parsePropietario(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parsePropietario(contenido));
     }
     
@@ -342,8 +354,9 @@ public class parser {
      * Crea un objeto Pub a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Pub creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Pub parsePub(String str){
+    public static Pub parsePub(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
@@ -359,12 +372,12 @@ public class parser {
         strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
         
         // Comprobar validez
-        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
-        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
-        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(null == strHoraApertura) throw new IllegalArgumentException("HoraApertura vacia o invalida");
-        if(null == strHoraClausura) throw new IllegalArgumentException("HoraClausura vacio o invalido");
-        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        if(null == strNombre) throw new XMLParsingException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new XMLParsingException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new XMLParsingException("Descripcion vacia o invalida");
+        if(null == strHoraApertura) throw new XMLParsingException("HoraApertura vacia o invalida");
+        if(null == strHoraClausura) throw new XMLParsingException("HoraClausura vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new XMLParsingException("Propietarios vacio o invalido");
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
@@ -387,15 +400,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Pub creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Pub parsePub(File f) throws IOException {
+    public static Pub parsePub(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parsePub(contenido));
     }
     
@@ -403,8 +417,9 @@ public class parser {
      * Crea un objeto Reserva a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Reserva creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Reserva parseReserva(String str){
+    public static Reserva parseReserva(String str) throws XMLParsingException{
         
         // Obtener datos del XML
         String strcliente = obtenerContenidoEtiqueta(str, "Cliente");
@@ -413,10 +428,10 @@ public class parser {
         String strdescuento = obtenerContenidoEtiqueta(str, "descuento");
         
         // Comprobar validez XML
-        if(null == strcliente) throw new IllegalArgumentException("Cliente vacio o invalido.");
-        if(null == strfecha) throw new IllegalArgumentException("Fecha vacia o invalida.");
-        if(null == strhora) throw new IllegalArgumentException("Hora vacia o invalida.");
-        if(null == strdescuento) throw new IllegalArgumentException("Descuento vacia o invalida.");
+        if(null == strcliente) throw new XMLParsingException("Cliente vacio o invalido.");
+        if(null == strfecha) throw new XMLParsingException("Fecha vacia o invalida.");
+        if(null == strhora) throw new XMLParsingException("Hora vacia o invalida.");
+        if(null == strdescuento) throw new XMLParsingException("Descuento vacia o invalida.");
                 
         // Obtener objetos
         Cliente cliente = parseCliente(strcliente);   
@@ -430,15 +445,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Reserva creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Reserva parseReserva(File f) throws IOException {
+    public static Reserva parseReserva(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseReserva(contenido));
     }
     
@@ -446,8 +462,9 @@ public class parser {
      * Crea un objeto Restaurante a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Restaurante creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Restaurante parseRestaurante(String str){
+    public static Restaurante parseRestaurante(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
@@ -471,13 +488,13 @@ public class parser {
         strReservas.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
 
         // Comprobar validez
-        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
-        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
-        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(null == strPrecioMenu) throw new IllegalArgumentException("PrecioMenu vacia o invalida");
-        if(null == strCapacidad) throw new IllegalArgumentException("Capacidad vacio o invalido");
-        if(null == strCapacidadMesa) throw new IllegalArgumentException("CapacidadMesa vacio o invalido");
-        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        if(null == strNombre) throw new XMLParsingException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new XMLParsingException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new XMLParsingException("Descripcion vacia o invalida");
+        if(null == strPrecioMenu) throw new XMLParsingException("PrecioMenu vacia o invalida");
+        if(null == strCapacidad) throw new XMLParsingException("Capacidad vacio o invalido");
+        if(null == strCapacidadMesa) throw new XMLParsingException("CapacidadMesa vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new XMLParsingException("Propietarios vacio o invalido");
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
@@ -507,15 +524,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Restaurante creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Restaurante parseRestaurante(File f) throws IOException {
+    public static Restaurante parseRestaurante(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseRestaurante(contenido));
     }
     
@@ -524,8 +542,9 @@ public class parser {
      * @param str String que contiene el XML.
      * @return Objeto Review creado a partir del XML.
      * @throws java.io.IOException problea con Usuario Local o Contestacion
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Review parseReview(String str) throws IOException{
+    public static Review parseReview(String str) throws IOException, XMLParsingException{
         // Atributos a almacenar
         String strValoracion = obtenerContenidoEtiqueta(str,"valoracion");
         String strComentario = obtenerContenidoEtiqueta(str,"comentario");
@@ -535,12 +554,12 @@ public class parser {
         String strConstestacion = obtenerContenidoEtiqueta(str,"constestacion");
     
         // Comprobar validez XML
-        if(null == strValoracion) throw new IllegalArgumentException("Valoracion vacio o invalido.");
-        if(null == strComentario) throw new IllegalArgumentException("Comentario vacia o invalida.");
-        if(null == strFecha) throw new IllegalArgumentException("Fecha vacia o invalida.");
-        if(null == strLocal) throw new IllegalArgumentException("Local vacio o invalido.");
-        if(null == strUsuario) throw new IllegalArgumentException("Usuario vacio o invalido.");
-        if(null == strConstestacion) throw new IllegalArgumentException("Contestacion vacia o invalida.");
+        if(null == strValoracion) throw new XMLParsingException("Valoracion vacio o invalido.");
+        if(null == strComentario) throw new XMLParsingException("Comentario vacia o invalida.");
+        if(null == strFecha) throw new XMLParsingException("Fecha vacia o invalida.");
+        if(null == strLocal) throw new XMLParsingException("Local vacio o invalido.");
+        if(null == strUsuario) throw new XMLParsingException("Usuario vacio o invalido.");
+        if(null == strConstestacion) throw new XMLParsingException("Contestacion vacia o invalida.");
 
         Usuario usuario = parseUsuario(strUsuario);
         Local local = parseLocal(strLocal);
@@ -558,15 +577,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Review creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Review parseReview(File f) throws IOException {
+    public static Review parseReview(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseReview(contenido));
     }
 
@@ -574,8 +594,9 @@ public class parser {
      * Crea un objeto Usuario a partir de un String XML que le represente.
      * @param str String que contiene el XML.
      * @return Objeto Usuario creado a partir del XML.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Usuario parseUsuario(String str){
+    public static Usuario parseUsuario(String str) throws XMLParsingException{
         // Obtener datos del XML
         String strNick = obtenerContenidoEtiqueta(str,"nick");
         String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
@@ -583,10 +604,10 @@ public class parser {
         String strTipo = obtenerContenidoEtiqueta(str, "tipo");
         
         // Comprobar validez XML
-        if(null == strNick) throw new IllegalArgumentException("Nick vacio o invalido.");
-        if(null == strContrasena) throw new IllegalArgumentException("Contraseña vacia o invalida.");
-        if(null == strFechaNacimiento) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
-        if(null == strTipo) throw new IllegalArgumentException("Tipo vacio o invalido.");
+        if(null == strNick) throw new XMLParsingException("Nick vacio o invalido.");
+        if(null == strContrasena) throw new XMLParsingException("Contraseña vacia o invalida.");
+        if(null == strFechaNacimiento) throw new XMLParsingException("Fecha de nacimiento vacia o invalida.");
+        if(null == strTipo) throw new XMLParsingException("Tipo vacio o invalido.");
         
         // Conversion de datos
         String[] strLocalDate = strFechaNacimiento.split("-");
@@ -601,15 +622,16 @@ public class parser {
      * @param f Fichero que contiene el XML.
      * @return Objeto Usuario creado a partir del XML.
      * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Usuario parseUsuario(File f) throws IOException {
+    public static Usuario parseUsuario(File f) throws IOException, XMLParsingException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
         // Comprobar si esta vacio
-        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         return(parseUsuario(contenido));
     }
     

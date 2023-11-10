@@ -4,6 +4,7 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.persistence.XMLParsingException;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
@@ -139,18 +140,19 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
     @Override
     public boolean saveToXML(File f) {
         try {
-        String xmlData = toXML();
+            String xmlData = toXML();
             try (FileWriter writer = new FileWriter(f)) {
                 writer.write(xmlData);
             }
         return true;
+        
         } catch (IOException e) {
             return false;
         }
     }
 
     @Override
-    public boolean saveToXML(String filePath) {
+    public boolean saveToXML(String filePath){
         File file = new File(filePath);
         return saveToXML(file);
     }
