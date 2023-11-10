@@ -67,7 +67,7 @@ public class TestReview {
         XMLReview += "\t<contestacion>" + review.getContestacion().toXML() + "</contestacion>\n";
         XMLReview += "</Review>\n";
         
-        System.out.println("XMLLocal temporal:\n" + XMLReview);
+        System.out.println("XMLReview temporal:\n" + XMLReview);
         /* FIN A BORRAR */
         
         // XMLRepresentable: saveToXML a partir de su review

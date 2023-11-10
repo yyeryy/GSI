@@ -18,24 +18,27 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.xml.parsers.DocumentBuilderFactory;
-import jdk.internal.org.xml.sax.InputSource;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
+
+/**
+ * Clase parser
+ * Clase estatica que permite generar objetos definidos en el modelo a partir del formato XML
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 10.11.2023
+ */
 public class parser {
-    // Bar
+    /**
+     * Crea un objeto Bar a partir de un String XML que le represente
+     * @param str String que contiene el XML.
+     * @return Objeto bar creado a partir del XML 
+     * @throws java.io.IOException Problema con la lista de propietarios
+     */
     public static Bar parseBar(String str) throws IOException {
-
-
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
@@ -70,29 +73,35 @@ public class parser {
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
-
         List<Propietario> propietarios = new ArrayList<>();
         for(String strPropietario : strPropietarios){
-            propietarios.add(parsePropietario(strPropietario));
-        }
-        
+            propietarios.add(parsePropietario(strPropietario));}
 
         // Construccion objeto
         Bar bar =new Bar(strNombre, direccion, strDescripcion, propietarios.get(0));
         for(int i = 1; i < propietarios.size(); i++){
             bar.addPropietario(propietarios.get(i));}
-        // Introducir Reservas 
+        
+        // Introducir Reservas si las hay
         for(int i = 0; i < strReservas.size(); i++){
-            Reserva r = parseReserva(strReservas.get(i));
-            bar.nuevaReserva(r.getCliente(), r.getFecha(), r.getHora());
+            Reserva reserva = parseReserva(strReservas.get(i));
+            bar.nuevaReserva(reserva.getCliente(), reserva.getFecha(), reserva.getHora());
         }
         // Introducir Especialidades
         for(int i = 0; i < strEspecialidades.size(); i++){
             bar.agregarEspecialidad(strEspecialidades.get(i));
         }
 
+        // Devolver objeto
         return bar;
     }
+    
+    /**
+     * Crea un objeto Bar a partir de un fichero XML que le represente.
+     * @param f SFile que contiene el XML.
+     * @return Objeto bar creado a partir del fichero XML .
+     * @throws java.io.IOException Problema con la lista de propietarios.
+     */
     public static Bar parseBar(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -104,10 +113,12 @@ public class parser {
         return(parseBar(contenido));
     }
     
-    // Cliente
-    // COMPLETADO
-    // TESTEADO
-    public static Cliente parseCliente(String str) throws IOException{
+    /**
+     * Crea un objeto Cliente a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Cliente creado a partir del XML.
+     */
+    public static Cliente parseCliente(String str){
         // Obtener datos del XML
         String strNick = obtenerContenidoEtiqueta(str, "nick");
         String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
@@ -125,8 +136,13 @@ public class parser {
         // Construccion objeto
         return new Cliente(strNick, strContrasena, fechaNacimiento);
     }
-    // COMPLETADO
-    // TESTEADO
+    
+    /**
+     * Crea un objeto Cliente a partir de un fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto cliente creado a partir del XML .
+     * @throws java.io.IOException Problema al trabajar con el fichero.
+     */
     public static Cliente parseCliente(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -138,7 +154,12 @@ public class parser {
         return(parseCliente(contenido));
     }
     
-    // Contestacion
+    /**
+     * Crea un objeto Local a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Local creado a partir del XML.
+     * @throws java.io.IOException Problema al tratar con el Local.
+     */
     public static Contestacion parseContestacion(String str) throws IOException{
 
         String strComentario = obtenerContenidoEtiqueta(str, "comentario");
@@ -154,8 +175,16 @@ public class parser {
         // Crear objetos que se usan para crear propietario
         Contestacion contestacion = new Contestacion(strComentario, LocalDate.parse(strFecha), local);
         
+        // Devolver objeto
         return contestacion;
     }
+    
+    /**
+     * Crea un objeto Local a partir de un fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Fichero creado a partir del XML.
+     * @throws java.io.IOException Problema al trabajar con el fichero.
+     */
     public static Contestacion parseContestacion(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -167,9 +196,11 @@ public class parser {
         return(parseContestacion(contenido));
     }
     
-    // Direccion
-    // COMPLETADO
-    // TESTEADO
+    /**
+     * Crea un objeto Direccion a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Direccion creado a partir del XML.
+     */
     public static Direccion parseDireccion(String str){
         // Obtener datos del XML
         String strLocalidad = obtenerContenidoEtiqueta(str, "localidad");
@@ -189,8 +220,13 @@ public class parser {
         // Contruccion objeto
         return new Direccion(strLocalidad, strProvincia, strCalle, numero);
     }
-    // COMPLETADO
-    // TESTEADO
+    
+    /**
+     * Crea un objeto Direccion a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Direccion creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Direccion parseDireccion(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -202,7 +238,12 @@ public class parser {
         return(parseDireccion(contenido));
     }
     
-    // Local
+    /**
+     * Crea un objeto Local a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Local creado a partir del XML.
+     * @throws java.io.IOException
+     */
     public static Local parseLocal(String str) throws IOException{
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
@@ -238,6 +279,13 @@ public class parser {
             local.addPropietario(propietarios.get(i));}
         return local;
     }
+    
+    /**
+     * Crea un objeto Local a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Local creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Local parseLocal(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -249,10 +297,12 @@ public class parser {
         return(parseLocal(contenido));
     }
     
-    // Propietario
-    // COMPLETADO
-    // TESTEADO
-    public static Propietario parsePropietario(String str) throws IOException{
+    /**
+     * Crea un objeto Propietario a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Propietario creado a partir del XML.
+     */
+    public static Propietario parsePropietario(String str){
         // Obtener datos del XML
         String strNick = obtenerContenidoEtiqueta(str, "nick");
         String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
@@ -270,8 +320,13 @@ public class parser {
         // Construccion objeto
         return new Propietario(strNick, strContrasena, fechaNacimiento);
     }
-    // COMPLETADO
-    // TESTEADO
+    
+    /**
+     * Crea un objeto Propietario a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Propietario creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Propietario parsePropietario(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -283,13 +338,16 @@ public class parser {
         return(parsePropietario(contenido));
     }
     
-    // Pub
-    public static Pub parsePub(String str) throws IOException{
+    /**
+     * Crea un objeto Pub a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Pub creado a partir del XML.
+     */
+    public static Pub parsePub(String str){
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
         String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
-        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
         String strHoraApertura = obtenerContenidoEtiqueta(str, "horaApertura");
         String strHoraClausura = obtenerContenidoEtiqueta(str, "horaClausura");
         
@@ -315,14 +373,21 @@ public class parser {
             propietarios.add(parsePropietario(strPropietario));
         }
 
-        
         // Construccion objeto
         Pub pub = new Pub(strHoraApertura, strHoraClausura, strNombre, direccion, strDescripcion, propietarios.get(0));
         for(int i = 1; i < propietarios.size(); i++){
             pub.addPropietario(propietarios.get(i));}
 
+        // Devolver objeto
         return pub;
     }
+    
+    /**
+     * Crea un objeto Pub a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Pub creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Pub parsePub(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -334,8 +399,12 @@ public class parser {
         return(parsePub(contenido));
     }
     
-    // Reserva
-    public static Reserva parseReserva(String str) throws IOException{
+    /**
+     * Crea un objeto Reserva a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Reserva creado a partir del XML.
+     */
+    public static Reserva parseReserva(String str){
         
         // Obtener datos del XML
         String strcliente = obtenerContenidoEtiqueta(str, "Cliente");
@@ -349,16 +418,19 @@ public class parser {
         if(null == strhora) throw new IllegalArgumentException("Hora vacia o invalida.");
         if(null == strdescuento) throw new IllegalArgumentException("Descuento vacia o invalida.");
                 
-
-        // System.out.println(strCliente);
         // Obtener objetos
         Cliente cliente = parseCliente(strcliente);   
-        // Crear el objeto Local
-        Reserva reserva = new Reserva(cliente, LocalDate.parse(strfecha), LocalTime.parse(strhora), Integer.parseInt(strdescuento));
-    
-        return reserva;
-
+        
+        // Crear el objeto Reserva y lo devuelvo
+        return new Reserva(cliente, LocalDate.parse(strfecha), LocalTime.parse(strhora), Integer.parseInt(strdescuento));
     }
+    
+    /**
+     * Crea un objeto Reserva a partir de un String XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Reserva creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Reserva parseReserva(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -370,13 +442,16 @@ public class parser {
         return(parseReserva(contenido));
     }
     
-    // Restarurante
-    public static Restaurante parseRestaurante(String str) throws IOException{
+    /**
+     * Crea un objeto Restaurante a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Restaurante creado a partir del XML.
+     */
+    public static Restaurante parseRestaurante(String str){
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
         String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
-        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
         String strPrecioMenu = obtenerContenidoEtiqueta(str, "precioMenu");
         String strCapacidad = obtenerContenidoEtiqueta(str, "capacidad");
         String strCapacidadMesa = obtenerContenidoEtiqueta(str, "capacidadMesa");
@@ -403,12 +478,9 @@ public class parser {
         if(null == strCapacidad) throw new IllegalArgumentException("Capacidad vacio o invalido");
         if(null == strCapacidadMesa) throw new IllegalArgumentException("CapacidadMesa vacio o invalido");
         if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
-        //Posible que no tenga reservas
-        //if(strReservas.isEmpty()) throw new IllegalArgumentException("Reservas vacio o invalido");
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
-
         List<Propietario> propietarios = new ArrayList<>();
         for(String strPropietario : strPropietarios){
             propietarios.add(parsePropietario(strPropietario));
@@ -419,14 +491,23 @@ public class parser {
                Double.parseDouble(strPrecioMenu), Integer.parseInt(strCapacidad), Integer.parseInt(strCapacidadMesa));
         for(int i = 1; i < propietarios.size(); i++){
             restaurante.addPropietario(propietarios.get(i));}
+        
         // Introducir Reservas 
         for(int i = 0; i < strReservas.size(); i++){
             Reserva r = parseReserva(strReservas.get(i));
             restaurante.nuevaReserva(r.getCliente(), r.getFecha(), r.getHora());
         }
-
+        
+        // Devolver objeto
         return restaurante;
     }
+    
+    /**
+     * Crea un objeto Restaurante a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Restaurante creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Restaurante parseRestaurante(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -438,15 +519,20 @@ public class parser {
         return(parseRestaurante(contenido));
     }
     
-    // Review
+    /**
+     * Crea un objeto Review a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Review creado a partir del XML.
+     * @throws java.io.IOException problea con Usuario Local o Contestacion
+     */
     public static Review parseReview(String str) throws IOException{
         // Atributos a almacenar
         String strValoracion = obtenerContenidoEtiqueta(str,"valoracion");
         String strComentario = obtenerContenidoEtiqueta(str,"comentario");
         String strFecha = obtenerContenidoEtiqueta(str,"fecha");
-        String strLocal = obtenerContenidoEtiqueta(str,"Local");
-        String strUsuario = obtenerContenidoEtiqueta(str,"Usuario");
-        String strConstestacion = obtenerContenidoEtiqueta(str,"Constestacion");
+        String strLocal = obtenerContenidoEtiqueta(str,"local");
+        String strUsuario = obtenerContenidoEtiqueta(str,"usuario");
+        String strConstestacion = obtenerContenidoEtiqueta(str,"constestacion");
     
         // Comprobar validez XML
         if(null == strValoracion) throw new IllegalArgumentException("Valoracion vacio o invalido.");
@@ -463,8 +549,16 @@ public class parser {
         Review review = new Review(Integer.parseInt(strValoracion), strComentario, LocalDate.parse(strFecha), local, usuario);
         review.setContestacion(contestacion);     
 
+        // Devolver objeto
         return review;
     }
+    
+    /**
+     * Crea un objeto Review a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Review creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Review parseReview(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -476,10 +570,12 @@ public class parser {
         return(parseReview(contenido));
     }
 
-    // Usuario
-    // COMPLETADO
-    // TESTEADO
-    public static Usuario parseUsuario(String str) throws IOException{
+    /**
+     * Crea un objeto Usuario a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Usuario creado a partir del XML.
+     */
+    public static Usuario parseUsuario(String str){
         // Obtener datos del XML
         String strNick = obtenerContenidoEtiqueta(str,"nick");
         String strContrasena = obtenerContenidoEtiqueta(str, "contraseña");
@@ -499,8 +595,13 @@ public class parser {
         // Construccion objeto
         return new Usuario(strNick, strContrasena, fechaNacimiento, tipo);
     }
-    // COMPLETADO
-    // TESTEADO
+    
+    /**
+     * Crea un objeto Usuario a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Usuario creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     */
     public static Usuario parseUsuario(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
@@ -512,7 +613,16 @@ public class parser {
         return(parseUsuario(contenido));
     }
     
-    // Estrae el string contenido por la etiqueta xml indicada
+    /**
+     * Devuelve un String que contiene la etiqueta indicada como etiqueta delimitadora
+     * Ejemplo:
+     *  original = <etiqueta>contenido</etiqueta>
+     *  salida = contenido
+     * 
+     * @param contenidoOriginal String en formato XML.
+     * @param etiqueta String etiqueta que se quiere buscar, debe seguir el formato: <etiqueta></etiqueta>.
+     * @return String que devuelve el contenido que se encuentra entre el primer conjunto de etiquetas localizado.
+     */
     public static String obtenerContenidoEtiqueta(String contenidoOriginal, String etiqueta) {
         int posicionInicioEtiqueta = contenidoOriginal.indexOf("<" + etiqueta + ">");
 

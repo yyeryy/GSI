@@ -7,7 +7,7 @@
     <fechaNacimiento>2003-11-10</fechaNacimiento>
 </Cliente>
 </cliente>
-    <hora>12:47</hora>
+    <hora>16:31</hora>
     <fecha>2024-11-10</fecha>
     <descuento>10</descuento>
 </Reserva>
