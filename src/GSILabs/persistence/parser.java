@@ -440,9 +440,6 @@ public class parser {
     
     // Review
     public static Review parseReview(String str) throws IOException{
-        String strFiltrado = str.substring(7, str.length()-1); //Elimino Dirección{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
-        
         // Atributos a almacenar
         String strValoracion = obtenerContenidoEtiqueta(str,"valoracion");
         String strComentario = obtenerContenidoEtiqueta(str,"comentario");
@@ -454,19 +451,10 @@ public class parser {
         // Comprobar validez XML
         if(null == strValoracion) throw new IllegalArgumentException("Valoracion vacio o invalido.");
         if(null == strComentario) throw new IllegalArgumentException("Comentario vacia o invalida.");
-        if(null == strFecha) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
+        if(null == strFecha) throw new IllegalArgumentException("Fecha vacia o invalida.");
         if(null == strLocal) throw new IllegalArgumentException("Local vacio o invalido.");
         if(null == strUsuario) throw new IllegalArgumentException("Usuario vacio o invalido.");
         if(null == strConstestacion) throw new IllegalArgumentException("Contestacion vacia o invalida.");
-
-/*
-        System.out.println(strValoracion);
-        System.out.println(strComentario);
-        System.out.println(strFecha);
-        System.out.println(strLocal);
-        System.out.println(strUsuario);
-        System.out.println(strConstestacion);
-*/
 
         Usuario usuario = parseUsuario(strUsuario);
         Local local = parseLocal(strLocal);

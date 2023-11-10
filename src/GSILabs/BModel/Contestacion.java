@@ -97,9 +97,9 @@ public class Contestacion implements XMLRepresentable{
     public String toXML() {
         String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         xmlData += "<Contestacion>\n";
-        xmlData += "    <comentario>" + this.getComentario() + "</comentario>\n";
-        xmlData += "    <fechaReview>" + this.getFechaReview() + "</fechaReview>\n";
-        xmlData += "    <local>" + this.getLocal() + "</local>\n";
+        xmlData += "\t<comentario>" + this.getComentario() + "</comentario>\n";
+        xmlData += "\t<fecha>" + this.getFechaReview() + "</fecha>\n";
+        xmlData += "\t<local>" + this.getLocal().toXML() + "</local>\n";
         xmlData += "</Contestacion>\n";
         return xmlData;
     }

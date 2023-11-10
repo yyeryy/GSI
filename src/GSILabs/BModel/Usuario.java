@@ -1,5 +1,8 @@
 package GSILabs.BModel;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -149,5 +152,32 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "nick=" + nick + ", contraseña=" + contraseña + ", fecha_de_nacimiento=" + fechaNacimiento.toString() + ", tipo=" + tipo + '}';
     }
-
+    
+    public String toXML() {
+        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlData += "<Usuario>\n";
+        xmlData += "\t<nick>" + this.getNick() + "</nick>\n";
+        xmlData += "\t<contraseña>" + this.getContraseña() + "</contraseña>\n";
+        xmlData += "\t<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        xmlData += "\t<tipo>" + this.getTipo().toString() + "</tipo>\n";
+        xmlData += "</Usuario>\n";
+        return xmlData;
+    }
+    
+    public boolean saveToXML(File f) {
+        try {
+        String xmlData = toXML();
+            try (FileWriter writer = new FileWriter(f)) {
+                writer.write(xmlData);
+            }
+        return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    
+    public boolean saveToXML(String filePath) {
+        File file = new File(filePath);
+        return saveToXML(file);
+    }
 }

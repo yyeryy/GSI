@@ -1,9 +1,7 @@
 package GSILabs.persistence;
 
 import GSILabs.BModel.Cliente;
-import GSILabs.BModel.Local;
 import GSILabs.BModel.Reserva;
-import static GSILabs.persistence.parser.parseLocal;
 import static GSILabs.persistence.parser.parseReserva;
 import java.io.File;
 import java.io.IOException;

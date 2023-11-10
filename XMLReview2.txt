@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Review>
+	<valoracion>9</valoracion>
+	<comentario>Muy buen local</comentario>
+	<fecha>2022-11-10</fecha>
+	<local><?xml version="1.0" encoding="UTF-8"?>
+<Local>
+<nombre>Local estandar</nombre>
+<?xml version="1.0" encoding="UTF-8"?>
+<Direccion>
+    <localidad>Burlada</localidad>
+    <provincia>Melilla</provincia>
+    <calle>Pereza</calle>
+    <numero>33</numero>
+</Direccion>
+
+<descripcion>Descripcion generica</descripcion>
+<tipo>RESTAURANTE</tipo>
+<?xml version="1.0" encoding="UTF-8"?>
+<Propietario>
+    <nick>Juanjo</nick>
+    <contraseña>1234</contraseña>
+    <fechaNacimiento>2005-11-10</fechaNacimiento>
+</Propietario>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Propietario>
+    <nick>Pepa</nick>
+    <contraseña>4321</contraseña>
+    <fechaNacimiento>2005-11-10</fechaNacimiento>
+</Propietario>
+
+</Local>
+</local>
+	<usuario><?xml version="1.0" encoding="UTF-8"?>
+<Usuario>
+	<nick>Diego</nick>
+	<contraseña>6996</contraseña>
+	<fechaNacimiento>2005-11-10</fechaNacimiento>
+	<tipo>CLIENTE</tipo>
+</Usuario>
+</usuario>
+</Review>

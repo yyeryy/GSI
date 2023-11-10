@@ -7,7 +7,6 @@ import static GSILabs.BModel.Local.tipoLocal.PUB;
 import GSILabs.BModel.Propietario;
 import static GSILabs.persistence.parser.parseLocal;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,22 +30,22 @@ public class TestLocal {
         local.addPropietario(propietarios.get(1));
         
         // XMLRepresentable: toXML
-        /*String XMLlocal = local.toXML();
-        System.out.println("String generado por local.toXML():\n" + XMLlocal);*/
+        String XMLlocal = local.toXML();
+        System.out.println("String generado por local.toXML():\n" + XMLlocal);
         System.out.println("local.toXML() NO EXISTE AUN");
         
         // XMLRepresentable: saveToXML a partir de File
-        /*String pathname = "XMLLocal1.txt";
+        String pathname = "XMLLocal1.txt";
         File file = new File(pathname);
         boolean esFicheroCreado1 = local.saveToXML(file);
         if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
-        else System.out.println("Error en la creacion del fichero 1");*/
+        else System.out.println("Error en la creacion del fichero 1");
         System.out.println("local.saveToXML() NO EXISTE AUN");
         
         /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
         // Los .toXML ya tienen el <algo>   </algo>
         // Las substring son para quital el  <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-        String XMLLocal = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        /*String XMLLocal = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         XMLLocal += "<Local>\n";
         XMLLocal += "<nombre>" + nombre + "</nombre>\n";
         XMLLocal += "" + direccion.toXML().substring(39, direccion.toXML().length()) + "\n";
@@ -55,7 +54,7 @@ public class TestLocal {
         XMLLocal += "" + propietarios.get(0).toXML().substring(39, propietarios.get(0).toXML().length())  + "\n";
         XMLLocal += "" + propietarios.get(1).toXML().substring(39, propietarios.get(1).toXML().length()) + "\n";
         XMLLocal += "</Local>\n";
-        System.out.println("XMLLocal temporal:\n" + XMLLocal);
+        System.out.println("XMLLocal temporal:\n" + XMLLocal);*/
         /* FIN A BORRAR */
         
         // XMLRepresentable: saveToXML a partir de su local
@@ -65,16 +64,16 @@ public class TestLocal {
         else System.out.println("Error en la creacion del fichero 2");*/
         
         /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-        File file = new File("XMLLocal2.txt");
+        /*File file = new File("XMLLocal2.txt");
         try (FileWriter fileWriter = new FileWriter(file)) {
         fileWriter.write(XMLLocal);
         } catch (IOException e) {
             System.out.println("No se ha podido escribir");
-        }
+        }*/
         /* FIN A BORRAR */
         
         // Obtener objeto del String XML
-        Local local2 = parseLocal(XMLLocal);
+        Local local2 = parseLocal(XMLlocal);
         System.out.println("\nTest 1 (String: toXML + parseLocal): " + (local.equals(local2)));
         
         // Obtener objeto del fichero XML
