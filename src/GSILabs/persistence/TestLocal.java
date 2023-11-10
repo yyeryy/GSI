@@ -44,14 +44,16 @@ public class TestLocal {
         System.out.println("local.saveToXML() NO EXISTE AUN");
         
         /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
+        // Los .toXML ya tienen el <algo>   </algo>
+        // Las substring son para quital el  <?xml version=\"1.0\" encoding=\"UTF-8\"?>
         String XMLLocal = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         XMLLocal += "<Local>\n";
-        XMLLocal += "\t<nombre>" + nombre + "</nombre>\n";
-        XMLLocal += "\t<direccion>" + direccion.toXML() + "</direccion>\n";
-        XMLLocal += "\t<descripcion>" + descripcion + "</descripcion>\n";
-        XMLLocal += "\t<tipo>" + tipo.toString() + "</tipo>\n";
-        XMLLocal += "\t<propietario>" + propietarios.get(0).toXML() + "</propietario>\n";
-        XMLLocal += "\t<propietario>" + propietarios.get(1).toXML() + "</propietario>\n";
+        XMLLocal += "<nombre>" + nombre + "</nombre>\n";
+        XMLLocal += "" + direccion.toXML().substring(39, direccion.toXML().length()) + "\n";
+        XMLLocal += "<descripcion>" + descripcion + "</descripcion>\n";
+        XMLLocal += "<tipo>" + tipo.toString() + "</tipo>\n";
+        XMLLocal += "" + propietarios.get(0).toXML().substring(39, propietarios.get(0).toXML().length())  + "\n";
+        XMLLocal += "" + propietarios.get(1).toXML().substring(39, propietarios.get(1).toXML().length()) + "\n";
         XMLLocal += "</Local>\n";
         System.out.println("XMLLocal temporal:\n" + XMLLocal);
         /* FIN A BORRAR */
@@ -78,5 +80,6 @@ public class TestLocal {
         // Obtener objeto del fichero XML
         Local local3 = parseLocal(new File("XMLLocal2.txt"));
         System.out.println("Test 2 (File: toXML + parseLocal(local)): " + (local.equals(local3)));
+        //System.out.println(local2.toString());
     }
 }

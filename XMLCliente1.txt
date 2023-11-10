@@ -2,5 +2,5 @@
 <Cliente>
     <nick>juana</nick>
     <contraseña>4321</contraseña>
-    <fechaNacimiento>2003-11-09</fechaNacimiento>
+    <fechaNacimiento>2003-11-10</fechaNacimiento>
 </Cliente>

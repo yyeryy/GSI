@@ -127,7 +127,9 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
         xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
         xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
         xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
+        /*Y Propietarios esta mal implementado, es un PUTO ARRAY????*/
         xmlData += "    <propietario>" + this.getPropietarios() + "</propietario>\n";
+        /*Y reservas???? (ES UNA ARRAY DE RESERVABLE....)*/
         xmlData += "    <precioMenu>" + this.getPrecioMenu() + "</precioMenu>\n";
         xmlData += "    <capacidad>" + this.getCapacidad() + "</capacidad>\n";
         xmlData += "    <capacidadMesa>" + this.getCapacidadMesa() + "</capacidadMesa>\n";

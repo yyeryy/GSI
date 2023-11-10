@@ -122,14 +122,15 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
     public String toXML() {
         String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         xmlData += "<Bar>\n";
-        xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
-        xmlData += "    <direccion>" + this.getDireccion().toXML() + "</direccion>\n";
-        xmlData += "    <descripcion>" + this.getDireccion() + "</descripcion>\n";
+        xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
+        xmlData += "" + this.getDireccion().toXML() + "\n";
+        xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
         for(int i = 0; i<this.getPropietarios().size(); i++){
-            xmlData += "    <propietario>" + this.getPropietarios().get(i).toXML() + "</propietario>\n";
-        }
+            xmlData += "" + this.getPropietarios().get(i).toXML() + "\n";
+        }/*Y reservas???? pista, utilizar this.listaReserva.size() y lo mismo en Restaurante*/
+
         for(int i = 0;i<this.getEspecialidades().size();i++){
-            xmlData += "    <especialidad>" + this.getEspecialidades().get(i) + "</especialidad>\n";
+            xmlData += "<especialidad>" + this.getEspecialidades().get(i) + "</especialidad>\n";
         }
         xmlData += "</Bar>";
         return xmlData;

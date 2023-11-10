@@ -34,126 +34,81 @@ import org.w3c.dom.Node;
 public class parser {
     // Bar
     public static Bar parseBar(String str) throws IOException {
-        String strFiltrado = str.substring(4, str.length()-1); //Elimino Bar{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+
+
+        // Obtener datos del XML
+        String strNombre = obtenerContenidoEtiqueta(str, "nombre");
+        String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
+        String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
+        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
+
         
-        // Atributos a almacenar
-        String strNombre = null;
-        String strDireccion = null;
-        String strDescripcion = null;
-        String strTipoLocal = null;
-        List<String> listaStrPropietarios = new ArrayList<>();
+        // Obtengo la lista de propietarios
+        List<String> strPropietarios = new ArrayList<>();
+        for(String strPropietario : str.split("<Propietario>")){
+            strPropietarios.add(obtenerContenidoEtiqueta("<Propietario>"+strPropietario+"</Propietario>", "Propietario"));
+        }
+        strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+        
+        // Obtengo la lista de Reservas
+        List<String> strReservas = new ArrayList<>();
+        for(String strReserva : str.split("<Reserva>")){
+            strReservas.add(obtenerContenidoEtiqueta("<Reserva>"+strReserva+"</Reserva>", "Reserva"));
+        }
+        strReservas.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+        // Obtengo la lista de Epecialidades
         List<String> strEspecialidades = new ArrayList<>();
-        ArrayList<String> strReservas = new ArrayList<>();
+        for(String especialidad : str.split("<especialidad>")){
+            strEspecialidades.add(obtenerContenidoEtiqueta("<especialidad>"+especialidad+"</especialidad>", "especialidad"));
+        }
+        strEspecialidades.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
 
+        // Comprobar validez
+        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
+        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        if(strEspecialidades.isEmpty()) throw new IllegalArgumentException("Espacialidades vacio o invalido");
+        //Posible que no tenga reservas
+        //if(strReservas.isEmpty()) throw new IllegalArgumentException("Reservas vacio o invalido");
         
-        // Obtener String basicos
-        for(int i = 0; i < strTroceado.length ; i++)
-        {
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0]) 
-                switch (atributoValor[0]){
-                case "nombre":
-                    strNombre = atributoValor[1];
-                    break;
-                case "dirección":
-                    strDireccion = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        strDireccion = strDireccion + ", " + strTroceado[i];
-                        i++;
-                    }
-                    strDireccion = strDireccion + ", " + strTroceado[i];
-                    break;
-                case "descripción":
-                    strDescripcion = atributoValor[1];
-                    break;
-                case "tipo":
-                    strTipoLocal = atributoValor[1];
-                    break;
-                case "propietario":
-                    String pro = null;
-                    pro = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        pro = pro + ", " + strTroceado[i];
-                        i++;
-                    }
-                    pro = pro + ", " + strTroceado[i];
-
-                    listaStrPropietarios.add(pro);
-                    break;
-                case "especialidad":
-                    String esp = null;
-                    esp = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        esp = esp + ", " + strTroceado[i];
-                        i++;
-                    }
-                    esp = esp + ", " + strTroceado[i];
-
-                    strEspecialidades.add(esp);
-                    break;
-                case "reserva":
-                    String res = null;
-                    res = atributoValor[1] +"="+ atributoValor[2] + "=" + atributoValor[3];
-                    i++;
-                    int j = 0;
-
-                    while(j != 2){
-                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                            res = res + ", " + strTroceado[i];
-                            i++;
-                        }
-                        res = res + ", " + strTroceado[i];
-                        j++;
-                        i++;
-                    }
-                    i--;
-                    strReservas.add(res);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-        // Comprobar si los datos son válidos
-        if (strNombre == null || strDescripcion == null || strTipoLocal == null || strDireccion == null
-                || listaStrPropietarios.isEmpty()) {
-            throw new IOException("Uno de los campos necesarios está vacío");
-        }
-        // Obtener objetos
+        // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
-        List<Propietario> listaPropietarios = new ArrayList<>();
-        for(int i = 0; i < listaStrPropietarios.size(); i++)
-            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
 
-        // Crear Bar
-        Bar bar =new Bar(strNombre, direccion, strDescripcion, listaPropietarios.get(0));
-        for(int i = 1; i < listaPropietarios.size(); i++)
-            bar.addPropietario(listaPropietarios.get(i));
+        List<Propietario> propietarios = new ArrayList<>();
+        for(String strPropietario : strPropietarios){
+            propietarios.add(parsePropietario(strPropietario));
+        }
+        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
+        
 
+        // Construccion objeto
+        Bar bar =new Bar(strNombre, direccion, strDescripcion, propietarios.get(0));
+        for(int i = 1; i < propietarios.size(); i++){
+            bar.addPropietario(propietarios.get(i));}
         // Introducir Reservas 
         for(int i = 0; i < strReservas.size(); i++){
-
             Reserva r = parseReserva(strReservas.get(i));
             bar.nuevaReserva(r.getCliente(), r.getFecha(), r.getHora());
         }
-
         // Introducir Especialidades
         for(int i = 0; i < strEspecialidades.size(); i++){
-            System.out.println(strEspecialidades.size());
             bar.agregarEspecialidad(strEspecialidades.get(i));
         }
 
         return bar;
     }
-    public static Bar parseBar(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Bar parseBar(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseBar(contenido));
     }
     
     // Cliente
@@ -192,64 +147,31 @@ public class parser {
     
     // Contestacion
     public static Contestacion parseContestacion(String str) throws IOException{
-        String strFiltrado = str.substring(13, str.length()-1); //Elimino Dirección{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+
+        String strComentario = obtenerContenidoEtiqueta(str, "comentario");
+        String strFecha = obtenerContenidoEtiqueta(str, "fecha");
+        String strLocal = obtenerContenidoEtiqueta(str, "Local");
         
-        // Atributos a almacenar
-        String strComentario = null;
-        String strFecha = null;
-        String strLocal = null;
-        
-        // Campos del atributo Bar
-        // Obtener String basicos
-        for(int i = 0; i < strTroceado.length ; i++)
-        {
+        // Comprobar validez XML
+        if(null == strComentario) throw new IllegalArgumentException("Comentario vacio o invalido.");
+        if(null == strFecha) throw new IllegalArgumentException("Fecha vacia o invalida.");
+        if(null == strLocal) throw new IllegalArgumentException("Local  vacia o invalida.");
 
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0]) 
-
-                switch (atributoValor[0]){
-                case "comentario":
-                    strComentario = atributoValor[1];
-                    break;
-                case "fechaReview":
-                    strFecha = atributoValor[1];
-                    break;
-                case "local":
-                    String res = null;
-                    res = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    int j = 0;
-
-                    while(j != 2){
-                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                            res = res + ", " + strTroceado[i];
-                            i++;
-                        }
-                        res = res + ", " + strTroceado[i];
-                        j++;
-                        i++;
-                    }
-                    i--;
-                    strLocal = res + "}";
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        // Comprobar si los datos son validos
-        if(strComentario == null || strFecha == null || strLocal == null){
-            throw new IOException("Uno de los campos necesarios esta vacio");
-        }
         Local local = parseLocal(strLocal);
         // Crear objetos que se usan para crear propietario
         Contestacion contestacion = new Contestacion(strComentario, LocalDate.parse(strFecha), local);
         
         return contestacion;
     }
-    public static Contestacion parseContestacion(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Contestacion parseContestacion(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseContestacion(contenido));
     }
     
     // Direccion
@@ -276,7 +198,7 @@ public class parser {
     }
     // COMPLETADO
     // TESTEADO
-    public static Direccion parseDireccion(File f) throws FileNotFoundException, IOException {
+    public static Direccion parseDireccion(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
@@ -291,14 +213,14 @@ public class parser {
     public static Local parseLocal(String str) throws IOException{
         // Obtener datos del XML
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
-        String strDireccion = obtenerContenidoEtiqueta(str, "direccion");
+        String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
         String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
         String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
         
         // Obtengo la lista de propietarios
         List<String> strPropietarios = new ArrayList<>();
-        for(String strPropietario : str.split("<propietario>")){
-            strPropietarios.add(obtenerContenidoEtiqueta(strPropietario, "Propietario"));
+        for(String strPropietario : str.split("<Propietario>")){
+            strPropietarios.add(obtenerContenidoEtiqueta("<Propietario>"+strPropietario+"</Propietario>", "Propietario"));
         }
         strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
         
@@ -323,7 +245,7 @@ public class parser {
             local.addPropietario(propietarios.get(i));}
         return local;
     }
-    public static Local parseLocal(File f) throws FileNotFoundException, IOException {
+    public static Local parseLocal(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
@@ -357,7 +279,7 @@ public class parser {
     }
     // COMPLETADO
     // TESTEADO
-    public static Propietario parsePropietario(File f) throws FileNotFoundException, IOException {
+    public static Propietario parsePropietario(File f) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
         // Leer fichero
         String contenido = "";
@@ -370,266 +292,161 @@ public class parser {
     
     // Pub
     public static Pub parsePub(String str) throws IOException{
-        String strFiltrado = str.substring(4, str.length()-1); //Elimino PUB{ y }.
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        // Obtener datos del XML
+        String strNombre = obtenerContenidoEtiqueta(str, "nombre");
+        String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
+        String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
+        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
+        String strHoraApertura = obtenerContenidoEtiqueta(str, "horaApertura");
+        String strHoraClausura = obtenerContenidoEtiqueta(str, "horaClausura");
         
-        // Atributos a almacenar
-        String strHoraA = null;
-        String strHoraC = null;
-        String strNombre = null;
-        String strDireccion = null;
-        String strDescripcion = null;
-        String strTipoLocal = null;
-        List<String> listaStrPropietarios = new ArrayList<>();
-
-
+        // Obtengo la lista de propietarios
+        List<String> strPropietarios = new ArrayList<>();
+        for(String strPropietario : str.split("<Propietario>")){
+            strPropietarios.add(obtenerContenidoEtiqueta("<Propietario>"+strPropietario+"</Propietario>", "Propietario"));
+        }
+        strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
         
-        // Obtener String basicos
-        for(int i = 0; i < strTroceado.length ; i++)
-        {
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0]) 
-                switch (atributoValor[0]){
-                case "nombre":
-                    strNombre = atributoValor[1];
-                    break;
-                case "dirección":
-                    strDireccion = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        strDireccion = strDireccion + ", " + strTroceado[i];
-                        i++;
-                    }
-                    strDireccion = strDireccion + ", " + strTroceado[i];
-                    break;
-                case "descripción":
-                    strDescripcion = atributoValor[1];
-                    break;
-                case "tipo":
-                    strTipoLocal = atributoValor[1];
-                    break;
-                case "propietario":
-                    String pro = null;
-                    pro = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        pro = pro + ", " + strTroceado[i];
-                        i++;
-                    }
-                    pro = pro + ", " + strTroceado[i];
-
-                    listaStrPropietarios.add(pro);
-                    break;
-                case "hora Apertura":
-                    strHoraA = atributoValor[1];
-                    break;
-                case "hora Clausura":
-                    strHoraC = atributoValor[1];
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        // Comprobar si los datos son válidos
-        if (strNombre == null || strDescripcion == null || strTipoLocal == null || strDireccion == null
-                || strHoraA == null || strHoraC == null || listaStrPropietarios.isEmpty()) {
-            throw new IOException("Uno de los campos necesarios está vacío");
-        }
-        // Obtener objetos
+        // Comprobar validez
+        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
+        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
+        if(null == strHoraApertura) throw new IllegalArgumentException("HoraApertura vacia o invalida");
+        if(null == strHoraClausura) throw new IllegalArgumentException("HoraClausura vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        
+        // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
-        List<Propietario> listaPropietarios = new ArrayList<>();
-        for(int i = 0; i < listaStrPropietarios.size(); i++)
-            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
-
-        // Crear Bar
-        Pub pub = new Pub(strHoraA, strHoraC,strNombre, direccion, strDescripcion, listaPropietarios.get(0));
-        for(int i = 1; i < listaPropietarios.size(); i++)
-            pub.addPropietario(listaPropietarios.get(i));
+        List<Propietario> propietarios = new ArrayList<>();
+        for(String strPropietario : strPropietarios){
+            propietarios.add(parsePropietario(strPropietario));
+        }
+        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
+        
+        // Construccion objeto
+        Pub pub = new Pub(strHoraApertura, strHoraClausura, strNombre, direccion, strDescripcion, propietarios.get(0));
+        for(int i = 1; i < propietarios.size(); i++){
+            pub.addPropietario(propietarios.get(i));}
 
         return pub;
     }
-    public static Pub parsePub(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Pub parsePub(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parsePub(contenido));
     }
     
     // Reserva
     public static Reserva parseReserva(String str) throws IOException{
         
-        String strFiltrado = str.substring(8, str.length()-1); //Eliminar "Propietario{" y "}".
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
+        // Obtener datos del XML
+        String strcliente = obtenerContenidoEtiqueta(str, "Cliente");
+        String strfecha = obtenerContenidoEtiqueta(str, "fecha");
+        String strhora = obtenerContenidoEtiqueta(str, "hora");
+        String strdescuento = obtenerContenidoEtiqueta(str, "descuento");
         
-        // Atributos a almacenar
-        String strCliente = null;
-        String strFecha = null;
-        String strHora = null;
-        String strDescuento = null;
-        
-        // Obtener String basicos
-        for(int i = 0; i < strTroceado.length ; i++)
-        {
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0]) 
-                switch (atributoValor[0]){
-                case "cliente":
-                    strCliente = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        strCliente = strCliente + ", " + strTroceado[i];
-                        i++;
-                    }
-                    strCliente = strCliente + ", " + strTroceado[i];
+        // Comprobar validez XML
+        if(null == strcliente) throw new IllegalArgumentException("Cliente vacio o invalido.");
+        if(null == strfecha) throw new IllegalArgumentException("Fecha vacia o invalida.");
+        if(null == strhora) throw new IllegalArgumentException("Hora vacia o invalida.");
+        if(null == strdescuento) throw new IllegalArgumentException("Descuento vacia o invalida.");
+                
 
-                    break;
-                case "fechaReserva":
-                    strFecha = atributoValor[1];
-                    break;
-                case "hora":
-                    strHora = atributoValor[1];
-                    break;
-                case "descuento":
-                    strDescuento = atributoValor[1];
-                    strDescuento = strDescuento.substring(0, strDescuento.length() - 1);
-                    break;
-                default:
-                    break;
-            }
-        }
- 
-        // Comprobar si los datos son válidos
-        if (strCliente == null || strFecha == null || strHora == null || strDescuento == null) {
-            throw new IOException("Uno de los campos necesarios está vacío");
-        }
         // System.out.println(strCliente);
         // Obtener objetos
-        Cliente cliente = parseCliente(strCliente);   
+        Cliente cliente = parseCliente(strcliente);   
         // Crear el objeto Local
-        Reserva reserva = new Reserva(cliente, LocalDate.parse(strFecha), LocalTime.parse(strHora), Integer.parseInt(strDescuento));
+        Reserva reserva = new Reserva(cliente, LocalDate.parse(strfecha), LocalTime.parse(strhora), Integer.parseInt(strdescuento));
     
         return reserva;
 
     }
-    public static Reserva parseReserva(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Reserva parseReserva(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseReserva(contenido));
     }
     
     // Restarurante
     public static Restaurante parseRestaurante(String str) throws IOException{
-
-        String strFiltrado = str.substring(12, str.length()-1); //Eliminar "Restaurante{" y "}".
-        String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
-
-        // Atributos a almacenar
-        String strNombre = null;
-        String strDireccion = null;
-        String strDescripcion = null;
-        String strTipoLocal = null;
-        String strPrecioMenu = null;  
-        String strCapacidad = null;
-        String strCapacidadMesa = null;
-        List<String> listaStrPropietarios = new ArrayList<>();
-        ArrayList<String> strReservas = new ArrayList<>();
-
+        // Obtener datos del XML
+        String strNombre = obtenerContenidoEtiqueta(str, "nombre");
+        String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
+        String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
+        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
+        String strPrecioMenu = obtenerContenidoEtiqueta(str, "precioMenu");
+        String strCapacidad = obtenerContenidoEtiqueta(str, "capacidad");
+        String strCapacidadMesa = obtenerContenidoEtiqueta(str, "capacidadMesa");
         
-        // Obtener String basicos
-        for(int i = 0; i < strTroceado.length ; i++)
-        {
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0]) 
-                switch (atributoValor[0]){
-                case "nombre":
-                    strNombre = atributoValor[1];
-                    break;
-                case "dirección":
-                    strDireccion = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        strDireccion = strDireccion + ", " + strTroceado[i];
-                        i++;
-                    }
-                    strDireccion = strDireccion + ", " + strTroceado[i];
-                    break;
-                case "descripción":
-                    strDescripcion = atributoValor[1];
-                    break;
-                case "tipo":
-                    strTipoLocal = atributoValor[1];
-                    break;
-                case "propietario":
-                    String pro = null;
-                    pro = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-
-                    while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                        pro = pro + ", " + strTroceado[i];
-                        i++;
-                    }
-                    pro = pro + ", " + strTroceado[i];
-
-                    listaStrPropietarios.add(pro);
-                    break;
-                case "precioMenu":
-                    strPrecioMenu = atributoValor[1];
-                    break;
-                case "capacidad":
-                    strCapacidad = atributoValor[1];
-                    break;
-                case "capacidad Mesa":
-                    strCapacidadMesa = atributoValor[1];
-                    break;
-                case "reserva":
-                    String res = null;
-                    res = atributoValor[1] +"="+ atributoValor[2] + "=" + atributoValor[3];
-                    i++;
-                    int j = 0;
-
-                    while(j != 2){
-                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                            res = res + ", " + strTroceado[i];
-                            i++;
-                        }
-                        res = res + ", " + strTroceado[i];
-                        j++;
-                        i++;
-                    }
-                    i--;
-                    strReservas.add(res);
-                    break;
-                default:
-                    break;
-            }
+        // Obtengo la lista de propietarios
+        List<String> strPropietarios = new ArrayList<>();
+        for(String strPropietario : str.split("<Propietario>")){
+            strPropietarios.add(obtenerContenidoEtiqueta("<Propietario>"+strPropietario+"</Propietario>", "Propietario"));
         }
-
-
-        // Comprobar si los datos son válidos
-        if (strNombre == null || strDescripcion == null || strTipoLocal == null || strDireccion == null
-                || listaStrPropietarios.isEmpty()) {
-            throw new IOException("Uno de los campos necesarios está vacío");
+        strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+        
+        // Obtengo la lista de Reservas
+        List<String> strReservas = new ArrayList<>();
+        for(String strReserva : str.split("<Reserva>")){
+            strReservas.add(obtenerContenidoEtiqueta("<Reserva>"+strReserva+"</Reserva>", "Reserva"));
         }
-        // Obtener objetos
+        strReservas.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+        // Comprobar validez
+        if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
+        if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
+        if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
+        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
+        if(null == strPrecioMenu) throw new IllegalArgumentException("PrecioMenu vacia o invalida");
+        if(null == strCapacidad) throw new IllegalArgumentException("Capacidad vacio o invalido");
+        if(null == strCapacidadMesa) throw new IllegalArgumentException("CapacidadMesa vacio o invalido");
+        if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
+        //Posible que no tenga reservas
+        //if(strReservas.isEmpty()) throw new IllegalArgumentException("Reservas vacio o invalido");
+        
+        // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
-        List<Propietario> listaPropietarios = new ArrayList<>();
-        for(int i = 0; i < listaStrPropietarios.size(); i++)
-            listaPropietarios.add(parsePropietario(listaStrPropietarios.get(i)));
 
-        // Crear Bar
-        Restaurante restaurante =new Restaurante(strNombre, direccion, strDescripcion, listaPropietarios.get(0),
-                 Double.parseDouble(strPrecioMenu), Integer.parseInt(strCapacidad), Integer.parseInt(strCapacidadMesa));
-        for(int i = 1; i < listaPropietarios.size(); i++)
-            restaurante.addPropietario(listaPropietarios.get(i));
+        List<Propietario> propietarios = new ArrayList<>();
+        for(String strPropietario : strPropietarios){
+            propietarios.add(parsePropietario(strPropietario));
+        }
+        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
+        
 
+        // Construccion objeto
+        Restaurante restaurante =new Restaurante(strNombre, direccion, strDescripcion, propietarios.get(0),
+               Double.parseDouble(strPrecioMenu), Integer.parseInt(strCapacidad), Integer.parseInt(strCapacidadMesa));
+        for(int i = 1; i < propietarios.size(); i++){
+            restaurante.addPropietario(propietarios.get(i));}
         // Introducir Reservas 
         for(int i = 0; i < strReservas.size(); i++){
             Reserva r = parseReserva(strReservas.get(i));
             restaurante.nuevaReserva(r.getCliente(), r.getFecha(), r.getHora());
         }
 
-
         return restaurante;
     }
-    public static Restaurante parseRestaurante(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Restaurante parseRestaurante(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseRestaurante(contenido));
     }
     
     // Review
@@ -638,90 +455,21 @@ public class parser {
         String[] strTroceado = strFiltrado.split(", "); //Trocear las distintas partes
         
         // Atributos a almacenar
-        String strValoracion = null;
-        String strComentario = null;
-        String strFecha = null;
-        String strLocal = null;
-        String strUsuario = null;
-        String strConstestacion = null;
-        
-        int j;
-        // Campos del atributo Bar
-        // Obtener String basicos
-        for(int i = 0; i < strTroceado.length ; i++)
-        {
+        String strValoracion = obtenerContenidoEtiqueta(str,"valoracion");
+        String strComentario = obtenerContenidoEtiqueta(str,"comentario");
+        String strFecha = obtenerContenidoEtiqueta(str,"fecha");
+        String strLocal = obtenerContenidoEtiqueta(str,"Local");
+        String strUsuario = obtenerContenidoEtiqueta(str,"Usuario");
+        String strConstestacion = obtenerContenidoEtiqueta(str,"Constestacion");
+    
+        // Comprobar validez XML
+        if(null == strValoracion) throw new IllegalArgumentException("Valoracion vacio o invalido.");
+        if(null == strComentario) throw new IllegalArgumentException("Comentario vacia o invalida.");
+        if(null == strFecha) throw new IllegalArgumentException("Fecha de nacimiento vacia o invalida.");
+        if(null == strLocal) throw new IllegalArgumentException("Local vacio o invalido.");
+        if(null == strUsuario) throw new IllegalArgumentException("Usuario vacio o invalido.");
+        if(null == strConstestacion) throw new IllegalArgumentException("Contestacion vacia o invalida.");
 
-            String[] atributoValor = strTroceado[i].split("=");
-            if(null != atributoValor[0]) 
-
-                switch (atributoValor[0]){
-                case "valoracion":
-                    strValoracion = atributoValor[1];
-                    break;
-                case "comentario":
-                    strComentario = atributoValor[1];
-                    break;
-                case "fechaReview":
-                    strFecha = atributoValor[1];
-                    break;
-                case "local":
-                    String res = null;
-                    res = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    j = 0;
-
-                    while(j != 2){
-                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                            res = res + ", " + strTroceado[i];
-                            i++;
-                        }
-                        res = res + ", " + strTroceado[i];
-                        j++;
-                        i++;
-                    }
-                    i--;
-                    strLocal = res + "}";
-                    break;
-                case "usuario":
-                    String usu = null;
-                    usu = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    j = 0;
-
-                    while(j != 1){
-                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                            usu = usu + ", " + strTroceado[i];
-                            i++;
-                        }
-                        usu = usu + ", " + strTroceado[i];
-                        j++;
-                        i++;
-                    }
-                    i--;
-                    strUsuario = usu;
-                    break;
-                case "contestacion":
-                    String con = null;
-                    con = atributoValor[1] +"="+ atributoValor[2];
-                    i++;
-                    j = 0;
-
-                    while(j != 2){
-                        while(!strTroceado[i].substring(strTroceado[i].length() -1).equals("}")){
-                            con = con + ", " + strTroceado[i];
-                            i++;
-                        }
-                        con = con + ", " + strTroceado[i];
-                        j++;
-                        i++;
-                    }
-                    i--;
-                    strConstestacion = con;
-                    break; 
-                default:
-                    break;
-            }
-        }
 /*
         System.out.println(strValoracion);
         System.out.println(strComentario);
@@ -731,11 +479,6 @@ public class parser {
         System.out.println(strConstestacion);
 */
 
-        // Comprobar si los datos son validos
-        if(strValoracion == null || strComentario == null || strFecha == null
-            || strLocal == null || strUsuario == null || strConstestacion == null){
-            throw new IOException("Uno de los campos necesarios esta vacio");
-        }
         Usuario usuario = parseUsuario(strUsuario);
         Local local = parseLocal(strLocal);
         Contestacion contestacion = parseContestacion(strConstestacion);
@@ -745,10 +488,17 @@ public class parser {
 
         return review;
     }
-    public static Review parseReview(File f) {
-        throw new UnsupportedOperationException("Este método aún no está implementado");
+    public static Review parseReview(File f) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new IllegalArgumentException("Fichero vacio.");}
+        return(parseReview(contenido));
     }
-    
+
     // Usuario
     // COMPLETADO
     // TESTEADO
@@ -787,19 +537,19 @@ public class parser {
     
     // Estrae el string contenido por la etiqueta xml indicada
     public static String obtenerContenidoEtiqueta(String contenidoOriginal, String etiqueta) {
-    int posicionInicioEtiqueta = contenidoOriginal.indexOf("<" + etiqueta + ">");
-    
-// Posicion inicial
-    if (posicionInicioEtiqueta == -1) {
-        return null;
-    }
-    
-    // Posicion final
-    int posicionCierreEtiqueta = contenidoOriginal.indexOf("</" + etiqueta + ">");
-    if (posicionCierreEtiqueta == -1) {
-        return null;
-    }
+        int posicionInicioEtiqueta = contenidoOriginal.indexOf("<" + etiqueta + ">");
 
-    return contenidoOriginal.substring(posicionInicioEtiqueta + etiqueta.length() + 2 /*<>*/, posicionCierreEtiqueta);
+        // Posicion inicial
+        if (posicionInicioEtiqueta == -1) {
+            return null;
+        }
+
+        // Posicion final
+        int posicionCierreEtiqueta = contenidoOriginal.indexOf("</" + etiqueta + ">");
+        if (posicionCierreEtiqueta == -1) {
+            return null;
+        }
+
+        return contenidoOriginal.substring(posicionInicioEtiqueta + etiqueta.length() + 2 /*<>*/, posicionCierreEtiqueta);
     }
 }
