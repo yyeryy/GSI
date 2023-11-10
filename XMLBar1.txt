@@ -21,18 +21,4 @@
     <contraseña>4321</contraseña>
     <fechaNacimiento>1973-11-10</fechaNacimiento>
 </Propietario>
-<Reserva><?xml version="1.0" encoding="UTF-8"?>
-<Reserva>
-    <Cliente>Cliente{nick=Alfonso, contraseña=1234, fecha_de_nacimiento=2000-01-01}</Cliente>
-    <hora>00:00</hora>
-    <fecha>2050-01-01</fecha>
-    <descuento>0</descuento>
-</Reserva></Reserva>
-<Reserva><?xml version="1.0" encoding="UTF-8"?>
-<Reserva>
-    <Cliente>Cliente{nick=Alfonso, contraseña=1234, fecha_de_nacimiento=2000-01-01}</Cliente>
-    <hora>00:00</hora>
-    <fecha>2070-01-01</fecha>
-    <descuento>0</descuento>
-</Reserva></Reserva>
 </Bar>

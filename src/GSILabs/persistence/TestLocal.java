@@ -58,7 +58,7 @@ public class TestLocal {
         System.out.println("XMLLocal temporal:\n" + XMLLocal);
         /* FIN A BORRAR */
         
-        // XMLRepresentable: saveToXML a partir de su direccion
+        // XMLRepresentable: saveToXML a partir de su local
         /*String filepath = "XMLLocal2.txt";
         boolean esFicheroCreado2 = direccion.saveToXML(filepath);
         if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);

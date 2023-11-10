@@ -40,9 +40,7 @@ public class parser {
         String strNombre = obtenerContenidoEtiqueta(str, "nombre");
         String strDireccion = obtenerContenidoEtiqueta(str, "Direccion");
         String strDescripcion = obtenerContenidoEtiqueta(str, "descripcion");
-        String strTipoLocal = obtenerContenidoEtiqueta(str, "tipo");
 
-        
         // Obtengo la lista de propietarios
         List<String> strPropietarios = new ArrayList<>();
         for(String strPropietario : str.split("<Propietario>")){
@@ -68,11 +66,7 @@ public class parser {
         if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
         if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
         if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
         if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
-        if(strEspecialidades.isEmpty()) throw new IllegalArgumentException("Espacialidades vacio o invalido");
-        //Posible que no tenga reservas
-        //if(strReservas.isEmpty()) throw new IllegalArgumentException("Reservas vacio o invalido");
         
         // Conversion de datos
         Direccion direccion = parseDireccion(strDireccion);
@@ -81,7 +75,6 @@ public class parser {
         for(String strPropietario : strPropietarios){
             propietarios.add(parsePropietario(strPropietario));
         }
-        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
         
 
         // Construccion objeto
@@ -311,7 +304,6 @@ public class parser {
         if(null == strNombre) throw new IllegalArgumentException("Nombre vacio o invalido");
         if(null == strDireccion) throw new IllegalArgumentException("Direccion vacia o invalida");
         if(null == strDescripcion) throw new IllegalArgumentException("Descripcion vacia o invalida");
-        if(null == strTipoLocal) throw new IllegalArgumentException("TipoLocal vacio o invalido");
         if(null == strHoraApertura) throw new IllegalArgumentException("HoraApertura vacia o invalida");
         if(null == strHoraClausura) throw new IllegalArgumentException("HoraClausura vacio o invalido");
         if(strPropietarios.isEmpty()) throw new IllegalArgumentException("Propietarios vacio o invalido");
@@ -322,7 +314,7 @@ public class parser {
         for(String strPropietario : strPropietarios){
             propietarios.add(parsePropietario(strPropietario));
         }
-        tipoLocal tipo = tipoLocal.parse(strTipoLocal);
+
         
         // Construccion objeto
         Pub pub = new Pub(strHoraApertura, strHoraClausura, strNombre, direccion, strDescripcion, propietarios.get(0));
