@@ -2,5 +2,5 @@
 <Propietario>
     <nick>marcos</nick>
     <contraseña>4321134</contraseña>
-    <fechaNacimiento>2001-11-10</fechaNacimiento>
+    <fechaNacimiento>2001-11-11</fechaNacimiento>
 </Propietario>

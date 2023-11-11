@@ -2,6 +2,6 @@
 <Usuario>
 	<nick>Pepe</nick>
 	<contraseña>1234</contraseña>
-	<fechaNacimiento>2005-11-10</fechaNacimiento>
+	<fechaNacimiento>2005-11-11</fechaNacimiento>
 	<tipo>PROPIETARIO</tipo>
 </Usuario>

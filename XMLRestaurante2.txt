@@ -15,13 +15,13 @@
 <Propietario>
     <nick>Pedro</nick>
     <contraseña>1234</contraseña>
-    <fechaNacimiento>2005-11-10</fechaNacimiento>
+    <fechaNacimiento>2005-11-11</fechaNacimiento>
 </Propietario>
 
 <Propietario>
     <nick>Anna</nick>
     <contraseña>4321</contraseña>
-    <fechaNacimiento>1973-11-10</fechaNacimiento>
+    <fechaNacimiento>1973-11-11</fechaNacimiento>
 </Propietario>
 
 </Restaurante>

@@ -9,11 +9,6 @@ import GSILabs.BSystem.BusinessSystem;
 import GSILabs.persistence.XMLParsingException;
 
 import java.io.File;
-<<<<<<< HEAD
-=======
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
->>>>>>> parent of ca8bf49... a
 
 /**
  * Clase BusinessSystem
@@ -23,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 04.09.2023
  */
 public class P03Tester {
-<<<<<<< HEAD
 
     public static void main(String[] args) {
         if(testParseXMLFile()){
@@ -41,25 +35,13 @@ public class P03Tester {
         try {
             File xmlFile = new File("XMLCliente1.txt");
             BusinessSystem businessSystem = BusinessSystem.parseXMLFile(xmlFile);
-=======
 
-    @Test
-    public void testParseXMLFile() {
-        File xmlFile = new File("src/test/resources/test.xml"); //Poner ruta donde tenemos el XML de ejemplo
-        
-        try {
-            //Prueba la función parseXMLFile
-            BusinessSystem businessSystem = new BusinessSystem();
-            BusinessSystem.parseXMLFile(xmlFile);
->>>>>>> parent of ca8bf49... a
-            
-            assertNotNull(businessSystem);
+            return businessSystem != null;
         } catch (XMLParsingException e) {
-<<<<<<< HEAD
             return false;
         }
     }
-    
+
     public static boolean testLoadXMLFile() {
         try {
             File xmlFile = new File("XMLCliente1.txt");
@@ -68,20 +50,5 @@ public class P03Tester {
         } catch (XMLParsingException ex) {
             return false;
         }
-=======
-            fail("Excepción inesperada: " + e.getMessage());
-        }
-    }
-    
-    @Test
-    public void testLoadXMLFile() throws XMLParsingException {
-        File xmlFile = new File("src/test/resources/test.xml"); //Poner ruta donde tenemos el XML de ejemplo
-
-        //BusinessSystem businessSystem = new BusinessSystem();
-        boolean result = BusinessSystem.loadXMLFile(xmlFile);
-
-        assertTrue(result);
->>>>>>> parent of ca8bf49... a
     }
 }
-
