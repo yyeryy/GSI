@@ -939,7 +939,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             return businessSystem;
         
         //Si por el contrario ocurre algún error devolvemos false.
-        } catch (IOException | ParserConfigurationException | SAXException e) {
+        } catch (Exception e) {
             // Lanzar una excepción personalizada XMLParsingException
             throw new XMLParsingException("Error al analizar el archivo XML");
         }
@@ -954,14 +954,23 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     public static boolean loadXMLFile(File f) throws XMLParsingException {
         try {
+            //Creación de un constructor de documentos
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
-            // Carga del File
-            BusinessSystem businessSystem = parseXMLFile(f);
-            return true; 
+            //Análisis del archivo XML
+            Document document = (Document) dBuilder.parse(f);
+
+            //Normalización del documento
+            document.getDocumentElement().normalize();
+
+            //Si el fichero XML se ha cargado correctamente devolvemos true
+            return true;
             
-        } catch(XMLParsingException exception) {
-            exception.printStackTrace();
+        //Si por el contrario ocurre algún error devolvemos false.
+        } catch(Exception exception) {
             return false;
+            //throw new XMLParsingException("Error al analizar el archivo XML");
         }
     }
 }
