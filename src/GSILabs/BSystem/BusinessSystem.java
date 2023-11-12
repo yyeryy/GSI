@@ -16,6 +16,7 @@ import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import GSILabs.persistence.XMLParsingException;
+import GSILabs.persistence.XMLWritingException;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -942,6 +943,30 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         } catch (Exception e) {
             // Lanzar una excepción personalizada XMLParsingException
             throw new XMLParsingException("Error al analizar el archivo XML");
+        }
+    }
+    
+    /**
+     * Write XML File (Ejercicio 3 - Práctica 4)
+     * @param f Fichero XML
+     * @return Booleano que indica si el fichero XML se ha escrito correctamente.
+     * Escribe un fichero XML.
+     * @throws GSILabs.persistence.XMLWritingException
+     */
+    public boolean writeXMLFile(File f) throws XMLWritingException{
+        try{
+            for (Usuario usuario : this.usuarios) {
+                usuario.saveToXML(f);
+            }
+            for (Review review: this.reviews){
+                review.saveToXML(f);
+            }
+            for (Local local: this.locales){
+                local.saveToXML(f);
+            }
+            return true;
+        }catch(Exception exception){
+            return false;
         }
     }
     
