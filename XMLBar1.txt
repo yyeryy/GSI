@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bar>
 <nombre>Ana</nombre>
-<?xml version="1.0" encoding="UTF-8"?>
 <Direccion>
     <localidad>Chusmalandia</localidad>
     <provincia>Marruecos</provincia>
@@ -10,18 +9,42 @@
 </Direccion>
 
 <descripcion>Quiero dormir</descripcion>
-<?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Maria</nick>
     <contraseña>1234</contraseña>
-    <fechaNacimiento>2005-11-11</fechaNacimiento>
+    <fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
 
-<?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Carmen</nick>
     <contraseña>4321</contraseña>
-    <fechaNacimiento>1973-11-11</fechaNacimiento>
+    <fechaNacimiento>1973-11-12</fechaNacimiento>
 </Propietario>
 
+<Reserva>
+<Cliente>
+    <nick>Alfonso</nick>
+    <contraseña>1234</contraseña>
+    <fechaNacimiento>2000-01-01</fechaNacimiento>
+</Cliente>
+
+    <hora>00:00</hora>
+    <fecha>2050-01-01</fecha>
+    <descuento>0</descuento>
+</Reserva>
+
+<Reserva>
+<Cliente>
+    <nick>Alfonso</nick>
+    <contraseña>1234</contraseña>
+    <fechaNacimiento>2000-01-01</fechaNacimiento>
+</Cliente>
+
+    <hora>00:00</hora>
+    <fecha>2070-01-01</fecha>
+    <descuento>0</descuento>
+</Reserva>
+
+<especialidad>Mexicano</especialidad>
+<especialidad>Italiano</especialidad>
 </Bar>

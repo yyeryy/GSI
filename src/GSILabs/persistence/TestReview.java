@@ -65,13 +65,14 @@ public class TestReview {
             XMLReview += "\t<valoracion>" + review.getValoracion() + "</valoracion>\n";
             XMLReview += "\t<comentario>" + review.getComentario()+ "</comentario>\n";
             XMLReview += "\t<fecha>" + review.getFechaReview().toString() + "</fecha>\n";
-            XMLReview += "\t<local>" + review.getLocal().toXML()+ "</local>\n";
-            XMLReview += "\t<usuario>" + review.getUsuario().toXML()+ "</usuario>\n";
-            XMLReview += "\t<contestacion>" + review.getContestacion().toXML() + "</contestacion>\n";
+
+            XMLReview += "\t" + review.getLocal().toXML()+ "\n";
+            XMLReview += "\t" + review.getUsuario().toXML()+ "\n";
+            XMLReview += "\t" + review.getContestacion().toXML() + "\n";
             XMLReview += "</Review>\n";
             
             System.out.println("XMLReview temporal:\n" + XMLReview);
-            /* FIN A BORRAR */
+            /* FIN A BORRAR .substring(39, propietarios.get(1).toXML().length())   */
             
             // XMLRepresentable: saveToXML a partir de su review
             /*String filepath = "XMLPub2.txt";

@@ -149,9 +149,13 @@ public class Review implements XMLRepresentable{
         xmlData += "    <valoracion>" + this.getValoracion() + "</valoracion>\n";
         xmlData += "    <comentario>" + this.getComentario() + "</comentario>\n";
         xmlData += "    <fecha>" + this.getFechaReview() + "</fecha>\n";
-        xmlData += "    <local>" + this.getLocal() + "</local>\n";
-        xmlData += "    <usuario>" + this.getUsuario() + "</usuario>\n";
-        xmlData += "    <contestacion>" + this.getContestacion() + "</contestacion>\n";
+        String[] partes;
+        partes = this.getLocal().toXML().split("<Local>", 2);
+        xmlData += "    <Local>" + partes[1] + "\n";
+        partes = this.getUsuario().toXML().split("<Usuario>", 2);
+        xmlData += "    <Usuario>" + partes[1] + "\n";
+        partes = this.getContestacion().toXML().split("<Contestacion>", 2);
+        xmlData += "    <Contestacion>" + partes[1] + "\n";
         xmlData += "</Review>\n";
         return xmlData;
     }

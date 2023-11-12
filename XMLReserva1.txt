@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Reserva>
-    <cliente><?xml version="1.0" encoding="UTF-8"?>
 <Cliente>
     <nick>Yeray</nick>
     <contraseña>6666</contraseña>
     <fechaNacimiento>2003-11-12</fechaNacimiento>
 </Cliente>
-</cliente>
-    <hora>16:20</hora>
+
+    <hora>17:28</hora>
     <fecha>2024-11-12</fecha>
     <descuento>10</descuento>
 </Reserva>

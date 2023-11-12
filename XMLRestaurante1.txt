@@ -1,15 +1,13 @@
 <Restaurante>
     <nombre>The Beer Garden</nombre>
-    <direccion><?xml version="1.0" encoding="UTF-8"?>
 <Direccion>
     <localidad>Pamplona</localidad>
     <provincia>Navarra</provincia>
     <calle>Calle Ermitagaña</calle>
     <numero>19</numero>
 </Direccion>
-</direccion>
+
     <descripcion>Restaurante con los mejores cocteles de la ciudad</descripcion>
-<?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Pedro</nick>
     <contraseña>1234</contraseña>

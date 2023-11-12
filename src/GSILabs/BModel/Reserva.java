@@ -103,9 +103,11 @@ public class Reserva implements XMLRepresentable{
 
     @Override
     public String toXML() {
+        String[] partes;
         String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         xmlData += "<Reserva>\n";
-        xmlData += "    <cliente>" + this.getCliente().toXML() + "</cliente>\n";
+        partes = this.getCliente().toXML().split("<Cliente>", 2);
+        xmlData += "<Cliente>" + partes[1] + "\n";
         xmlData += "    <hora>" + this.getHora() + "</hora>\n";
         xmlData += "    <fecha>" + this.getFecha() + "</fecha>\n";
         xmlData += "    <descuento>" + this.getDescuento() + "</descuento>\n";

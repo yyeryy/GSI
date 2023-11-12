@@ -87,15 +87,21 @@ public class Pub extends Local implements XMLRepresentable{
 
     @Override
     public String toXML() {
+        String[] partes;
         String xmlData = "";
         xmlData += "<Pub>\n";
         xmlData += "    <horaApertura>" + this.getHoraApertura() + "</horaApertura>\n";
         xmlData += "    <horaClausura>" + this.getHoraClausura() + "</horaClausura>\n";
         xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
-        xmlData += "    " + this.getDireccion().toXML() + "\n";
+
+        partes = this.getDireccion().toXML().split("<Direccion>", 2);
+        xmlData += "<Direccion>" + partes[1] + "\n";
+
         xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
+
         for(int i = 0; i<this.getPropietarios().size(); i++){
-            xmlData += "" + this.getPropietarios().get(i).toXML() + "\n";
+            partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
+            xmlData += "<Propietario>" + partes[1] + "\n";
         }
         xmlData += "</Pub>\n";
         return xmlData;

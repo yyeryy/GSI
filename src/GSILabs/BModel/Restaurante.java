@@ -121,15 +121,25 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
 
     @Override
     public String toXML() {
+        String[] partes;
         String xmlData = "";
         xmlData += "<Restaurante>\n";
         xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
-        xmlData += "    <direccion>" + this.getDireccion().toXML() + "</direccion>\n";
+
+        partes = this.getDireccion().toXML().split("<Direccion>", 2);
+        xmlData += "<Direccion>" + partes[1] + "\n";
+
         xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
+
         for(int i = 0; i<this.getPropietarios().size(); i++){
-            xmlData += "" + this.getPropietarios().get(i).toXML() + "\n";}
+            partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
+            xmlData += "<Propietario>" + partes[1] + "\n";
+        }
         for(int i = 0; i < this.listaReserva.size(); i++){
-            xmlData += "" + this.listaReserva.get(i).toXML();}
+            partes = this.listaReserva.get(i).toXML().split("<Reserva>", 2);
+            xmlData += "<Reserva>" + partes[1] + "\n";
+        }
+
         xmlData += "    <precioMenu>" + this.getPrecioMenu() + "</precioMenu>\n";
         xmlData += "    <capacidad>" + this.getCapacidad() + "</capacidad>\n";
         xmlData += "    <capacidadMesa>" + this.getCapacidadMesa() + "</capacidadMesa>\n";

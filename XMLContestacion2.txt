@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Contestacion>
 	<comentario>Tendremos en cuenta su opinion</comentario>
-	<fecha>2023-11-10</fecha>
-	<local><?xml version="1.0" encoding="UTF-8"?>
-<Local>
+	<fecha>2023-11-12</fecha>
+	<Local>
 <nombre>Santa chula</nombre>
 <?xml version="1.0" encoding="UTF-8"?>
 <Direccion>
@@ -19,16 +18,16 @@
 <Propietario>
     <nick>Juanjo</nick>
     <contraseña>1234</contraseña>
-    <fechaNacimiento>2005-11-10</fechaNacimiento>
+    <fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Pepa</nick>
     <contraseña>4321</contraseña>
-    <fechaNacimiento>1973-11-10</fechaNacimiento>
+    <fechaNacimiento>1973-11-12</fechaNacimiento>
 </Propietario>
 
 </Local>
-</local>
+
 </Contestacion>

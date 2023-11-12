@@ -1,12 +1,15 @@
 package GSILabs.persistence;
 
 import GSILabs.BModel.Bar;
+import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Propietario;
+import GSILabs.BModel.Reserva;
 import static GSILabs.persistence.parser.parseBar;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,17 +30,17 @@ public class TestBar {
             Bar bar = new Bar(nombre, direccion, descripcion, propietarios.get(0));
             bar.addPropietario(propietarios.get(1));
             // Añadir especialidades, esto es opcional
-            //String especialidad1 = "Mexicano";
-            //String especialidad2 = "Italiano";
-            //bar.agregarEspecialidad(especialidad1);
-            //bar.agregarEspecialidad(especialidad2);
+            String especialidad1 = "Mexicano";
+            String especialidad2 = "Italiano";
+            bar.agregarEspecialidad(especialidad1);
+            bar.agregarEspecialidad(especialidad2);
             
             // Añadir Reservas, esto es opcional
-            //Cliente cliente = new Cliente("Alfonso", "1234", LocalDate.of(2000,1,1));
-            //Reserva reserva = new Reserva(cliente,  LocalDate.of(2050,1,1), LocalTime.MIN, 0);
-            //Reserva reserva1 = new Reserva(cliente,  LocalDate.of(2070,1,1), LocalTime.MIN, 0);
-            //bar.nuevaReserva(cliente,  LocalDate.of(2050,1,1), LocalTime.MIN);
-            //bar.nuevaReserva(cliente,  LocalDate.of(2070,1,1), LocalTime.MIN);
+            Cliente cliente = new Cliente("Alfonso", "1234", LocalDate.of(2000,1,1));
+            Reserva reserva = new Reserva(cliente,  LocalDate.of(2050,1,1), LocalTime.MIN, 0);
+            Reserva reserva1 = new Reserva(cliente,  LocalDate.of(2070,1,1), LocalTime.MIN, 0);
+            bar.nuevaReserva(cliente,  LocalDate.of(2050,1,1), LocalTime.MIN);
+            bar.nuevaReserva(cliente,  LocalDate.of(2070,1,1), LocalTime.MIN);
             
             // XMLRepresentable: toXML
             String XMLbar = bar.toXML();
