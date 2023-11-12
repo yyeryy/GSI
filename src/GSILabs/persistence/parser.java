@@ -15,7 +15,6 @@ import GSILabs.BModel.Usuario;
 import GSILabs.BModel.Usuario.tipoUsuario;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -35,8 +34,7 @@ public class parser {
     /**
      * Crea un objeto Bar a partir de un String XML que le represente
      * @param str String que contiene el XML.
-     * @return Objeto bar creado a partir del XML 
-     * @throws java.io.IOException Problema con la lista de propietarios
+     * @return Objeto bar creado a partir del XML
      * @throws GSILabs.persistence.XMLParsingException
      */
     public static Bar parseBar(String str) throws XMLParsingException{
@@ -549,9 +547,9 @@ public class parser {
         String strValoracion = obtenerContenidoEtiqueta(str,"valoracion");
         String strComentario = obtenerContenidoEtiqueta(str,"comentario");
         String strFecha = obtenerContenidoEtiqueta(str,"fecha");
-        String strLocal = obtenerContenidoEtiqueta(str,"local");
-        String strUsuario = obtenerContenidoEtiqueta(str,"usuario");
-        String strConstestacion = obtenerContenidoEtiqueta(str,"constestacion");
+        String strLocal = obtenerContenidoEtiqueta(str,"Local");
+        String strUsuario = obtenerContenidoEtiqueta(str,"Usuario");
+        String strConstestacion = obtenerContenidoEtiqueta(str,"Contestacion");
     
         // Comprobar validez XML
         if(null == strValoracion) throw new XMLParsingException("Valoracion vacio o invalido.");
