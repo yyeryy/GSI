@@ -54,11 +54,9 @@ public class TestReview {
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
-            
-            
             // XMLRepresentable: saveToXML a partir de su review
-            String filepath = "XMLPub2.txt";
-            boolean esFicheroCreado2 = direccion.saveToXML(filepath);
+            String filepath = "XMLReview2.txt";
+            boolean esFicheroCreado2 = review.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
             
