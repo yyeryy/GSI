@@ -30,62 +30,34 @@ public class TestPub {
             
             // Generar Pub
             Pub pub = new Pub(horaApertura, horaClausura, nombre, direccion, descripcion, propietarios.get(0));
+            pub.addPropietario(propietarios.get(1));
             
             // XMLRepresentable: toXML
-            /*String XMLpub = pub.toXML();
-            System.out.println("String generado por pub.toXML():\n" + XMLpub);*/
-            System.out.println("pub.toXML() TENEIS QUE ARREGLARLO");
+            String XMLpub = pub.toXML();
+            System.out.println("String generado por pub.toXML():\n" + XMLpub);
             
             // XMLRepresentable: saveToXML a partir de File
-            /*String pathname = "XMLPub1.txt";
+            String pathname = "XMLPub1.txt";
             File file = new File(pathname);
             boolean esFicheroCreado1 = pub.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
-            else System.out.println("Error en la creacion del fichero 1");*/
-            System.out.println("local.saveToXML() TENEIS QUE ARREGLARLO");
-            
-            /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-            // Los .toXML ya tienen el <algo>   </algo>
-            // Las substring son para quital el  <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-            String XMLPub = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-            XMLPub += "<Pub>\n";
-            XMLPub += "<horaApertura>" + pub.getHoraApertura() + "</horaApertura>\n";
-            XMLPub += "<horaClausura>" + pub.getHoraClausura() + "</horaClausura>\n";
-            XMLPub += "<nombre>" + pub.getNombre() + "</nombre>\n";
-            XMLPub += "" + direccion.toXML().substring(39, direccion.toXML().length()) + "\n";
-            XMLPub += "<descripcion>" + descripcion + "</descripcion>\n";
-            XMLPub += "" + propietarios.get(0).toXML().substring(39, propietarios.get(0).toXML().length())  + "\n";
-            XMLPub += "" + propietarios.get(1).toXML().substring(39, propietarios.get(1).toXML().length()) + "\n";
-            XMLPub += "</Pub>\n";
-            System.out.println("XMLPub temporal:\n" + XMLPub);
-            /* FIN A BORRAR */
+            else System.out.println("Error en la creacion del fichero 1");
             
             // XMLRepresentable: saveToXML a partir de su pub
-            /*String filepath = "XMLPub2.txt";
-            boolean esFicheroCreado2 = direccion.saveToXML(filepath);
+            String filepath = "XMLPub2.txt";
+            boolean esFicheroCreado2 = pub.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
-            else System.out.println("Error en la creacion del fichero 2");*/
-            
-            /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-            File file = new File("XMLPub2.txt");
-            try (FileWriter fileWriter = new FileWriter(file)) {
-                fileWriter.write(XMLPub);
-            } catch (IOException e) {
-                System.out.println("No se ha podido escribir");
-            }
-            /* FIN A BORRAR */
+            else System.out.println("Error en la creacion del fichero 2");
             
             // Obtener objeto del String XML
-            Pub pub2 = parsePub(XMLPub);
+            Pub pub2 = parsePub(XMLpub);
             System.out.println("\nTest 1 (String: toXML + parsePub): " + (pub.equals(pub2)));
             
             // Obtener objeto del fichero XML
             Pub pub3 = parsePub(new File("XMLPub2.txt"));
             System.out.println("Test 2 (File: toXML + parsePub(pub)): " + (pub.equals(pub3)));
-            //System.out.println(local2.toString());
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestPub.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /* FIN A BORRAR */
     }
 }
