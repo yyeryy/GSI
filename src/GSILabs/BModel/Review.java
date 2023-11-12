@@ -144,18 +144,26 @@ public class Review implements XMLRepresentable{
 
     @Override
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        xmlData += "<Review>\n";
-        xmlData += "    <valoracion>" + this.getValoracion() + "</valoracion>\n";
-        xmlData += "    <comentario>" + this.getComentario() + "</comentario>\n";
-        xmlData += "    <fecha>" + this.getFechaReview() + "</fecha>\n";
         String[] partes;
+        String xmlData = "";
+        // Cabecera
+        xmlData += "<Review>\n";
+        // Valoracion
+        xmlData += "<valoracion>" + this.getValoracion() + "</valoracion>\n";
+        // Comentario
+        xmlData += "<comentario>" + this.getComentario() + "</comentario>\n";
+        // Fecha
+        xmlData += "<fecha>" + this.getFechaReview() + "</fecha>\n";
+        // Local
         partes = this.getLocal().toXML().split("<Local>", 2);
-        xmlData += "    <Local>" + partes[1] + "\n";
+        xmlData += "<Local>" + partes[1];
+        // Usuario
         partes = this.getUsuario().toXML().split("<Usuario>", 2);
-        xmlData += "    <Usuario>" + partes[1] + "\n";
+        xmlData += "<Usuario>" + partes[1];
+        // Contestacion
         partes = this.getContestacion().toXML().split("<Contestacion>", 2);
-        xmlData += "    <Contestacion>" + partes[1] + "\n";
+        xmlData += "<Contestacion>" + partes[1];
+        // Cierre
         xmlData += "</Review>\n";
         return xmlData;
     }

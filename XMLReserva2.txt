@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <Reserva>
 <Cliente>
-    <nick>Yeray</nick>
-    <contraseña>6666</contraseña>
-    <fechaNacimiento>2003-11-12</fechaNacimiento>
+<nick>Yeray</nick>
+<contraseña>6666</contraseña>
+<fechaNacimiento>2003-11-12</fechaNacimiento>
 </Cliente>
-
-    <hora>17:28</hora>
-    <fecha>2024-11-12</fecha>
-    <descuento>10</descuento>
+<hora>19:56</hora>
+<fecha>2024-11-12</fecha>
+<descuento>10</descuento>
 </Reserva>

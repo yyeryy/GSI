@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BModel;
 
 import java.time.LocalDate;
@@ -95,13 +91,18 @@ public class Contestacion implements XMLRepresentable{
 
     @Override
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        xmlData += "<Contestacion>\n";
-        xmlData += "\t<comentario>" + this.getComentario() + "</comentario>\n";
-        xmlData += "\t<fecha>" + this.getFechaReview() + "</fecha>\n";
         String[] partes;
+        String xmlData = "";
+        // Cabecera
+        xmlData += "<Contestacion>\n";
+        // Comentario
+        xmlData += "<comentario>" + this.getComentario() + "</comentario>\n";
+        // Fecha
+        xmlData += "<fecha>" + this.getFechaReview() + "</fecha>\n";
+        // Local
         partes = this.getLocal().toXML().split("<Local>", 2);
-        xmlData += "\t<Local>" + partes[1] + "\n";
+        xmlData += "<Local>" + partes[1];
+        // Cierre
         xmlData += "</Contestacion>\n";
         return xmlData;
     }

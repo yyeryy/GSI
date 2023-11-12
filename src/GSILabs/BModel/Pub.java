@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BModel;
 
 import java.util.Objects;
@@ -89,20 +85,25 @@ public class Pub extends Local implements XMLRepresentable{
     public String toXML() {
         String[] partes;
         String xmlData = "";
+        // Cabecera
         xmlData += "<Pub>\n";
-        xmlData += "    <horaApertura>" + this.getHoraApertura() + "</horaApertura>\n";
-        xmlData += "    <horaClausura>" + this.getHoraClausura() + "</horaClausura>\n";
-        xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
-
+        // Hora de Apertura
+        xmlData += "<horaApertura>" + this.getHoraApertura() + "</horaApertura>\n";
+        // Hora de Cierre
+        xmlData += "<horaClausura>" + this.getHoraClausura() + "</horaClausura>\n";
+        // Nombre
+        xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
+        // Direccion
         partes = this.getDireccion().toXML().split("<Direccion>", 2);
-        xmlData += "<Direccion>" + partes[1] + "\n";
-
-        xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
-
+        xmlData += "<Direccion>" + partes[1];
+        // Descripcion
+        xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
+        // Propietario
         for(int i = 0; i<this.getPropietarios().size(); i++){
             partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
-            xmlData += "<Propietario>" + partes[1] + "\n";
+            xmlData += "<Propietario>" + partes[1];
         }
+        // Cierre
         xmlData += "</Pub>\n";
         return xmlData;
     }

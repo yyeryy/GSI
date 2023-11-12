@@ -1,50 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <Bar>
 <nombre>Ana</nombre>
 <Direccion>
-    <localidad>Chusmalandia</localidad>
-    <provincia>Marruecos</provincia>
-    <calle>PerezaDeVida</calle>
-    <numero>66</numero>
+<localidad>Chusmalandia</localidad>
+<provincia>Marruecos</provincia>
+<calle>PerezaDeVida</calle>
+<numero>66</numero>
 </Direccion>
-
 <descripcion>Quiero dormir</descripcion>
 <Propietario>
-    <nick>Maria</nick>
-    <contraseña>1234</contraseña>
-    <fechaNacimiento>2005-11-12</fechaNacimiento>
+<nick>Maria</nick>
+<contraseña>1234</contraseña>
+<fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
-
 <Propietario>
-    <nick>Carmen</nick>
-    <contraseña>4321</contraseña>
-    <fechaNacimiento>1973-11-12</fechaNacimiento>
+<nick>Carmen</nick>
+<contraseña>4321</contraseña>
+<fechaNacimiento>1973-11-12</fechaNacimiento>
 </Propietario>
-
 <Reserva>
 <Cliente>
-    <nick>Alfonso</nick>
-    <contraseña>1234</contraseña>
-    <fechaNacimiento>2000-01-01</fechaNacimiento>
+<nick>Alfonso</nick>
+<contraseña>1234</contraseña>
+<fechaNacimiento>2000-01-01</fechaNacimiento>
 </Cliente>
-
-    <hora>00:00</hora>
-    <fecha>2050-01-01</fecha>
-    <descuento>0</descuento>
+<hora>00:00</hora>
+<fecha>2050-01-01</fecha>
+<descuento>0</descuento>
 </Reserva>
-
 <Reserva>
 <Cliente>
-    <nick>Alfonso</nick>
-    <contraseña>1234</contraseña>
-    <fechaNacimiento>2000-01-01</fechaNacimiento>
+<nick>Alfonso</nick>
+<contraseña>1234</contraseña>
+<fechaNacimiento>2000-01-01</fechaNacimiento>
 </Cliente>
-
-    <hora>00:00</hora>
-    <fecha>2070-01-01</fecha>
-    <descuento>0</descuento>
+<hora>00:00</hora>
+<fecha>2070-01-01</fecha>
+<descuento>0</descuento>
 </Reserva>
-
 <especialidad>Mexicano</especialidad>
 <especialidad>Italiano</especialidad>
 </Bar>

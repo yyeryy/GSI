@@ -154,12 +154,18 @@ public class Usuario {
     }
     
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
+        // Cabecera
         xmlData += "<Usuario>\n";
-        xmlData += "\t<nick>" + this.getNick() + "</nick>\n";
-        xmlData += "\t<contraseña>" + this.getContraseña() + "</contraseña>\n";
-        xmlData += "\t<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
-        xmlData += "\t<tipo>" + this.getTipo().toString() + "</tipo>\n";
+        // Nick
+        xmlData += "<nick>" + this.getNick() + "</nick>\n";
+        // Contraseña
+        xmlData += "<contraseña>" + this.getContraseña() + "</contraseña>\n";
+        // Fecha naciemiento
+        xmlData += "<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        // Tipo
+        xmlData += "<tipo>" + this.getTipo().toString() + "</tipo>\n";
+        // Cierre
         xmlData += "</Usuario>\n";
         return xmlData;
     }

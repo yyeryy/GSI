@@ -168,20 +168,24 @@ public class Local{
     
     public String toXML() {
         String[] partes;
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
+        // Cabecera
         xmlData += "<Local>\n";
+        // Nombre
         xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
-
+        // Direccion
         partes = this.getDireccion().toXML().split("<Direccion>", 2);
-        xmlData += "<Direccion>" + partes[1] + "\n";
-
+        xmlData += "<Direccion>" + partes[1];
+        // Descripcion
         xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
+        // Tipo
         xmlData += "<tipo>" + this.getTipo().toString()+ "</tipo>\n";
-
+        // Propietario
         for(int i = 0; i<this.getPropietarios().size(); i++){
             partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
-            xmlData += "<Propietario>" + partes[1] + "\n";
+            xmlData += "<Propietario>" + partes[1];
         }
+        // Cierre
         xmlData += "</Local>\n";
         return xmlData;
     }

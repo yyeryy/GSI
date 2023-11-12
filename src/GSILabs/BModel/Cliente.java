@@ -50,11 +50,16 @@ public class Cliente extends Usuario implements XMLRepresentable{
 
     @Override
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
+        // Cabecera
         xmlData += "<Cliente>\n";
-        xmlData += "    <nick>" + this.getNick() + "</nick>\n";
-        xmlData += "    <contraseña>" + this.getContraseña() + "</contraseña>\n";
-        xmlData += "    <fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        // Nick
+        xmlData += "<nick>" + this.getNick() + "</nick>\n";
+        // Contraseña
+        xmlData += "<contraseña>" + this.getContraseña() + "</contraseña>\n";
+        // Fecha de naciemiento
+        xmlData += "<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        // Cierre
         xmlData += "</Cliente>\n";
         return xmlData;
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BModel;
 
 import java.time.LocalDate;
@@ -54,11 +50,16 @@ public class Propietario extends Usuario implements XMLRepresentable{
     
     @Override
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
+        // Cabecera
         xmlData += "<Propietario>\n";
-        xmlData += "    <nick>" + this.getNick() + "</nick>\n";
-        xmlData += "    <contraseña>" + this.getContraseña() + "</contraseña>\n";
-        xmlData += "    <fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        // Nick
+        xmlData += "<nick>" + this.getNick() + "</nick>\n";
+        // Contraseña
+        xmlData += "<contraseña>" + this.getContraseña() + "</contraseña>\n";
+        // Fecha de Nacimiento
+        xmlData += "<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
+        // Cierre
         xmlData += "</Propietario>\n";
         return xmlData;
     }

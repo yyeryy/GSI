@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BModel;
 
-import GSILabs.persistence.XMLParsingException;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
@@ -122,27 +117,30 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
     @Override
     public String toXML() {
         String[] partes;
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
+        // Cabecera
         xmlData += "<Bar>\n";
+        // Nombre
         xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
-       
+        // Direccion
         partes = this.getDireccion().toXML().split("<Direccion>", 2);
-        xmlData += "<Direccion>" + partes[1] + "\n";
-
+        xmlData += "<Direccion>" + partes[1];
+        // Descripcion
         xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
         for(int i = 0; i<this.getPropietarios().size(); i++){
             partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
-            xmlData += "<Propietario>" + partes[1] + "\n";
-        }/*Y reservas???? pista, utilizar this.listaReserva.size() y lo mismo en Restaurante*/
-
+            xmlData += "<Propietario>" + partes[1];
+        }
+        // Reservas
         for(int i = 0; i < this.listaReserva.size(); i++){
             partes = this.listaReserva.get(i).toXML().split("<Reserva>", 2);
-            xmlData += "<Reserva>" + partes[1] + "\n";
+            xmlData += "<Reserva>" + partes[1];
         }
-
+        // Especialidades
         for(int i = 0;i<this.getEspecialidades().size();i++){
             xmlData += "<especialidad>" + this.getEspecialidades().get(i) + "</especialidad>\n";
         }
+        // Cierre
         xmlData += "</Bar>\n";
         return xmlData;
     }

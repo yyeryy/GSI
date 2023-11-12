@@ -99,12 +99,18 @@ public class Direccion implements XMLRepresentable{
 
     @Override
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
+        // Cabecera
         xmlData += "<Direccion>\n";
-        xmlData += "    <localidad>" + this.getLocalidad() + "</localidad>\n";
-        xmlData += "    <provincia>" + this.getProvincia() + "</provincia>\n";
-        xmlData += "    <calle>" + this.getCalle() + "</calle>\n";
-        xmlData += "    <numero>" + this.getNumero() + "</numero>\n";
+        // Localidad
+        xmlData += "<localidad>" + this.getLocalidad() + "</localidad>\n";
+        // Provincia
+        xmlData += "<provincia>" + this.getProvincia() + "</provincia>\n";
+        // Calle
+        xmlData += "<calle>" + this.getCalle() + "</calle>\n";
+        // Numero
+        xmlData += "<numero>" + this.getNumero() + "</numero>\n";
+        // Cierre
         xmlData += "</Direccion>\n";
         return xmlData;
     }
