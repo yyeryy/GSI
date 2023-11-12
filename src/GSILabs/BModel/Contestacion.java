@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.time.LocalDate;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
@@ -104,7 +105,7 @@ public class Contestacion implements XMLRepresentable{
         xmlData += "<Local>" + partes[1];
         // Cierre
         xmlData += "</Contestacion>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

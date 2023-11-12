@@ -45,20 +45,24 @@ public class TestBar {
             // XMLRepresentable: toXML
             String XMLbar = bar.toXML();
             System.out.println("String generado por bar.toXML():\n" + XMLbar);
+            
             // XMLRepresentable: saveToXML a partir de File
             String pathname = "XMLBar1.txt";
             File file = new File(pathname);
             boolean esFicheroCreado1 = bar.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
+            
             // XMLRepresentable: saveToXML a partir de su direccion
             String filepath = "XMLBar2.txt";
             boolean esFicheroCreado2 = bar.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
+            
             // Obtener objeto del String XML
             Bar bar2 = parseBar(XMLbar);
             System.out.println("\nTest 1 (String: toXML + parseBar): " + (bar.equals(bar2)));
+            
             // Obtener objeto del fichero XML
             Bar bar3 = parseBar(new File("XMLBar2.txt"));
             System.out.println("Test 2 (File: toXML + parseBar(bar)): " + (bar.equals(bar3)));
@@ -66,5 +70,4 @@ public class TestBar {
             Logger.getLogger(TestBar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 } 

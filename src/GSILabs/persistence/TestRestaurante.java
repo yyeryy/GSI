@@ -2,12 +2,9 @@ package GSILabs.persistence;
 
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Propietario;
-import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
-import static GSILabs.persistence.parser.parsePub;
 import static GSILabs.persistence.parser.parseRestaurante;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;

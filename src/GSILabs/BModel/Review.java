@@ -4,6 +4,7 @@
  */
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.time.LocalDate;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
@@ -165,7 +166,7 @@ public class Review implements XMLRepresentable{
         xmlData += "<Contestacion>" + partes[1];
         // Cierre
         xmlData += "</Review>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

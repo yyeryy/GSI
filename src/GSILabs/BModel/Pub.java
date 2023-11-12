@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
@@ -105,7 +106,7 @@ public class Pub extends Local implements XMLRepresentable{
         }
         // Cierre
         xmlData += "</Pub>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

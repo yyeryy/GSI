@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -108,7 +109,7 @@ public class Reserva implements XMLRepresentable{
         xmlData += "<fecha>" + this.getFecha() + "</fecha>\n";
         xmlData += "<descuento>" + this.getDescuento() + "</descuento>\n";
         xmlData += "</Reserva>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

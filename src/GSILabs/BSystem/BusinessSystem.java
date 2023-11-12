@@ -973,4 +973,25 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             //throw new XMLParsingException("Error al analizar el archivo XML");
         }
     }
+    
+    /**
+     * A partir de un string XML sin tabulaciones añade las tabulaciones pertinentes
+     * @param input string sin tabulaciones.
+     * @return string con tabulaciones.
+     */
+    public static String formatearXML(String input) {
+        // Eliminar tabulacion
+        input = input.replaceAll("\t", "");
+        StringBuilder stringBuilder = new StringBuilder();
+        int tabulacion = 0; // Nivel de tabulacion a meter tras salto de linea
+
+        String[] lineas = input.split("\n"); // Trocear por salto de linea
+        for (String linea : lineas) {
+            if (linea.startsWith("</")) {tabulacion--;} // Caso fin objeto
+            for (int i = 0; i < tabulacion; i++) {stringBuilder.append("\t");}
+            stringBuilder.append(linea).append("\n");
+            if (linea.matches(".*<[A-Z].*")) {tabulacion++;} // Caso de inicio objeto
+        }
+        return stringBuilder.toString();
+    }
 }

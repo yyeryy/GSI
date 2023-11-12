@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
@@ -150,7 +151,7 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
         xmlData += "<capacidadMesa>" + this.getCapacidadMesa() + "</capacidadMesa>\n";
         // Cierre
         xmlData += "</Restaurante>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

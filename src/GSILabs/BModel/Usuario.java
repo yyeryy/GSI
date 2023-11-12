@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -167,7 +168,7 @@ public class Usuario {
         xmlData += "<tipo>" + this.getTipo().toString() + "</tipo>\n";
         // Cierre
         xmlData += "</Usuario>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
     
     public boolean saveToXML(File f) {

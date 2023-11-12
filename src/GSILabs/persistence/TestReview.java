@@ -10,7 +10,6 @@ import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import static GSILabs.persistence.parser.parseReview;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,52 +44,26 @@ public class TestReview {
             review.setContestacion(contestacion);
             
             // XMLRepresentable: toXML
-            /*String XMLreview = review.toXML();
-            System.out.println("String generado por review.toXML():\n" + XMLreview);*/
-            System.out.println("review.toXML() TENEIS QUE ARREGLARLO");
+            String XMLreview = review.toXML();
+            System.out.println("String generado por review.toXML():\n" + XMLreview);
             
             // XMLRepresentable: saveToXML a partir de File
-            /*String pathname = "XMLReview1.txt";
+            String pathname = "XMLReview1.txt";
             File file = new File(pathname);
             boolean esFicheroCreado1 = review.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
-            else System.out.println("Error en la creacion del fichero 1");*/
-            System.out.println("review.saveToXML() TENEIS QUE ARREGLARLO");
+            else System.out.println("Error en la creacion del fichero 1");
             
-            /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-            // Los .toXML ya tienen el <algo>   </algo>
-            // Las substring son para quital el  <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-            String XMLReview = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-            XMLReview += "<Review>\n";
-            XMLReview += "\t<valoracion>" + review.getValoracion() + "</valoracion>\n";
-            XMLReview += "\t<comentario>" + review.getComentario()+ "</comentario>\n";
-            XMLReview += "\t<fecha>" + review.getFechaReview().toString() + "</fecha>\n";
-
-            XMLReview += "\t" + review.getLocal().toXML()+ "\n";
-            XMLReview += "\t" + review.getUsuario().toXML()+ "\n";
-            XMLReview += "\t" + review.getContestacion().toXML() + "\n";
-            XMLReview += "</Review>\n";
             
-            System.out.println("XMLReview temporal:\n" + XMLReview);
-            /* FIN A BORRAR .substring(39, propietarios.get(1).toXML().length())   */
             
             // XMLRepresentable: saveToXML a partir de su review
-            /*String filepath = "XMLPub2.txt";
+            String filepath = "XMLPub2.txt";
             boolean esFicheroCreado2 = direccion.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
-            else System.out.println("Error en la creacion del fichero 2");*/
-            
-            /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-            File file = new File("XMLReview2.txt");
-            try (FileWriter fileWriter = new FileWriter(file)) {
-                fileWriter.write(XMLReview);
-            } catch (IOException e) {
-                System.out.println("No se ha podido escribir");
-            }
-            /* FIN A BORRAR */
+            else System.out.println("Error en la creacion del fichero 2");
             
             // Obtener objeto del String XML
-            Review review2 = parseReview(XMLReview);
+            Review review2 = parseReview(XMLreview);
             System.out.println("\nTest 1 (String: toXML + parseReview): " + (review.equals(review2)));
             
             // Obtener objeto del fichero XML
@@ -99,8 +72,5 @@ public class TestReview {
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestReview.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /* FIN A BORRAR */
     }
 }
-
-// FALTA METER CONTESTACION

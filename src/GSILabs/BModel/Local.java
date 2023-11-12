@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -187,7 +188,7 @@ public class Local{
         }
         // Cierre
         xmlData += "</Local>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
     
     public boolean saveToXML(File f) {

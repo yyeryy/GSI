@@ -1,22 +1,22 @@
 <Pub>
-<horaApertura>23:00</horaApertura>
-<horaClausura>04:00</horaClausura>
-<nombre>Santa Chula</nombre>
-<Direccion>
-<localidad>Villava</localidad>
-<provincia>Navarra</provincia>
-<calle>Poligono</calle>
-<numero>69</numero>
-</Direccion>
-<descripcion>No eres consciente del navajazo que te van a meter aqui</descripcion>
-<Propietario>
-<nick>Carlos</nick>
-<contraseña>1234</contraseña>
-<fechaNacimiento>2005-11-12</fechaNacimiento>
-</Propietario>
-<Propietario>
-<nick>Aimar</nick>
-<contraseña>4321</contraseña>
-<fechaNacimiento>1973-11-12</fechaNacimiento>
-</Propietario>
+	<horaApertura>23:00</horaApertura>
+	<horaClausura>04:00</horaClausura>
+	<nombre>Santa Chula</nombre>
+	<Direccion>
+		<localidad>Villava</localidad>
+		<provincia>Navarra</provincia>
+		<calle>Poligono</calle>
+		<numero>69</numero>
+	</Direccion>
+	<descripcion>No eres consciente del navajazo que te van a meter aqui</descripcion>
+	<Propietario>
+		<nick>Carlos</nick>
+		<contraseña>1234</contraseña>
+		<fechaNacimiento>2005-11-12</fechaNacimiento>
+	</Propietario>
+	<Propietario>
+		<nick>Aimar</nick>
+		<contraseña>4321</contraseña>
+		<fechaNacimiento>1973-11-12</fechaNacimiento>
+	</Propietario>
 </Pub>

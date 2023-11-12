@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
@@ -112,7 +113,7 @@ public class Direccion implements XMLRepresentable{
         xmlData += "<numero>" + this.getNumero() + "</numero>\n";
         // Cierre
         xmlData += "</Direccion>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

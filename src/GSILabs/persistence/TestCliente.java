@@ -39,6 +39,7 @@ public class TestCliente {
             // Obtener objeto del String XML
             Cliente cliente2 = parseCliente(XMLcliente);
             System.out.println("\nTest 1 (String: toXML + parseCliente): " + (cliente.equals(cliente2)));
+            
             // Obtener objeto del fichero XML
             Cliente cliente3 = parseCliente(new File("XMLCliente2.txt"));
             System.out.println("Test 2 (File: toXML + parseCliente(cliente)): " + (cliente.equals(cliente3)));

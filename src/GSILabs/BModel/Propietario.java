@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import java.time.LocalDate;
 import java.util.Objects;
 import GSILabs.serializable.XMLRepresentable;
@@ -61,7 +62,7 @@ public class Propietario extends Usuario implements XMLRepresentable{
         xmlData += "<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
         // Cierre
         xmlData += "</Propietario>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

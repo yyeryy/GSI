@@ -1,0 +1,57 @@
+<Review>
+	<valoracion>9</valoracion>
+	<comentario>Muy buen local</comentario>
+	<fecha>2022-11-12</fecha>
+	<Local>
+		<nombre>Local estandar</nombre>
+		<Direccion>
+			<localidad>Burlada</localidad>
+			<provincia>Melilla</provincia>
+			<calle>Pereza</calle>
+			<numero>33</numero>
+		</Direccion>
+		<descripcion>Descripcion generica</descripcion>
+		<tipo>RESTAURANTE</tipo>
+		<Propietario>
+			<nick>Juanjo</nick>
+			<contraseña>1234</contraseña>
+			<fechaNacimiento>2005-11-12</fechaNacimiento>
+		</Propietario>
+		<Propietario>
+			<nick>Pepa</nick>
+			<contraseña>4321</contraseña>
+			<fechaNacimiento>2005-11-12</fechaNacimiento>
+		</Propietario>
+	</Local>
+	<Usuario>
+		<nick>Diego</nick>
+		<contraseña>6996</contraseña>
+		<fechaNacimiento>2005-11-12</fechaNacimiento>
+		<tipo>CLIENTE</tipo>
+	</Usuario>
+	<Contestacion>
+		<comentario>Me parece adecuado</comentario>
+		<fecha>2023-11-12</fecha>
+		<Local>
+			<nombre>Local estandar</nombre>
+			<Direccion>
+				<localidad>Burlada</localidad>
+				<provincia>Melilla</provincia>
+				<calle>Pereza</calle>
+				<numero>33</numero>
+			</Direccion>
+			<descripcion>Descripcion generica</descripcion>
+			<tipo>RESTAURANTE</tipo>
+			<Propietario>
+				<nick>Juanjo</nick>
+				<contraseña>1234</contraseña>
+				<fechaNacimiento>2005-11-12</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>Pepa</nick>
+				<contraseña>4321</contraseña>
+				<fechaNacimiento>2005-11-12</fechaNacimiento>
+			</Propietario>
+		</Local>
+	</Contestacion>
+</Review>

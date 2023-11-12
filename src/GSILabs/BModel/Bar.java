@@ -1,5 +1,6 @@
 package GSILabs.BModel;
 
+import static GSILabs.BSystem.BusinessSystem.formatearXML;
 import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
@@ -142,7 +143,7 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
         }
         // Cierre
         xmlData += "</Bar>\n";
-        return xmlData;
+        return formatearXML(xmlData);
     }
 
     @Override

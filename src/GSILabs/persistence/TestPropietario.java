@@ -39,6 +39,7 @@ public class TestPropietario {
             // Obtener objeto del String XML
             Propietario propietario2 = parsePropietario(XMLpropietario);
             System.out.println("\nTest 1 (String: toXML + parsePropietario): " + (propietario.equals(propietario2)));
+            
             // Obtener objeto del fichero XML
             Propietario propietario3 = parsePropietario(new File("XMLPropietario2.txt"));
             System.out.println("Test 2 (File: toXML + parsePropietario(propietario)): " + (propietario.equals(propietario3)));
