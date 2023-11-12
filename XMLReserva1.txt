@@ -4,10 +4,10 @@
 <Cliente>
     <nick>Yeray</nick>
     <contraseña>6666</contraseña>
-    <fechaNacimiento>2003-11-11</fechaNacimiento>
+    <fechaNacimiento>2003-11-12</fechaNacimiento>
 </Cliente>
 </cliente>
-    <hora>11:10</hora>
-    <fecha>2024-11-11</fecha>
+    <hora>16:20</hora>
+    <fecha>2024-11-12</fecha>
     <descuento>10</descuento>
 </Reserva>

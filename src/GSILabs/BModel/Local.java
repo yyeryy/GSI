@@ -174,8 +174,7 @@ public class Local{
         xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
         xmlData += "<tipo>" + this.getTipo().toString()+ "</tipo>\n";
         for(int i = 0; i<this.getPropietarios().size(); i++){
-            xmlData += "" + this.getPropietarios().get(i).toXML() + "\n";
-        }
+            xmlData += "" + this.getPropietarios().get(i).toXML() + "\n";}
         xmlData += "</Local>\n";
         return xmlData;
     }

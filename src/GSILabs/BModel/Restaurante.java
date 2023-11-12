@@ -121,14 +121,15 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
 
     @Override
     public String toXML() {
-        String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        String xmlData = "";
         xmlData += "<Restaurante>\n";
         xmlData += "    <nombre>" + this.getNombre() + "</nombre>\n";
-        xmlData += "    <direccion>" + this.getDireccion() + "</direccion>\n";
+        xmlData += "    <direccion>" + this.getDireccion().toXML() + "</direccion>\n";
         xmlData += "    <descripcion>" + this.getDescripcion() + "</descripcion>\n";
-        /*Y Propietarios esta mal implementado, es un PUTO ARRAY????*/
-        xmlData += "    <propietario>" + this.getPropietarios() + "</propietario>\n";
-        /*Y reservas???? (ES UNA ARRAY DE RESERVABLE....)*/
+        for(int i = 0; i<this.getPropietarios().size(); i++){
+            xmlData += "" + this.getPropietarios().get(i).toXML() + "\n";}
+        for(int i = 0; i < this.listaReserva.size(); i++){
+            xmlData += "" + this.listaReserva.get(i).toXML();}
         xmlData += "    <precioMenu>" + this.getPrecioMenu() + "</precioMenu>\n";
         xmlData += "    <capacidad>" + this.getCapacidad() + "</capacidad>\n";
         xmlData += "    <capacidadMesa>" + this.getCapacidadMesa() + "</capacidadMesa>\n";
