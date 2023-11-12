@@ -28,33 +28,12 @@ public class TestUsuario {
         boolean esFicheroCreado1 = usuario.saveToXML(file);
         if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
         else System.out.println("Error en la creacion del fichero 1");
-        //System.out.println("usuario.saveToXML() NO EXISTE AUN");
-        
-        /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-        /*String XMLusuario = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        XMLusuario += "<Usuario>\n";
-        XMLusuario += "\t<nick>" + nick + "</nick>\n";
-        XMLusuario += "\t<contraseña>" + contrasena + "</contraseña>\n";
-        XMLusuario += "\t<fechaNacimiento>" + fechaNacimiento + "</fechaNacimiento>\n";
-        XMLusuario += "\t<tipo>" + tipo.toString() + "</tipo>\n";
-        XMLusuario += "</Usuario>\n";
-        System.out.println("XMLusuario temporal:\n" + XMLusuario);*/
-        /* FIN A BORRAR */
         
         // XMLRepresentable: saveToXML a partir de su direccion
         String filepath = "XMLUsuario2.txt";
         boolean esFicheroCreado2 = usuario.saveToXML(filepath);
         if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
         else System.out.println("Error en la creacion del fichero 2");
-        
-        /* A BORRAR CUANDO LAS FUNCIONES ANTERIORES ESTEN */
-        /*File file = new File("XMLUsuario2.txt");
-        try (FileWriter fileWriter = new FileWriter(file)) {
-        fileWriter.write(XMLusuario);
-        } catch (IOException e) {
-            System.out.println("No se ha podido escribir");
-        }*/
-        /* FIN A BORRAR */
         
         // Obtener objeto del String XML
         Usuario usuario2 = parseUsuario(XMLusuario);

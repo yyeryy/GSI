@@ -2,7 +2,7 @@
 <Review>
 	<valoracion>9</valoracion>
 	<comentario>Muy buen local</comentario>
-	<fecha>2022-11-11</fecha>
+	<fecha>2022-11-12</fecha>
 	<local><?xml version="1.0" encoding="UTF-8"?>
 <Local>
 <nombre>Local estandar</nombre>
@@ -20,14 +20,14 @@
 <Propietario>
     <nick>Juanjo</nick>
     <contraseña>1234</contraseña>
-    <fechaNacimiento>2005-11-11</fechaNacimiento>
+    <fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Pepa</nick>
     <contraseña>4321</contraseña>
-    <fechaNacimiento>2005-11-11</fechaNacimiento>
+    <fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
 
 </Local>
@@ -36,14 +36,14 @@
 <Usuario>
 	<nick>Diego</nick>
 	<contraseña>6996</contraseña>
-	<fechaNacimiento>2005-11-11</fechaNacimiento>
+	<fechaNacimiento>2005-11-12</fechaNacimiento>
 	<tipo>CLIENTE</tipo>
 </Usuario>
 </usuario>
 	<contestacion><?xml version="1.0" encoding="UTF-8"?>
 <Contestacion>
 	<comentario>Me parece adecuado</comentario>
-	<fecha>2023-11-11</fecha>
+	<fecha>2023-11-12</fecha>
 	<local><?xml version="1.0" encoding="UTF-8"?>
 <Local>
 <nombre>Local estandar</nombre>
@@ -61,14 +61,14 @@
 <Propietario>
     <nick>Juanjo</nick>
     <contraseña>1234</contraseña>
-    <fechaNacimiento>2005-11-11</fechaNacimiento>
+    <fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <Propietario>
     <nick>Pepa</nick>
     <contraseña>4321</contraseña>
-    <fechaNacimiento>2005-11-11</fechaNacimiento>
+    <fechaNacimiento>2005-11-12</fechaNacimiento>
 </Propietario>
 
 </Local>
