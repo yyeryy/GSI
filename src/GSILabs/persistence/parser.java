@@ -172,13 +172,32 @@ public class parser {
         String strComentario = obtenerContenidoEtiqueta(str, "comentario");
         String strFecha = obtenerContenidoEtiqueta(str, "fecha");
         String strLocal = obtenerContenidoEtiqueta(str, "Local");
+
+        Local local = null;
+        if(null == strLocal){
+            strLocal = obtenerContenidoEtiqueta(str, "Bar");
+            if(null == strLocal){
+                strLocal = obtenerContenidoEtiqueta(str, "Restaurante");
+                if(null == strLocal){
+                    strLocal = obtenerContenidoEtiqueta(str, "Pub");
+                    if(null != strLocal){
+                        local = parsePub(strLocal);
+                    }
+                }else{
+                    local = parseRestaurante(strLocal);
+                }
+            }else{
+                local = parseBar(strLocal);
+            }
+        }else{
+            local = parseLocal(strLocal);
+        }
         
         // Comprobar validez XML
         if(null == strComentario) throw new XMLParsingException("Comentario vacio o invalido.");
         if(null == strFecha) throw new XMLParsingException("Fecha vacia o invalida.");
         if(null == strLocal) throw new XMLParsingException("Local  vacia o invalida.");
 
-        Local local = parseLocal(strLocal);
         // Crear objetos que se usan para crear propietario
         Contestacion contestacion = new Contestacion(strComentario, LocalDate.parse(strFecha), local);
         
@@ -552,9 +571,45 @@ public class parser {
         String strComentario = obtenerContenidoEtiqueta(str,"comentario");
         String strFecha = obtenerContenidoEtiqueta(str,"fecha");
         String strLocal = obtenerContenidoEtiqueta(str,"Local");
+
+        Local local = null;
+        if(null == strLocal){
+            strLocal = obtenerContenidoEtiqueta(str, "Bar");
+            if(null == strLocal){
+                strLocal = obtenerContenidoEtiqueta(str, "Restaurante");
+                if(null == strLocal){
+                    strLocal = obtenerContenidoEtiqueta(str, "Pub");
+                    if(null != strLocal){
+                        local = parsePub(strLocal);
+                    }
+                }else{
+                    local = parseRestaurante(strLocal);
+                }
+            }else{
+                local = parseBar(strLocal);
+            }
+        }else{
+            local = parseLocal(strLocal);
+        }
+
         String strUsuario = obtenerContenidoEtiqueta(str,"Usuario");
-        String strConstestacion = obtenerContenidoEtiqueta(str,"Contestacion");
+        Usuario usuario = null;
+        if(null == strUsuario){
+            strUsuario = obtenerContenidoEtiqueta(str, "Cliente");
+            if(null == strUsuario){
+                strUsuario = obtenerContenidoEtiqueta(str, "Propietario");
+                if(null != strUsuario){
+                    usuario = parsePropietario(strUsuario);
+                }
+            }else{
+                usuario = parseCliente(strUsuario);
+            }
+        }else{
+            usuario = parseUsuario(strUsuario);
+        }
     
+        String strConstestacion = obtenerContenidoEtiqueta(str,"Contestacion");
+
         // Comprobar validez XML
         if(null == strValoracion) throw new XMLParsingException("Valoracion vacio o invalido.");
         if(null == strComentario) throw new XMLParsingException("Comentario vacia o invalida.");
@@ -563,8 +618,7 @@ public class parser {
         if(null == strUsuario) throw new XMLParsingException("Usuario vacio o invalido.");
         if(null == strConstestacion) throw new XMLParsingException("Contestacion vacia o invalida.");
 
-        Usuario usuario = parseUsuario(strUsuario);
-        Local local = parseLocal(strLocal);
+
         Contestacion contestacion = parseContestacion(strConstestacion);
         // Crear objetos que se usan para crear propietario
         Review review = new Review(Integer.parseInt(strValoracion), strComentario, LocalDate.parse(strFecha), local, usuario);

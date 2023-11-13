@@ -1,7 +1,7 @@
 <Contestacion>
 	<comentario>Tendremos en cuenta su opinion</comentario>
-	<fecha>2023-11-12</fecha>
-	<Local>
+	<fecha>2023-11-13</fecha>
+	<Bar>
 		<nombre>Santa chula</nombre>
 		<Direccion>
 			<localidad>Burlada</localidad>
@@ -10,16 +10,15 @@
 			<numero>33</numero>
 		</Direccion>
 		<descripcion>Restaurante deluxe</descripcion>
-		<tipo>RESTAURANTE</tipo>
 		<Propietario>
 			<nick>Juanjo</nick>
 			<contraseña>1234</contraseña>
-			<fechaNacimiento>2005-11-12</fechaNacimiento>
+			<fechaNacimiento>2005-11-13</fechaNacimiento>
 		</Propietario>
 		<Propietario>
 			<nick>Pepa</nick>
 			<contraseña>4321</contraseña>
-			<fechaNacimiento>1973-11-12</fechaNacimiento>
+			<fechaNacimiento>1973-11-13</fechaNacimiento>
 		</Propietario>
-	</Local>
+	</Bar>
 </Contestacion>

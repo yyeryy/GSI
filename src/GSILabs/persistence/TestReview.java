@@ -1,5 +1,6 @@
 package GSILabs.persistence;
 
+import GSILabs.BModel.Bar;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
@@ -31,7 +32,7 @@ public class TestReview {
             propietarios.add(propietario1);
             Propietario propietario2 = new Propietario("Pepa", "4321", LocalDate.of(LocalDate.now().getYear()-18,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()));
             propietarios.add(propietario2);
-            Local local = new Local("Local estandar", direccion, "Descripcion generica", RESTAURANTE, propietarios.get(0));
+            Bar local = new Bar("Local estandar", direccion, "Descripcion generica", propietarios.get(0));
             local.addPropietario(propietarios.get(1));
             //F LOCAL
             
