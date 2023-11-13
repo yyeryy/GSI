@@ -17,7 +17,21 @@ import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import GSILabs.persistence.XMLParsingException;
 import GSILabs.persistence.XMLWritingException;
+import static GSILabs.persistence.parser.obtenerContenidoEtiqueta;
+import static GSILabs.persistence.parser.parseBar;
+import static GSILabs.persistence.parser.parseCliente;
+import static GSILabs.persistence.parser.parseDireccion;
+import static GSILabs.persistence.parser.parseLocal;
+import static GSILabs.persistence.parser.parsePropietario;
+import static GSILabs.persistence.parser.parsePub;
+import static GSILabs.persistence.parser.parseReserva;
+import static GSILabs.persistence.parser.parseRestaurante;
+import static GSILabs.persistence.parser.parseReview;
+import static GSILabs.persistence.parser.parseUsuario;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -25,6 +39,7 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -938,6 +953,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         xmlData += "<BusinessSystem>\n";
 
         // Usuarios
+        xmlData += "<Usuarios>\n";
         for(int i = 0; i < this.usuarios.size(); i++){
 
             partes = this.usuarios.get(i).toXML().split("<Usuario>", 2);
@@ -955,7 +971,9 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                 }
             }
         }
+        xmlData += "</Usuarios>\n";
 
+        xmlData += "<Reviews>\n";
         //Reviews
         for(int i = 0; i < this.reviews.size(); i++){
             partes = this.reviews.get(i).toXML().split("<Review>", 2);
@@ -963,7 +981,9 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                 xmlData += "<Review>" + partes[1];
             }
         }
+        xmlData += "</Reviews>\n";
 
+        xmlData += "<Locales>\n";
         // Locales
         for(int i = 0; i < this.locales.size(); i++){
             partes = this.locales.get(i).toXML().split("<Local>", 2);
@@ -986,13 +1006,12 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                 }
             }
         }
+        xmlData += "</Locales>\n";
 
         // Cierre
         xmlData += "</BusinessSystem>\n";
         return formatearXML(xmlData);
     }
-
-
 
 
 
@@ -1003,28 +1022,130 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      * @throws XMLParsingException
      * Parsea un fichero XML.
      */
-    public static BusinessSystem parseXMLFile(File f) throws XMLParsingException {
-        try {
-            //Instancia de BusinessSystem
-            BusinessSystem businessSystem = new BusinessSystem();
-            //Creación de un constructor de documentos
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    public static BusinessSystem parseXMLFile(File f) throws XMLParsingException, IOException {        
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        // Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        // Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
+        String str = contenido;
 
-            //Análisis del archivo XML
-            Document doc = dBuilder.parse(f);
 
-            //Normalización del documento
-            doc.getDocumentElement().normalize();
+        String strUsuariosTodos = obtenerContenidoEtiqueta(str,"Usuarios");
+        List<Usuario> usuarios = new ArrayList<>();
+        String strLocalesTodos = obtenerContenidoEtiqueta(str,"Locales");
+        List<Local> locales = new ArrayList<>();
+        String strReviewsTodos = obtenerContenidoEtiqueta(str,"Reviews");
+        List<Review> reviews = new ArrayList<>();
 
-            //Si el fichero XML se ha cargado correctamente devolvemos true
-            return businessSystem;
-        
-        //Si por el contrario ocurre algún error devolvemos false.
-        } catch (Exception e) {
-            // Lanzar una excepción personalizada XMLParsingException
-            throw new XMLParsingException("Error al analizar el archivo XML");
+
+        // Para todos los Usuarios
+        if(strUsuariosTodos != null){
+
+            List<String> strPropietarios = new ArrayList<>();
+            for(String strPropietario : strUsuariosTodos.split("<Propietario>")){
+                strPropietarios.add(obtenerContenidoEtiqueta("<Propietario>"+strPropietario+"</Propietario>", "Propietario"));
+            }
+            strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strClientes = new ArrayList<>();
+            for(String strCliente : strUsuariosTodos.split("<Cliente>")){
+                strClientes.add(obtenerContenidoEtiqueta("<Cliente>"+strCliente+"</Cliente>", "Cliente"));
+            }
+            strClientes.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strUsuarios = new ArrayList<>();
+            for(String strUsuario : strUsuariosTodos.split("<Usuario>")){
+                strUsuarios.add(obtenerContenidoEtiqueta("<Usuario>"+strUsuario+"</Usuario>", "Usuario"));
+            }
+            strUsuarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strPropietario : strPropietarios){
+                usuarios.add(parsePropietario(strPropietario));
+            }
+            for(String strCliente : strClientes){
+                usuarios.add(parseCliente(strCliente));
+            }
+            for(String strUsuario : strUsuarios){
+                usuarios.add(parseUsuario(strUsuario));
+            }
         }
+
+
+        // Para todos los Locales
+        if(strLocalesTodos != null){
+
+            List<String> strLocales = new ArrayList<>();
+            for(String strLocal : strLocalesTodos.split("<Local>")){
+                strLocales.add(obtenerContenidoEtiqueta("<Local>"+strLocal+"</Local>", "Local"));
+            }
+            strLocales.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strBares = new ArrayList<>();
+            for(String strBar : strLocalesTodos.split("<Bar>")){
+                strBares.add(obtenerContenidoEtiqueta("<Bar>"+strBar+"</Bar>", "Bar"));
+            }
+            strBares.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strPubs = new ArrayList<>();
+            for(String strPub : strLocalesTodos.split("<Pub>")){
+                strPubs.add(obtenerContenidoEtiqueta("<Pub>"+strPub+"</Pub>", "Pub"));
+            }
+            strPubs.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strRestaurantes = new ArrayList<>();
+            for(String strRestaurante : strLocalesTodos.split("<Restaurante>")){
+                strRestaurantes.add(obtenerContenidoEtiqueta("<Restaurante>"+strRestaurante+"</Restaurante>", "Restaurante"));
+            }
+            strRestaurantes.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strLocal : strLocales){
+                locales.add(parseLocal(strLocal));
+            }
+            for(String strBar : strBares){
+                locales.add(parseBar(strBar));
+            }
+            for(String strPub : strPubs){
+                locales.add(parsePub(strPub));
+            }
+            for(String strRestaurante : strRestaurantes){
+                locales.add(parseRestaurante(strRestaurante));
+            }
+        }
+
+        // Para todos las Reviews
+        if(strReviewsTodos != null){
+            List<String> strReviews = new ArrayList<>();
+            for(String strReview : strReviewsTodos.split("<Review>")){
+                strReviews.add(obtenerContenidoEtiqueta("<Review>"+strReview+"</Review>", "Review"));
+            }
+            strReviews.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strReview : strReviews){
+                reviews.add(parseReview(strReview));
+            }
+        }
+        // Instancia de BusinessSystem
+        BusinessSystem bs = new BusinessSystem();
+
+        // Añadir Usuarios
+        for(int i = 0; i < usuarios.size(); i++){
+            bs.nuevoUsuario(usuarios.get(i));
+        }
+
+        // Añadir Locales
+        for(int i = 0; i < locales.size(); i++){
+            bs.nuevoLocal(locales.get(i));
+        }
+        for(int i = 0; i < reviews.size(); i++){
+            bs.nuevaReview(reviews.get(i));
+        }
+
+        return bs;
+        
+
     }
     
     public boolean saveToXML(File f) {
@@ -1047,16 +1168,8 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      * @throws GSILabs.persistence.XMLWritingException
      */
     public boolean writeXMLFile(File f) throws XMLWritingException{
-        try{
-            for (Usuario usuario : this.usuarios) {
-                usuario.saveToXML(f);
-            }
-            for (Review review: this.reviews){
-                review.saveToXML(f);
-            }
-            for (Local local: this.locales){
-                local.saveToXML(f);
-            }
+        try{          
+            saveToXML(f);
             return true;
         }catch(Exception exception){
             return false;

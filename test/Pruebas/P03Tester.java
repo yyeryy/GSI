@@ -7,8 +7,11 @@ package Pruebas;
 
 import GSILabs.BSystem.BusinessSystem;
 import GSILabs.persistence.XMLParsingException;
+import java.io.BufferedReader;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Clase BusinessSystem
@@ -19,7 +22,7 @@ import java.io.File;
  */
 public class P03Tester {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if(testParseXMLFile()){
             System.out.println("Test de ParseXMLFile completado");
         }else{
@@ -31,12 +34,27 @@ public class P03Tester {
         }
     }
 
-    public static boolean testParseXMLFile() {
+    public static boolean testParseXMLFile() throws IOException {
         try {
-            File xmlFile = new File("XMLCliente1.txt");
+            File xmlFile = new File("bs.xml");
             BusinessSystem businessSystem = BusinessSystem.parseXMLFile(xmlFile);
 
-            return businessSystem != null;
+            // Leer otra vez el fichero
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(xmlFile));
+            // Leer fichero
+            String contenido = "";
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+            // Comprobar si esta vacio
+            if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
+            String str = contenido;
+
+
+            // Clientes iguales
+            System.out.println(businessSystem.toXML()); 
+            // No se como comprobar que tiene todos los datos iguales
+            // Seguramente esten desosrdenados 
+            return businessSystem.toXML() == contenido;
         } catch (XMLParsingException e) {
             return false;
         }
@@ -44,7 +62,7 @@ public class P03Tester {
 
     public static boolean testLoadXMLFile() {
         try {
-            File xmlFile = new File("XMLCliente1.txt");
+            File xmlFile = new File("bs.xml");
 
             return BusinessSystem.loadXMLFile(xmlFile);
         } catch (XMLParsingException ex) {

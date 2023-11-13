@@ -82,9 +82,6 @@ public class TestBS {
         restaurante2.nuevaReserva(reserva6.getCliente(), reserva6.getFecha(), reserva6.getHora());
         */
 
-
-
-        
         // Introducir los datos en el sistema
         BusinessSystem bs = new BusinessSystem();
         bs.nuevoUsuario(propietario1);

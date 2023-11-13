@@ -1,6 +1,7 @@
 package GSILabs.BModel;
 
 import static GSILabs.BSystem.BusinessSystem.formatearXML;
+import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.Objects;
  * del mismo. No se permiten usuario de menos de 14 años. Cada usuario debe tener un perfil
  * determinado, a escoger entre Propietario y Cliente.
  */
-public class Usuario {
+public class Usuario implements XMLRepresentable{
 
     private String nick;
     private String contraseña;

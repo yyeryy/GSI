@@ -622,7 +622,7 @@ public class parser {
 
         // Crear objetos que se usan para crear propietario
         Review review = new Review(Integer.parseInt(strValoracion), strComentario, LocalDate.parse(strFecha), local, usuario);
-        if(strConstestacion == null){
+        if(strConstestacion != null){
             Contestacion contestacion = parseContestacion(strConstestacion);
             review.setContestacion(contestacion);  
         }   

@@ -1,6 +1,7 @@
 package GSILabs.BModel;
 
 import static GSILabs.BSystem.BusinessSystem.formatearXML;
+import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Local{
+public class Local implements XMLRepresentable{
     private String nombre;
     private Direccion direccion;
     private String descripcion;
