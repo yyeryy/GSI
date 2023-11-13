@@ -96,7 +96,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2050-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -106,7 +106,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2060-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -151,7 +151,7 @@
 							<contraseña>987654321</contraseña>
 							<fechaNacimiento>1996-11-13</fechaNacimiento>
 						</Cliente>
-						<hora>19:54</hora>
+						<hora>20:33</hora>
 						<fecha>2050-12-27</fecha>
 						<descuento>0</descuento>
 					</Reserva>
@@ -161,7 +161,7 @@
 							<contraseña>987654321</contraseña>
 							<fechaNacimiento>1996-11-13</fechaNacimiento>
 						</Cliente>
-						<hora>19:54</hora>
+						<hora>20:33</hora>
 						<fecha>2060-12-27</fecha>
 						<descuento>0</descuento>
 					</Reserva>
@@ -204,7 +204,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2050-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -214,7 +214,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2060-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -261,7 +261,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2050-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -271,7 +271,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2060-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -423,7 +423,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>19:54</hora>
+					<hora>20:33</hora>
 					<fecha>2050-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -469,7 +469,7 @@
 							<contraseña>987654321</contraseña>
 							<fechaNacimiento>1996-11-13</fechaNacimiento>
 						</Cliente>
-						<hora>19:54</hora>
+						<hora>20:33</hora>
 						<fecha>2050-12-27</fecha>
 						<descuento>0</descuento>
 					</Reserva>
@@ -511,7 +511,7 @@
 					<contraseña>987654321</contraseña>
 					<fechaNacimiento>1996-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2050-12-27</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -521,7 +521,7 @@
 					<contraseña>987654321</contraseña>
 					<fechaNacimiento>1996-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2060-12-27</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -553,7 +553,7 @@
 					<contraseña>876543219</contraseña>
 					<fechaNacimiento>1995-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2060-12-15</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -579,7 +579,7 @@
 					<contraseña>765432198</contraseña>
 					<fechaNacimiento>1994-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2070-12-01</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -681,7 +681,7 @@
 					<contraseña>987654321</contraseña>
 					<fechaNacimiento>1996-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2050-12-27</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -714,7 +714,7 @@
 					<contraseña>876543219</contraseña>
 					<fechaNacimiento>1995-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2060-12-15</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -742,7 +742,7 @@
 					<contraseña>765432198</contraseña>
 					<fechaNacimiento>1994-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>19:54</hora>
+				<hora>20:33</hora>
 				<fecha>2070-12-01</fecha>
 				<descuento>0</descuento>
 			</Reserva>
