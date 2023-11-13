@@ -915,6 +915,73 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	
     }
     
+    // @Override
+    public String toXML() {
+
+        String[] partes;
+        String xmlData = "";
+        // Cabecera
+        xmlData += "<BusinessSystem>\n";
+
+        // Usuarios
+        for(int i = 0; i < this.usuarios.size(); i++){
+
+            partes = this.usuarios.get(i).toXML().split("<Usuario>", 2);
+            if(partes.length == 2){
+                xmlData += "<Usuario>" + partes[1];
+            }else{
+                partes = this.usuarios.get(i).toXML().split("<Cliente>", 2);
+                if(partes.length == 2){
+                    xmlData += "<Cliente>" + partes[1];
+                }else{
+                    partes = this.usuarios.get(i).toXML().split("<Propietario>", 2);
+                    if(partes.length == 2){
+                        xmlData += "<Propietario>" + partes[1];
+                    }
+                }
+            }
+        }
+
+        //Reviews
+        for(int i = 0; i < this.reviews.size(); i++){
+            partes = this.reviews.get(i).toXML().split("<Review>", 2);
+            if(partes.length == 2){
+                xmlData += "<Review>" + partes[1];
+            }
+        }
+
+        // Locales
+        for(int i = 0; i < this.locales.size(); i++){
+            partes = this.locales.get(i).toXML().split("<Local>", 2);
+            if(partes.length == 2){
+                xmlData += "<Local>" + partes[1];
+            }else{
+                partes = this.locales.get(i).toXML().split("<Bar>", 2);
+                if(partes.length == 2){
+                    xmlData += "<Bar>" + partes[1];
+                } else{
+                    partes = this.locales.get(i).toXML().split("<Restaurante>", 2);
+                    if(partes.length == 2){
+                        xmlData += "<Restaurante>" + partes[1];
+                    }else{
+                        partes = this.locales.get(i).toXML().split("<Pub>", 2);
+                        if(partes.length == 2){
+                            xmlData += "<Pub>" + partes[1];
+                        }
+                    }
+                }
+            }
+        }
+
+        // Cierre
+        xmlData += "</BusinessSystem>\n";
+        return formatearXML(xmlData);
+    }
+
+
+
+
+
     /**
      * Parse XML File (Ejercicio 5 - Práctica 3)
      * @param f Fichero XML
