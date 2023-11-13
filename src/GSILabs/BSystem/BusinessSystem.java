@@ -453,10 +453,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         if(fechaActual.isAfter(ld)){
             return false;
         }
-        LocalTime horaActual = LocalTime.now();
-        if(horaActual.isAfter(lt)){
-            return false;
+
+        if(fechaActual.isEqual(ld)){
+            LocalTime horaActual = LocalTime.now();
+            if(horaActual.isAfter(lt)){
+
+                return false;
+            }
         }
+
 
         /*
         Comprobar si existe alguna reserva en la misma fecha
@@ -464,7 +469,14 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         Reserva[] localReservas = obtenerReservas(r);
         int encontradoReserva = 0;
         int reserva = 0;
-        while (encontradoReserva == 0 && reserva < localReservas.length){
+        int len;
+        if(localReservas == null){
+            len = 0;
+        }else{
+            len = localReservas.length;
+        }
+        
+        while (encontradoReserva == 0 && reserva < len){
             if (!localReservas[reserva].getFecha().equals(ld)){
                 reserva++;
             }else{

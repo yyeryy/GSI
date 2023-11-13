@@ -11,6 +11,7 @@ import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reserva;
+import GSILabs.BModel.Reservable;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BSystem.BusinessSystem;
@@ -66,23 +67,20 @@ public class TestBS {
         pub1.addPropietario(propietario9);
         pub2.addPropietario(propietario9);
         bar1.agregarEspecialidad("Mexicano");
-        bar1.agregarEspecialidad("Italiano");
-        bar2.agregarEspecialidad("Frances");
+        bar1.agregarEspecialidad("Mexicano2");
+        bar2.agregarEspecialidad("Italiano");
+        bar3.agregarEspecialidad("Frances");
         Cliente cliente1 = new Cliente("Juan","987654321",LocalDate.of(LocalDate.now().getYear()-27,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()));
-        Cliente cliente2 = new Cliente("David","876543219",LocalDate.of(LocalDate.now().getYear()-28,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()));
+        Cliente cliente2 = new Cliente("Ivan","876543219",LocalDate.of(LocalDate.now().getYear()-28,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()));
         Cliente cliente3 = new Cliente("Vanesa","765432198",LocalDate.of(LocalDate.now().getYear()-29,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()));
-        Reserva reserva1 = new Reserva(cliente1,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()),10);
-        Reserva reserva2 = new Reserva(cliente1,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()),20);
-        Reserva reserva3 = new Reserva(cliente1,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()),30);
-        Reserva reserva4 = new Reserva(cliente2,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()),10);
-        Reserva reserva5 = new Reserva(cliente2,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()),20);
-        Reserva reserva6 = new Reserva(cliente3,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()),10); 
+        /*
         bar1.nuevaReserva(reserva1.getCliente(), reserva1.getFecha(), reserva1.getHora());
         bar1.nuevaReserva(reserva2.getCliente(), reserva2.getFecha(), reserva2.getHora());
         bar2.nuevaReserva(reserva3.getCliente(), reserva3.getFecha(), reserva3.getHora());
         restaurante1.nuevaReserva(reserva4.getCliente(), reserva4.getFecha(), reserva4.getHora());
         restaurante1.nuevaReserva(reserva5.getCliente(), reserva5.getFecha(), reserva5.getHora());
         restaurante2.nuevaReserva(reserva6.getCliente(), reserva6.getFecha(), reserva6.getHora());
+        */
         Review review1 = new Review(10,"Maravilloso local",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1,cliente1);
         Review review2 = new Review(9,"Camareros majos",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1,cliente2);
         Review review3 = new Review(8,"Comida deliciosa",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1,cliente3);
@@ -128,15 +126,19 @@ public class TestBS {
         bs.nuevaContestacion(contestacion1, review1);
         bs.nuevaContestacion(contestacion2, review3);
         bs.nuevaContestacion(contestacion3, review6);
-        bs.nuevaReserva(reserva1.getCliente(), bar1, reserva1.getFecha(), reserva1.getHora());
-        bs.nuevaReserva(reserva2.getCliente(), bar1, reserva2.getFecha(), reserva2.getHora());
-        bs.nuevaReserva(reserva3.getCliente(), bar2, reserva3.getFecha(), reserva3.getHora());
-        bs.nuevaReserva(reserva4.getCliente(), restaurante1, reserva4.getFecha(), reserva4.getHora());
-        bs.nuevaReserva(reserva5.getCliente(), restaurante1, reserva5.getFecha(), reserva5.getHora());
-        bs.nuevaReserva(reserva6.getCliente(), restaurante2, reserva6.getFecha(), reserva6.getHora());
-        
+
+
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente1.getNick()), (Reservable) bs.obtenerLocal(bar1.getDireccion()), LocalDate.parse("2050-12-27"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente2.getNick()), (Reservable) bs.obtenerLocal(bar2.getDireccion()), LocalDate.parse("2060-12-15"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente3.getNick()), (Reservable) bs.obtenerLocal(bar3.getDireccion()), LocalDate.parse("2070-12-01"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente1.getNick()), (Reservable) bs.obtenerLocal(restaurante1.getDireccion()), LocalDate.parse("2050-12-27"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente2.getNick()), (Reservable) bs.obtenerLocal(restaurante2.getDireccion()), LocalDate.parse("2060-12-15"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente3.getNick()), (Reservable) bs.obtenerLocal(restaurante3.getDireccion()), LocalDate.parse("2070-12-01"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+
+
         // Genero el XML del sistema
-        System.out.println("Salida:\n" + bs.toXML());
+        // System.out.println("Salida:\n" + bs.obtenerReservas((Cliente) bs.obtenerUsuario(cliente1.getNick()))[5].toString());
         File file = new File("bs.xml");
         bs.saveToXML(file);
     }
