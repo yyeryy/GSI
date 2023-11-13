@@ -157,10 +157,41 @@ public class Review implements XMLRepresentable{
         xmlData += "<fecha>" + this.getFechaReview() + "</fecha>\n";
         // Local
         partes = this.getLocal().toXML().split("<Local>", 2);
-        xmlData += "<Local>" + partes[1];
+        if(partes.length == 2){
+            xmlData += "<Local>" + partes[1];
+        }else{
+            partes = this.getLocal().toXML().split("<Bar>", 2);
+            if(partes.length == 2){
+                xmlData += "<Bar>" + partes[1];
+            } else{
+                partes = this.getLocal().toXML().split("<Restaurante>", 2);
+                if(partes.length == 2){
+                    xmlData += "<Restaurante>" + partes[1];
+                }else{
+                    partes = this.getLocal().toXML().split("<Pub>", 2);
+                    if(partes.length == 2){
+                        xmlData += "<Pub>" + partes[1];
+                    }
+                }
+            }
+        }
+
         // Usuario
         partes = this.getUsuario().toXML().split("<Usuario>", 2);
-        xmlData += "<Usuario>" + partes[1];
+        if(partes.length == 2){
+            xmlData += "<Usuario>" + partes[1];
+        }else{
+            partes = this.getUsuario().toXML().split("<Cliente>", 2);
+            if(partes.length == 2){
+                xmlData += "<Cliente>" + partes[1];
+            }else{
+            partes = this.getUsuario().toXML().split("<Propietario>", 2);
+            if(partes.length == 2){
+                xmlData += "<Propietario>" + partes[1];
+            }
+            }
+        }
+
         // Contestacion
         partes = this.getContestacion().toXML().split("<Contestacion>", 2);
         xmlData += "<Contestacion>" + partes[1];

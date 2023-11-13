@@ -102,7 +102,24 @@ public class Contestacion implements XMLRepresentable{
         xmlData += "<fecha>" + this.getFechaReview() + "</fecha>\n";
         // Local
         partes = this.getLocal().toXML().split("<Local>", 2);
-        xmlData += "<Local>" + partes[1];
+        if(partes.length == 2){
+            xmlData += "<Local>" + partes[1];
+        }else{
+            partes = this.getLocal().toXML().split("<Bar>", 2);
+            if(partes.length == 2){
+                xmlData += "<Bar>" + partes[1];
+            } else{
+                partes = this.getLocal().toXML().split("<Restaurante>", 2);
+                if(partes.length == 2){
+                    xmlData += "<Restaurante>" + partes[1];
+                }else{
+                    partes = this.getLocal().toXML().split("<Pub>", 2);
+                    if(partes.length == 2){
+                        xmlData += "<Pub>" + partes[1];
+                    }
+                }
+            }
+        }
         // Cierre
         xmlData += "</Contestacion>\n";
         return formatearXML(xmlData);
