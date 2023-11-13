@@ -18,6 +18,7 @@ import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import GSILabs.persistence.XMLParsingException;
 import GSILabs.persistence.XMLWritingException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -1010,6 +1011,18 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         } catch (Exception e) {
             // Lanzar una excepción personalizada XMLParsingException
             throw new XMLParsingException("Error al analizar el archivo XML");
+        }
+    }
+    
+    public boolean saveToXML(File f) {
+        try {
+        String xmlData = toXML();
+            try (FileWriter writer = new FileWriter(f)) {
+                writer.write(xmlData);
+            }
+        return true;
+        } catch (IOException e) {
+            return false;
         }
     }
     

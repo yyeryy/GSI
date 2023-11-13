@@ -136,8 +136,8 @@ public class TestBS {
         bs.nuevaReserva(reserva6.getCliente(), restaurante2, reserva6.getFecha(), reserva6.getHora());
         
         // Genero el XML del sistema
+        System.out.println("Salida:\n" + bs.toXML());
         File file = new File("bs.xml");
-        bs.writeXMLFile(file);
+        bs.saveToXML(file);
     }
-    
 }
