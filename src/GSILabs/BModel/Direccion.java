@@ -19,9 +19,21 @@ import java.io.IOException;
  */
 public class Direccion implements XMLRepresentable{
 
+    /**
+     * Localidad del lugar.
+     */
     public String localidad;
+    /**
+     * Provincia del lugar.
+     */
     public String provincia;
+    /**
+     * Calle del lugar.
+     */
     public String calle;
+    /**
+     * Numero de portal del lugar.
+     */
     public int numero;
     
     /**
@@ -98,6 +110,10 @@ public class Direccion implements XMLRepresentable{
         return "Dirección{" + "localidad=" + localidad + ", provincia=" + provincia + ", calle=" + calle + ", numero=" + numero + '}';
     }
 
+    /**
+     * Generación de una representación XML del objeto Direccion.
+     * @return Representación XML del objeto en forma de cadena
+     */
     @Override
     public String toXML() {
         String xmlData = "";
@@ -116,6 +132,12 @@ public class Direccion implements XMLRepresentable{
         return formatearXML(xmlData);
     }
 
+    /**
+     * Guardado de la representación XML del objeto Direccion
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(File f) {
         try {
@@ -129,6 +151,12 @@ public class Direccion implements XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Dirección
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);

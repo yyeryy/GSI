@@ -14,7 +14,14 @@ import java.io.IOException;
  * @since 04.09.2023
  */
 public class Pub extends Local implements XMLRepresentable{
+    
+    /**
+     * Hora de apertura del pub.
+     */
     private String horaApertura;
+    /**
+     * Hora de clausura del pub.
+     */
     private String horaClausura;
 
     /**
@@ -82,33 +89,43 @@ public class Pub extends Local implements XMLRepresentable{
         
     }
 
+    /**
+     * Generación de una representación XML de Pub.
+     * @return Representación XML del objeto en forma de cadena
+     */
     @Override
     public String toXML() {
         String[] partes;
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<Pub>\n";
-        // Hora de Apertura
+        //Hora de Apertura
         xmlData += "<horaApertura>" + this.getHoraApertura() + "</horaApertura>\n";
-        // Hora de Cierre
+        //Hora de Cierre
         xmlData += "<horaClausura>" + this.getHoraClausura() + "</horaClausura>\n";
-        // Nombre
+        //Nombre
         xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
-        // Direccion
+        //Direccion
         partes = this.getDireccion().toXML().split("<Direccion>", 2);
         xmlData += "<Direccion>" + partes[1];
-        // Descripcion
+        //Descripcion
         xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
-        // Propietario
+        //Propietario
         for(int i = 0; i<this.getPropietarios().size(); i++){
             partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
             xmlData += "<Propietario>" + partes[1];
         }
-        // Cierre
+        //Cierre
         xmlData += "</Pub>\n";
         return formatearXML(xmlData);
     }
 
+    /**
+     * Guardado de la representación XML del objeto Pub
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(File f) {
         try {
@@ -122,6 +139,12 @@ public class Pub extends Local implements XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Pub
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);

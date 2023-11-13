@@ -16,7 +16,7 @@ import java.time.LocalTime;
 public interface Reservable {
     
     /**
-     * Lista de Reservas de un Local Reservable (Bar o Restaurante)
+     * Lista de Reservas de un Local Reservable (Bar o Restaurante).
      */
     ArrayList<Reserva> getListaReserva();
 
@@ -144,5 +144,4 @@ public interface Reservable {
         }
         return null;
     }
-
 }

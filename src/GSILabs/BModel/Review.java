@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GSILabs.BModel;
 
 import static GSILabs.BSystem.BusinessSystem.formatearXML;
@@ -18,7 +14,6 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-
 public class Review implements XMLRepresentable{
 
     /**
@@ -143,19 +138,23 @@ public class Review implements XMLRepresentable{
         return salida + '}';
     }
 
+    /**
+     * Generación de una representación XML del objeto Review.
+     * @return Representación XML del objeto en forma de cadena
+     */
     @Override
     public String toXML() {
         String[] partes;
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<Review>\n";
-        // Valoracion
+        //Valoracion
         xmlData += "<valoracion>" + this.getValoracion() + "</valoracion>\n";
-        // Comentario
+        //Comentario
         xmlData += "<comentario>" + this.getComentario() + "</comentario>\n";
-        // Fecha
+        //Fecha
         xmlData += "<fecha>" + this.getFechaReview() + "</fecha>\n";
-        // Local
+        //Local
         partes = this.getLocal().toXML().split("<Local>", 2);
         if(partes.length == 2){
             xmlData += "<Local>" + partes[1];
@@ -176,7 +175,7 @@ public class Review implements XMLRepresentable{
             }
         }
 
-        // Usuario
+        //Usuario
         partes = this.getUsuario().toXML().split("<Usuario>", 2);
         if(partes.length == 2){
             xmlData += "<Usuario>" + partes[1];
@@ -192,17 +191,23 @@ public class Review implements XMLRepresentable{
             }
         }
 
-        // Contestacion
+        //Contestacion
         if(this.getContestacion() != null){
             partes = this.getContestacion().toXML().split("<Contestacion>", 2);
             xmlData += "<Contestacion>" + partes[1];
         }
 
-        // Cierre
+        //Cierre
         xmlData += "</Review>\n";
         return formatearXML(xmlData);
     }
 
+    /**
+     * Guardado de la representación XML del objeto Review
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(File f) {
         try {
@@ -216,6 +221,12 @@ public class Review implements XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Review
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);

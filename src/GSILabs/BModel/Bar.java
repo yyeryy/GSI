@@ -16,9 +16,16 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Bar extends Local implements Reservable, XMLRepresentable{
+    
+    /**
+     * Lista de especialidades del Bar.
+     */
     private List<String> especialidades;
+    /**
+     * Lista de reservas del Bar.
+     */
     private ArrayList<Reserva> listaReserva;
-    // listaReserva se incia en Reservable
+    // listaReserva se inicia en Reservable
 
     /**
      * Constructor Bar
@@ -80,7 +87,7 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
     @Override
     public String toString() {
 
-        // String de Propietarios
+        //String de Propietarios
         String strPropietarios = "";
         for(int i = 0; i < this.getPropietarios().size(); i++){
             strPropietarios = strPropietarios + "propietario=" + this.getPropietarios().get(i).toString();
@@ -88,7 +95,7 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
                 strPropietarios = strPropietarios + ", ";
         }
 
-        // String de Especialidades
+        //String de Especialidades
         String strEspecialidades = "";
         for(int i = 0; i < this.especialidades.size(); i++){
             strEspecialidades = strEspecialidades + "especialidad=" + this.especialidades.get(i).toString();
@@ -96,7 +103,7 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
                 strEspecialidades = strEspecialidades + ", ";
         }
 
-        // String de Reservas
+        //String de Reservas
         String strReservas = "";
         for(int i = 0; i < this.listaReserva.size(); i++){
             strReservas = strReservas + "reserva=" + this.listaReserva.get(i).toString();
@@ -121,37 +128,47 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
         return salida + "}";
     }
 
+    /**
+     * Generación de una representación XML del objeto Bar.
+     * @return Representación XML del objeto en forma de cadena
+     */
     @Override
     public String toXML() {
         String[] partes;
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<Bar>\n";
-        // Nombre
+        //Nombre
         xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
-        // Direccion
+        //Direccion
         partes = this.getDireccion().toXML().split("<Direccion>", 2);
         xmlData += "<Direccion>" + partes[1];
-        // Descripcion
+        //Descripcion
         xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
         for(int i = 0; i<this.getPropietarios().size(); i++){
             partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
             xmlData += "<Propietario>" + partes[1];
         }
-        // Reservas
+        //Reservas
         for(int i = 0; i < this.listaReserva.size(); i++){
             partes = this.listaReserva.get(i).toXML().split("<Reserva>", 2);
             xmlData += "<Reserva>" + partes[1];
         }
-        // Especialidades
+        //Especialidades
         for(int i = 0;i<this.getEspecialidades().size();i++){
             xmlData += "<especialidad>" + this.getEspecialidades().get(i) + "</especialidad>\n";
         }
-        // Cierre
+        //Cierre
         xmlData += "</Bar>\n";
         return formatearXML(xmlData);
     }
 
+    /**
+     * Guardado de la representación XML del objeto Bar
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(File f) {
         try {
@@ -166,6 +183,12 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Bar
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(String filePath){
         File file = new File(filePath);

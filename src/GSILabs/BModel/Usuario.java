@@ -20,9 +20,21 @@ import java.util.Objects;
  */
 public class Usuario implements XMLRepresentable{
 
+    /**
+     * Nick del usuario.
+     */
     private String nick;
+    /**
+     * Contraseña del usuario.
+     */
     private String contraseña;
+    /**
+     * Fecha de nacimiento del usuario.
+     */
     private LocalDate fechaNacimiento;
+    /**
+     * Tipo del usuario.
+     */
     private tipoUsuario tipo;
 
     /**
@@ -155,23 +167,35 @@ public class Usuario implements XMLRepresentable{
         return "Usuario{" + "nick=" + nick + ", contraseña=" + contraseña + ", fecha_de_nacimiento=" + fechaNacimiento.toString() + ", tipo=" + tipo + '}';
     }
     
+    /**
+     * Generación de una representación XML del objeto Usuario.
+     * @return Representación XML del objeto en forma de cadena
+     */
+    @Override
     public String toXML() {
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<Usuario>\n";
-        // Nick
+        //Nick
         xmlData += "<nick>" + this.getNick() + "</nick>\n";
-        // Contraseña
+        //Contraseña
         xmlData += "<contraseña>" + this.getContraseña() + "</contraseña>\n";
-        // Fecha naciemiento
+        //Fecha naciemiento
         xmlData += "<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
-        // Tipo
+        //Tipo
         xmlData += "<tipo>" + this.getTipo().toString() + "</tipo>\n";
-        // Cierre
+        //Cierre
         xmlData += "</Usuario>\n";
         return formatearXML(xmlData);
     }
     
+    /**
+     * Guardado de la representación XML del objeto Usuario
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
+    @Override
     public boolean saveToXML(File f) {
         try {
         String xmlData = toXML();
@@ -184,6 +208,13 @@ public class Usuario implements XMLRepresentable{
         }
     }
     
+    /**
+     * Guardado de la representación XML del objeto Usuario
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
+    @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);
         return saveToXML(file);

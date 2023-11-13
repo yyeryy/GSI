@@ -21,11 +21,25 @@ import java.io.IOException;
 public class Reserva implements XMLRepresentable{
 
     /**
-     * Un cliente no pude tener la misma fecha en una reserva, por lo que se puede utilizar la combinacion de los atributos como una supuesta ID
-    */
+     * Un cliente no puede tener la misma fecha en una reserva, por lo que se 
+     * puede utilizar la combinacion de los atributos como una supuesta ID.
+     */
+    
+    /**
+     * Cliente que ha realizado la reserva.
+     */
     private Cliente cliente;
+    /**
+     * Fecha de la reserva.
+     */
     private LocalDate fecha;
+    /**
+     * Hora de la reserva.
+     */
     private LocalTime hora;
+    /**
+     * Descuento aplicado en la reserva.
+     */
     private int descuento;
 
     /**
@@ -98,6 +112,10 @@ public class Reserva implements XMLRepresentable{
         return "Reserva{" + "cliente=" + this.cliente.toString() + ", fechaReserva=" + this.fecha.toString() + ", hora=" + this.hora.toString() + ", descuento=" + this.descuento + "%" + '}';
     }
 
+    /**
+     * Generación de una representación XML del objeto Reserva.
+     * @return Representación XML del objeto en forma de cadena
+     */
     @Override
     public String toXML() {
         String[] partes;
@@ -112,6 +130,12 @@ public class Reserva implements XMLRepresentable{
         return formatearXML(xmlData);
     }
 
+    /**
+     * Guardado de la representación XML del objeto Reserva
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(File f) {
         try {
@@ -125,6 +149,12 @@ public class Reserva implements XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Reserva
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);

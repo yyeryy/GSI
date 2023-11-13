@@ -49,22 +49,32 @@ public class Cliente extends Usuario implements XMLRepresentable{
         return "Cliente{" + "nick=" + this.getNick() + ", contraseña=" + this.getContraseña() + ", fecha_de_nacimiento=" + this.getFechaNacimiento().toString() + "}";
     }
 
+    /**
+     * Generación de una representación XML de Cliente.
+     * @return Representación XML del objeto en forma de cadena
+     */
     @Override
     public String toXML() {
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<Cliente>\n";
-        // Nick
+        //Nick
         xmlData += "<nick>" + this.getNick() + "</nick>\n";
-        // Contraseña
+        //Contraseña
         xmlData += "<contraseña>" + this.getContraseña() + "</contraseña>\n";
-        // Fecha de naciemiento
+        //Fecha de naciemiento
         xmlData += "<fechaNacimiento>" + this.getFechaNacimiento() + "</fechaNacimiento>\n";
-        // Cierre
+        //Cierre
         xmlData += "</Cliente>\n";
         return formatearXML(xmlData);
     }
 
+    /**
+     * Guardado de la representación XML del objeto Cliente
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(File f) {
         try {
@@ -78,6 +88,12 @@ public class Cliente extends Usuario implements XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Cliente
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
     @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);

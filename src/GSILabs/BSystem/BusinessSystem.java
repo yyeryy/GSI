@@ -26,6 +26,7 @@ import static GSILabs.persistence.parser.parsePub;
 import static GSILabs.persistence.parser.parseRestaurante;
 import static GSILabs.persistence.parser.parseReview;
 import static GSILabs.persistence.parser.parseUsuario;
+import GSILabs.serializable.XMLRepresentable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -37,9 +38,6 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.w3c.dom.Document;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
 
@@ -51,7 +49,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  * @version 1.0
  * @since 04.09.2023
  */
-public class BusinessSystem implements LeisureOffice, LookupService{
+public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresentable{
     
     ArrayList<Usuario> usuarios = new ArrayList<>();
     ArrayList<Review> reviews = new ArrayList<>();
@@ -422,9 +420,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public boolean nuevaReserva(Cliente c, Reservable r, LocalDate ld, LocalTime lt) {
-        /*
-        Comprobar si el usuario existe y es cliente
-        */
+        //Comprobar si el usuario existe y es cliente
         int encontradoCliente = 0;
         int user = 0;
         Cliente cliente = null;
@@ -440,9 +436,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             return false;
         }
 
-        /*
-        Comprobar si el local reservable existe (Bar/Restaurante)
-        */
+        //Comprobar si el local reservable existe (Bar/Restaurante)
         int encontradoLocal = 0;
         int local = 0;
         while (encontradoLocal == 0 && local < locales.size()){
@@ -456,9 +450,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             return false;
         }
 
-        /*
-        Comprobar si la fecha es futura
-        */
+        //Comprobar si la fecha es futura
         LocalDate fechaActual = LocalDate.now();
         if(fechaActual.isAfter(ld)){
             return false;
@@ -472,10 +464,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             }
         }
 
-
-        /*
-        Comprobar si existe alguna reserva en la misma fecha
-        */
+        //Comprobar si existe alguna reserva en la misma fecha
         Reserva[] localReservas = obtenerReservas(r);
         int encontradoReserva = 0;
         int reserva = 0;
@@ -510,9 +499,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(Cliente c) {
-        /*
-        Comprobar si el usuario existe y es cliente
-        */
+        //Comprobar si el usuario existe y es cliente
         int encontradoCliente = 0;
         int user = 0;
         Cliente cliente = null;
@@ -567,9 +554,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(Reservable r) {
-        /*
-        Comprobar si el local reservable existe (Bar/Restaurante)
-        */
+        //Comprobar si el local reservable existe (Bar/Restaurante)
         int encontradoLocal = 0;
         int local = 0;
         while (encontradoLocal == 0 && local < locales.size()){
@@ -593,9 +578,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     @Override
     public Reserva[] obtenerReservas(LocalDate ld) {
-        /*
-        Comprobar si el local reservable existe (Bar/Restaurante)
-        */
+        //Comprobar si el local reservable existe (Bar/Restaurante)
         int local = 0;
         ArrayList<Reserva> listaReserva = new  ArrayList<>();
         while ( local < locales.size()){
@@ -939,15 +922,19 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 	
     }
     
-    // @Override
+    /**
+     * Generación de una representación XML del objeto BusinessSystem.
+     * @return Representación XML del objeto en forma de cadena
+     */
+    @Override
     public String toXML() {
 
         String[] partes;
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<BusinessSystem>\n";
 
-        // Usuarios
+        //Usuarios
         xmlData += "<Usuarios>\n";
         for(int i = 0; i < this.usuarios.size(); i++){
 
@@ -979,7 +966,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         xmlData += "</Reviews>\n";
 
         xmlData += "<Locales>\n";
-        // Locales
+        //Locales
         for(int i = 0; i < this.locales.size(); i++){
             partes = this.locales.get(i).toXML().split("<Local>", 2);
             if(partes.length == 2){
@@ -1003,7 +990,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
         xmlData += "</Locales>\n";
 
-        // Cierre
+        //Cierre
         xmlData += "</BusinessSystem>\n";
         return formatearXML(xmlData);
     }
@@ -1019,11 +1006,11 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     public static BusinessSystem parseXMLFile(File f) throws XMLParsingException, IOException {        
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
-        // Leer fichero
+        //Leer fichero
         String contenido = "";
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
-        // Comprobar si esta vacio
+        //Comprobar si esta vacio
         if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
         String str = contenido;
 
@@ -1036,7 +1023,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         List<Review> reviews = new ArrayList<>();
 
 
-        // Para todos los Usuarios
+        //Para todos los Usuarios
         if(strUsuariosTodos != null){
 
             List<String> strPropietarios = new ArrayList<>();
@@ -1069,7 +1056,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
 
 
-        // Para todos los Locales
+        //Para todos los Locales
         if(strLocalesTodos != null){
 
             List<String> strLocales = new ArrayList<>();
@@ -1110,7 +1097,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
             }
         }
 
-        // Para todos las Reviews
+        //Para todos las Reviews
         if(strReviewsTodos != null){
             List<String> strReviews = new ArrayList<>();
             for(String strReview : strReviewsTodos.split("<Review>")){
@@ -1122,15 +1109,15 @@ public class BusinessSystem implements LeisureOffice, LookupService{
                 reviews.add(parseReview(strReview));
             }
         }
-        // Instancia de BusinessSystem
+        //Instancia de BusinessSystem
         BusinessSystem bs = new BusinessSystem();
 
-        // Añadir Usuarios
+        //Añadir Usuarios
         for(int i = 0; i < usuarios.size(); i++){
             bs.nuevoUsuario(usuarios.get(i));
         }
 
-        // Añadir Locales
+        //Añadir Locales
         for(int i = 0; i < locales.size(); i++){
             bs.nuevoLocal(locales.get(i));
         }
@@ -1143,6 +1130,13 @@ public class BusinessSystem implements LeisureOffice, LookupService{
 
     }
     
+    /**
+     * Guardado de la representación XML del objeto BusinessSystem
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
+    @Override
     public boolean saveToXML(File f) {
         try {
         String xmlData = toXML();
@@ -1153,6 +1147,18 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         } catch (IOException e) {
             return false;
         }
+    }
+    
+    /**
+     * Guardado de la representación XML del objeto BusinessSystem
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
+    @Override
+    public boolean saveToXML(String filePath) {
+        File file = new File(filePath);
+        return saveToXML(file);
     }
     
     /**
@@ -1182,16 +1188,16 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         try {
             BusinessSystem loadedBusinessSystem = BusinessSystem.parseXMLFile(f);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
-            // Leer fichero
+            //Leer fichero
             String contenido = "";
             String linea;
             while ((linea = bufferedReader.readLine()) != null) {contenido += linea + "\n";}
-            // Comprobar si esta vacio
+            //Comprobar si esta vacio
             if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
             String str = contenido;
 
 
-            // Conteo de lineas para comparar
+            //Conteo de lineas para comparar
             int lineasXml = contenido.split("\n").length;
             int lineasBS = loadedBusinessSystem.toXML().split("\n").length;
             
@@ -1210,17 +1216,17 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      * @return string con tabulaciones.
      */
     public static String formatearXML(String input) {
-        // Eliminar tabulacion
+        //Eliminar tabulacion
         input = input.replaceAll("\t", "");
         StringBuilder stringBuilder = new StringBuilder();
-        int tabulacion = 0; // Nivel de tabulacion a meter tras salto de linea
+        int tabulacion = 0; //Nivel de tabulacion a meter tras salto de linea
 
-        String[] lineas = input.split("\n"); // Trocear por salto de linea
+        String[] lineas = input.split("\n"); //Trocear por salto de linea
         for (String linea : lineas) {
             if (linea.startsWith("</")) {tabulacion--;} // Caso fin objeto
             for (int i = 0; i < tabulacion; i++) {stringBuilder.append("\t");}
             stringBuilder.append(linea).append("\n");
-            if (linea.matches(".*<[A-Z].*")) {tabulacion++;} // Caso de inicio objeto
+            if (linea.matches(".*<[A-Z].*")) {tabulacion++;} //Caso de inicio objeto
         }
         return stringBuilder.toString();
     }

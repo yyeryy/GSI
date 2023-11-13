@@ -15,10 +15,26 @@ import java.util.Objects;
  * @since 04.09.2023
  */
 public class Local implements XMLRepresentable{
+    
+    /**
+     *Nombre del local.
+     */
     private String nombre;
+    /**
+     * Dirección del local.
+     */
     private Direccion direccion;
+    /**
+     * Descripción del local.
+     */
     private String descripcion;
+    /**
+     * Tipo del local.
+     */
     private tipoLocal tipo;
+    /**
+     * Lista de propietarios del local.
+     */
     private ArrayList<Propietario> propietarios;
 
     public enum tipoLocal {
@@ -168,30 +184,42 @@ public class Local implements XMLRepresentable{
         return salida + "}";
     }
     
+    /**
+     * Generación de una representación XML del objeto Local.
+     * @return Representación XML del objeto en forma de cadena
+     */
+    @Override
     public String toXML() {
         String[] partes;
         String xmlData = "";
-        // Cabecera
+        //Cabecera
         xmlData += "<Local>\n";
-        // Nombre
+        //Nombre
         xmlData += "<nombre>" + this.getNombre() + "</nombre>\n";
-        // Direccion
+        //Direccion
         partes = this.getDireccion().toXML().split("<Direccion>", 2);
         xmlData += "<Direccion>" + partes[1];
-        // Descripcion
+        //Descripcion
         xmlData += "<descripcion>" + this.getDescripcion() + "</descripcion>\n";
-        // Tipo
+        //Tipo
         xmlData += "<tipo>" + this.getTipo().toString()+ "</tipo>\n";
-        // Propietario
+        //Propietario
         for(int i = 0; i<this.getPropietarios().size(); i++){
             partes = this.getPropietarios().get(i).toXML().split("<Propietario>", 2);
             xmlData += "<Propietario>" + partes[1];
         }
-        // Cierre
+        //Cierre
         xmlData += "</Local>\n";
         return formatearXML(xmlData);
     }
     
+    /**
+     * Guardado de la representación XML del objeto Local
+     * en el fichero indicado por parámetro.
+     * @param f Fichero XML en el que se guarda la representación XML del objeto
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
+    @Override
     public boolean saveToXML(File f) {
         try {
         String xmlData = toXML();
@@ -204,6 +232,13 @@ public class Local implements XMLRepresentable{
         }
     }
 
+    /**
+     * Guardado de la representación XML del objeto Local
+     * en un fichero XML que se almacenará en la ruta indicada por parámetro.
+     * @param filePath Ruta del fichero donde se va a guardar la reprentación XML.
+     * @return Booleano que indica si el fichero se ha guardado exitosamente.
+     */
+    @Override
     public boolean saveToXML(String filePath) {
         File file = new File(filePath);
         return saveToXML(file);
