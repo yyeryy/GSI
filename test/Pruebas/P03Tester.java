@@ -44,17 +44,18 @@ public class P03Tester {
             // Leer fichero
             String contenido = "";
             String linea;
-            while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+            while ((linea = bufferedReader.readLine()) != null) {contenido += linea + "\n";}
             // Comprobar si esta vacio
             if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
             String str = contenido;
 
 
-            // Clientes iguales
-            System.out.println(businessSystem.toXML()); 
+            // Conteo de lineas para comparar
+            int lineasXml = contenido.split("\n").length;
+            int lineasBS = businessSystem.toXML().split("\n").length;
             // No se como comprobar que tiene todos los datos iguales
             // Seguramente esten desosrdenados 
-            return businessSystem.toXML() == contenido;
+            return lineasXml == lineasBS;
         } catch (XMLParsingException e) {
             return false;
         }

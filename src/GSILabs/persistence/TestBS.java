@@ -10,7 +10,6 @@ import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
-import GSILabs.BModel.Reserva;
 import GSILabs.BModel.Reservable;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
@@ -27,6 +26,7 @@ public class TestBS {
 
     /**
      * @param args the command line arguments
+     * @throws GSILabs.persistence.XMLWritingException
      */
     public static void main(String[] args) throws XMLWritingException {
         // Crear distintos objetos que componen el sistema para realizar las pruebas
@@ -146,7 +146,7 @@ public class TestBS {
 
         // Genero el XML del sistema
 
-        File file = new File("bs.xml");
+        File file = new File("testbs.xml");
         bs.saveToXML(file);
     }
 }
