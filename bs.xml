@@ -61,8 +61,335 @@
 	</Cliente>
 	<Review>
 		<valoracion>5</valoracion>
+		<comentario>Maravilloso local</comentario>
+		<fecha>2050-12-27</fecha>
+		<Bar>
+			<nombre>Nara</nombre>
+			<Direccion>
+				<localidad>Pamplona</localidad>
+				<provincia>Navarra</provincia>
+				<calle>Calle Mayor</calle>
+				<numero>1</numero>
+			</Direccion>
+			<descripcion>Bar antiguo cerca del Ayuntamiento</descripcion>
+			<Propietario>
+				<nick>Antonio</nick>
+				<contraseña>123456789</contraseña>
+				<fechaNacimiento>2005-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>María Carmen</nick>
+				<contraseña>234567891</contraseña>
+				<fechaNacimiento>2004-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>María</nick>
+				<contraseña>345678912</contraseña>
+				<fechaNacimiento>2003-11-13</fechaNacimiento>
+			</Propietario>
+			<Reserva>
+				<Cliente>
+					<nick>Juan</nick>
+					<contraseña>987654321</contraseña>
+					<fechaNacimiento>1996-11-13</fechaNacimiento>
+				</Cliente>
+				<hora>17:47</hora>
+				<fecha>2050-12-27</fecha>
+				<descuento>0</descuento>
+			</Reserva>
+			<Reserva>
+				<Cliente>
+					<nick>Juan</nick>
+					<contraseña>987654321</contraseña>
+					<fechaNacimiento>1996-11-13</fechaNacimiento>
+				</Cliente>
+				<hora>17:47</hora>
+				<fecha>2060-12-27</fecha>
+				<descuento>0</descuento>
+			</Reserva>
+			<especialidad>Mexicano</especialidad>
+			<especialidad>Mexicano2</especialidad>
+		</Bar>
+		<Cliente>
+			<nick>Juan</nick>
+			<contraseña>987654321</contraseña>
+			<fechaNacimiento>1996-11-13</fechaNacimiento>
+		</Cliente>
+		<Contestacion>
+			<comentario>Muchas gracias por su opinion</comentario>
+			<fecha>2024-11-13</fecha>
+			<Bar>
+				<nombre>Nara</nombre>
+				<Direccion>
+					<localidad>Pamplona</localidad>
+					<provincia>Navarra</provincia>
+					<calle>Calle Mayor</calle>
+					<numero>1</numero>
+				</Direccion>
+				<descripcion>Bar antiguo cerca del Ayuntamiento</descripcion>
+				<Propietario>
+					<nick>Antonio</nick>
+					<contraseña>123456789</contraseña>
+					<fechaNacimiento>2005-11-13</fechaNacimiento>
+				</Propietario>
+				<Propietario>
+					<nick>María Carmen</nick>
+					<contraseña>234567891</contraseña>
+					<fechaNacimiento>2004-11-13</fechaNacimiento>
+				</Propietario>
+				<Propietario>
+					<nick>María</nick>
+					<contraseña>345678912</contraseña>
+					<fechaNacimiento>2003-11-13</fechaNacimiento>
+				</Propietario>
+				<Reserva>
+					<Cliente>
+						<nick>Juan</nick>
+						<contraseña>987654321</contraseña>
+						<fechaNacimiento>1996-11-13</fechaNacimiento>
+					</Cliente>
+					<hora>17:47</hora>
+					<fecha>2050-12-27</fecha>
+					<descuento>0</descuento>
+				</Reserva>
+				<Reserva>
+					<Cliente>
+						<nick>Juan</nick>
+						<contraseña>987654321</contraseña>
+						<fechaNacimiento>1996-11-13</fechaNacimiento>
+					</Cliente>
+					<hora>17:47</hora>
+					<fecha>2060-12-27</fecha>
+					<descuento>0</descuento>
+				</Reserva>
+				<especialidad>Mexicano</especialidad>
+				<especialidad>Mexicano2</especialidad>
+			</Bar>
+		</Contestacion>
+	</Review>
+	<Review>
+		<valoracion>3</valoracion>
+		<comentario>Camareros majos</comentario>
+		<fecha>2055-12-27</fecha>
+		<Bar>
+			<nombre>Nara</nombre>
+			<Direccion>
+				<localidad>Pamplona</localidad>
+				<provincia>Navarra</provincia>
+				<calle>Calle Mayor</calle>
+				<numero>1</numero>
+			</Direccion>
+			<descripcion>Bar antiguo cerca del Ayuntamiento</descripcion>
+			<Propietario>
+				<nick>Antonio</nick>
+				<contraseña>123456789</contraseña>
+				<fechaNacimiento>2005-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>María Carmen</nick>
+				<contraseña>234567891</contraseña>
+				<fechaNacimiento>2004-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>María</nick>
+				<contraseña>345678912</contraseña>
+				<fechaNacimiento>2003-11-13</fechaNacimiento>
+			</Propietario>
+			<Reserva>
+				<Cliente>
+					<nick>Juan</nick>
+					<contraseña>987654321</contraseña>
+					<fechaNacimiento>1996-11-13</fechaNacimiento>
+				</Cliente>
+				<hora>17:47</hora>
+				<fecha>2050-12-27</fecha>
+				<descuento>0</descuento>
+			</Reserva>
+			<Reserva>
+				<Cliente>
+					<nick>Juan</nick>
+					<contraseña>987654321</contraseña>
+					<fechaNacimiento>1996-11-13</fechaNacimiento>
+				</Cliente>
+				<hora>17:47</hora>
+				<fecha>2060-12-27</fecha>
+				<descuento>0</descuento>
+			</Reserva>
+			<especialidad>Mexicano</especialidad>
+			<especialidad>Mexicano2</especialidad>
+		</Bar>
+		<Cliente>
+			<nick>Ivan</nick>
+			<contraseña>876543219</contraseña>
+			<fechaNacimiento>1995-11-13</fechaNacimiento>
+		</Cliente>
+	</Review>
+	<Review>
+		<valoracion>2</valoracion>
+		<comentario>Comida deliciosa</comentario>
+		<fecha>2060-12-27</fecha>
+		<Bar>
+			<nombre>Nara</nombre>
+			<Direccion>
+				<localidad>Pamplona</localidad>
+				<provincia>Navarra</provincia>
+				<calle>Calle Mayor</calle>
+				<numero>1</numero>
+			</Direccion>
+			<descripcion>Bar antiguo cerca del Ayuntamiento</descripcion>
+			<Propietario>
+				<nick>Antonio</nick>
+				<contraseña>123456789</contraseña>
+				<fechaNacimiento>2005-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>María Carmen</nick>
+				<contraseña>234567891</contraseña>
+				<fechaNacimiento>2004-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>María</nick>
+				<contraseña>345678912</contraseña>
+				<fechaNacimiento>2003-11-13</fechaNacimiento>
+			</Propietario>
+			<Reserva>
+				<Cliente>
+					<nick>Juan</nick>
+					<contraseña>987654321</contraseña>
+					<fechaNacimiento>1996-11-13</fechaNacimiento>
+				</Cliente>
+				<hora>17:47</hora>
+				<fecha>2050-12-27</fecha>
+				<descuento>0</descuento>
+			</Reserva>
+			<Reserva>
+				<Cliente>
+					<nick>Juan</nick>
+					<contraseña>987654321</contraseña>
+					<fechaNacimiento>1996-11-13</fechaNacimiento>
+				</Cliente>
+				<hora>17:47</hora>
+				<fecha>2060-12-27</fecha>
+				<descuento>0</descuento>
+			</Reserva>
+			<especialidad>Mexicano</especialidad>
+			<especialidad>Mexicano2</especialidad>
+		</Bar>
+		<Cliente>
+			<nick>Vanesa</nick>
+			<contraseña>765432198</contraseña>
+			<fechaNacimiento>1994-11-13</fechaNacimiento>
+		</Cliente>
+		<Contestacion>
+			<comentario>Disculpe por los incovenientes</comentario>
+			<fecha>2024-11-13</fecha>
+			<Pub>
+				<horaApertura>10:00</horaApertura>
+				<horaClausura>2:00</horaClausura>
+				<nombre>El refugio del Jazz</nombre>
+				<Direccion>
+					<localidad>Madrid</localidad>
+					<provincia>Madrid</provincia>
+					<calle>Calle Alcala</calle>
+					<numero>7</numero>
+				</Direccion>
+				<descripcion>Sumergete entre copas y Jazz</descripcion>
+				<Propietario>
+					<nick>Carmen</nick>
+					<contraseña>789123456</contraseña>
+					<fechaNacimiento>1999-11-13</fechaNacimiento>
+				</Propietario>
+				<Propietario>
+					<nick>David</nick>
+					<contraseña>891234567</contraseña>
+					<fechaNacimiento>1998-11-13</fechaNacimiento>
+				</Propietario>
+				<Propietario>
+					<nick>Ana</nick>
+					<contraseña>912345678</contraseña>
+					<fechaNacimiento>1997-11-13</fechaNacimiento>
+				</Propietario>
+			</Pub>
+		</Contestacion>
+	</Review>
+	<Review>
+		<valoracion>1</valoracion>
+		<comentario>Un poco lentos</comentario>
+		<fecha>2065-12-27</fecha>
+		<Pub>
+			<horaApertura>10:00</horaApertura>
+			<horaClausura>2:00</horaClausura>
+			<nombre>El refugio del Jazz</nombre>
+			<Direccion>
+				<localidad>Madrid</localidad>
+				<provincia>Madrid</provincia>
+				<calle>Calle Alcala</calle>
+				<numero>7</numero>
+			</Direccion>
+			<descripcion>Sumergete entre copas y Jazz</descripcion>
+			<Propietario>
+				<nick>Carmen</nick>
+				<contraseña>789123456</contraseña>
+				<fechaNacimiento>1999-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>David</nick>
+				<contraseña>891234567</contraseña>
+				<fechaNacimiento>1998-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>Ana</nick>
+				<contraseña>912345678</contraseña>
+				<fechaNacimiento>1997-11-13</fechaNacimiento>
+			</Propietario>
+		</Pub>
+		<Cliente>
+			<nick>Juan</nick>
+			<contraseña>987654321</contraseña>
+			<fechaNacimiento>1996-11-13</fechaNacimiento>
+		</Cliente>
+	</Review>
+	<Review>
+		<valoracion>3</valoracion>
+		<comentario>Precio caro</comentario>
+		<fecha>2070-12-27</fecha>
+		<Pub>
+			<horaApertura>10:00</horaApertura>
+			<horaClausura>2:00</horaClausura>
+			<nombre>El refugio del Jazz</nombre>
+			<Direccion>
+				<localidad>Madrid</localidad>
+				<provincia>Madrid</provincia>
+				<calle>Calle Alcala</calle>
+				<numero>7</numero>
+			</Direccion>
+			<descripcion>Sumergete entre copas y Jazz</descripcion>
+			<Propietario>
+				<nick>Carmen</nick>
+				<contraseña>789123456</contraseña>
+				<fechaNacimiento>1999-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>David</nick>
+				<contraseña>891234567</contraseña>
+				<fechaNacimiento>1998-11-13</fechaNacimiento>
+			</Propietario>
+			<Propietario>
+				<nick>Ana</nick>
+				<contraseña>912345678</contraseña>
+				<fechaNacimiento>1997-11-13</fechaNacimiento>
+			</Propietario>
+		</Pub>
+		<Cliente>
+			<nick>Ivan</nick>
+			<contraseña>876543219</contraseña>
+			<fechaNacimiento>1995-11-13</fechaNacimiento>
+		</Cliente>
+	</Review>
+	<Review>
+		<valoracion>5</valoracion>
 		<comentario>muy justo</comentario>
-		<fecha>2024-11-13</fecha>
+		<fecha>2080-12-27</fecha>
 		<Restaurante>
 			<nombre>Sotano encantado</nombre>
 			<Direccion>
@@ -93,7 +420,7 @@
 					<contraseña>987654321</contraseña>
 					<fechaNacimiento>1996-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>17:25</hora>
+				<hora>17:47</hora>
 				<fecha>2050-12-27</fecha>
 				<descuento>0</descuento>
 			</Reserva>
@@ -102,9 +429,9 @@
 			<capacidadMesa>4</capacidadMesa>
 		</Restaurante>
 		<Cliente>
-			<nick>Juan</nick>
-			<contraseña>987654321</contraseña>
-			<fechaNacimiento>1996-11-13</fechaNacimiento>
+			<nick>Vanesa</nick>
+			<contraseña>765432198</contraseña>
+			<fechaNacimiento>1994-11-13</fechaNacimiento>
 		</Cliente>
 		<Contestacion>
 			<comentario>Sentimos el problema, mejoraremos en ese aspecto</comentario>
@@ -139,7 +466,7 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>17:25</hora>
+					<hora>17:47</hora>
 					<fecha>2050-12-27</fecha>
 					<descuento>0</descuento>
 				</Reserva>
@@ -179,7 +506,7 @@
 				<contraseña>987654321</contraseña>
 				<fechaNacimiento>1996-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2050-12-27</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -189,7 +516,7 @@
 				<contraseña>987654321</contraseña>
 				<fechaNacimiento>1996-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2060-12-27</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -221,7 +548,7 @@
 				<contraseña>876543219</contraseña>
 				<fechaNacimiento>1995-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2060-12-15</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -247,7 +574,7 @@
 				<contraseña>765432198</contraseña>
 				<fechaNacimiento>1994-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -349,7 +676,7 @@
 				<contraseña>987654321</contraseña>
 				<fechaNacimiento>1996-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2050-12-27</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -382,7 +709,7 @@
 				<contraseña>876543219</contraseña>
 				<fechaNacimiento>1995-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2060-12-15</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -410,7 +737,7 @@
 				<contraseña>765432198</contraseña>
 				<fechaNacimiento>1994-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>17:25</hora>
+			<hora>17:47</hora>
 			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>

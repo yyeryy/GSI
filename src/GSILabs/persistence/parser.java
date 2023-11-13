@@ -616,13 +616,16 @@ public class parser {
         if(null == strFecha) throw new XMLParsingException("Fecha vacia o invalida.");
         if(null == strLocal) throw new XMLParsingException("Local vacio o invalido.");
         if(null == strUsuario) throw new XMLParsingException("Usuario vacio o invalido.");
-        if(null == strConstestacion) throw new XMLParsingException("Contestacion vacia o invalida.");
+        // if(null == strConstestacion) throw new XMLParsingException("Contestacion vacia o invalida.");
 
 
-        Contestacion contestacion = parseContestacion(strConstestacion);
+
         // Crear objetos que se usan para crear propietario
         Review review = new Review(Integer.parseInt(strValoracion), strComentario, LocalDate.parse(strFecha), local, usuario);
-        review.setContestacion(contestacion);     
+        if(strConstestacion == null){
+            Contestacion contestacion = parseContestacion(strConstestacion);
+            review.setContestacion(contestacion);  
+        }   
 
         // Devolver objeto
         return review;

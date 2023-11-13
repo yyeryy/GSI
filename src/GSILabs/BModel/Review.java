@@ -193,8 +193,11 @@ public class Review implements XMLRepresentable{
         }
 
         // Contestacion
-        partes = this.getContestacion().toXML().split("<Contestacion>", 2);
-        xmlData += "<Contestacion>" + partes[1];
+        if(this.getContestacion() != null){
+            partes = this.getContestacion().toXML().split("<Contestacion>", 2);
+            xmlData += "<Contestacion>" + partes[1];
+        }
+
         // Cierre
         xmlData += "</Review>\n";
         return formatearXML(xmlData);

@@ -81,18 +81,9 @@ public class TestBS {
         restaurante1.nuevaReserva(reserva5.getCliente(), reserva5.getFecha(), reserva5.getHora());
         restaurante2.nuevaReserva(reserva6.getCliente(), reserva6.getFecha(), reserva6.getHora());
         */
-        Review review1 = new Review(10,"Maravilloso local",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1,cliente1);
-        Review review2 = new Review(9,"Camareros majos",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1,cliente2);
-        Review review3 = new Review(8,"Comida deliciosa",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1,cliente3);
-        Review review4 = new Review(7,"Un poco lentos",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub1,cliente1);
-        Review review5 = new Review(6,"Precio caro",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub2,cliente2);
-        Review review6 = new Review(5,"muy justo",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),restaurante1,cliente1);
-        Contestacion contestacion1 = new Contestacion("Muchas gracias por su opinion",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1);
-        Contestacion contestacion2 = new Contestacion("Disculpe por los incovenientes",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub1);
-        Contestacion contestacion3 = new Contestacion("Sentimos el problema, mejoraremos en ese aspecto",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),restaurante1);
-        review1.setContestacion(contestacion1);
-        review3.setContestacion(contestacion2);
-        review6.setContestacion(contestacion3);
+
+
+
         
         // Introducir los datos en el sistema
         BusinessSystem bs = new BusinessSystem();
@@ -117,12 +108,29 @@ public class TestBS {
         bs.nuevoLocal(restaurante1);
         bs.nuevoLocal(restaurante2);
         bs.nuevoLocal(restaurante3);
+
+        Review review1 = new Review(5,"Maravilloso local",LocalDate.parse("2050-12-27"),bs.obtenerLocal(bar1.getDireccion()),(Cliente) bs.obtenerUsuario(cliente1.getNick()));
+        Review review2 = new Review(3,"Camareros majos",LocalDate.parse("2055-12-27"),bs.obtenerLocal(bar1.getDireccion()),(Cliente) bs.obtenerUsuario(cliente2.getNick()));
+        Review review3 = new Review(2,"Comida deliciosa",LocalDate.parse("2060-12-27"),bs.obtenerLocal(bar1.getDireccion()),(Cliente) bs.obtenerUsuario(cliente3.getNick()));
+        Review review4 = new Review(1,"Un poco lentos",LocalDate.parse("2065-12-27"),bs.obtenerLocal(pub1.getDireccion()),(Cliente) bs.obtenerUsuario(cliente1.getNick()));
+        Review review5 = new Review(3,"Precio caro",LocalDate.parse("2070-12-27"),bs.obtenerLocal(pub1.getDireccion()),(Cliente) bs.obtenerUsuario(cliente2.getNick()));
+        Review review6 = new Review(5,"muy justo",LocalDate.parse("2080-12-27"),bs.obtenerLocal(restaurante1.getDireccion()),(Cliente) bs.obtenerUsuario(cliente3.getNick()));
+
         bs.nuevaReview(review1);
         bs.nuevaReview(review2);
         bs.nuevaReview(review3);
         bs.nuevaReview(review4);
         bs.nuevaReview(review5);
         bs.nuevaReview(review6);
+
+        Contestacion contestacion1 = new Contestacion("Muchas gracias por su opinion",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar1);
+        Contestacion contestacion2 = new Contestacion("Disculpe por los incovenientes",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub1);
+        Contestacion contestacion3 = new Contestacion("Sentimos el problema, mejoraremos en ese aspecto",LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),restaurante1);
+        // review1.setContestacion(contestacion1);
+        // review3.setContestacion(contestacion2);
+        // review6.setContestacion(contestacion3);
+
+
         bs.nuevaContestacion(contestacion1, review1);
         bs.nuevaContestacion(contestacion2, review3);
         bs.nuevaContestacion(contestacion3, review6);
