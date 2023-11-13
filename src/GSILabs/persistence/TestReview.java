@@ -49,14 +49,14 @@ public class TestReview {
             System.out.println("String generado por review.toXML():\n" + XMLreview);
             
             // XMLRepresentable: saveToXML a partir de File
-            String pathname = "XMLReview1.txt";
+            String pathname = "XMLReview1.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = review.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
             // XMLRepresentable: saveToXML a partir de su review
-            String filepath = "XMLReview2.txt";
+            String filepath = "XMLReview2.xml";
             boolean esFicheroCreado2 = review.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -66,7 +66,7 @@ public class TestReview {
             System.out.println("\nTest 1 (String: toXML + parseReview): " + (review.equals(review2)));
             
             // Obtener objeto del fichero XML
-            Review review3 = parseReview(new File("XMLReview2.txt"));
+            Review review3 = parseReview(new File("XMLReview2.xml"));
             System.out.println("Test 2 (File: toXML + parseReview(review)): " + (review.equals(review3)));
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestReview.class.getName()).log(Level.SEVERE, null, ex);

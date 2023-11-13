@@ -36,14 +36,14 @@ public class TestRestaurante {
             System.out.println("String generado por restaurante.toXML():\n" + XMLrestaurante);
             
             // XMLRepresentable: saveToXML a partir de File
-            String pathname = "XMLRestaurante1.txt";
+            String pathname = "XMLRestaurante1.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = restaurante.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
             // XMLRepresentable: saveToXML a partir de su restaurante
-            String filepath = "XMLRestaurante2.txt";
+            String filepath = "XMLRestaurante2.xml";
             boolean esFicheroCreado2 = restaurante.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -53,7 +53,7 @@ public class TestRestaurante {
             System.out.println("\nTest 1 (String: toXML + parseRestaurante): " + (restaurante.equals(restaurante2)));
             
             // Obtener objeto del fichero XML
-            Restaurante restaurante3 = parseRestaurante(new File("XMLRestaurante2.txt"));
+            Restaurante restaurante3 = parseRestaurante(new File("XMLRestaurante2.xml"));
             System.out.println("Test 2 (File: toXML + parseRestaurante(restaurante)): " + (restaurante.equals(restaurante3)));
             //System.out.println(local2.toString());
         } catch (XMLParsingException ex) {

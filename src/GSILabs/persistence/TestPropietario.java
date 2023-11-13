@@ -24,14 +24,14 @@ public class TestPropietario {
             System.out.println("String generado por direccion.toXML():\n" + XMLpropietario);
             
             // XMLRepresentable: saveToXML a partir de File
-            String pathname = "XMLPropietario.txt";
+            String pathname = "XMLPropietario.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = propietario.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
             // XMLRepresentable: saveToXML a partir de su direccion
-            String filepath = "XMLPropietario2.txt";
+            String filepath = "XMLPropietario2.xml";
             boolean esFicheroCreado2 = propietario.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -41,7 +41,7 @@ public class TestPropietario {
             System.out.println("\nTest 1 (String: toXML + parsePropietario): " + (propietario.equals(propietario2)));
             
             // Obtener objeto del fichero XML
-            Propietario propietario3 = parsePropietario(new File("XMLPropietario2.txt"));
+            Propietario propietario3 = parsePropietario(new File("XMLPropietario2.xml"));
             System.out.println("Test 2 (File: toXML + parsePropietario(propietario)): " + (propietario.equals(propietario3)));
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestPropietario.class.getName()).log(Level.SEVERE, null, ex);

@@ -26,13 +26,13 @@ public class TestReserva {
             String XMLreserva = reserva.toXML();
             System.out.println("String generado por reserva.toXML():\n" + XMLreserva);
             
-            String pathname = "XMLReserva1.txt";
+            String pathname = "XMLReserva1.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = reserva.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
-            String filepath = "XMLReserva2.txt";
+            String filepath = "XMLReserva2.xml";
             boolean esFicheroCreado2 = reserva.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -42,7 +42,7 @@ public class TestReserva {
             System.out.println("\nTest 1 (String: toXML + parseReserva): " + (reserva.equals(reserva2)));
             
             // Obtener objeto del fichero XML
-            Reserva reserva3 = parseReserva(new File("XMLReserva2.txt"));
+            Reserva reserva3 = parseReserva(new File("XMLReserva2.xml"));
             System.out.println("Test 2 (File: toXML + parseReserva(reserva)): " + (reserva.equals(reserva3)));
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestReserva.class.getName()).log(Level.SEVERE, null, ex);

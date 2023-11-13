@@ -20,14 +20,14 @@ public class TestDireccion {
         System.out.println("String generado por direccion.toXML():\n" + XMLdireccion);
         
         // XMLRepresentable: saveToXML a partir de File
-        String pathname = "XMLDireccion1.txt";
+        String pathname = "XMLDireccion1.xml";
         File file = new File(pathname);
         boolean esFicheroCreado1 = direccion.saveToXML(file);
         if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
         else System.out.println("Error en la creacion del fichero 1");
         
         // XMLRepresentable: saveToXML a partir de su direccion
-        String filepath = "XMLDireccion2.txt";
+        String filepath = "XMLDireccion2.xml";
         boolean esFicheroCreado2 = direccion.saveToXML(filepath);
         if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
         else System.out.println("Error en la creacion del fichero 2");
@@ -37,7 +37,7 @@ public class TestDireccion {
         System.out.println("\nTest 1 (String: toXML + parseDireccion): " + (direccion.equals(direccion2)));
         
         // Obtener objeto del fichero XML
-        Direccion direccion3 = parseDireccion(new File("XMLDireccion2.txt"));
+        Direccion direccion3 = parseDireccion(new File("XMLDireccion2.xml"));
         System.out.println("Test 2 (File: toXML + parseDireccion(direccion)): " + (direccion.equals(direccion3)));
     }
 }

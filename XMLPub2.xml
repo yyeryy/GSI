@@ -12,11 +12,11 @@
 	<Propietario>
 		<nick>Carlos</nick>
 		<contraseña>1234</contraseña>
-		<fechaNacimiento>2005-11-12</fechaNacimiento>
+		<fechaNacimiento>2005-11-13</fechaNacimiento>
 	</Propietario>
 	<Propietario>
 		<nick>Aimar</nick>
 		<contraseña>4321</contraseña>
-		<fechaNacimiento>1973-11-12</fechaNacimiento>
+		<fechaNacimiento>1973-11-13</fechaNacimiento>
 	</Propietario>
 </Pub>

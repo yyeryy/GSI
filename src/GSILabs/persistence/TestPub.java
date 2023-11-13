@@ -36,14 +36,14 @@ public class TestPub {
             System.out.println("String generado por pub.toXML():\n" + XMLpub);
             
             // XMLRepresentable: saveToXML a partir de File
-            String pathname = "XMLPub1.txt";
+            String pathname = "XMLPub1.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = pub.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
             // XMLRepresentable: saveToXML a partir de su pub
-            String filepath = "XMLPub2.txt";
+            String filepath = "XMLPub2.xml";
             boolean esFicheroCreado2 = pub.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -53,7 +53,7 @@ public class TestPub {
             System.out.println("\nTest 1 (String: toXML + parsePub): " + (pub.equals(pub2)));
             
             // Obtener objeto del fichero XML
-            Pub pub3 = parsePub(new File("XMLPub2.txt"));
+            Pub pub3 = parsePub(new File("XMLPub2.xml"));
             System.out.println("Test 2 (File: toXML + parsePub(pub)): " + (pub.equals(pub3)));
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestPub.class.getName()).log(Level.SEVERE, null, ex);

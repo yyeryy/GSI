@@ -24,14 +24,14 @@ public class TestCliente {
             System.out.println("String generado por direccion.toXML():\n" + XMLcliente);
             
             // XMLRepresentable: saveToXML a partir de File
-            String pathname = "XMLCliente1.txt";
+            String pathname = "XMLCliente1.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = cliente.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
             
             // XMLRepresentable: saveToXML a partir de su direccion
-            String filepath = "XMLCliente2.txt";
+            String filepath = "XMLCliente2.xml";
             boolean esFicheroCreado2 = cliente.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -41,7 +41,7 @@ public class TestCliente {
             System.out.println("\nTest 1 (String: toXML + parseCliente): " + (cliente.equals(cliente2)));
             
             // Obtener objeto del fichero XML
-            Cliente cliente3 = parseCliente(new File("XMLCliente2.txt"));
+            Cliente cliente3 = parseCliente(new File("XMLCliente2.xml"));
             System.out.println("Test 2 (File: toXML + parseCliente(cliente)): " + (cliente.equals(cliente3)));
         } catch (XMLParsingException ex) {
             Logger.getLogger(TestCliente.class.getName()).log(Level.SEVERE, null, ex);

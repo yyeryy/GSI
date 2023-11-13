@@ -37,14 +37,14 @@ public class TestLocal {
             System.out.println("String generado por local.toXML():\n" + XMLlocal);
             
             // XMLRepresentable: saveToXML a partir de File
-            String pathname = "XMLLocal1.txt";
+            String pathname = "XMLLocal1.xml";
             File file = new File(pathname);
             boolean esFicheroCreado1 = local.saveToXML(file);
             if(esFicheroCreado1) {System.out.println("Fichero 1 creado con exito: " + pathname);}
             else System.out.println("Error en la creacion del fichero 1");
      
             // XMLRepresentable: saveToXML a partir de su local
-            String filepath = "XMLLocal2.txt";
+            String filepath = "XMLLocal2.xml";
             boolean esFicheroCreado2 = local.saveToXML(filepath);
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
@@ -54,7 +54,7 @@ public class TestLocal {
             System.out.println("\nTest 1 (String: toXML + parseLocal): " + (local.equals(local2)));
             
             // Obtener objeto del fichero XML
-            Local local3 = parseLocal(new File("XMLLocal2.txt"));
+            Local local3 = parseLocal(new File("XMLLocal2.xml"));
             System.out.println("Test 2 (File: toXML + parseLocal(local)): " + (local.equals(local3)));
             //System.out.println(local2.toString());
         } catch (XMLParsingException ex) {
