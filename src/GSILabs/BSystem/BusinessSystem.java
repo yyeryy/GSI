@@ -20,17 +20,14 @@ import GSILabs.persistence.XMLWritingException;
 import static GSILabs.persistence.parser.obtenerContenidoEtiqueta;
 import static GSILabs.persistence.parser.parseBar;
 import static GSILabs.persistence.parser.parseCliente;
-import static GSILabs.persistence.parser.parseDireccion;
 import static GSILabs.persistence.parser.parseLocal;
 import static GSILabs.persistence.parser.parsePropietario;
 import static GSILabs.persistence.parser.parsePub;
-import static GSILabs.persistence.parser.parseReserva;
 import static GSILabs.persistence.parser.parseRestaurante;
 import static GSILabs.persistence.parser.parseReview;
 import static GSILabs.persistence.parser.parseUsuario;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -43,10 +40,8 @@ import java.util.List;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
-import org.xml.sax.SAXException;
 
 
 /**
@@ -1185,19 +1180,23 @@ public class BusinessSystem implements LeisureOffice, LookupService{
      */
     public static boolean loadXMLFile(File f) throws XMLParsingException {
         try {
-            //Creación de un constructor de documentos
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            BusinessSystem loadedBusinessSystem = BusinessSystem.parseXMLFile(f);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+            // Leer fichero
+            String contenido = "";
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {contenido += linea + "\n";}
+            // Comprobar si esta vacio
+            if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
+            String str = contenido;
 
-            //Análisis del archivo XML
-            Document document = (Document) dBuilder.parse(f);
 
-            //Normalización del documento
-            document.getDocumentElement().normalize();
-
-            //Si el fichero XML se ha cargado correctamente devolvemos true
-            return true;
+            // Conteo de lineas para comparar
+            int lineasXml = contenido.split("\n").length;
+            int lineasBS = loadedBusinessSystem.toXML().split("\n").length;
             
+            //Si el fichero XML se ha cargado correctamente devolvemos true
+            return lineasXml == lineasBS;
         //Si por el contrario ocurre algún error devolvemos false.
         } catch(Exception exception) {
             return false;
