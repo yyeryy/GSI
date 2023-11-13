@@ -447,7 +447,7 @@ public class BusinessSystem implements LeisureOffice, LookupService{
         }
 
         /*
-        Comrpobar si la fecha es futura
+        Comprobar si la fecha es futura
         */
         LocalDate fechaActual = LocalDate.now();
         if(fechaActual.isAfter(ld)){

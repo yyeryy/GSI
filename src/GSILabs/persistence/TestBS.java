@@ -129,6 +129,8 @@ public class TestBS {
 
 
         bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente1.getNick()), (Reservable) bs.obtenerLocal(bar1.getDireccion()), LocalDate.parse("2050-12-27"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+
+        bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente1.getNick()), (Reservable) bs.obtenerLocal(bar1.getDireccion()), LocalDate.parse("2060-12-27"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));     
         bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente2.getNick()), (Reservable) bs.obtenerLocal(bar2.getDireccion()), LocalDate.parse("2060-12-15"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
         bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente3.getNick()), (Reservable) bs.obtenerLocal(bar3.getDireccion()), LocalDate.parse("2070-12-01"), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
 
@@ -138,7 +140,7 @@ public class TestBS {
 
 
         // Genero el XML del sistema
-        // System.out.println("Salida:\n" + bs.obtenerReservas((Cliente) bs.obtenerUsuario(cliente1.getNick()))[5].toString());
+
         File file = new File("bs.xml");
         bs.saveToXML(file);
     }

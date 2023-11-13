@@ -6,6 +6,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Clase Restaurante
@@ -18,6 +19,7 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
     private double precioMenu;
     private Integer capacidad;
     private Integer capacidadMesa;
+    private ArrayList<Reserva> listaReserva;
     // listaReserva se incia en Reservable
 
     /**
@@ -35,9 +37,15 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
         this.precioMenu = precioMenu;
         this.capacidad = capacidad;
         this.capacidadMesa = capacidadMesa;
+        this.listaReserva = new ArrayList<Reserva>();
         // listaReserva se incia en Reservable
     }
     
+    @Override
+    public ArrayList<Reserva> getListaReserva() {
+        return listaReserva;
+    }
+
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
     public double getPrecioMenu(){
         return this.precioMenu;

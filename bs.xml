@@ -93,28 +93,8 @@
 					<contraseña>987654321</contraseña>
 					<fechaNacimiento>1996-11-13</fechaNacimiento>
 				</Cliente>
-				<hora>16:43</hora>
+				<hora>17:25</hora>
 				<fecha>2050-12-27</fecha>
-				<descuento>0</descuento>
-			</Reserva>
-			<Reserva>
-				<Cliente>
-					<nick>Ivan</nick>
-					<contraseña>876543219</contraseña>
-					<fechaNacimiento>1995-11-13</fechaNacimiento>
-				</Cliente>
-				<hora>16:43</hora>
-				<fecha>2060-12-15</fecha>
-				<descuento>0</descuento>
-			</Reserva>
-			<Reserva>
-				<Cliente>
-					<nick>Vanesa</nick>
-					<contraseña>765432198</contraseña>
-					<fechaNacimiento>1994-11-13</fechaNacimiento>
-				</Cliente>
-				<hora>16:43</hora>
-				<fecha>2070-12-01</fecha>
 				<descuento>0</descuento>
 			</Reserva>
 			<precioMenu>20.0</precioMenu>
@@ -159,28 +139,8 @@
 						<contraseña>987654321</contraseña>
 						<fechaNacimiento>1996-11-13</fechaNacimiento>
 					</Cliente>
-					<hora>16:43</hora>
+					<hora>17:25</hora>
 					<fecha>2050-12-27</fecha>
-					<descuento>0</descuento>
-				</Reserva>
-				<Reserva>
-					<Cliente>
-						<nick>Ivan</nick>
-						<contraseña>876543219</contraseña>
-						<fechaNacimiento>1995-11-13</fechaNacimiento>
-					</Cliente>
-					<hora>16:43</hora>
-					<fecha>2060-12-15</fecha>
-					<descuento>0</descuento>
-				</Reserva>
-				<Reserva>
-					<Cliente>
-						<nick>Vanesa</nick>
-						<contraseña>765432198</contraseña>
-						<fechaNacimiento>1994-11-13</fechaNacimiento>
-					</Cliente>
-					<hora>16:43</hora>
-					<fecha>2070-12-01</fecha>
 					<descuento>0</descuento>
 				</Reserva>
 				<precioMenu>20.0</precioMenu>
@@ -219,28 +179,18 @@
 				<contraseña>987654321</contraseña>
 				<fechaNacimiento>1996-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
+			<hora>17:25</hora>
 			<fecha>2050-12-27</fecha>
 			<descuento>0</descuento>
 		</Reserva>
 		<Reserva>
 			<Cliente>
-				<nick>Ivan</nick>
-				<contraseña>876543219</contraseña>
-				<fechaNacimiento>1995-11-13</fechaNacimiento>
+				<nick>Juan</nick>
+				<contraseña>987654321</contraseña>
+				<fechaNacimiento>1996-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2060-12-15</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Vanesa</nick>
-				<contraseña>765432198</contraseña>
-				<fechaNacimiento>1994-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2070-12-01</fecha>
+			<hora>17:25</hora>
+			<fecha>2060-12-27</fecha>
 			<descuento>0</descuento>
 		</Reserva>
 		<especialidad>Mexicano</especialidad>
@@ -267,32 +217,12 @@
 		</Propietario>
 		<Reserva>
 			<Cliente>
-				<nick>Juan</nick>
-				<contraseña>987654321</contraseña>
-				<fechaNacimiento>1996-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2050-12-27</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
 				<nick>Ivan</nick>
 				<contraseña>876543219</contraseña>
 				<fechaNacimiento>1995-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
+			<hora>17:25</hora>
 			<fecha>2060-12-15</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Vanesa</nick>
-				<contraseña>765432198</contraseña>
-				<fechaNacimiento>1994-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>
 		<especialidad>Italiano</especialidad>
@@ -313,31 +243,11 @@
 		</Propietario>
 		<Reserva>
 			<Cliente>
-				<nick>Juan</nick>
-				<contraseña>987654321</contraseña>
-				<fechaNacimiento>1996-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2050-12-27</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Ivan</nick>
-				<contraseña>876543219</contraseña>
-				<fechaNacimiento>1995-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2060-12-15</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
 				<nick>Vanesa</nick>
 				<contraseña>765432198</contraseña>
 				<fechaNacimiento>1994-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
+			<hora>17:25</hora>
 			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>
@@ -439,28 +349,8 @@
 				<contraseña>987654321</contraseña>
 				<fechaNacimiento>1996-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
+			<hora>17:25</hora>
 			<fecha>2050-12-27</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Ivan</nick>
-				<contraseña>876543219</contraseña>
-				<fechaNacimiento>1995-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2060-12-15</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Vanesa</nick>
-				<contraseña>765432198</contraseña>
-				<fechaNacimiento>1994-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>
 		<precioMenu>20.0</precioMenu>
@@ -488,32 +378,12 @@
 		</Propietario>
 		<Reserva>
 			<Cliente>
-				<nick>Juan</nick>
-				<contraseña>987654321</contraseña>
-				<fechaNacimiento>1996-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2050-12-27</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
 				<nick>Ivan</nick>
 				<contraseña>876543219</contraseña>
 				<fechaNacimiento>1995-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
+			<hora>17:25</hora>
 			<fecha>2060-12-15</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Vanesa</nick>
-				<contraseña>765432198</contraseña>
-				<fechaNacimiento>1994-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>
 		<precioMenu>8.0</precioMenu>
@@ -536,31 +406,11 @@
 		</Propietario>
 		<Reserva>
 			<Cliente>
-				<nick>Juan</nick>
-				<contraseña>987654321</contraseña>
-				<fechaNacimiento>1996-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2050-12-27</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
-				<nick>Ivan</nick>
-				<contraseña>876543219</contraseña>
-				<fechaNacimiento>1995-11-13</fechaNacimiento>
-			</Cliente>
-			<hora>16:43</hora>
-			<fecha>2060-12-15</fecha>
-			<descuento>0</descuento>
-		</Reserva>
-		<Reserva>
-			<Cliente>
 				<nick>Vanesa</nick>
 				<contraseña>765432198</contraseña>
 				<fechaNacimiento>1994-11-13</fechaNacimiento>
 			</Cliente>
-			<hora>16:43</hora>
+			<hora>17:25</hora>
 			<fecha>2070-12-01</fecha>
 			<descuento>0</descuento>
 		</Reserva>

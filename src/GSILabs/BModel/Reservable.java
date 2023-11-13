@@ -18,7 +18,7 @@ public interface Reservable {
     /**
      * Lista de Reservas de un Local Reservable (Bar o Restaurante)
      */
-    public ArrayList<Reserva> listaReserva = new ArrayList<Reserva>();
+    ArrayList<Reserva> getListaReserva();
 
     /**
      * Dado un Cliente existente sin ninguna reserva en ese día, una fecha y hora futura,
@@ -31,7 +31,7 @@ public interface Reservable {
 
         int descuento = 0;
         Reserva reserva = new Reserva(cliente, fecha, hora, descuento);
-        listaReserva.add(reserva);
+        this.getListaReserva().add(reserva);
 
     };
 
@@ -43,12 +43,12 @@ public interface Reservable {
      * @return La lista de las reservas del Cliente, o null si no existe ninguna reserva.
      */
     default Reserva[] reservasDeCliente(Cliente c){
-        if(listaReserva.size() > 0){
+        if(this.getListaReserva().size() > 0){
             int pos = 0;
             ArrayList<Reserva> todasReservas = new  ArrayList<Reserva>();
-            while(pos < listaReserva.size()){
-                if(listaReserva.get(pos).getCliente().equals(c)){
-                    todasReservas.add(listaReserva.get(pos));
+            while(pos < this.getListaReserva().size()){
+                if(this.getListaReserva().get(pos).getCliente().equals(c)){
+                    todasReservas.add(this.getListaReserva().get(pos));
                 }
                 pos++;
             }
@@ -75,8 +75,8 @@ public interface Reservable {
     default boolean comprobarReserva(Reserva r){
         int pos = 0;
         int encontrada = 0;
-        while(pos < listaReserva.size() && encontrada == 0){
-            if(listaReserva.get(pos).equals(r)){
+        while(pos < this.getListaReserva().size() && encontrada == 0){
+            if(this.getListaReserva().get(pos).equals(r)){
                 encontrada = 1;
             }
             pos++;
@@ -94,7 +94,7 @@ public interface Reservable {
      * @return True si y solo si se ha elimina la Reserva de la Lista de Reservas
      */
     default boolean eliminarReserva(Reserva r){
-        return listaReserva.remove(r);
+        return this.getListaReserva().remove(r);
 
     }
 
@@ -103,11 +103,11 @@ public interface Reservable {
      * @return La lista de las reservas, o null si no existe ninguna reserva.
      */
     default Reserva[] todasReserva(){
-        if(listaReserva.size() > 0){
-            Reserva[] reservas = new Reserva[listaReserva.size()];
+        if(this.getListaReserva().size() > 0){
+            Reserva[] reservas = new Reserva[this.getListaReserva().size()];
             int pos = 0;
-            while(pos < listaReserva.size()){
-                reservas[pos] = listaReserva.get(pos);
+            while(pos < this.getListaReserva().size()){
+                reservas[pos] = this.getListaReserva().get(pos);
                 pos++;
             }
             return reservas;
@@ -122,12 +122,12 @@ public interface Reservable {
      * @return La lista de las reservas para esa Fecha, o null si no existe ninguna reserva.
      */
     default Reserva[] reservasDeDia(LocalDate ld){
-        if(listaReserva.size() > 0){
+        if(this.getListaReserva().size() > 0){
             int pos = 0;
             ArrayList<Reserva> diaReservas = new  ArrayList<Reserva>();
-            while(pos < listaReserva.size()){
-                if(listaReserva.get(pos).getFecha().equals(ld)){
-                    diaReservas.add(listaReserva.get(pos));
+            while(pos < this.getListaReserva().size()){
+                if(this.getListaReserva().get(pos).getFecha().equals(ld)){
+                    diaReservas.add(this.getListaReserva().get(pos));
                 }
                 pos++;
             }

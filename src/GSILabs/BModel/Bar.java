@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class Bar extends Local implements Reservable, XMLRepresentable{
     private List<String> especialidades;
+    private ArrayList<Reserva> listaReserva;
     // listaReserva se incia en Reservable
 
     /**
@@ -29,9 +30,14 @@ public class Bar extends Local implements Reservable, XMLRepresentable{
     public Bar(String nombre, Direccion direccion, String descripcion, Propietario propietario) {
         super(nombre, direccion, descripcion, tipoLocal.BAR, propietario);
         this.especialidades = new ArrayList<>();
+        this.listaReserva = new ArrayList<Reserva>();
         // listaReserva se incia en Reservable
     }
 
+    @Override
+    public ArrayList<Reserva> getListaReserva() {
+        return listaReserva;
+    }
     /**
      * Función que agrega especialidades al bar.
      * @param especialidad Especialidad del bar
