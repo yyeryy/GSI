@@ -17,6 +17,7 @@ public interface Reservable {
     
     /**
      * Lista de Reservas de un Local Reservable (Bar o Restaurante).
+     * @return Lista de reservas
      */
     ArrayList<Reserva> getListaReserva();
 

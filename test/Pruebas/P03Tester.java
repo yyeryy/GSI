@@ -1,10 +1,5 @@
 package Pruebas;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-
 import GSILabs.BSystem.BusinessSystem;
 import GSILabs.persistence.XMLParsingException;
 import java.io.BufferedReader;
@@ -34,33 +29,42 @@ public class P03Tester {
         }
     }
 
+    /**
+     * testParseXMLFile
+     * @return Booleano para ver si se ha realizado el parseado correctamente.
+     * @throws IOException 
+     */
     public static boolean testParseXMLFile() throws IOException {
         try {
             File xmlFile = new File("bs.xml");
             BusinessSystem businessSystem = BusinessSystem.parseXMLFile(xmlFile);
 
-            // Leer otra vez el fichero
+            //Leer otra vez el fichero
             BufferedReader bufferedReader = new BufferedReader(new FileReader(xmlFile));
-            // Leer fichero
+            
+            //Leer fichero
             String contenido = "";
             String linea;
             while ((linea = bufferedReader.readLine()) != null) {contenido += linea + "\n";}
-            // Comprobar si esta vacio
+            
+            //Comprobar si esta vacio
             if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
             String str = contenido;
 
-
-            // Conteo de lineas para comparar
+            //Conteo de lineas para comparar
             int lineasXml = contenido.split("\n").length;
             int lineasBS = businessSystem.toXML().split("\n").length;
-            // No se como comprobar que tiene todos los datos iguales
-            // Seguramente esten desosrdenados 
+            
             return lineasXml == lineasBS;
         } catch (XMLParsingException e) {
             return false;
         }
     }
 
+    /**
+     * testLoadXMLFile
+     * @return Booleano para ver si se ha realizado el load correctamente.
+     */
     public static boolean testLoadXMLFile() {
         try {
             File xmlFile = new File("bs.xml");

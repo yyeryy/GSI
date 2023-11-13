@@ -37,7 +37,7 @@ public interface LookupService {
      * @param l Local de interés.
      * @param edadEntre Edad minima del rango (incluida)
      * @param edadHasta Edad maxima del rango (incluida)
-     * @return 
+     * @return Valoración media realizada al local
      */
     public float obtenerValoracionMedia(Local l, int edadEntre, int edadHasta);
     

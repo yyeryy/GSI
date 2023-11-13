@@ -181,9 +181,9 @@ public interface LeisureOffice {
     
     /**
      * 
-     * @param viejoL
-     * @param nuevoL
-     * @return 
+     * @param viejoL Local viejo
+     * @param nuevoL Local Nuevo
+     * @return Booleano que indica si se ha actualizado el local correctamente.
      */
     public boolean actualizarLocal(Local viejoL, Local nuevoL);
     

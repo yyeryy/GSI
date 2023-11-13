@@ -370,9 +370,9 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
 
     /**
      * 
-     * @param viejoL
-     * @param nuevoL
-     * @return 
+     * @param viejoL Local Viejo
+     * @param nuevoL Nuevo Local
+     * @return Booleano que indica si se ha actualizado el local correctamente.
      */
     @Override
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
@@ -390,7 +390,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @return Lista de reviews del sistema. En caso de que el Local no exista, sera
      *  el valor null.
      */
-
     @Override
     public Review[] verReviews(Local l) {
         ArrayList<Review> reviewsLocal = new ArrayList<>();
@@ -741,7 +740,7 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param l Local de interés.
      * @param edadEntre Edad minima del rango (incluida)
      * @param edadHasta Edad maxima del rango (incluida)
-     * @return 
+     * @return Valoración media realizada al local
      */
     @Override
     public float obtenerValoracionMedia(Local l, int edadEntre, int edadHasta) {
@@ -1003,6 +1002,7 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @return Clase BusinessSystem
      * @throws XMLParsingException
      * Parsea un fichero XML.
+     * @throws java.io.IOException Exception por error de manejo de ficheros.
      */
     public static BusinessSystem parseXMLFile(File f) throws XMLParsingException, IOException {        
         BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
@@ -1166,7 +1166,7 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param f Fichero XML
      * @return Booleano que indica si el fichero XML se ha escrito correctamente.
      * Escribe un fichero XML.
-     * @throws GSILabs.persistence.XMLWritingException
+     * @throws GSILabs.persistence.XMLWritingException Exception de fallo de escritura de ficheros XML.
      */
     public boolean writeXMLFile(File f) throws XMLWritingException{
         try{          
@@ -1182,7 +1182,7 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param f Fichero XML
      * @return Booleano que indica si el fichero XML se ha cargado correctamente.
      * Carga un fichero XML.
-     * @throws GSILabs.persistence.XMLParsingException
+     * @throws GSILabs.persistence.XMLParsingException Exception de Parseo de XML
      */
     public static boolean loadXMLFile(File f) throws XMLParsingException {
         try {

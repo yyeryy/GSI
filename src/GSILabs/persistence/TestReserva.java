@@ -10,19 +10,25 @@ import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase TestReserva
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 07.11.2023
+ * Test de Reserva.
+ */
 public class TestReserva {
     public static void main(String[] args) throws IOException {
         try {
-            // Variables
             Cliente cliente = new Cliente("Yeray", "6666", LocalDate.of(LocalDate.now().getYear() - 20,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()));
             LocalDate fecha = LocalDate.of(LocalDate.now().getYear() + 1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth());
             LocalTime hora = LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute());
             int descuento = 10;
             
-            // Generar Reserva
+            //Generar Reserva
             Reserva reserva = new Reserva(cliente, fecha, hora, descuento);
             
-            // XMLRepresentable: toXML
+            //XMLRepresentable: toXML
             String XMLreserva = reserva.toXML();
             System.out.println("String generado por reserva.toXML():\n" + XMLreserva);
             
@@ -37,11 +43,11 @@ public class TestReserva {
             if(esFicheroCreado2) System.out.println("Fichero 2 creado con exito: " + filepath);
             else System.out.println("Error en la creacion del fichero 2");
             
-            // Obtener objeto del String XML
+            //Obtener objeto del String XML
             Reserva reserva2 = parseReserva(XMLreserva);
             System.out.println("\nTest 1 (String: toXML + parseReserva): " + (reserva.equals(reserva2)));
             
-            // Obtener objeto del fichero XML
+            //Obtener objeto del fichero XML
             Reserva reserva3 = parseReserva(new File("XMLReserva2.xml"));
             System.out.println("Test 2 (File: toXML + parseReserva(reserva)): " + (reserva.equals(reserva3)));
         } catch (XMLParsingException ex) {
