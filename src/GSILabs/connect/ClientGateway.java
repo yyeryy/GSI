@@ -22,7 +22,7 @@ import java.rmi.RemoteException;
  * @author carlos.lopez
  * @version 1.0 (12/08/2016)
  */
-public interface ClientGateway extends Remote, LocalFinder{
+public interface ClientGateway extends Remote, LocalFinder {
     
     
     /**

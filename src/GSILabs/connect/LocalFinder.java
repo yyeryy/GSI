@@ -22,7 +22,7 @@ public interface LocalFinder extends Remote {
    
     /**
      * Retrieves an Locals that matches EXACTLY (up to the case and/or spacing),
-     *  the name.
+     * the name.
      * @param name Name of the local
      * @return The local , or a null response
      * @throws RemoteException If some error happens in the remove invocation.
@@ -31,7 +31,7 @@ public interface LocalFinder extends Remote {
     
     /**
      * Retrieves all the Locals that match, either partial o totally (up to the case and/or spacing),
-     *  the name given as argument.
+     * the name given as argument.
      * @param name Complete or partial name of the ñpcañ
      * @return The list of local, that might eventually contain zero elements
      * @throws RemoteException If some error happens in the remove invocation.
