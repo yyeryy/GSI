@@ -63,7 +63,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param u El nuevo usuario
      * @return Cierto si el usuario pudo ser añadido.
      */
-    
     @Override
     public boolean nuevoUsuario(Usuario u) {
         if (existeNick(u.getNick()))
@@ -77,7 +76,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param u El usuario
      * @return True si y solo si el usuario existia y pudo ser eliminado.
      */
-
     @Override
     public boolean eliminaUsuario(Usuario u) {
         if (existeNick(u.getNick())){
@@ -95,7 +93,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param nuevoU El nuevo usuario
      * @return True si el usuario se encontro y pudo ser modificado
      */
-
     @Override
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
         if (existeNick(u.getNick())){
@@ -113,7 +110,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param nick id del usuario a comprobar
      * @return True si existe un usuario con ese nick
      */
-    
     @Override
     public boolean existeNick(String nick) {
 	for (Usuario u : usuarios) {
@@ -128,7 +124,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param nick id del usuario a obtener
      * @return El usuario con el nick. Debe devolver null si existeNick(nick) es falso.
      */
-    
     @Override
     public Usuario obtenerUsuario(String nick) {
         for (Usuario u : usuarios) {
@@ -146,7 +141,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param r La review a introducir al sistema.
      * @return True si y solo si la operacion fue completada.
      */
-
     @Override
     public boolean nuevaReview(Review r) {
         if(existeNick(r.getUsuario().getNick()) && (r.getValoracion() >= 0) && (r.getValoracion() <= 5) && r.getComentario().length() >= 0 && r.getComentario().length() <= 500){
@@ -169,7 +163,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param r Review a eliminar
      * @return True si y solo si la operacion fue completada.
      */
-
     @Override
     public boolean eliminaReview(Review r) {
         if(reviews.isEmpty()){
@@ -187,7 +180,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param ld la fecha de visita
      * @return True si y solo si la review existe.
      */
-    
     @Override
     public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
         if(reviews.isEmpty()){
@@ -212,7 +204,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param r Review
      * @return True si y solo si la operacion fue completada y se pudo añadir la review.
      */
-
     @Override
     public boolean nuevaContestacion(Contestacion c, Review r) {
         if(existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
@@ -231,7 +222,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param r Review a añadir
      * @return True si y solo si la Review existe y tiene contestacion
      */
-
     @Override
     public boolean tieneContestacion(Review r) {
         if(existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
@@ -247,7 +237,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param r Review a consultar
      * @return La contestacion, o null si esta, o la propia review, no existen
      */
-
     @Override
     public Contestacion obtenerContestacion(Review r) {
         if(existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
@@ -263,7 +252,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param c Contestacion a eliminar
      * @return True si y solo si la operacion fue completada.
      */
-
     @Override
     public boolean eliminaContestacion(Contestacion c) {
         if(reviews.isEmpty()){
@@ -283,7 +271,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      * @param r La review cuya contestacion hay que elimnar
      * @return True si y solo si la operacion fue completada.
      */
-    
     @Override
     public boolean eliminaContestacion(Review r) {
         if(reviews.isEmpty()){

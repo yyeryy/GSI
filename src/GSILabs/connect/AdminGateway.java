@@ -44,7 +44,7 @@ public interface AdminGateway extends Remote, LocalFinder {
     * @return True sí y sólo si se pudo completar la tarea
     * @throws RemoteException If some error happens in the remove invocation.
     */
-   public Boolean eliminaReview(Review r) throws RemoteException;
+   public Boolean eliminarReview(Review r) throws RemoteException;
    
    /**
     * Elimina todas la reviews de un cliente determinado
@@ -56,7 +56,7 @@ public interface AdminGateway extends Remote, LocalFinder {
    
    /**
     * Crea un usuario falso al que se le añade una review falsa con la puntuación
-    *  determinada en el segunda argumento.
+    * determinada en el segunda argumento.
     * @param l Local al que añadir la review falsa
     * @param puntuacion puntuación de la review
     * @return True sí y sólo si se pudo completar la tarea

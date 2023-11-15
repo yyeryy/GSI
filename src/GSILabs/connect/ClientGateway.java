@@ -43,7 +43,7 @@ public interface ClientGateway extends Remote, LocalFinder {
      */
     public boolean quitaReview(Review r) throws RemoteException;
 	
-	/**
+    /**
      * Devuelve el mejor bar de la cuidad que coincida con el nombre.
      * @param ciudad nombre de la cuidad
      * @return El bar con mejor puntuación media de la cuidad
@@ -52,7 +52,7 @@ public interface ClientGateway extends Remote, LocalFinder {
     public Bar mejorBar(String ciudad) throws RemoteException;
 	
 	
-	/**
+    /**
      * Devuelve los num restaurantes de la cuidad con mejores puntuaciones.
      * @param ciudad nombre de la cuidad
      * @param num numero de restaurantes
