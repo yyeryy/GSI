@@ -1,22 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package GSILabs.connect;
 
 import GSILabs.BSystem.PublicBusinessSystem;
 
 /**
- *
- * @author yeray
+ * Clase BusinessServer
+ * Clase con la que implementaremos los métodos implementados de las interfaces
+ * para publicarla en un registro RMI (puerto 1099).
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 15.11.2023
  */
 public class BusinessServer {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         PublicBusinessSystem pbs = new PublicBusinessSystem();
+        
+        //Población de la instancia
+        
+        //Más fácil hacerlo con ODS, pero nos puntuaría más casi seguro si lo hicieramos con 
+        //ODS o XML.
+        
+        
     }
     
 }
