@@ -1,7 +1,3 @@
-ArrayList<Usuario> usuarios = new ArrayList<>();
-ArrayList<Review> reviews = new ArrayList<>();
-ArrayList<Local> locales = new ArrayList<>();
-
 <Usuarios>
     <Usuario>
         <nick>Pepe</nick>
