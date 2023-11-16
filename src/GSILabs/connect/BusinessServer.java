@@ -1,6 +1,10 @@
 package GSILabs.connect;
 
 import GSILabs.BSystem.PublicBusinessSystem;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Clase BusinessServer
@@ -12,13 +16,24 @@ import GSILabs.BSystem.PublicBusinessSystem;
  */
 public class BusinessServer {
 
-    public static void main(String[] args) {
-        PublicBusinessSystem pbs = new PublicBusinessSystem();
+    public static void main(String[] args) throws RemoteException {
+        LocalFinder pbs = new PublicBusinessSystem();
         
-        //Población de la instancia
+        //poblacion
         
-        //Más fácil hacerlo con ODS, pero nos puntuaría más casi seguro si lo hicieramos con 
-        //ODS o XML.
+        
+        
+        // generar un stub del objeto
+        LocalFinder stub = (LocalFinder) UnicastRemoteObject.exportObject(pbs, 0);
+
+        // crear un registro en el puerto 1099
+        Registry reg = LocateRegistry.createRegistry(1099);
+
+        // asociar el stub a los identificadores ClientGateway y AdminGateway
+        reg.rebind("ClientGateway", stub);
+        reg.rebind("AdminGateway", stub);
+
+        System.out.println("Servidor RMI listo...");
         
         
     }
