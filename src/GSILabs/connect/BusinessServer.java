@@ -1,10 +1,14 @@
 package GSILabs.connect;
 
 import GSILabs.BSystem.PublicBusinessSystem;
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Clase BusinessServer
@@ -21,7 +25,18 @@ public class BusinessServer {
         
         //poblacion
         
-        
+        try {
+            File file = new File("bs.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = (Document) builder.parse(file);
+            
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Población fallida");
+        }
         
         // generar un stub del objeto
         LocalFinder stub = (LocalFinder) UnicastRemoteObject.exportObject(pbs, 0);
