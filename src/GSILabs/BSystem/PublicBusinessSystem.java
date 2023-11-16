@@ -4,6 +4,7 @@ import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
@@ -13,8 +14,10 @@ import GSILabs.connect.ClientGateway;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import jdk.internal.net.http.common.Pair;
 
 /**
  * Clase PublicBusinessSystem
@@ -35,18 +38,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public boolean insertaReview(Review r) throws RemoteException {
-        if(existeNick(r.getUsuario().getNick()) && (r.getValoracion() >= 0) && (r.getValoracion() <= 5) && r.getComentario().length() >= 0 && r.getComentario().length() <= 500){
-            if(existeRewiew(r.getUsuario(), r.getLocal(), LocalDate.now())){
-                for(Local l : locales){
-                    if(l.getDireccion().equals(r.getLocal().getDireccion())){
-                        return false;
-                    }
-                }
-            }
-            reviews.add(r);
-            return true;
-        }
-        return false;    
+        return nuevaReview(r);
     }
 
     /**
@@ -58,10 +50,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public boolean quitaReview(Review r) throws RemoteException {
-        if(reviews.isEmpty()){
-            return false;
-        }
-        return reviews.remove(r);
+        return eliminaReview(r);
     }
 
     /**
@@ -73,13 +62,23 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     @Override
     public Bar mejorBar(String ciudad) throws RemoteException {
         //No nos dan provinvia
-        Bar[] bares = listarBares("","");
-        Bar mejorBar;
-        
-        for (Bar bar : bares) {
-            //Bar no tiene el campo puntuacion
+        Bar mejorBar = null;
+        Review[] reviewsLocal;
+        int valoracionMax = 0;
+        for (Local local : locales) {
+            int valoracionMedia = 0;
+            if(local.getDireccion().getLocalidad().equalsIgnoreCase(ciudad) && local.getTipo() == tipoLocal.BAR){
+                reviewsLocal = verReviews(local);
+                for (int i = 0; i < reviewsLocal.length; i++) {
+                    valoracionMedia += reviewsLocal[i].getValoracion();
+                }
+                if(valoracionMax < valoracionMedia){
+                    valoracionMax = valoracionMedia;
+                    mejorBar = (Bar) local;
+                }
+            }
         }
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return mejorBar;
     }
 
     /**
@@ -91,7 +90,30 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public Restaurante[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Restaurante[] mejoresRestaurantes = new Restaurante[num];
+        Integer[] valoraciones = new Integer[num];
+        int index = 0;
+        Review[] reviewsLocal;
+        for (Local local : locales) {
+            int valoracionMedia = 0;
+            if(local.getDireccion().getLocalidad().equalsIgnoreCase(ciudad) && local.getTipo() == tipoLocal.RESTAURANTE){
+                reviewsLocal = verReviews(local);
+                for (int i = 0; i < reviewsLocal.length; i++) {
+                    valoracionMedia += reviewsLocal[i].getValoracion();
+                }
+                if (index < num || valoracionMedia > valoraciones[0]) {
+                    // Agrega el restaurante si hay espacio o si su valoración es mayor que la de los existentes
+                    mejoresRestaurantes[0] = (Restaurante) local;
+                    valoraciones[0] = valoracionMedia;
+                    Arrays.sort(mejoresRestaurantes);
+                    Arrays.sort(valoraciones); 
+                    if (index < num) {
+                        index++; // Incrementa solo si hay espacio en el array
+                    }
+                }
+            }
+        }
+        return mejoresRestaurantes;
     }
 
     /**
@@ -104,7 +126,6 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     @Override
     public Local getLocal(String name) throws RemoteException {
         for (Local local : locales) {
-            // Compara el nombre del local con el nombre proporcionado
             if (local.getNombre().equals(name)) {
                 return local;
             }
@@ -121,16 +142,13 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public Local[] getLocals(String name) throws RemoteException {
-        
         List<Local> localesEncontrados = new ArrayList<>();
         for (Local local : locales) {
-            // Compara el nombre del local, ignorando mayúsculas, minúsculas y espacios
             if (local.getNombre().toLowerCase().contains(name.toLowerCase().trim())) {
-                localesEncontrados.add(local); // Agrega el local a la lista si coincide parcial o totalmente
+                localesEncontrados.add(local);
             }
         }
-
-        return localesEncontrados.toArray(new Local[0]); // Convierte la lista a un array de Locales
+        return localesEncontrados.toArray(new Local[0]);
     }
 
     /**
@@ -141,10 +159,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public Boolean eliminaLocal(Local l) throws RemoteException {
-        if(locales.size() < 1) {
-            return false;
-        }
-        return locales.remove(l);
+        return eliminarLocal(l);
     }
 
     /**
@@ -156,20 +171,14 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     @Override
     public Boolean eliminaReviewsDeLocal(Local l) throws RemoteException {
         boolean revisionesEliminadas = false;
-
-        Iterator<Review> iterator = reviews.iterator();
-        while (iterator.hasNext()) {
-            Review review = iterator.next();
+        for(Review review : reviews){
             if (review.getLocal().equals(l)) {
-                // Elimina la revisión del local
-                iterator.remove();
-                // Elimina las respuestas asociadas a esta revisión
+                eliminaReview(review);
                 Contestacion c = obtenerContestacion(review);
                 eliminaContestacion(c);
                 revisionesEliminadas = true;
             }
         }
-
         return revisionesEliminadas;
     }
 
@@ -197,11 +206,9 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     @Override
     public Integer eliminaReviewsDeUsuario(Cliente c) throws RemoteException {
         int reviewsEliminadas = 0;
-        Iterator<Review> iterator = reviews.iterator();
-        while (iterator.hasNext()) {
-            Review review = iterator.next();
+        for(Review review : reviews){
             if (review.getUsuario().equals(c)) {
-                iterator.remove();
+                eliminaReview(review);
                 reviewsEliminadas++;
             }
         }
@@ -224,9 +231,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     public Boolean insertaReviewFalsa(Local l, Integer puntuacion) throws RemoteException {
         Usuario usuarioFalso = new Usuario("falso", "contraseña", LocalDate.now(), tipoUsuario.CLIENTE);
         nuevoUsuario(usuarioFalso);
-        //Review review = new Review();
-        //nuevaReview(reviewFalsa)
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Review reviewFalsa = new Review(puntuacion, "comentario falso", LocalDate.now(), l, usuarioFalso);
+        return nuevaReview(reviewFalsa);
     }
-    
 }
