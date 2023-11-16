@@ -165,7 +165,7 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
      */
     @Override
     public boolean eliminaReview(Review r) {
-        if(reviews.isEmpty()){
+        if(reviews.isEmpty() || tieneContestacion(r) || !existeRewiew(r.getUsuario(), r.getLocal(), r.getFechaReview())){
             return false;
         }
         return reviews.remove(r);
