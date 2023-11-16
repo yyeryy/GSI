@@ -2,13 +2,19 @@ package GSILabs.BSystem;
 
 import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
+import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
+import GSILabs.BModel.Usuario;
+import GSILabs.BModel.Usuario.tipoUsuario;
 import GSILabs.connect.AdminGateway;
 import GSILabs.connect.ClientGateway;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Clase PublicBusinessSystem
@@ -40,7 +46,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
             reviews.add(r);
             return true;
         }
-        return false;
+        return false;    
     }
 
     /**
@@ -66,6 +72,13 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public Bar mejorBar(String ciudad) throws RemoteException {
+        //No nos dan provinvia
+        Bar[] bares = listarBares("","");
+        Bar mejorBar;
+        
+        for (Bar bar : bares) {
+            //Bar no tiene el campo puntuacion
+        }
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -90,7 +103,13 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public Local getLocal(String name) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Local local : locales) {
+            // Compara el nombre del local con el nombre proporcionado
+            if (local.getNombre().equals(name)) {
+                return local;
+            }
+        }
+        return null;
     }
 
     /**
@@ -102,7 +121,16 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
      */
     @Override
     public Local[] getLocals(String name) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        List<Local> localesEncontrados = new ArrayList<>();
+        for (Local local : locales) {
+            // Compara el nombre del local, ignorando mayúsculas, minúsculas y espacios
+            if (local.getNombre().toLowerCase().contains(name.toLowerCase().trim())) {
+                localesEncontrados.add(local); // Agrega el local a la lista si coincide parcial o totalmente
+            }
+        }
+
+        return localesEncontrados.toArray(new Local[0]); // Convierte la lista a un array de Locales
     }
 
     /**
@@ -127,7 +155,22 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     */
     @Override
     public Boolean eliminaReviewsDeLocal(Local l) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean revisionesEliminadas = false;
+
+        Iterator<Review> iterator = reviews.iterator();
+        while (iterator.hasNext()) {
+            Review review = iterator.next();
+            if (review.getLocal().equals(l)) {
+                // Elimina la revisión del local
+                iterator.remove();
+                // Elimina las respuestas asociadas a esta revisión
+                Contestacion c = obtenerContestacion(review);
+                eliminaContestacion(c);
+                revisionesEliminadas = true;
+            }
+        }
+
+        return revisionesEliminadas;
     }
 
     /**
@@ -138,15 +181,13 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     */
     @Override
     public Boolean eliminarReview(Review r) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (reviews.contains(r)) {
+            reviews.remove(r);
+            return true;
+        }
+        return false;  
     }
-/*  REVISAR SI PODEMOS SOLUCIONARLO ASÍ
-    @Override
-    public Boolean eliminaReview(Review r) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-*/
-    
+
     /**
     * Elimina todas la reviews de un cliente determinado
     * @param c Cliente cuyas reviews deben ser eliminadas
@@ -155,7 +196,20 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     */
     @Override
     public Integer eliminaReviewsDeUsuario(Cliente c) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int reviewsEliminadas = 0;
+        Iterator<Review> iterator = reviews.iterator();
+        while (iterator.hasNext()) {
+            Review review = iterator.next();
+            if (review.getUsuario().equals(c)) {
+                iterator.remove();
+                reviewsEliminadas++;
+            }
+        }
+        if (reviewsEliminadas > 0) {
+            return reviewsEliminadas;
+        } else {
+            return -1;
+        }
     }
 
     /**
@@ -168,6 +222,10 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     */
     @Override
     public Boolean insertaReviewFalsa(Local l, Integer puntuacion) throws RemoteException {
+        Usuario usuarioFalso = new Usuario("falso", "contraseña", LocalDate.now(), tipoUsuario.CLIENTE);
+        nuevoUsuario(usuarioFalso);
+        //Review review = new Review();
+        //nuevaReview(reviewFalsa)
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
