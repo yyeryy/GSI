@@ -1,0 +1,830 @@
+ArrayList<Usuario> usuarios = new ArrayList<>();
+ArrayList<Review> reviews = new ArrayList<>();
+ArrayList<Local> locales = new ArrayList<>();
+
+<Usuarios>
+    <Usuario>
+        <nick>Pepe</nick>
+        <contraseña>1234</contraseña>
+        <fechaNacimiento>2005-11-13</fechaNacimiento>
+        <tipo>PROPIETARIO</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Maria</nick>
+        <contraseña>5678</contraseña>
+        <fechaNacimiento>1990-03-25</fechaNacimiento>
+        <tipo>CLIENTE</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Juanito</nick>
+        <contraseña>abcd</contraseña>
+        <fechaNacimiento>1985-07-02</fechaNacimiento>
+        <tipo>PROPIETARIO</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Laura</nick>
+        <contraseña>xyz123</contraseña>
+        <fechaNacimiento>1998-09-18</fechaNacimiento>
+        <tipo>CLIENTE</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Carlos</nick>
+        <contraseña>9876</contraseña>
+        <fechaNacimiento>2000-12-07</fechaNacimiento>
+        <tipo>PROPIETARIO</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Ana</nick>
+        <contraseña>qwerty</contraseña>
+        <fechaNacimiento>1982-05-30</fechaNacimiento>
+        <tipo>CLIENTE</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Pablo</nick>
+        <contraseña>13579</contraseña>
+        <fechaNacimiento>1995-08-22</fechaNacimiento>
+        <tipo>PROPIETARIO</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Isabel</nick>
+        <contraseña>abcd1234</contraseña>
+        <fechaNacimiento>1988-04-11</fechaNacimiento>
+        <tipo>CLIENTE</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Eduardo</nick>
+        <contraseña>8765</contraseña>
+        <fechaNacimiento>2002-06-05</fechaNacimiento>
+        <tipo>PROPIETARIO</tipo>
+    </Usuario>
+    <Usuario>
+        <nick>Monica</nick>
+        <contraseña>pass123</contraseña>
+        <fechaNacimiento>1993-01-28</fechaNacimiento>
+        <tipo>CLIENTE</tipo>
+    </Usuario>
+</Usuarios>
+<Reviews>
+	<Review>
+        <valoracion>8</valoracion>
+        <comentario>Buena experiencia, pero podría mejorar</comentario>
+        <fecha>2022-10-25</fecha>
+        <Bar>
+            <nombre>Bar Relax</nombre>
+            <Direccion>
+                <localidad>Pamplona</localidad>
+                <provincia>Navarra</provincia>
+                <calle>Serenidad</calle>
+                <numero>21</numero>
+            </Direccion>
+            <descripcion>Un lugar tranquilo para relajarse</descripcion>
+            <Propietario>
+                <nick>Luisa</nick>
+                <contraseña>7890</contraseña>
+                <fechaNacimiento>1980-05-18</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Miguel</nick>
+                <contraseña>0987</contraseña>
+                <fechaNacimiento>1982-08-07</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Marta</nick>
+            <contraseña>abc123</contraseña>
+            <fechaNacimiento>1995-12-03</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Agradecemos tus comentarios</comentario>
+            <fecha>2022-10-26</fecha>
+            <Bar>
+                <nombre>Bar Relax</nombre>
+                <Direccion>
+                    <localidad>Pamplona</localidad>
+                    <provincia>Navarra</provincia>
+                    <calle>Serenidad</calle>
+                    <numero>21</numero>
+                </Direccion>
+                <descripcion>Un lugar tranquilo para relajarse</descripcion>
+                <Propietario>
+                    <nick>Luisa</nick>
+                    <contraseña>7890</contraseña>
+                    <fechaNacimiento>1980-05-18</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Miguel</nick>
+                    <contraseña>0987</contraseña>
+                    <fechaNacimiento>1982-08-07</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+    <Review>
+        <valoracion>9</valoracion>
+        <comentario>Muy buen local</comentario>
+        <fecha>2022-11-13</fecha>
+        <Bar>
+            <nombre>Local estandar</nombre>
+            <Direccion>
+                <localidad>Burlada</localidad>
+                <provincia>Melilla</provincia>
+                <calle>Pereza</calle>
+                <numero>33</numero>
+            </Direccion>
+            <descripcion>Descripcion generica</descripcion>
+            <Propietario>
+                <nick>Juanjo</nick>
+                <contraseña>1234</contraseña>
+                <fechaNacimiento>2005-11-13</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Pepa</nick>
+                <contraseña>4321</contraseña>
+                <fechaNacimiento>2005-11-13</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Diego</nick>
+            <contraseña>6996</contraseña>
+            <fechaNacimiento>2005-11-13</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Me parece adecuado</comentario>
+            <fecha>2023-11-13</fecha>
+            <Bar>
+                <nombre>Local estandar</nombre>
+                <Direccion>
+                    <localidad>Burlada</localidad>
+                    <provincia>Melilla</provincia>
+                    <calle>Pereza</calle>
+                    <numero>33</numero>
+                </Direccion>
+                <descripcion>Descripcion generica</descripcion>
+                <Propietario>
+                    <nick>Juanjo</nick>
+                    <contraseña>1234</contraseña>
+                    <fechaNacimiento>2005-11-13</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Pepa</nick>
+                    <contraseña>4321</contraseña>
+                    <fechaNacimiento>2005-11-13</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+    <Review>
+        <valoracion>10</valoracion>
+        <comentario>Increíble servicio y ambiente</comentario>
+        <fecha>2022-12-05</fecha>
+        <Bar>
+            <nombre>La Bohème</nombre>
+            <Direccion>
+                <localidad>Madrid</localidad>
+                <provincia>Madrid</provincia>
+                <calle>Armonía</calle>
+                <numero>42</numero>
+            </Direccion>
+            <descripcion>Un lugar con música en vivo y buena comida</descripcion>
+            <Propietario>
+                <nick>Carlos</nick>
+                <contraseña>1357</contraseña>
+                <fechaNacimiento>1988-03-15</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Ana</nick>
+                <contraseña>2468</contraseña>
+                <fechaNacimiento>1985-09-20</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Lorena</nick>
+            <contraseña>qwerty</contraseña>
+            <fechaNacimiento>1990-07-10</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Agradecemos tu visita, ¡esperamos verte pronto!</comentario>
+            <fecha>2022-12-06</fecha>
+            <Bar>
+                <nombre>La Bohème</nombre>
+                <Direccion>
+                    <localidad>Madrid</localidad>
+                    <provincia>Madrid</provincia>
+                    <calle>Armonía</calle>
+                    <numero>42</numero>
+                </Direccion>
+                <descripcion>Un lugar con música en vivo y buena comida</descripcion>
+                <Propietario>
+                    <nick>Carlos</nick>
+                    <contraseña>1357</contraseña>
+                    <fechaNacimiento>1988-03-15</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Ana</nick>
+                    <contraseña>2468</contraseña>
+                    <fechaNacimiento>1985-09-20</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>7</valoracion>
+        <comentario>Buen lugar, pero podría mejorar la atención al cliente</comentario>
+        <fecha>2022-09-18</fecha>
+        <Bar>
+            <nombre>El Rincón del Sabor</nombre>
+            <Direccion>
+                <localidad>Barcelona</localidad>
+                <provincia>Barcelona</provincia>
+                <calle>Sabores</calle>
+                <numero>15</numero>
+            </Direccion>
+            <descripcion>Variedad de platillos internacionales</descripcion>
+            <Propietario>
+                <nick>Isabel</nick>
+                <contraseña>7531</contraseña>
+                <fechaNacimiento>1975-12-08</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Ricardo</nick>
+                <contraseña>9642</contraseña>
+                <fechaNacimiento>1980-06-25</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Pablo</nick>
+            <contraseña>abc123</contraseña>
+            <fechaNacimiento>1992-02-14</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Lamentamos la experiencia, tomaremos medidas para mejorar</comentario>
+            <fecha>2022-09-19</fecha>
+            <Bar>
+                <nombre>El Rincón del Sabor</nombre>
+                <Direccion>
+                    <localidad>Barcelona</localidad>
+                    <provincia>Barcelona</provincia>
+                    <calle>Sabores</calle>
+                    <numero>15</numero>
+                </Direccion>
+                <descripcion>Variedad de platillos internacionales</descripcion>
+                <Propietario>
+                    <nick>Isabel</nick>
+                    <contraseña>7531</contraseña>
+                    <fechaNacimiento>1975-12-08</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Ricardo</nick>
+                    <contraseña>9642</contraseña>
+                    <fechaNacimiento>1980-06-25</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>5</valoracion>
+        <comentario>Experiencia mediocre, esperaba más</comentario>
+        <fecha>2022-08-03</fecha>
+        <Bar>
+            <nombre>La Cabaña del Sabor</nombre>
+            <Direccion>
+                <localidad>Sevilla</localidad>
+                <provincia>Sevilla</provincia>
+                <calle>Aromas</calle>
+                <numero>8</numero>
+            </Direccion>
+            <descripcion>Ofrece platos tradicionales con un toque moderno</descripcion>
+            <Propietario>
+                <nick>Javier</nick>
+                <contraseña>2468</contraseña>
+                <fechaNacimiento>1983-04-17</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Lucía</nick>
+                <contraseña>1357</contraseña>
+                <fechaNacimiento>1986-09-29</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Sofía</nick>
+            <contraseña>pass123</contraseña>
+            <fechaNacimiento>1998-12-12</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Lamentamos no haber cumplido tus expectativas, ¡esperamos que nos des otra oportunidad!</comentario>
+            <fecha>2022-08-04</fecha>
+            <Bar>
+                <nombre>La Cabaña del Sabor</nombre>
+                <Direccion>
+                    <localidad>Sevilla</localidad>
+                    <provincia>Sevilla</provincia>
+                    <calle>Aromas</calle>
+                    <numero>8</numero>
+                </Direccion>
+                <descripcion>Ofrece platos tradicionales con un toque moderno</descripcion>
+                <Propietario>
+                    <nick>Javier</nick>
+                    <contraseña>2468</contraseña>
+                    <fechaNacimiento>1983-04-17</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Lucía</nick>
+                    <contraseña>1357</contraseña>
+                    <fechaNacimiento>1986-09-29</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>6</valoracion>
+        <comentario>El ambiente es agradable, pero la comida deja mucho que desear</comentario>
+        <fecha>2022-07-15</fecha>
+        <Bar>
+            <nombre>El Bistró del Arte</nombre>
+            <Direccion>
+                <localidad>Valencia</localidad>
+                <provincia>Valencia</provincia>
+                <calle>Arte</calle>
+                <numero>56</numero>
+            </Direccion>
+            <descripcion>Un lugar con decoración artística y música en vivo</descripcion>
+            <Propietario>
+                <nick>Olivia</nick>
+                <contraseña>7890</contraseña>
+                <fechaNacimiento>1987-11-05</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Fernando</nick>
+                <contraseña>0123</contraseña>
+                <fechaNacimiento>1984-06-12</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Miguel</nick>
+            <contraseña>xyz789</contraseña>
+            <fechaNacimiento>1993-02-28</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Agradecemos tus comentarios y lamentamos que no hayas disfrutado plenamente de tu visita</comentario>
+            <fecha>2022-07-16</fecha>
+            <Bar>
+                <nombre>El Bistró del Arte</nombre>
+                <Direccion>
+                    <localidad>Valencia</localidad>
+                    <provincia>Valencia</provincia>
+                    <calle>Arte</calle>
+                    <numero>56</numero>
+                </Direccion>
+                <descripcion>Un lugar con decoración artística y música en vivo</descripcion>
+                <Propietario>
+                    <nick>Olivia</nick>
+                    <contraseña>7890</contraseña>
+                    <fechaNacimiento>1987-11-05</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Fernando</nick>
+                    <contraseña>0123</contraseña>
+                    <fechaNacimiento>1984-06-12</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>9</valoracion>
+        <comentario>Una experiencia excepcional, la comida es deliciosa</comentario>
+        <fecha>2022-06-02</fecha>
+        <Bar>
+            <nombre>La Cocina Creativa</nombre>
+            <Direccion>
+                <localidad>Granada</localidad>
+                <provincia>Granada</provincia>
+                <calle>Sabores Creativos</calle>
+                <numero>10</numero>
+            </Direccion>
+            <descripcion>Platos innovadores con presentaciones artísticas</descripcion>
+            <Propietario>
+                <nick>Sara</nick>
+                <contraseña>5678</contraseña>
+                <fechaNacimiento>1986-08-20</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Roberto</nick>
+                <contraseña>4321</contraseña>
+                <fechaNacimiento>1983-04-10</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Lucas</nick>
+            <contraseña>pass1234</contraseña>
+            <fechaNacimiento>1990-12-15</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Gracias por tus amables palabras, esperamos verte de nuevo pronto</comentario>
+            <fecha>2022-06-03</fecha>
+            <Bar>
+                <nombre>La Cocina Creativa</nombre>
+                <Direccion>
+                    <localidad>Granada</localidad>
+                    <provincia>Granada</provincia>
+                    <calle>Sabores Creativos</calle>
+                    <numero>10</numero>
+                </Direccion>
+                <descripcion>Platos innovadores con presentaciones artísticas</descripcion>
+                <Propietario>
+                    <nick>Sara</nick>
+                    <contraseña>5678</contraseña>
+                    <fechaNacimiento>1986-08-20</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Roberto</nick>
+                    <contraseña>4321</contraseña>
+                    <fechaNacimiento>1983-04-10</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>8</valoracion>
+        <comentario>Buena relación calidad-precio, pero el servicio puede mejorar</comentario>
+        <fecha>2022-05-12</fecha>
+        <Bar>
+            <nombre>El Rincón Gastronómico</nombre>
+            <Direccion>
+                <localidad>Zaragoza</localidad>
+                <provincia>Zaragoza</provincia>
+                <calle>Gourmet</calle>
+                <numero>28</numero>
+            </Direccion>
+            <descripcion>Ofrece platos de alta cocina a precios accesibles</descripcion>
+            <Propietario>
+                <nick>Marta</nick>
+                <contraseña>9876</contraseña>
+                <fechaNacimiento>1980-10-25</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Antonio</nick>
+                <contraseña>5432</contraseña>
+                <fechaNacimiento>1982-02-18</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Luis</nick>
+            <contraseña>pass4321</contraseña>
+            <fechaNacimiento>1995-07-08</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Agradecemos tus comentarios y tomaremos medidas para mejorar nuestro servicio</comentario>
+            <fecha>2022-05-13</fecha>
+            <Bar>
+                <nombre>El Rincón Gastronómico</nombre>
+                <Direccion>
+                    <localidad>Zaragoza</localidad>
+                    <provincia>Zaragoza</provincia>
+                    <calle>Gourmet</calle>
+                    <numero>28</numero>
+                </Direccion>
+                <descripcion>Ofrece platos de alta cocina a precios accesibles</descripcion>
+                <Propietario>
+                    <nick>Marta</nick>
+                    <contraseña>9876</contraseña>
+                    <fechaNacimiento>1980-10-25</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Antonio</nick>
+                    <contraseña>5432</contraseña>
+                    <fechaNacimiento>1982-02-18</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>7</valoracion>
+        <comentario>La comida es aceptable, pero la espera fue larga</comentario>
+        <fecha>2022-04-20</fecha>
+        <Bar>
+            <nombre>El Bistró del Tiempo</nombre>
+            <Direccion>
+                <localidad>Palma de Mallorca</localidad>
+                <provincia>Islas Baleares</provincia>
+                <calle>Espera</calle>
+                <numero>15</numero>
+            </Direccion>
+            <descripcion>Ofrece platos mediterráneos en un ambiente acogedor</descripcion>
+            <Propietario>
+                <nick>Manuel</nick>
+                <contraseña>123abc</contraseña>
+                <fechaNacimiento>1978-09-15</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Beatriz</nick>
+                <contraseña>xyz456</contraseña>
+                <fechaNacimiento>1981-03-22</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Ana</nick>
+            <contraseña>pass789</contraseña>
+            <fechaNacimiento>1992-12-03</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Lamentamos la espera y agradecemos tu paciencia, esperamos que disfrutaras de la comida</comentario>
+            <fecha>2022-04-21</fecha>
+            <Bar>
+                <nombre>El Bistró del Tiempo</nombre>
+                <Direccion>
+                    <localidad>Palma de Mallorca</localidad>
+                    <provincia>Islas Baleares</provincia>
+                    <calle>Espera</calle>
+                    <numero>15</numero>
+                </Direccion>
+                <descripcion>Ofrece platos mediterráneos en un ambiente acogedor</descripcion>
+                <Propietario>
+                    <nick>Manuel</nick>
+                    <contraseña>123abc</contraseña>
+                    <fechaNacimiento>1978-09-15</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Beatriz</nick>
+                    <contraseña>xyz456</contraseña>
+                    <fechaNacimiento>1981-03-22</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+	<Review>
+        <valoracion>6</valoracion>
+        <comentario>El lugar es bonito, pero la comida no cumplió mis expectativas</comentario>
+        <fecha>2022-03-10</fecha>
+        <Bar>
+            <nombre>La Terraza del Sabor</nombre>
+            <Direccion>
+                <localidad>Málaga</localidad>
+                <provincia>Málaga</provincia>
+                <calle>Sabores del Sur</calle>
+                <numero>20</numero>
+            </Direccion>
+            <descripcion>Ofrece platos típicos de la región en una terraza con vista al mar</descripcion>
+            <Propietario>
+                <nick>Marina</nick>
+                <contraseña>abcd1234</contraseña>
+                <fechaNacimiento>1984-07-08</fechaNacimiento>
+            </Propietario>
+            <Propietario>
+                <nick>Rafael</nick>
+                <contraseña>5678efgh</contraseña>
+                <fechaNacimiento>1987-01-15</fechaNacimiento>
+            </Propietario>
+        </Bar>
+        <Usuario>
+            <nick>Carlos</nick>
+            <contraseña>pass456</contraseña>
+            <fechaNacimiento>1990-05-25</fechaNacimiento>
+            <tipo>CLIENTE</tipo>
+        </Usuario>
+        <Contestacion>
+            <comentario>Lamentamos que la comida no haya sido de tu agrado, tomaremos medidas para mejorar</comentario>
+            <fecha>2022-03-11</fecha>
+            <Bar>
+                <nombre>La Terraza del Sabor</nombre>
+                <Direccion>
+                    <localidad>Málaga</localidad>
+                    <provincia>Málaga</provincia>
+                    <calle>Sabores del Sur</calle>
+                    <numero>20</numero>
+                </Direccion>
+                <descripcion>Ofrece platos típicos de la región en una terraza con vista al mar</descripcion>
+                <Propietario>
+                    <nick>Marina</nick>
+                    <contraseña>abcd1234</contraseña>
+                    <fechaNacimiento>1984-07-08</fechaNacimiento>
+                </Propietario>
+                <Propietario>
+                    <nick>Rafael</nick>
+                    <contraseña>5678efgh</contraseña>
+                    <fechaNacimiento>1987-01-15</fechaNacimiento>
+                </Propietario>
+            </Bar>
+        </Contestacion>
+    </Review>
+</Reviews>
+<Locales>
+	<Local>
+		<nombre>Pepe</nombre>
+		<Direccion>
+			<localidad>Burlada</localidad>
+			<provincia>Melilla</provincia>
+			<calle>Pereza</calle>
+			<numero>33</numero>
+		</Direccion>
+		<descripcion>El mejor local de Pamplona</descripcion>
+		<tipo>PUB</tipo>
+		<Propietario>
+			<nick>Juanjo</nick>
+			<contraseña>1234</contraseña>
+			<fechaNacimiento>2005-11-13</fechaNacimiento>
+		</Propietario>
+		<Propietario>
+			<nick>Pepa</nick>
+			<contraseña>4321</contraseña>
+			<fechaNacimiento>1973-11-13</fechaNacimiento>
+		</Propietario>
+	</Local>
+	<Local>
+        <nombre>La Taberna del Sabor</nombre>
+        <Direccion>
+            <localidad>Burlada</localidad>
+            <provincia>Melilla</provincia>
+            <calle>Pereza</calle>
+            <numero>33</numero>
+        </Direccion>
+        <descripcion>El mejor local de Pamplona para degustar sabores únicos</descripcion>
+        <tipo>PUB</tipo>
+        <Propietario>
+            <nick>Juanjo</nick>
+            <contraseña>1234</contraseña>
+            <fechaNacimiento>2005-11-13</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Pepa</nick>
+            <contraseña>4321</contraseña>
+            <fechaNacimiento>1973-11-13</fechaNacimiento>
+        </Propietario>
+    </Local>
+    <Local>
+        <nombre>Bar del Arte</nombre>
+        <Direccion>
+            <localidad>Pamplona</localidad>
+            <provincia>Navarra</provincia>
+            <calle>Creatividad</calle>
+            <numero>15</numero>
+        </Direccion>
+        <descripcion>Un lugar artístico para disfrutar de bebidas y buena compañía</descripcion>
+        <tipo>BAR</tipo>
+        <Propietario>
+            <nick>Luisa</nick>
+            <contraseña>7890</contraseña>
+            <fechaNacimiento>1980-05-18</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Miguel</nick>
+            <contraseña>0987</contraseña>
+            <fechaNacimiento>1982-08-07</fechaNacimiento>
+        </Propietario>
+    </Local>
+	<Local>
+        <nombre>La Parrilla del Sabor</nombre>
+        <Direccion>
+            <localidad>Burlada</localidad>
+            <provincia>Melilla</provincia>
+            <calle>Asado</calle>
+            <numero>45</numero>
+        </Direccion>
+        <descripcion>Auténtica parrilla argentina en un ambiente acogedor</descripcion>
+        <tipo>RESTAURANTE</tipo>
+        <Propietario>
+            <nick>Mario</nick>
+            <contraseña>5678</contraseña>
+            <fechaNacimiento>1982-09-25</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Ana</nick>
+            <contraseña>abcd</contraseña>
+            <fechaNacimiento>1975-06-12</fechaNacimiento>
+        </Propietario>
+    </Local>
+    <Local>
+        <nombre>El Sabor Oriental</nombre>
+        <Direccion>
+            <localidad>Pamplona</localidad>
+            <provincia>Navarra</provincia>
+            <calle>Sushi</calle>
+            <numero>12</numero>
+        </Direccion>
+        <descripcion>Restaurante especializado en cocina asiática y sushi fresco</descripcion>
+        <tipo>RESTAURANTE</tipo>
+        <Propietario>
+            <nick>Sophie</nick>
+            <contraseña>9876</contraseña>
+            <fechaNacimiento>1988-12-18</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Carlos</nick>
+            <contraseña>5432</contraseña>
+            <fechaNacimiento>1986-04-05</fechaNacimiento>
+        </Propietario>
+    </Local>
+    <Local>
+        <nombre>La Cava del Vino</nombre>
+        <Direccion>
+            <localidad>Barcelona</localidad>
+            <provincia>Barcelona</provincia>
+            <calle>Vinos</calle>
+            <numero>8</numero>
+        </Direccion>
+        <descripcion>Amplia selección de vinos españoles en un ambiente íntimo</descripcion>
+        <tipo>BAR</tipo>
+        <Propietario>
+            <nick>Isabel</nick>
+            <contraseña>1357</contraseña>
+            <fechaNacimiento>1978-07-20</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Ricardo</nick>
+            <contraseña>2468</contraseña>
+            <fechaNacimiento>1980-11-15</fechaNacimiento>
+        </Propietario>
+    </Local>
+    <Local>
+        <nombre>La Terraza del Mar</nombre>
+        <Direccion>
+            <localidad>Valencia</localidad>
+            <provincia>Valencia</provincia>
+            <calle>Marítima</calle>
+            <numero>25</numero>
+        </Direccion>
+        <descripcion>Disfruta de cócteles y vistas al mar en nuestra terraza</descripcion>
+        <tipo>BAR</tipo>
+        <Propietario>
+            <nick>Olivia</nick>
+            <contraseña>8901</contraseña>
+            <fechaNacimiento>1983-03-12</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Fernando</nick>
+            <contraseña>2345</contraseña>
+            <fechaNacimiento>1985-08-28</fechaNacimiento>
+        </Propietario>
+    </Local>
+	<Local>
+        <nombre>La Casa del Jazz</nombre>
+        <Direccion>
+            <localidad>Sevilla</localidad>
+            <provincia>Sevilla</provincia>
+            <calle>Armonía</calle>
+            <numero>18</numero>
+        </Direccion>
+        <descripcion>Local con música en vivo y ambiente jazzístico</descripcion>
+        <tipo>BAR</tipo>
+        <Propietario>
+            <nick>Marta</nick>
+            <contraseña>9876</contraseña>
+            <fechaNacimiento>1980-04-15</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Antonio</nick>
+            <contraseña>5432</contraseña>
+            <fechaNacimiento>1982-09-20</fechaNacimiento>
+        </Propietario>
+    </Local>
+    <Local>
+        <nombre>El Rincón del Sabor Mexicano</nombre>
+        <Direccion>
+            <localidad>Madrid</localidad>
+            <provincia>Madrid</provincia>
+            <calle>Guacamole</calle>
+            <numero>5</numero>
+        </Direccion>
+        <descripcion>Restaurante especializado en auténtica comida mexicana</descripcion>
+        <tipo>RESTAURANTE</tipo>
+        <Propietario>
+            <nick>Lorena</nick>
+            <contraseña>pass1234</contraseña>
+            <fechaNacimiento>1985-06-08</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Pablo</nick>
+            <contraseña>abcd5678</contraseña>
+            <fechaNacimiento>1987-11-25</fechaNacimiento>
+        </Propietario>
+    </Local>
+    <Local>
+        <nombre>La Vinoteca del Valle</nombre>
+        <Direccion>
+            <localidad>Granada</localidad>
+            <provincia>Granada</provincia>
+            <calle>Vinos Selectos</calle>
+            <numero>12</numero>
+        </Direccion>
+        <descripcion>Ofrece una amplia variedad de vinos de la región</descripcion>
+        <tipo>BAR</tipo>
+        <Propietario>
+            <nick>Sara</nick>
+            <contraseña>pass7890</contraseña>
+            <fechaNacimiento>1988-02-10</fechaNacimiento>
+        </Propietario>
+        <Propietario>
+            <nick>Roberto</nick>
+            <contraseña>xyz123</contraseña>
+            <fechaNacimiento>1986-07-15</fechaNacimiento>
+        </Propietario>
+    </Local>
+</Locales>
