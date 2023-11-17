@@ -1,7 +1,11 @@
 package GSILabs.connect;
 
+import GSILabs.BSystem.BusinessSystem;
 import GSILabs.BSystem.PublicBusinessSystem;
+import GSILabs.persistence.XMLParsingException;
 import java.io.File;
+import java.io.IOException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -21,34 +25,48 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class BusinessServer {
 
     public static void main(String[] args) throws RemoteException {
-        LocalFinder pbs = new PublicBusinessSystem();
+        PublicBusinessSystem pbs = new PublicBusinessSystem();
+        ClientGateway clientStub = null;
+        AdminGateway adminStub = null;
         
+
+    // Copiar los valores de BusinessSystem a PublicBusinessSystem
+    // Suponiendo que tienes un método en PublicBusinessSystem para hacerlo
+    
         //poblacion
         
         try {
             File file = new File("bs.xml");
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = (Document) builder.parse(file);
+            pbs = PublicBusinessSystem.parseXMLFilePublic(file);
             
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(XMLParsingException | IOException e){
             System.out.println("Población fallida");
         }
         
-        // generar un stub del objeto
-        LocalFinder stub = (LocalFinder) UnicastRemoteObject.exportObject(pbs, 0);
+        try{
+            // generar un stub del objeto
+            clientStub = (ClientGateway) UnicastRemoteObject.exportObject( pbs, 0);
+            adminStub = (AdminGateway) UnicastRemoteObject.exportObject(pbs, 0);
 
-        // crear un registro en el puerto 1099
-        Registry reg = LocateRegistry.createRegistry(1099);
+            // crear un registro en el puerto 1099
+            Registry reg = LocateRegistry.createRegistry(1099);
 
-        // asociar el stub a los identificadores ClientGateway y AdminGateway
-        reg.rebind("ClientGateway", stub);
-        reg.rebind("AdminGateway", stub);
+            // asociar el stub a los identificadores ClientGateway y AdminGateway
+            reg.rebind("ClientGateway", clientStub);
+            reg.rebind("AdminGateway", adminStub);
+        
+        } catch (RemoteException e) {
+            /*try {
+                Registry registry = LocateRegistry.createRegistry(1100);
 
-        System.out.println("Servidor RMI listo...");
+                registry.rebind("ClientGateway", clientStub);
+                registry.rebind("AdminGateway", adminStub);
+            } catch (RemoteException ex) {
+                System.out.println("error");
+            }*/
+        }
+
+        //System.out.println("Servidor RMI listo...");
         
         
     }

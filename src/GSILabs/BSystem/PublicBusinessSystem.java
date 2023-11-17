@@ -11,6 +11,20 @@ import GSILabs.BModel.Usuario;
 import GSILabs.BModel.Usuario.tipoUsuario;
 import GSILabs.connect.AdminGateway;
 import GSILabs.connect.ClientGateway;
+import GSILabs.persistence.XMLParsingException;
+import static GSILabs.persistence.parser.obtenerContenidoEtiqueta;
+import static GSILabs.persistence.parser.parseBar;
+import static GSILabs.persistence.parser.parseCliente;
+import static GSILabs.persistence.parser.parseLocal;
+import static GSILabs.persistence.parser.parsePropietario;
+import static GSILabs.persistence.parser.parsePub;
+import static GSILabs.persistence.parser.parseRestaurante;
+import static GSILabs.persistence.parser.parseReview;
+import static GSILabs.persistence.parser.parseUsuario;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -233,5 +247,139 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
         nuevoUsuario(usuarioFalso);
         Review reviewFalsa = new Review(puntuacion, "comentario falso", LocalDate.now(), l, usuarioFalso);
         return nuevaReview(reviewFalsa);
+    }
+    
+    /**
+     * Parse XML File (Ejercicio 5 - Práctica 3)
+     * @param f Fichero XML
+     * @return Clase BusinessSystem
+     * @throws XMLParsingException
+     * Parsea un fichero XML.
+     * @throws java.io.IOException Exception por error de manejo de ficheros.
+     */
+    public static PublicBusinessSystem parseXMLFilePublic(File f) throws XMLParsingException, IOException {        
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        //Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        //Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
+        String str = contenido;
+
+
+        String strUsuariosTodos = obtenerContenidoEtiqueta(str,"Usuarios");
+        List<Usuario> usuarios = new ArrayList<>();
+        String strLocalesTodos = obtenerContenidoEtiqueta(str,"Locales");
+        List<Local> locales = new ArrayList<>();
+        String strReviewsTodos = obtenerContenidoEtiqueta(str,"Reviews");
+        List<Review> reviews = new ArrayList<>();
+
+
+        //Para todos los Usuarios
+        if(strUsuariosTodos != null){
+
+            List<String> strPropietarios = new ArrayList<>();
+            for(String strPropietario : strUsuariosTodos.split("<Propietario>")){
+                strPropietarios.add(obtenerContenidoEtiqueta("<Propietario>"+strPropietario+"</Propietario>", "Propietario"));
+            }
+            strPropietarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strClientes = new ArrayList<>();
+            for(String strCliente : strUsuariosTodos.split("<Cliente>")){
+                strClientes.add(obtenerContenidoEtiqueta("<Cliente>"+strCliente+"</Cliente>", "Cliente"));
+            }
+            strClientes.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strUsuarios = new ArrayList<>();
+            for(String strUsuario : strUsuariosTodos.split("<Usuario>")){
+                strUsuarios.add(obtenerContenidoEtiqueta("<Usuario>"+strUsuario+"</Usuario>", "Usuario"));
+            }
+            strUsuarios.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strPropietario : strPropietarios){
+                usuarios.add(parsePropietario(strPropietario));
+            }
+            for(String strCliente : strClientes){
+                usuarios.add(parseCliente(strCliente));
+            }
+            for(String strUsuario : strUsuarios){
+                usuarios.add(parseUsuario(strUsuario));
+            }
+        }
+
+
+        //Para todos los Locales
+        if(strLocalesTodos != null){
+
+            List<String> strLocales = new ArrayList<>();
+            for(String strLocal : strLocalesTodos.split("<Local>")){
+                strLocales.add(obtenerContenidoEtiqueta("<Local>"+strLocal+"</Local>", "Local"));
+            }
+            strLocales.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strBares = new ArrayList<>();
+            for(String strBar : strLocalesTodos.split("<Bar>")){
+                strBares.add(obtenerContenidoEtiqueta("<Bar>"+strBar+"</Bar>", "Bar"));
+            }
+            strBares.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strPubs = new ArrayList<>();
+            for(String strPub : strLocalesTodos.split("<Pub>")){
+                strPubs.add(obtenerContenidoEtiqueta("<Pub>"+strPub+"</Pub>", "Pub"));
+            }
+            strPubs.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            List<String> strRestaurantes = new ArrayList<>();
+            for(String strRestaurante : strLocalesTodos.split("<Restaurante>")){
+                strRestaurantes.add(obtenerContenidoEtiqueta("<Restaurante>"+strRestaurante+"</Restaurante>", "Restaurante"));
+            }
+            strRestaurantes.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strLocal : strLocales){
+                locales.add(parseLocal(strLocal));
+            }
+            for(String strBar : strBares){
+                locales.add(parseBar(strBar));
+            }
+            for(String strPub : strPubs){
+                locales.add(parsePub(strPub));
+            }
+            for(String strRestaurante : strRestaurantes){
+                locales.add(parseRestaurante(strRestaurante));
+            }
+        }
+
+        //Para todos las Reviews
+        if(strReviewsTodos != null){
+            List<String> strReviews = new ArrayList<>();
+            for(String strReview : strReviewsTodos.split("<Review>")){
+                strReviews.add(obtenerContenidoEtiqueta("<Review>"+strReview+"</Review>", "Review"));
+            }
+            strReviews.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strReview : strReviews){
+                reviews.add(parseReview(strReview));
+            }
+        }
+        //Instancia de BusinessSystem
+        PublicBusinessSystem bs = new PublicBusinessSystem();
+
+        //Añadir Usuarios
+        for(int i = 0; i < usuarios.size(); i++){
+            bs.nuevoUsuario(usuarios.get(i));
+        }
+
+        //Añadir Locales
+        for(int i = 0; i < locales.size(); i++){
+            bs.nuevoLocal(locales.get(i));
+        }
+        for(int i = 0; i < reviews.size(); i++){
+            bs.nuevaReview(reviews.get(i));
+        }
+
+        return bs;
+        
+
     }
 }
