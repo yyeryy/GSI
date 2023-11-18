@@ -56,7 +56,6 @@ public class Review implements XMLRepresentable{
         this.local = local;
         this.usuario = usuario;
     }
-
     
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
