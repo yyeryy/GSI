@@ -4,6 +4,8 @@ import GSILabs.BSystem.PublicBusinessSystem;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -20,7 +22,7 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class BusinessServer {
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws RemoteException, UnknownHostException {
         PublicBusinessSystem pbs = new PublicBusinessSystem();
         ClientGateway clientStub = null;
         AdminGateway adminStub = null;
@@ -53,6 +55,8 @@ public class BusinessServer {
             reg.rebind("AdminGateway", adminStub);
             
             System.out.println("Servidor funcionando");
+            System.out.println("IP: "+InetAddress.getLocalHost().getHostAddress());
+            System.out.println("Port: 1099");
         
         } catch (RemoteException e) {
             System.err.println("Server exception: " + e.toString());
