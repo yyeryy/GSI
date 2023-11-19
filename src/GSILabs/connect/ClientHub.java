@@ -29,6 +29,7 @@ public class ClientHub {
             // Pedir al usuario el puerto del servidor
             System.out.print("Ingrese el puerto del servidor: ");
             int serverPort = scanner.nextInt();
+            scanner.nextLine();
 
             // Obtener el objeto remoto desde el servidor
             ClientGateway clientGateway = (ClientGateway) LocateRegistry.getRegistry(serverAddress, serverPort).lookup("ClientGateway");
