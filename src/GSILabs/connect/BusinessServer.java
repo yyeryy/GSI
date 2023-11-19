@@ -1,6 +1,5 @@
 package GSILabs.connect;
 
-import GSILabs.BSystem.BusinessSystem;
 import GSILabs.BSystem.PublicBusinessSystem;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
@@ -10,9 +9,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import javax.swing.text.Document;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Clase BusinessServer
@@ -45,8 +41,9 @@ public class BusinessServer {
         
         try{
             // generar un stub del objeto
-            clientStub = (ClientGateway) UnicastRemoteObject.exportObject( pbs, 0);
-            adminStub = (AdminGateway) UnicastRemoteObject.exportObject(pbs, 0);
+            Remote stub = UnicastRemoteObject.exportObject( pbs, 0);
+            clientStub = (ClientGateway) stub;
+            adminStub = (AdminGateway) stub;
 
             // crear un registro en el puerto 1099
             Registry reg = LocateRegistry.createRegistry(1099);
@@ -54,8 +51,12 @@ public class BusinessServer {
             // asociar el stub a los identificadores ClientGateway y AdminGateway
             reg.rebind("ClientGateway", clientStub);
             reg.rebind("AdminGateway", adminStub);
+            
+            System.out.println("Servidor funcionando");
         
         } catch (RemoteException e) {
+            System.err.println("Server exception: " + e.toString());
+            e.printStackTrace();
             /*try {
                 Registry registry = LocateRegistry.createRegistry(1100);
 
