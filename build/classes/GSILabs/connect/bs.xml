@@ -817,10 +817,5 @@
             <contraseña>pass7890</contraseña>
             <fechaNacimiento>1988-02-10</fechaNacimiento>
         </Propietario>
-        <Propietario>
-            <nick>Roberto</nick>
-            <contraseña>xyz123</contraseña>
-            <fechaNacimiento>1986-07-15</fechaNacimiento>
-        </Propietario>
     </Local>
 </Locales>

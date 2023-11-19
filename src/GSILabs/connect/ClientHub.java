@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.Scanner;
 
 public class ClientHub {
@@ -28,13 +29,9 @@ public class ClientHub {
             // Pedir al usuario el puerto del servidor
             System.out.print("Ingrese el puerto del servidor: ");
             int serverPort = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer de entrada
-
-            // Crear la URL de conexión al objeto remoto
-            String remoteUrl = "rmi://" + serverAddress + ":" + serverPort + "/ClientGateway";
 
             // Obtener el objeto remoto desde el servidor
-            ClientGateway clientGateway = (ClientGateway) Naming.lookup(remoteUrl);
+            ClientGateway clientGateway = (ClientGateway) LocateRegistry.getRegistry(serverAddress, serverPort).lookup("ClientGateway");
             
             // Pedir al usuario el nombre de la ciudad
             System.out.print("Ingrese el nombre de la ciudad: ");
@@ -43,7 +40,7 @@ public class ClientHub {
             Bar bestBar = clientGateway.mejorBar(ciudad);
             System.out.println("El mejor bar de la ciudad es: " + bestBar);
 
-        } catch (MalformedURLException | NotBoundException | RemoteException e) {
+        } catch (NotBoundException | RemoteException e) {
         }
     }
 }
