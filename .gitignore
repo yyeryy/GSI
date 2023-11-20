@@ -1,5 +1,4 @@
 /target/
 .DS_Store
 desktop.ini
-nbproject/private/private.xml
-nbproject/private/private.properties
+nbproject/private/
