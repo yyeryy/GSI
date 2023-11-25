@@ -90,6 +90,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
                 }
             }
         }
+        System.out.println("mejorBar: " + mejorBar.getNombre());
         return mejorBar;
     }
 

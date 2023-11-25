@@ -5,6 +5,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +16,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Bar extends Local implements Reservable, XMLRepresentable{
+public class Bar extends Local implements Reservable, XMLRepresentable, Serializable{
     
     /**
      * Lista de especialidades del Bar.

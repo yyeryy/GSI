@@ -36,13 +36,14 @@ public class ClientHub {
             //Pedir al usuario el nombre de la ciudad
             System.out.print("Ingrese el nombre de la ciudad: ");
             String ciudad = scanner.nextLine();
-
+            
             Bar bestBar = clientGateway.mejorBar(ciudad);
-            System.out.println("El mejor bar de la ciudad es: " + bestBar);
+            System.out.println("El mejor bar de la ciudad es: " + bestBar.getNombre());
 
         } catch (NotBoundException | RemoteException e) {
-            System.out.println("Error en la ejecución del código.");
-            System.out.println("Excepción: \n" + e);
+            e.printStackTrace();
+            //System.out.println("Error en la ejecución del código.");
+            //System.out.println("Excepción: \n" + e);
         }
     }
 }
