@@ -28,10 +28,10 @@ public class BusinessServer {
         AdminGateway adminStub = null;
         
 
-    // Copiar los valores de BusinessSystem a PublicBusinessSystem
-    // Suponiendo que tienes un método en PublicBusinessSystem para hacerlo
+    //Copiar los valores de BusinessSystem a PublicBusinessSystem
+    //Suponiendo que tienes un método en PublicBusinessSystem para hacerlo
     
-        //poblacion
+        //Poblacion
         
         try {
             File file = new File("bs.xml");
@@ -42,15 +42,15 @@ public class BusinessServer {
         }
         
         try{
-            // generar un stub del objeto
+            //Generar un stub del objeto
             Remote stub = UnicastRemoteObject.exportObject( pbs, 0);
             clientStub = (ClientGateway) stub;
             adminStub = (AdminGateway) stub;
 
-            // crear un registro en el puerto 1099
+            //Crear un registro en el puerto 1099
             Registry reg = LocateRegistry.createRegistry(1099);
 
-            // asociar el stub a los identificadores ClientGateway y AdminGateway
+            //Asociar el stub a los identificadores ClientGateway y AdminGateway
             reg.rebind("ClientGateway", clientStub);
             reg.rebind("AdminGateway", adminStub);
             

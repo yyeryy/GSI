@@ -1,17 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package GSILabs.connect;
 
 /**
- *
- * @author rauli
+ * Clase ClientHub
+ * Clase ejecutora del cliente que se conecta con el servidor.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 15.11.2023
  */
 import GSILabs.BModel.Bar;
-import java.net.MalformedURLException;
-
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

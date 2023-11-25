@@ -386,7 +386,14 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
                     reviewsLocal.add(r);
                 }
             }
-            return (Review[])reviewsLocal.toArray();
+            
+            //Convertimos el arraylist en array
+            Review[] arrayReview = new Review[reviewsLocal.size()];
+            for (int j = 0; j < reviewsLocal.size(); j++) {
+                arrayReview[j] = reviewsLocal.get(j);
+            }
+            
+            return arrayReview;
         }
         return null;
     }
