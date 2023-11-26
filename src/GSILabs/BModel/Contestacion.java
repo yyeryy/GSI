@@ -7,6 +7,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Contestacion
@@ -14,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Contestacion implements XMLRepresentable{
+public class Contestacion implements XMLRepresentable, Serializable{
     
     /**
      * Comentario que realiza un propietario a una review.
@@ -29,6 +30,10 @@ public class Contestacion implements XMLRepresentable{
      */
     private Local local;
 
+    public Contestacion(){
+        
+    }
+    
     /**
      * Constructor Contestacion
      * @param comentario Comentario que realiza un propietario a una review

@@ -7,6 +7,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Review
@@ -14,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Review implements XMLRepresentable{
+public class Review implements XMLRepresentable, Serializable{
 
     /**
      * Valoración que un usuario hace a un local.
@@ -41,6 +42,10 @@ public class Review implements XMLRepresentable{
      */
     private Contestacion contestacion;
 
+    public Review(){
+        
+    }
+    
     /**
      * Constructor Review
      * @param valoracion Valoración que un usuario realiza a un local.

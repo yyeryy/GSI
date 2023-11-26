@@ -6,6 +6,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Direccion
@@ -17,7 +18,7 @@ import java.io.IOException;
  * en la misma dirección. Los locales pueden almacenar una breve descripción de no más de 300
  * caracteres.
  */
-public class Direccion implements XMLRepresentable{
+public class Direccion implements XMLRepresentable, Serializable{
 
     /**
      * Localidad del lugar.
@@ -35,6 +36,9 @@ public class Direccion implements XMLRepresentable{
      * Numero de portal del lugar.
      */
     public int numero;
+    
+    public Direccion(){
+    }
     
     /**
      * Constructor Direccion

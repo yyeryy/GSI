@@ -8,12 +8,13 @@ package GSILabs.connect;
  * @since 15.11.2023
  */
 import GSILabs.BModel.Bar;
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.Scanner;
 
-public class ClientHub {
+public class ClientHub implements Serializable{
 
     public static void main(String[] args) {
         try {
@@ -44,6 +45,8 @@ public class ClientHub {
             e.printStackTrace();
             //System.out.println("Error en la ejecución del código.");
             //System.out.println("Excepción: \n" + e);
+        } catch (NullPointerException ex) {
+            System.out.println("No hay datos de los bares de esta ciudad.");
         }
     }
 }

@@ -5,6 +5,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -18,7 +19,7 @@ import java.util.Objects;
  * del mismo. No se permiten usuario de menos de 14 años. Cada usuario debe tener un perfil
  * determinado, a escoger entre Propietario y Cliente.
  */
-public class Usuario implements XMLRepresentable{
+public class Usuario implements XMLRepresentable, Serializable{
 
     /**
      * Nick del usuario.
@@ -63,6 +64,10 @@ public class Usuario implements XMLRepresentable{
         }
     }
 
+    public Usuario(){
+        
+    }
+    
     /**
      * Constructor Usuario
      * @param n id o nombre del usuario

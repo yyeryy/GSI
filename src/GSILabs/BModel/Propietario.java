@@ -7,6 +7,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Propietario
@@ -14,7 +15,11 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Propietario extends Usuario implements XMLRepresentable{
+public class Propietario extends Usuario implements XMLRepresentable, Serializable{
+    
+    public Propietario(){
+        super(null, null, null, null);
+    }
     
     /**
      * Constructor Propietario

@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ import java.util.List;
  * @version 1.0
  * @since 15.11.2023
  */
-public class PublicBusinessSystem extends BusinessSystem implements ClientGateway, AdminGateway {
+public class PublicBusinessSystem extends BusinessSystem implements ClientGateway, AdminGateway, Serializable {
 
     /**
      * Incorpora una nueva review al sistema, en caso de que sus datos (Usuario, 

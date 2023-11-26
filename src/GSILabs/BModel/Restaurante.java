@@ -6,6 +6,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @since 04.09.2023
  */
 
-public class Restaurante extends Local implements Reservable, XMLRepresentable{
+public class Restaurante extends Local implements Reservable, XMLRepresentable, Serializable{
     
     /**
      * Precio del menú del restaurante.
@@ -32,6 +33,10 @@ public class Restaurante extends Local implements Reservable, XMLRepresentable{
     private ArrayList<Reserva> listaReserva;
     //listaReserva se inicia en Reservable
 
+    public Restaurante(){
+        
+    }
+    
     /**
      * Constructor Restaurante
      * @param nombre Nombre del restaurante

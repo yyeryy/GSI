@@ -12,6 +12,7 @@ package GSILabs.connect;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Bar;
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -22,7 +23,7 @@ import java.rmi.RemoteException;
  * @author carlos.lopez
  * @version 1.0 (12/08/2016)
  */
-public interface ClientGateway extends Remote, LocalFinder {
+public interface ClientGateway extends Remote, LocalFinder, Serializable {
     
     
     /**

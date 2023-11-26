@@ -6,6 +6,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Pub
@@ -13,7 +14,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Pub extends Local implements XMLRepresentable{
+public class Pub extends Local implements XMLRepresentable, Serializable{
     
     /**
      * Hora de apertura del pub.
@@ -24,6 +25,10 @@ public class Pub extends Local implements XMLRepresentable{
      */
     private String horaClausura;
 
+    public Pub(){
+        
+    }
+    
     /**
      * Constructor Pub
      * @param horaApertura Hora de apertura del pub

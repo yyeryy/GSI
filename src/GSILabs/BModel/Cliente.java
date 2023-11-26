@@ -8,6 +8,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Cliente
@@ -15,8 +16,12 @@ import java.io.IOException;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Cliente extends Usuario implements XMLRepresentable{
+public class Cliente extends Usuario implements XMLRepresentable, Serializable{
 
+    public Cliente(){
+        super(null, null, null, null);
+    }
+    
     /**
      * Constructor Cliente
      * @param n Nick del cliente

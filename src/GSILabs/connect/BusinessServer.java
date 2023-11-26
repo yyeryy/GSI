@@ -4,6 +4,7 @@ import GSILabs.BSystem.PublicBusinessSystem;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.Remote;
@@ -20,7 +21,7 @@ import java.rmi.server.UnicastRemoteObject;
  * @version 1.0
  * @since 15.11.2023
  */
-public class BusinessServer {
+public class BusinessServer implements Serializable{
 
     public static void main(String[] args) throws RemoteException, UnknownHostException {
         PublicBusinessSystem pbs = new PublicBusinessSystem();

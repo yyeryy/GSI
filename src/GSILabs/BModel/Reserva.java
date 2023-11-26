@@ -8,6 +8,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Clase Reserva
@@ -18,7 +19,7 @@ import java.io.IOException;
  * de Clientes para Bares o Restaurantes. Cada Reserva incluye únicamente la fecha y hora en que
  * se efectuará, así como un posible porcentaje de descuento.
  */
-public class Reserva implements XMLRepresentable{
+public class Reserva implements XMLRepresentable, Serializable{
 
     /**
      * Un cliente no puede tener la misma fecha en una reserva, por lo que se 
@@ -42,6 +43,10 @@ public class Reserva implements XMLRepresentable{
      */
     private int descuento;
 
+    public Reserva(){
+        super();
+    }
+    
     /**
      * Constructor Reserva
      * @param cliente Cliente que quiere reservar

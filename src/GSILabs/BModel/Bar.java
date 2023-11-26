@@ -27,7 +27,11 @@ public class Bar extends Local implements Reservable, XMLRepresentable, Serializ
      */
     private ArrayList<Reserva> listaReserva;
     // listaReserva se inicia en Reservable
-
+    
+    public Bar() {
+        super("DefaultName", new Direccion(null, null, null, 0), "DefaultDescription", tipoLocal.BAR, new Propietario(null, null, null));
+    }
+    
     /**
      * Constructor Bar
      * @param nombre Nombre del bar

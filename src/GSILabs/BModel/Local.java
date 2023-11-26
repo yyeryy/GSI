@@ -5,6 +5,7 @@ import GSILabs.serializable.XMLRepresentable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 04.09.2023
  */
-public class Local implements XMLRepresentable{
+public class Local implements XMLRepresentable, Serializable{
     
     /**
      *Nombre del local.
@@ -56,6 +57,10 @@ public class Local implements XMLRepresentable{
                 throw new IllegalArgumentException("El argumento es inválido.");
             }
         }
+    }
+    
+    public Local(){
+        
     }
 
     /**

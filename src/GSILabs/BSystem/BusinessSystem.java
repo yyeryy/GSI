@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
@@ -49,7 +50,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  * @version 1.0
  * @since 04.09.2023
  */
-public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresentable{
+public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresentable, Serializable{
     
     ArrayList<Usuario> usuarios = new ArrayList<>();
     ArrayList<Review> reviews = new ArrayList<>();

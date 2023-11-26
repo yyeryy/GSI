@@ -3,6 +3,7 @@ package GSILabs.connect;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Propietario;
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 19.11.2023
  */
-public class AdminHub {
+public class AdminHub implements Serializable{
     public static void main(String[] args) {
         try {
             // Pedir al usuario la dirección del servidor
@@ -35,7 +36,8 @@ public class AdminHub {
             AdminGateway adminGateway = (AdminGateway) LocateRegistry.getRegistry(serverAddress, serverPort).lookup("AdminGateway");
             
             // Eliminar un Local del objeto remoto
-            Local local = new Local("La Vinoteca del Valle", new Direccion("Granada", "Granada", "Vinos Selectos", 12), "Ofrece una amplia variedad de vinos de la región", Local.tipoLocal.BAR, new Propietario("Sara", "pass7890", LocalDate.of(1988, 2, 10)));
+            //Local local = new Local("La Vinoteca del Valle", new Direccion("Granada", "Granada", "Vinos Selectos", 12), "Ofrece una amplia variedad de vinos de la región", Local.tipoLocal.BAR, new Propietario("Sara", "pass7890", LocalDate.of(1988, 2, 10)));
+            Local local = new Local("El Rincon Bohemio", new Direccion("Pamplona","Navarra","Calle Amaya",2), "Bar con música y decoracion local", Local.tipoLocal.BAR, new Propietario("María Carmen","234567891", LocalDate.of(1988, 2, 10)));
             System.out.println("Resultado eliminar local: " + adminGateway.eliminaLocal(local));
         } catch(RemoteException | NotBoundException ex) {
             Logger.getLogger(AdminHub.class.getName()).log(Level.SEVERE, null, ex);
