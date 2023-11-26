@@ -1,9 +1,6 @@
 package GSILabs.connect;
 
 import GSILabs.BSystem.PublicBusinessSystem;
-import GSILabs.persistence.XMLParsingException;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -24,36 +21,34 @@ import java.rmi.server.UnicastRemoteObject;
 public class BusinessServer implements Serializable{
 
     public static void main(String[] args) throws RemoteException, UnknownHostException {
+        
+        //Instanciamos PublicBusinessSystem para implementar los interfaces
         PublicBusinessSystem pbs = new PublicBusinessSystem();
+        
+        //Inicializamos a null las variables de los stubs
         ClientGateway clientStub = null;
         AdminGateway adminStub = null;
         
-
-    //Copiar los valores de BusinessSystem a PublicBusinessSystem
-    //Suponiendo que tienes un método en PublicBusinessSystem para hacerlo
-    
-        //Poblacion
-        
-        try {
-            File file = new File("bs.xml");
-            pbs = PublicBusinessSystem.parseXMLFilePublic(file);
-            
-        }catch(XMLParsingException | IOException e){
-            System.out.println("Población fallida");
-        }
+        //Población de la instancia de PublicBusinessSystem programaticamente
+        //en el archivo TestBS del package GSILabs.persistence
         
         try{
             //Generar un stub del objeto
-            Remote stub = UnicastRemoteObject.exportObject( pbs, 0);
+            Remote stub = UnicastRemoteObject.exportObject(pbs, 0);
             clientStub = (ClientGateway) stub;
             adminStub = (AdminGateway) stub;
 
             //Crear un registro en el puerto 1099
-            Registry reg = LocateRegistry.createRegistry(1099);
+            int puerto = 1099;
+            Registry reg = LocateRegistry.createRegistry(puerto);
+            
+            //Establecemos los tags
+            String tagCliente = "ClientGateway";
+            String tagAdmin = "AdminGateway";
 
             //Asociar el stub a los identificadores ClientGateway y AdminGateway
-            reg.rebind("ClientGateway", clientStub);
-            reg.rebind("AdminGateway", adminStub);
+            reg.rebind(tagCliente, clientStub);
+            reg.rebind(tagAdmin, adminStub);
             
             System.out.println("Servidor funcionando");
             System.out.println("IP: "+InetAddress.getLocalHost().getHostAddress());
