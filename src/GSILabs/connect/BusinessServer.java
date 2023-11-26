@@ -62,19 +62,6 @@ public class BusinessServer implements Serializable{
         } catch (RemoteException e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
-            /*try {
-                Registry registry = LocateRegistry.createRegistry(1100);
-
-                registry.rebind("ClientGateway", clientStub);
-                registry.rebind("AdminGateway", adminStub);
-            } catch (RemoteException ex) {
-                System.out.println("error");
-            }*/
         }
-
-        //System.out.println("Servidor RMI listo...");
-        
-        
-    }
-    
+    }   
 }

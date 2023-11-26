@@ -1,15 +1,10 @@
 package GSILabs.connect;
 
-import GSILabs.BModel.Bar;
-import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
-import GSILabs.BModel.Propietario;
-import GSILabs.BSystem.BusinessSystem;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,23 +20,25 @@ import java.util.logging.Logger;
 public class AdminHub implements Serializable{
     public static void main(String[] args) {
         try {
-            // Pedir al usuario la dirección del servidor
+            //Pedir al usuario la dirección del servidor
             Scanner scanner = new Scanner(System.in);
             System.out.print("Ingrese la dirección del servidor: ");
             String serverAddress = scanner.nextLine();
 
-            // Pedir al usuario el puerto del servidor
+            //Pedir al usuario el puerto del servidor
             System.out.print("Ingrese el puerto del servidor: ");
             int serverPort = scanner.nextInt();
+            
+            //Establecemos el tag
+            String tagAdmin = "AdminGateway";
 
-            // Obtener el objeto remoto desde el servidor
-            AdminGateway adminGateway = (AdminGateway) LocateRegistry.getRegistry(serverAddress, serverPort).lookup("AdminGateway");
+            //Obtener el objeto remoto desde el servidor
+            AdminGateway adminGateway = (AdminGateway) LocateRegistry.getRegistry(serverAddress, serverPort).lookup(tagAdmin);
             
             //Local existente
             Local local1 = adminGateway.getLocal("Nara");
             
-            // Eliminar un Local del objeto remoto
-            //Local local = new Local("La Vinoteca del Valle", new Direccion("Granada", "Granada", "Vinos Selectos", 12), "Ofrece una amplia variedad de vinos de la región", Local.tipoLocal.BAR, new Propietario("Sara", "pass7890", LocalDate.of(1988, 2, 10))); 
+            //Eliminar un Local del objeto remoto
             System.out.println("Resultado eliminar local: " + adminGateway.eliminaLocal(local1));
         } catch(RemoteException | NotBoundException ex) {
             Logger.getLogger(AdminHub.class.getName()).log(Level.SEVERE, null, ex);

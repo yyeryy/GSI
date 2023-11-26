@@ -68,13 +68,12 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
 
     /**
      * Devuelve el mejor bar de la cuidad que coincida con el nombre.
-     * @param ciudad nombre de la cuidad
+     * @param ciudad nombre de la ciudad
      * @return El bar con mejor puntuación media de la cuidad
      * @throws RemoteException If some error happens in the remove invocation.
      */
     @Override
     public Bar mejorBar(String ciudad) throws RemoteException {
-        //No nos dan provinvia
         Bar mejorBar = null;
         Review[] reviewsLocal;
         int valoracionMax = 0;
@@ -97,7 +96,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
 
     /**
      * Devuelve los num restaurantes de la cuidad con mejores puntuaciones.
-     * @param ciudad nombre de la cuidad
+     * @param ciudad nombre de la ciudad
      * @param num numero de restaurantes
      * @return Una tabla con Num restaurantes, conteniendo nulls en caso de que no existan tantos.
      * @throws RemoteException If some error happens in the remove invocation.
@@ -116,13 +115,13 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
                     valoracionMedia += reviewsLocal[i].getValoracion();
                 }
                 if (index < num || valoracionMedia > valoraciones[0]) {
-                    // Agrega el restaurante si hay espacio o si su valoración es mayor que la de los existentes
+                    //Agrega el restaurante si hay espacio o si su valoración es mayor que la de los existentes
                     mejoresRestaurantes[0] = (Restaurante) local;
                     valoraciones[0] = valoracionMedia;
                     Arrays.sort(mejoresRestaurantes);
                     Arrays.sort(valoraciones); 
                     if (index < num) {
-                        index++; // Incrementa solo si hay espacio en el array
+                        index++; //Incrementa solo si hay espacio en el array
                     }
                 }
             }
@@ -131,11 +130,10 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     }
 
     /**
-     * Retrieves an Locals that matches EXACTLY (up to the case and/or spacing),
-     * the name.
-     * @param name Name of the local
-     * @return The local , or a null response
-     * @throws RemoteException If some error happens in the remove invocation.
+     * Devuelve un local cuyo nombre sea el mismo que el que se busca.
+     * @param name Nombre del local a buscar
+     * @return Local o null en caso de no encontrar
+     * @throws RemoteException si aparece algún error
      */
     @Override
     public Local getLocal(String name) throws RemoteException {
@@ -148,11 +146,10 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
     }
 
     /**
-     * Retrieves all the Locals that match, either partial o totally (up to the case and/or spacing),
-     * the name given as argument.
-     * @param name Complete or partial name of the ñpcañ
-     * @return The list of local, that might eventually contain zero elements
-     * @throws RemoteException If some error happens in the remove invocation.
+     * Devuelve todos los locales cuyo nombre sea el mismo que el que se busca.
+     * @param name Nombre del local a buscar
+     * @return Lista de locales que puede estar vacía
+     * @throws RemoteException si aparece algún error
      */
     @Override
     public Local[] getLocals(String name) throws RemoteException {
@@ -362,6 +359,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
                 reviews.add(parseReview(strReview));
             }
         }
+        
         //Instancia de BusinessSystem
         PublicBusinessSystem bs = new PublicBusinessSystem();
 
@@ -377,9 +375,7 @@ public class PublicBusinessSystem extends BusinessSystem implements ClientGatewa
         for(int i = 0; i < reviews.size(); i++){
             bs.nuevaReview(reviews.get(i));
         }
-
-        return bs;
         
-
+        return bs;
     }
 }

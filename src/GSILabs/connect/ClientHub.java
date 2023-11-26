@@ -43,8 +43,6 @@ public class ClientHub implements Serializable{
 
         } catch (NotBoundException | RemoteException e) {
             e.printStackTrace();
-            //System.out.println("Error en la ejecución del código.");
-            //System.out.println("Excepción: \n" + e);
         } catch (NullPointerException ex) {
             System.out.println("No hay datos de los bares de esta ciudad.");
         }
