@@ -1,8 +1,5 @@
 package GSILabs.connect;
 
-import GSILabs.BModel.Local;
-import GSILabs.BModel.Review;
-import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.PublicBusinessSystem;
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -45,7 +42,8 @@ public class BusinessServer implements Serializable{
             System.out.println("Población fallida");
         }
         
-        /*for (Usuario a : pbs.usuarios) {
+        /* Para realizar pruebas de la base de datos
+        for (Usuario a : pbs.usuarios) {
             System.out.println(""+a);
         }
         for (Review a : pbs.reviews) {
@@ -53,7 +51,8 @@ public class BusinessServer implements Serializable{
         }
         for (Local a : pbs.locales) {
             System.out.println(""+a);
-        }*/
+        }
+        */
         
         try{
             //Generar un stub del objeto
