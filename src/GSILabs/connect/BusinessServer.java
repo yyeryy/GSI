@@ -62,7 +62,7 @@ public class BusinessServer implements Serializable{
             adminStub = (AdminGateway) stub;
 
             //Crear un registro en el puerto 1099
-            int puerto = 1099;
+            int puerto = 109;
             Registry reg = LocateRegistry.createRegistry(puerto);
             
             //Establecemos los tags
@@ -75,7 +75,7 @@ public class BusinessServer implements Serializable{
             
             System.out.println("Servidor funcionando");
             System.out.println("IP: "+InetAddress.getLocalHost().getHostAddress());
-            System.out.println("Port: 1099");
+            System.out.println("Port: "+puerto);
         
         } catch (RemoteException e) {
             System.err.println("Server exception: " + e.toString());
