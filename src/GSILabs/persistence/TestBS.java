@@ -65,9 +65,9 @@ public class TestBS {
         Bar bar6 = new Bar("Bar Gaga", direccion6,"Luz tenue y buenos cocteles",propietario3);
         Bar bar7 = new Bar("Mejiros",direccion7,"Bar antiguo cerca del Ayuntamiento", propietario1);
         Bar bar8 = new Bar("El juli Bohemio", direccion8, "Bar con música y decoracion local", propietario2);
-        Bar bar9 = new Bar("Txola putero", direccion9,"Luz tenue y buenos cocteles",propietario3);
-        Bar bar10 = new Bar("El juli Bohemio", direccion10, "Bar con música y decoracion local", propietario2);
-        Bar bar11 = new Bar("Txola putero", direccion11,"Luz tenue y buenos cocteles",propietario3);
+        Bar bar9 = new Bar("Txola manin", direccion9,"Luz tenue y buenos cocteles",propietario3);
+        Bar bar10 = new Bar("El juli Romano", direccion10, "Bar con música y decoracion local", propietario2);
+        Bar bar11 = new Bar("Txola roncola", direccion11,"Luz tenue y buenos cocteles",propietario3);
         
         //Creación de restaurantes
         Restaurante restaurante1 = new Restaurante("Sotano encantado",direccion4,"Sotano con iluminacion de velas",propietario4,20,140,4);
