@@ -52,9 +52,9 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  */
 public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresentable, Serializable{
     
-    ArrayList<Usuario> usuarios = new ArrayList<>();
-    ArrayList<Review> reviews = new ArrayList<>();
-    ArrayList<Local> locales = new ArrayList<>();
+    public ArrayList<Usuario> usuarios = new ArrayList<>();
+    public ArrayList<Review> reviews = new ArrayList<>();
+    public ArrayList<Local> locales = new ArrayList<>();
 
     /** Usuarios **/
     
