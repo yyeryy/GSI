@@ -48,7 +48,7 @@ public class BusinessServer implements Serializable{
             clientStub = (ClientGateway) stub;
             adminStub = (AdminGateway) stub;
 
-            //Crear un registro en el puerto 1099
+            //Crear un registro en el puerto indicado
             int puerto = 1099;
             Registry reg = LocateRegistry.createRegistry(puerto);
             
@@ -61,8 +61,8 @@ public class BusinessServer implements Serializable{
             reg.rebind(tagAdmin, adminStub);
             
             System.out.println("Servidor funcionando");
-            System.out.println("IP: "+InetAddress.getLocalHost().getHostAddress());
-            System.out.println("Port: 1099");
+            System.out.println("IP: " + InetAddress.getLocalHost().getHostAddress());
+            System.out.println("Puerto: " + puerto);
         
         } catch (RemoteException e) {
             System.err.println("Server exception: " + e.toString());
