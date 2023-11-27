@@ -1,5 +1,8 @@
 package GSILabs.connect;
 
+import GSILabs.BModel.Local;
+import GSILabs.BModel.Review;
+import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.PublicBusinessSystem;
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -35,12 +38,22 @@ public class BusinessServer implements Serializable{
         
         //Población mediante XML
         try {
-            File file = new File("bs.xml");
+            File file = new File("testbs.xml");
             pbs = PublicBusinessSystem.parseXMLFilePublic(file);
             
         }catch(XMLParsingException | IOException e){
             System.out.println("Población fallida");
         }
+        
+        /*for (Usuario a : pbs.usuarios) {
+            System.out.println(""+a);
+        }
+        for (Review a : pbs.reviews) {
+            System.out.println(""+a);
+        }
+        for (Local a : pbs.locales) {
+            System.out.println(""+a);
+        }*/
         
         try{
             //Generar un stub del objeto
@@ -48,7 +61,7 @@ public class BusinessServer implements Serializable{
             clientStub = (ClientGateway) stub;
             adminStub = (AdminGateway) stub;
 
-            //Crear un registro en el puerto indicado
+            //Crear un registro en el puerto 1099
             int puerto = 1099;
             Registry reg = LocateRegistry.createRegistry(puerto);
             
@@ -61,8 +74,8 @@ public class BusinessServer implements Serializable{
             reg.rebind(tagAdmin, adminStub);
             
             System.out.println("Servidor funcionando");
-            System.out.println("IP: " + InetAddress.getLocalHost().getHostAddress());
-            System.out.println("Puerto: " + puerto);
+            System.out.println("IP: "+InetAddress.getLocalHost().getHostAddress());
+            System.out.println("Port: 1099");
         
         } catch (RemoteException e) {
             System.err.println("Server exception: " + e.toString());
