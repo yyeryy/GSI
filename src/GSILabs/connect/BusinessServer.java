@@ -10,6 +10,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import GSILabs.persistence.XMLParsingException;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Clase BusinessServer
  * Clase con la que implementaremos los métodos implementados de las interfaces
@@ -29,8 +33,14 @@ public class BusinessServer implements Serializable{
         ClientGateway clientStub = null;
         AdminGateway adminStub = null;
         
-        //Población de la instancia de PublicBusinessSystem programaticamente
-        //en el archivo TestBS del package GSILabs.persistence
+        //Población mediante XML
+        try {
+            File file = new File("bs.xml");
+            pbs = PublicBusinessSystem.parseXMLFilePublic(file);
+            
+        }catch(XMLParsingException | IOException e){
+            System.out.println("Población fallida");
+        }
         
         try{
             //Generar un stub del objeto
