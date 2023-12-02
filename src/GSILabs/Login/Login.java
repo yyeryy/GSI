@@ -48,6 +48,9 @@ public class Login extends javax.swing.JFrame {
      */
     static final String CONTRASENA_NO_ES_CORRECTA = "La contraseña del usuario no es válida. Por favor, introduzca la contraseña correcta del usuario.";
 
+    /**
+     * Constructor Login.
+     */
     public Login() {
         initComponents();
         creacionDocumentoLogin();

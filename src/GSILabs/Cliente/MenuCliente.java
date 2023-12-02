@@ -17,6 +17,11 @@ public class MenuCliente extends javax.swing.JFrame {
      */
     private static SesionUsuario sesionUsuario = null;
 
+    /**
+     * Constructor MenuCliente
+     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
+     * aplicación.
+     */
     public MenuCliente(SesionUsuario sesionUsuario) {
         initComponents();
         this.sesionUsuario = sesionUsuario;

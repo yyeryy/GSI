@@ -14,8 +14,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private static SesionUsuario sesionUsuario = null;
 
     /**
-     * Creates new form MenuAdministrador
-     * @param sesionUsuario
+     * Constructor MenuAdministrador
+     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
+     * aplicación.
      */
     public MenuAdministrador(SesionUsuario sesionUsuario) {
         initComponents();

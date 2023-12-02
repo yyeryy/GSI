@@ -14,8 +14,9 @@ public class MenuDonacion extends javax.swing.JFrame {
     private static SesionUsuario sesionUsuario = null;
 
     /**
-     * Creates new form MenuDonacion
-     * @param sesionUsuario
+     * Constructor MenuDonacion
+     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
+     * aplicación.
      */
     public MenuDonacion(SesionUsuario sesionUsuario) {
         initComponents();

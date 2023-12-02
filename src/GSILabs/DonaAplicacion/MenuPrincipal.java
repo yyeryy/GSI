@@ -11,6 +11,9 @@ package GSILabs.DonaAplicacion;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
+    /**
+     * Constructor MenuPrincipal.
+     */
     public MenuPrincipal() {
         initComponents();
     }

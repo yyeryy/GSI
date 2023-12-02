@@ -18,7 +18,9 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
     private static SesionUsuario sesionUsuario = null;
 
     /**
-     * Creates new form MenuHistorialDonaciones
+     * Constructor MenuHistorialDonaciones
+     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
+     * aplicación.
      */
     public MenuHistorialDonaciones(SesionUsuario sesionUsuario) {
         initComponents();

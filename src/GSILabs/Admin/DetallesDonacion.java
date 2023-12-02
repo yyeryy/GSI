@@ -13,6 +13,11 @@ public class DetallesDonacion extends javax.swing.JFrame {
      */
     private static SesionUsuario sesionUsuario = null;
 
+    /**
+     * Constructor DetallesDonacion
+     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
+     * aplicación.
+     */
     public DetallesDonacion(SesionUsuario sesionUsuario){
         initComponents();
         this.textoCantidad.setEditable(false);

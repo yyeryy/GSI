@@ -19,8 +19,9 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
     private static SesionUsuario sesionUsuario = null;
 
     /**
-     * Creates new form MenuVerDonacionesActivas
-     * @param sesionUsuario
+     * Constructor MenuVerDonacionesActivas
+     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
+     * aplicación.
      */
     public MenuVerDonacionesActivas(SesionUsuario sesionUsuario) {
         initComponents();
