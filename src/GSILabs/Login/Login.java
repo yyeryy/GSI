@@ -2,6 +2,7 @@ package GSILabs.Login;
 
 import GSILabs.Admin.MenuAdministrador;
 import GSILabs.BModel.SesionUsuario;
+import GSILabs.Cliente.MenuCliente;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileWriter;

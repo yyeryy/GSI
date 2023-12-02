@@ -1,5 +1,6 @@
 package GSILabs.DonaAplicacion;
 
+import GSILabs.Login.CreacionNuevoUsuario;
 import GSILabs.Login.Login;
 
 /**
@@ -90,7 +91,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnNuevoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPerfilActionPerformed
         new CreacionNuevoUsuario();
-        this.setVisible(this);
+        this.setVisible(false);
     }//GEN-LAST:event_btnNuevoPerfilActionPerformed
 
     
