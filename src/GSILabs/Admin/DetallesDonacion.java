@@ -1,21 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.Admin;
+
+import GSILabs.BModel.SesionUsuario;
 
 /**
  *
  * @author javie
  */
 public class DetallesDonacion extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos de la sesión de un usuario en la aplicación.
+     */
+    private static SesionUsuario sesionUsuario = null;
 
-    public DetallesDonacion(){
+    public DetallesDonacion(SesionUsuario sesionUsuario){
         initComponents();
         this.textoCantidad.setEditable(false);
         this.textoComida.setEditable(false);
         this.textoLocal.setEditable(false);
         this.textoFecha.setEditable(false);
+        this.sesionUsuario = sesionUsuario;
     }
     
     /**
@@ -196,7 +200,7 @@ public class DetallesDonacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DetallesDonacion().setVisible(true);
+                new DetallesDonacion(sesionUsuario).setVisible(true);
             }
         });
     }

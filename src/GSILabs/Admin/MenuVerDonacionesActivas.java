@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.Admin;
 
+import GSILabs.BModel.SesionUsuario;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,11 +12,17 @@ import javax.swing.DefaultListModel;
  * @author javie
  */
 public class MenuVerDonacionesActivas extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos de la sesión de un usuario en la aplicación.
+     */
+    private static SesionUsuario sesionUsuario = null;
 
     /**
      * Creates new form MenuVerDonacionesActivas
+     * @param sesionUsuario
      */
-    public MenuVerDonacionesActivas() {
+    public MenuVerDonacionesActivas(SesionUsuario sesionUsuario) {
         initComponents();
         List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
@@ -27,6 +30,8 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         for (String comida: listaComidas){
             modelo.addElement(comida);
         }
+        
+        this.sesionUsuario = sesionUsuario;
     }
     
     public String devuelveComida(String comida){
@@ -156,7 +161,7 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuVerDonacionesActivas().setVisible(true);
+                new MenuVerDonacionesActivas(sesionUsuario).setVisible(true);
             }
         });
     }

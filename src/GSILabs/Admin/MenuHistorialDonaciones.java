@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.Admin;
 
+import GSILabs.BModel.SesionUsuario;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +11,16 @@ import javax.swing.DefaultListModel;
  * @author javie
  */
 public class MenuHistorialDonaciones extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos de la sesión de un usuario en la aplicación.
+     */
+    private static SesionUsuario sesionUsuario = null;
 
     /**
      * Creates new form MenuHistorialDonaciones
      */
-    public MenuHistorialDonaciones() {
+    public MenuHistorialDonaciones(SesionUsuario sesionUsuario) {
         initComponents();
         List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
@@ -26,6 +28,8 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         for (String comida: listaComidas){
             modelo.addElement(comida);
         }
+        
+        this.sesionUsuario = sesionUsuario;
     }
 
     /**
@@ -143,7 +147,7 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuHistorialDonaciones().setVisible(true);
+                new MenuHistorialDonaciones(sesionUsuario).setVisible(true);
             }
         });
     }

@@ -1,20 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.Admin;
+
+import GSILabs.BModel.SesionUsuario;
 
 /**
  *
  * @author javie
  */
 public class MenuAdministrador extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos de la sesión de un usuario en la aplicación.
+     */
+    private static SesionUsuario sesionUsuario = null;
 
     /**
      * Creates new form MenuAdministrador
+     * @param sesionUsuario
      */
-    public MenuAdministrador() {
+    public MenuAdministrador(SesionUsuario sesionUsuario) {
         initComponents();
+        this.sesionUsuario = sesionUsuario;
     }
 
     /**
@@ -126,12 +131,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_botonDonarActionPerformed
 
     private void botonCrearEliminarDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEliminarDonacionesActionPerformed
-        MenuVerDonacionesActivas donacionesActivas = new MenuVerDonacionesActivas();
+        MenuVerDonacionesActivas donacionesActivas = new MenuVerDonacionesActivas(sesionUsuario);
         donacionesActivas.setVisible(true);
     }//GEN-LAST:event_botonCrearEliminarDonacionesActionPerformed
 
     private void botonHistorialDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialDonacionesActionPerformed
-        MenuHistorialDonaciones historialDonaciones = new MenuHistorialDonaciones();
+        MenuHistorialDonaciones historialDonaciones = new MenuHistorialDonaciones(sesionUsuario);
         this.setVisible(false);
         historialDonaciones.setVisible(true);
     }//GEN-LAST:event_botonHistorialDonacionesActionPerformed
@@ -166,7 +171,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdministrador().setVisible(true);
+                new MenuAdministrador(sesionUsuario).setVisible(true);
             }
         });
     }

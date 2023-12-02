@@ -1,20 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.Admin;
+
+import GSILabs.BModel.SesionUsuario;
 
 /**
  *
  * @author javie
  */
 public class MenuDonacion extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos de la sesión de un usuario en la aplicación.
+     */
+    private static SesionUsuario sesionUsuario = null;
 
     /**
      * Creates new form MenuDonacion
+     * @param sesionUsuario
      */
-    public MenuDonacion() {
+    public MenuDonacion(SesionUsuario sesionUsuario) {
         initComponents();
+        this.sesionUsuario = sesionUsuario;
     }
 
     MenuDonacion(MenuAdministrador aThis) {
@@ -144,7 +149,7 @@ public class MenuDonacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuDonacion().setVisible(true);
+                new MenuDonacion(sesionUsuario).setVisible(true);
             }
         });
     }
