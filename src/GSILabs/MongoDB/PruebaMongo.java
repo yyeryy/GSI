@@ -8,10 +8,15 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import org.bson.Document;
 public class PruebaMongo {
-    public static void main(String[] args) {
-        String connectionString = "mongodb+srv://GSI:G3GSI2023@gsi.lvvnusj.mongodb.net/?retryWrites=true&w=majority";
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String username = URLEncoder.encode("GSI", "UTF-8");
+        String password = URLEncoder.encode("G3GSI2023", "UTF-8");
+        String cluster = "gsi.lvvnusj.mongodb.net/";
+        String connectionString = "mongodb+srv://" + username + ":" + password + "@" + cluster +"?retryWrites=true&w=majority";
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(connectionString))
                 .build();
@@ -19,7 +24,7 @@ public class PruebaMongo {
         try (MongoClient mongoClient = MongoClients.create(settings)) {
             try {
                 // Send a ping to confirm a successful connection
-                MongoDatabase database = mongoClient.getDatabase("admin");
+                MongoDatabase database = mongoClient.getDatabase("GSI");
                 database.runCommand(new Document("ping", 1));
                 System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
                 
