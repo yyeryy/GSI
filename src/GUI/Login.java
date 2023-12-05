@@ -1,22 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author luisazcoitipena
+ * Clase Login
+ * Interfaz gráfica con la que iniciamos sesión (siempre y cuando tengamos un
+ * usuario) y que nos da acceso al programa.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Constructor Login.
      */
     public Login() {
         initComponents();
+        
+/*      PROBABLEMENTE BORRAR
+        creacionDocumentoLogin();
+        iniciarIcono();
+        pfContrasena.setEchoChar('*');
+
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
+*/
     }
 
     /**
@@ -32,11 +44,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         UsuarioLogin = new javax.swing.JTextField();
-        BotonLogin = new javax.swing.JButton();
-        SalirLogin = new javax.swing.JButton();
+        botonLogin = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
         ContrasenaLogin = new javax.swing.JPasswordField();
-        MostrarContraseña = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        mostrarContraseña = new javax.swing.JCheckBox();
+        botonRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,34 +61,34 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
 
-        BotonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        BotonLogin.setText("Login");
-        BotonLogin.addActionListener(new java.awt.event.ActionListener() {
+        botonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonLogin.setText("Login");
+        botonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonLoginActionPerformed(evt);
+                botonLoginActionPerformed(evt);
             }
         });
 
-        SalirLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        SalirLogin.setText("Salir");
-        SalirLogin.addActionListener(new java.awt.event.ActionListener() {
+        botonSalir.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalirLoginActionPerformed(evt);
+                botonSalirActionPerformed(evt);
             }
         });
 
-        MostrarContraseña.setText("Mostrar Contraseña");
-        MostrarContraseña.addActionListener(new java.awt.event.ActionListener() {
+        mostrarContraseña.setText("Mostrar Contraseña");
+        mostrarContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarContraseñaActionPerformed(evt);
+                mostrarContraseñaActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jButton1.setText("Registrarse");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistrarse.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonRegistrarse.setText("Registrarse");
+        botonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonRegistrarseActionPerformed(evt);
             }
         });
 
@@ -90,14 +102,14 @@ public class Login extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(SalirLogin)
+                                .addComponent(botonSalir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                                .addComponent(jButton1)
+                                .addComponent(botonRegistrarse)
                                 .addGap(52, 52, 52)
-                                .addComponent(BotonLogin))
+                                .addComponent(botonLogin))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(MostrarContraseña))
+                                .addComponent(mostrarContraseña))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -125,12 +137,12 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(ContrasenaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(MostrarContraseña)
+                .addComponent(mostrarContraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SalirLogin)
-                    .addComponent(jButton1)
-                    .addComponent(BotonLogin))
+                    .addComponent(botonSalir)
+                    .addComponent(botonRegistrarse)
+                    .addComponent(botonLogin))
                 .addGap(30, 30, 30))
         );
 
@@ -138,40 +150,87 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
+    /**
+     * Función ActionPerformed para el boton botonLogin en la que en primer
+     * lugar comprobamos si todos los campos están rellenados;
+     * En segundo lugar, si el login es correcto comprobamos si el usuario tiene 
+     * condición de cliente o de administrador, en función de ello se le redigirá 
+     * a una ventana u otra. En caso contrario se muestra un JOptionPane de error.
+     * @param evt Evento recibido por la función
+     */
+    private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
         System.out.println("Boton login pulsado");
+        //Si ambos campos están sin rellenar
         if(UsuarioLogin.getText().equals("") && ContrasenaLogin.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario y una contraseña.");
+        //Si el campo nombre de usuario está sin rellenar
         } else if(UsuarioLogin.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario.");
+        //Si el campo contraseña está sin rellenar
         } else if(ContrasenaLogin.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una contraseña.");
-        } else {
+        //Si el login se ha realizado correctamente
+        } else if(esLoginCorrecto()) { //MODIFICAR esLoginCorrecto
+            
             //Buscar en la base de datos que los datos coincidan y hacer el login.
+            
+/*          HACER ESTA COMPROBACIÓN PARA ENTRAR AL CLIENTE O AL ADMINISTRADOR (MODIFICAR CÓDIGO)
+            //Si el usuario que intenta hacer el login es Cliente
+            if(sesionUsuario.getTipoUsuario().equals("Cliente")) {
+                new MenuCliente(sesionUsuario);
+                this.setVisible(false);
+            }
+            //Si el usuario que intenta hacer el login es Cliente
+            else if(sesionUsuario.getTipoUsuario().equals("Administrador")) {
+                new MenuAdministrador(sesionUsuario);
+                this.setVisible(false);
+            }
+            //Si no es ninguna de las anteriores
+            else {
+                System.out.println("Error. El usuario no es ni cliente ni administrador");
+            }
+*/
+        //El login no se ha realizado correctamente
+        } else {
+            System.out.println("El login es incorrecto.");
         }
-    }//GEN-LAST:event_BotonLoginActionPerformed
+    }//GEN-LAST:event_botonLoginActionPerformed
 
-    private void MostrarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarContraseñaActionPerformed
-        if(MostrarContraseña.isSelected()){
+    /**
+     * Función ActionPerformed para el JCheckBox mostrarContraseña, que al 
+     * pulsarlo podemos visualizar la contraseña, y al volverlo a pulsar
+     * se vuelve a ocultar la contraseña mediante puntos.
+     * @param evt Evento recibido por la función
+     */
+    private void mostrarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraseñaActionPerformed
+        if(mostrarContraseña.isSelected()){
             ContrasenaLogin.setEchoChar((char)0);
         } else {
             ContrasenaLogin.setEchoChar('*');
         }
-    }//GEN-LAST:event_MostrarContraseñaActionPerformed
+    }//GEN-LAST:event_mostrarContraseñaActionPerformed
 
-    private void SalirLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirLoginActionPerformed
+    /**
+     * Función ActionPerformed para el JButton botonSalir, mediante el que se
+     * sale del programa al pulsarlo.
+     * @param evt Evento recibido por la función
+     */
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_SalirLoginActionPerformed
+        //jDialogInformacion.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Función ActionPerformed para el JButton botonRegistrarse, mediante el que
+     * se accede al JFrame RegistrarUsuario donde podremos crear un nuevo usuario.
+     * @param evt Evento recibido por la función
+     */
+    private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
         RegistrarUsuario abrirRegistrarUsuario = new RegistrarUsuario();
         abrirRegistrarUsuario.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonRegistrarseActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -205,14 +264,171 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonLogin;
     private javax.swing.JPasswordField ContrasenaLogin;
-    private javax.swing.JCheckBox MostrarContraseña;
-    private javax.swing.JButton SalirLogin;
     private javax.swing.JTextField UsuarioLogin;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonLogin;
+    private javax.swing.JButton botonRegistrarse;
+    private javax.swing.JButton botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JCheckBox mostrarContraseña;
     // End of variables declaration//GEN-END:variables
+
+    /** PROBABLEMENTE NO HAGA FALTA
+     * Creación inicial del documento claves.txt, en el que ya tiene creado un 
+     * usuario con condición de administrador con las siguientes credenciales:
+     * Nombre: admin
+     * Contrasena: admin.
+     */
+/*
+    private void creacionDocumentoLogin() {
+        try {
+            File archivoClaves = new File(System.getProperty("user.dir") + "\\claves.txt");
+            if(!archivoClaves.exists()){
+                System.out.println("Creamos fichero de claves.");
+                archivoClaves.createNewFile();             
+                insertarCuentaAdministradorPorDefecto(archivoClaves);
+            } else {
+            }
+        } catch(IOException ex) {
+            System.out.println("Error en la creación del documento de claves.");
+        }
+    }
+*/
+    
+    /** PROBABLEMENTE NO HAGA FALTA
+     * Inserción de cuenta inicial con las siguientes credenciales:
+     * Nombre: admin
+     * Contrasena: admin
+     * TipoUsuario: Administrador
+     * en el archivo claves.txt que almacena todos los usuarios del sistema.
+     * @param archivoLogin Fichero que almacena las los usuarios de la aplicación
+     * con sus claves y su tipo de usuario
+     * @throws IOException Exception lanzada al encontrar un error en el manejo
+     * de ficheros
+     */
+/*
+    private void insertarCuentaAdministradorPorDefecto(File archivoLogin) throws IOException {
+        String textoAEscribir = "";
+        try (FileWriter miEscritor = new FileWriter(archivoLogin)) {
+            textoAEscribir = textoAEscribir + "admin" + ":" + getMd5("admin") + ":" + "Administrador";
+            miEscritor.write(textoAEscribir);
+        } catch(Exception e) {
+            System.out.println("Error con FileWriter.");
+        }
+    }
+*/
+    /** PROBABLEMENTE NO HAGA FALTA
+     * Muestra de un JDialog en el que se muestra el texto del error ocurrido.
+     * @param texto Texto del error ocurrido en el transcurso de la aplicación.
+     */
+/*
+    public void mostrarVentana(String texto) {
+        ePaneInformacion.setText(texto);
+        jDialogInformacion.setSize(500, 250);
+        jDialogInformacion.setLocationRelativeTo(null);
+        jDialogInformacion.setVisible(true);
+    }
+*/
+    /** PROBABLEMENTE NO HAGA FALTA
+     * Comprobación de si todos los campos de la ventana de Login están cumplimentadas.
+     * @return Booleano. True si están todos los campos rellenados y False en caso contrario.
+     */
+/*
+    private boolean estanTodosLosCamposRellenados() {
+        if(this.tfNombre.getText().isEmpty() || this.pfContrasena.getText().isEmpty())
+            return false;
+        return true;
+    }
+*/
+    /** PROBABLEMENTE NO HAGA FALTA
+     * Comprobación de si los datos introducidos en la ventana de login 
+     * corresponden con los datos de un usuario previamente registrado y si la 
+     * contraseña introducida corresponde con el usuario introducido.
+     * @return Booleano. True si los datos introducidos se corresponden con
+     * los de un usuario previamente registrado y si la contraseña corresponde
+     * con el usuario. False en caso contrario.
+     */
+    private boolean esLoginCorrecto() { //MODIFICAR COMPROBANDO
+        return true;
+    }
+/*
+    private boolean esLoginCorrecto() {
+        List<String> contenidoFicheroClaves;
+        try {
+            contenidoFicheroClaves = Files.readAllLines(Paths.get(System.getProperty("user.dir") + "\\claves.txt"));
+            for(String linea : contenidoFicheroClaves){
+                String[] trozos = linea.split(":");
+                String nombreUsuario = trozos[0];
+                String contrasena = trozos[1];
+                String rolUsuario = trozos[2].split("\n")[0];
+                if(nombreUsuario.equals(tfNombre.getText()) && contrasena.equals(getMd5(this.pfContrasena.getText()))) {
+                    sesionUsuario = new SesionUsuario(nombreUsuario, contrasena, rolUsuario);
+                    return true;
+                } else {
+                    mostrarVentana(CONTRASENA_NO_ES_CORRECTA);
+                    return false;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GSILabs.ProyectoFinal.Login.Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+*/
+    
+    /** PROBABLEMENTE NO HARÁ FALTA
+     * Obtención del mensaje de error ocurrido.
+     * @return Texto del mensaje de error ocurrido.
+     */
+/*
+    private String obtenerMensajeDeTipoDeError() {
+        List<String> contenidoFicheroClaves;
+        try {
+            contenidoFicheroClaves = Files.readAllLines(Paths.get(System.getProperty("user.dir") + "\\claves.txt"));
+            for(String linea : contenidoFicheroClaves){
+                String[] trozos = linea.split(":");
+                String nombreUsuario = trozos[0];
+                if(!nombreUsuario.equals(tfNombre.getText()))
+                    return NOMBRE_USUARIO_NO_ESTA_REGISTRADO;
+                else
+                    return CONTRASENA_NO_ES_CORRECTA;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GSILabs.ProyectoFinal.Login.Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+*/
+    
+    
+    
+    /** HACE FALTA SI O SI
+     * Cifrado de la cadena introducida mediante el algoritmo de hash MD5.
+     * @param input Cadena que se va a cifrar.
+     * @return Cadena de texto cifrada con algoritmo de hash MD5.
+     */
+    public static String getMd5(String input) {
+        try {
+            //Instancia de MessageDigest estableciendo el algoritmo de hash MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            
+            //Calculamos el hash de la cadena de entrada.
+            byte[] messageDigest = md.digest(input.getBytes());
+ 
+            //Creación del objeto BigInteger a partir del hash (array de bytes)
+            BigInteger no = new BigInteger(1, messageDigest);
+ 
+            //Conversión de message digest a un valor hexadecimal.
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+            
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
