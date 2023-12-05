@@ -6,7 +6,7 @@ import GSILabs.BModel.SesionUsuario;
  *
  * @author javie
  */
-public class MenuAdministrador extends javax.swing.JFrame {
+public class MenuPropietario extends javax.swing.JFrame {
     
     /**
      * Almacena datos de la sesión de un usuario en la aplicación.
@@ -18,7 +18,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
      * @param sesionUsuario Sesión del usuario con la que se está utilizando la
      * aplicación.
      */
-    public MenuAdministrador(SesionUsuario sesionUsuario) {
+    public MenuPropietario(SesionUsuario sesionUsuario) {
         initComponents();
         this.sesionUsuario = sesionUsuario;
         super.setVisible(true);

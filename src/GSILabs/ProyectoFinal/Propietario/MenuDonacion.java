@@ -23,7 +23,7 @@ public class MenuDonacion extends javax.swing.JFrame {
         this.sesionUsuario = sesionUsuario;
     }
 
-    MenuDonacion(MenuAdministrador aThis) {
+    MenuDonacion(MenuPropietario aThis) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
