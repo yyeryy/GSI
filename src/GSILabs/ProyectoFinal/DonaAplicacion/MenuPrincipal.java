@@ -1,7 +1,7 @@
 package GSILabs.ProyectoFinal.DonaAplicacion;
 
-import GSILabs.ProyectoFinal.Login.CreacionNuevoUsuario;
 import GSILabs.ProyectoFinal.Login.Login;
+import GSILabs.ProyectoFinal.Login.RegistrarUsuario;
 
 /**
  * Clase MenuPrincipal
@@ -14,13 +14,11 @@ import GSILabs.ProyectoFinal.Login.Login;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
+/**
      * Constructor MenuPrincipal.
      */
     public MenuPrincipal() {
         initComponents();
-        super.setVisible(true);
-        super.setLocationRelativeTo(null);
     }
 
     /**
@@ -32,27 +30,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        btnIniciarSesion = new javax.swing.JButton();
-        btnNuevoPerfil = new javax.swing.JButton();
+        labelTitulo = new javax.swing.JLabel();
+        botonLogin = new javax.swing.JButton();
+        botonRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DonaAplicacion");
+        labelTitulo.setFont(new java.awt.Font("Helvetica Neue", 1, 48)); // NOI18N
+        labelTitulo.setText("DonaAplicación");
 
-        btnIniciarSesion.setText("Iniciar Sesión");
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        botonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        botonLogin.setText("Login");
+        botonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
+                botonLoginActionPerformed(evt);
             }
         });
 
-        btnNuevoPerfil.setText("Crear Nuevo Perfil");
-        btnNuevoPerfil.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistrarse.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        botonRegistrarse.setText("Registrarse");
+        botonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoPerfilActionPerformed(evt);
+                botonRegistrarseActionPerformed(evt);
             }
         });
 
@@ -61,46 +60,93 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnIniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNuevoPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(botonRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(labelTitulo)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnNuevoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(labelTitulo)
+                .addGap(47, 47, 47)
+                .addComponent(botonLogin)
+                .addGap(45, 45, 45)
+                .addComponent(botonRegistrarse)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        new Login();
+    /**
+     * Función ActionPerformed para el boton botonLogin mediante el que
+     * accedemos al JFrame Login con el que podremos logearnos en el sistema
+     * con nuestro usuario.
+     * @param evt Evento recibido por la función
+     */
+    private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
+        Login abrirLogin = new Login();
+        abrirLogin.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+    }//GEN-LAST:event_botonLoginActionPerformed
 
-    private void btnNuevoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPerfilActionPerformed
-        new CreacionNuevoUsuario();
+    /**
+     * Función ActionPerformed para el boton botonRegistrarse mediante el que
+     * accedemos al JFrame RegistrarUsuario con el que podremos crear un nuevo
+     * usuario.
+     * @param evt Evento recibido por la función
+     */
+    private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
+        RegistrarUsuario abrirRegistrarUsuario = new RegistrarUsuario();
+        abrirRegistrarUsuario.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnNuevoPerfilActionPerformed
+    }//GEN-LAST:event_botonRegistrarseActionPerformed
 
- 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuPrincipal().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnNuevoPerfil;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton botonLogin;
+    private javax.swing.JButton botonRegistrarse;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

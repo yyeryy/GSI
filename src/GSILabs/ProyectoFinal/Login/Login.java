@@ -1,21 +1,10 @@
 package GSILabs.ProyectoFinal.Login;
 
-import GSILabs.ProyectoFinal.Propietario.MenuAdministrador;
-import GSILabs.BModel.SesionUsuario;
-import GSILabs.ProyectoFinal.Cliente.MenuCliente;
-import java.awt.Image;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import GSILabs.ProyectoFinal.Login.RegistrarUsuario;
 import java.math.BigInteger;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * Clase Login
@@ -26,40 +15,21 @@ import javax.swing.ImageIcon;
  * @since 02.12.2023
  */
 public class Login extends javax.swing.JFrame {
-    
-    /**
-     * Almacena datos de la sesión de un usuario en la aplicación.
-     */
-    private SesionUsuario sesionUsuario = null;
-    
-    //Mensajes de error para los jdialog.
-    
-    /**
-     * Mensaje de error advirtiendo de que hay campos pendientes de rellenar.
-     */
-    static final String CAMPOS_SIN_RELLENAR = "Hay campos sin rellenar. Por favor, introduzca nombre y contraseña.";
-    
-    /**
-     * Mensaje de error advirtiendo de que no existe ningún usuario registrado con ese nombre.
-     */
-    static final String NOMBRE_USUARIO_NO_ESTA_REGISTRADO = "No existe usuario con este nombre. Por favor, introduzca el nombre de un usuario ya registrado.";
-    
-    /**
-     * Mensaje de error advirtiendo de que la contraseña del usuario no es correcta.
-     */
-    static final String CONTRASENA_NO_ES_CORRECTA = "La contraseña del usuario no es válida. Por favor, introduzca la contraseña correcta del usuario.";
 
     /**
      * Constructor Login.
      */
     public Login() {
         initComponents();
+        
+/*      PROBABLEMENTE BORRAR
         creacionDocumentoLogin();
         iniciarIcono();
         pfContrasena.setEchoChar('*');
 
         super.setVisible(true);
         super.setLocationRelativeTo(null);
+*/
     }
 
     /**
@@ -71,76 +41,55 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialogInformacion = new javax.swing.JDialog();
-        scrollPane1 = new java.awt.ScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ePaneInformacion = new javax.swing.JEditorPane();
-        btnAceptar = new javax.swing.JButton();
-        labTitulo = new javax.swing.JLabel();
-        labNombre = new javax.swing.JLabel();
-        labContrasena = new javax.swing.JLabel();
-        tfNombre = new javax.swing.JTextField();
-        btnSiguiente = new javax.swing.JButton();
-        pfContrasena = new javax.swing.JPasswordField();
-        labVisibilidadContrasena = new javax.swing.JLabel();
-
-        ePaneInformacion.setEditable(false);
-        jScrollPane1.setViewportView(ePaneInformacion);
-
-        scrollPane1.add(jScrollPane1);
-
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jDialogInformacionLayout = new javax.swing.GroupLayout(jDialogInformacion.getContentPane());
-        jDialogInformacion.getContentPane().setLayout(jDialogInformacionLayout);
-        jDialogInformacionLayout.setHorizontalGroup(
-            jDialogInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogInformacionLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogInformacionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
-                .addGap(241, 241, 241))
-        );
-        jDialogInformacionLayout.setVerticalGroup(
-            jDialogInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogInformacionLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(btnAceptar)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        UsuarioLogin = new javax.swing.JTextField();
+        botonLogin = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
+        ContrasenaLogin = new javax.swing.JPasswordField();
+        mostrarContraseña = new javax.swing.JCheckBox();
+        botonRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        labTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labTitulo.setText("Login");
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setText("Login");
 
-        labNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labNombre.setText("Nombre de Usuario:");
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Usuario:");
 
-        labContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labContrasena.setText("Contraseña:");
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel3.setText("Contraseña:");
 
-        btnSiguiente.setText("Siguiente");
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        botonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonLogin.setText("Login");
+        botonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
+                botonLoginActionPerformed(evt);
             }
         });
 
-        labVisibilidadContrasena.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labVisibilidadContrasenaMouseClicked(evt);
+        botonSalir.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+
+        mostrarContraseña.setText("Mostrar Contraseña");
+        mostrarContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarContraseñaActionPerformed(evt);
+            }
+        });
+
+        botonRegistrarse.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonRegistrarse.setText("Registrarse");
+        botonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarseActionPerformed(evt);
             }
         });
 
@@ -151,59 +100,82 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                                .addComponent(labContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(botonSalir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addComponent(botonRegistrarse)
+                                .addGap(52, 52, 52)
+                                .addComponent(botonLogin))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(pfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labVisibilidadContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(mostrarContraseña))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(UsuarioLogin)
+                                    .addComponent(ContrasenaLogin)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(labTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(btnSiguiente)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel1)))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(labTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(UsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ContrasenaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(labNombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(labContrasena)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labVisibilidadContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pfContrasena))
-                .addGap(39, 39, 39)
-                .addComponent(btnSiguiente)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(mostrarContraseña)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonSalir)
+                    .addComponent(botonRegistrarse)
+                    .addComponent(botonLogin))
+                .addGap(30, 30, 30))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Función ActionPerformed para el boton btnSiguiente en la que en primer
+     * Función ActionPerformed para el boton botonLogin en la que en primer
      * lugar comprobamos si todos los campos están rellenados;
-     * En segundo lugar si el login es correcto comprobamos si el usuario tiene 
+     * En segundo lugar, si el login es correcto comprobamos si el usuario tiene 
      * condición de cliente o de administrador, en función de ello se le redigirá 
-     * a una ventana u otra. En caso contrario se muestra un jDialog de error.
+     * a una ventana u otra. En caso contrario se muestra un JOptionPane de error.
      * @param evt Evento recibido por la función
      */
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        if(!estanTodosLosCamposRellenados()) {
-            mostrarVentana(CAMPOS_SIN_RELLENAR);
-        } else if(esLoginCorrecto()) {
+    private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
+        System.out.println("Boton login pulsado");
+        //Si ambos campos están sin rellenar
+        if(UsuarioLogin.getText().equals("") && ContrasenaLogin.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario y una contraseña.");
+        //Si el campo nombre de usuario está sin rellenar
+        } else if(UsuarioLogin.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario.");
+        //Si el campo contraseña está sin rellenar
+        } else if(ContrasenaLogin.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una contraseña.");
+        //Si el login se ha realizado correctamente
+        } else if(esLoginCorrecto()) { //MODIFICAR esLoginCorrecto
+            
+            //Buscar en la base de datos que los datos coincidan y hacer el login.
+            
+/*          HACER ESTA COMPROBACIÓN PARA ENTRAR AL CLIENTE O AL ADMINISTRADOR (MODIFICAR CÓDIGO)
             //Si el usuario que intenta hacer el login es Cliente
             if(sesionUsuario.getTipoUsuario().equals("Cliente")) {
                 new MenuCliente(sesionUsuario);
@@ -218,44 +190,47 @@ public class Login extends javax.swing.JFrame {
             else {
                 System.out.println("Error. El usuario no es ni cliente ni administrador");
             }
+*/
+        //El login no se ha realizado correctamente
         } else {
-            mostrarVentana(obtenerMensajeDeTipoDeError());
+            System.out.println("El login es incorrecto.");
         }
-    }//GEN-LAST:event_btnSiguienteActionPerformed
+    }//GEN-LAST:event_botonLoginActionPerformed
 
     /**
-     * Función MouseClicked para el JLabel labVisibilidadContrasena en la que
-     * al pulsar el jLabel cambiamos la condición actual tanto del propio JLabel
-     * como del PasswordTextField;
-     * Si las letras del passwordText se veían ocultas tras puntos al pulsar se
-     * podrán observar las letras ocultas, además de cambiar la imagen del JLabel
-     * En caso contrario se ocultarán las letras con puntos y también cambiará
-     * la imagen del JLabel.
-     * @param evt Evento recibido por la función.
-     */
-    private void labVisibilidadContrasenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labVisibilidadContrasenaMouseClicked
-        if(pfContrasena.getEchoChar() == '*'){
-            pfContrasena.setEchoChar((char)0);
-            Image imgIcon = new ImageIcon("Imagenes\\Ojo.png").getImage();
-            ImageIcon imgEscalada = new ImageIcon(imgIcon.getScaledInstance(labVisibilidadContrasena.getWidth(), labVisibilidadContrasena.getHeight(), Image.SCALE_SMOOTH));
-            labVisibilidadContrasena.setIcon(imgEscalada);
-        }else{
-            pfContrasena.setEchoChar('*');
-            Image imgIcon = new ImageIcon("Imagenes\\OjoTachado.png").getImage();
-            ImageIcon imgEscalada = new ImageIcon(imgIcon.getScaledInstance(labVisibilidadContrasena.getWidth(), labVisibilidadContrasena.getHeight(), Image.SCALE_SMOOTH));
-            labVisibilidadContrasena.setIcon(imgEscalada);
-        }
-    }//GEN-LAST:event_labVisibilidadContrasenaMouseClicked
-
-    /**
-     * Función ActionPerformed para el boton btnAceptar del JDialog en la que
-     * se cierra la ventana JDialogInformacion al pulsar el boton.
+     * Función ActionPerformed para el JCheckBox mostrarContraseña, que al 
+     * pulsarlo podemos visualizar la contraseña, y al volverlo a pulsar
+     * se vuelve a ocultar la contraseña mediante puntos.
      * @param evt Evento recibido por la función
      */
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        jDialogInformacion.dispose();
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    private void mostrarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraseñaActionPerformed
+        if(mostrarContraseña.isSelected()){
+            ContrasenaLogin.setEchoChar((char)0);
+        } else {
+            ContrasenaLogin.setEchoChar('*');
+        }
+    }//GEN-LAST:event_mostrarContraseñaActionPerformed
 
+    /**
+     * Función ActionPerformed para el JButton botonSalir, mediante el que se
+     * sale del programa al pulsarlo.
+     * @param evt Evento recibido por la función
+     */
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        System.exit(0);
+        //jDialogInformacion.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
+    /**
+     * Función ActionPerformed para el JButton botonRegistrarse, mediante el que
+     * se accede al JFrame RegistrarUsuario donde podremos crear un nuevo usuario.
+     * @param evt Evento recibido por la función
+     */
+    private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
+        RegistrarUsuario abrirRegistrarUsuario = new RegistrarUsuario();
+        abrirRegistrarUsuario.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonRegistrarseActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -290,26 +265,24 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnSiguiente;
-    private javax.swing.JEditorPane ePaneInformacion;
-    private javax.swing.JDialog jDialogInformacion;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labContrasena;
-    private javax.swing.JLabel labNombre;
-    private javax.swing.JLabel labTitulo;
-    private javax.swing.JLabel labVisibilidadContrasena;
-    private javax.swing.JPasswordField pfContrasena;
-    private java.awt.ScrollPane scrollPane1;
-    private javax.swing.JTextField tfNombre;
+    private javax.swing.JPasswordField ContrasenaLogin;
+    private javax.swing.JTextField UsuarioLogin;
+    private javax.swing.JButton botonLogin;
+    private javax.swing.JButton botonRegistrarse;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JCheckBox mostrarContraseña;
     // End of variables declaration//GEN-END:variables
 
-    /**
+    /** PROBABLEMENTE NO HAGA FALTA
      * Creación inicial del documento claves.txt, en el que ya tiene creado un 
      * usuario con condición de administrador con las siguientes credenciales:
      * Nombre: admin
      * Contrasena: admin.
      */
+/*
     private void creacionDocumentoLogin() {
         try {
             File archivoClaves = new File(System.getProperty("user.dir") + "\\claves.txt");
@@ -323,19 +296,9 @@ public class Login extends javax.swing.JFrame {
             System.out.println("Error en la creación del documento de claves.");
         }
     }
-
-    /**
-     * Establecimiento de la imagen del ojo tachado en el JLabel labVisibilidadContrasena.
-     */
-    private void iniciarIcono(){
-        //Inicializamos el icono de visibilidad para contraseña y confirmar contraseña
-        Image imgIcon = new ImageIcon("Imagenes\\OjoTachado.png").getImage();
-        ImageIcon imgEscalada = new ImageIcon(imgIcon.getScaledInstance(labVisibilidadContrasena.getWidth(), labVisibilidadContrasena.getHeight(), Image.SCALE_SMOOTH));
-        labVisibilidadContrasena.setIcon(imgEscalada);
-
-    }
+*/
     
-    /**
+    /** PROBABLEMENTE NO HAGA FALTA
      * Inserción de cuenta inicial con las siguientes credenciales:
      * Nombre: admin
      * Contrasena: admin
@@ -346,6 +309,7 @@ public class Login extends javax.swing.JFrame {
      * @throws IOException Exception lanzada al encontrar un error en el manejo
      * de ficheros
      */
+/*
     private void insertarCuentaAdministradorPorDefecto(File archivoLogin) throws IOException {
         String textoAEscribir = "";
         try (FileWriter miEscritor = new FileWriter(archivoLogin)) {
@@ -355,29 +319,31 @@ public class Login extends javax.swing.JFrame {
             System.out.println("Error con FileWriter.");
         }
     }
-
-    /**
+*/
+    /** PROBABLEMENTE NO HAGA FALTA
      * Muestra de un JDialog en el que se muestra el texto del error ocurrido.
      * @param texto Texto del error ocurrido en el transcurso de la aplicación.
      */
+/*
     public void mostrarVentana(String texto) {
         ePaneInformacion.setText(texto);
         jDialogInformacion.setSize(500, 250);
         jDialogInformacion.setLocationRelativeTo(null);
         jDialogInformacion.setVisible(true);
     }
-
-    /**
+*/
+    /** PROBABLEMENTE NO HAGA FALTA
      * Comprobación de si todos los campos de la ventana de Login están cumplimentadas.
      * @return Booleano. True si están todos los campos rellenados y False en caso contrario.
      */
+/*
     private boolean estanTodosLosCamposRellenados() {
         if(this.tfNombre.getText().isEmpty() || this.pfContrasena.getText().isEmpty())
             return false;
         return true;
     }
-
-    /**
+*/
+    /** PROBABLEMENTE NO HAGA FALTA
      * Comprobación de si los datos introducidos en la ventana de login 
      * corresponden con los datos de un usuario previamente registrado y si la 
      * contraseña introducida corresponde con el usuario introducido.
@@ -385,6 +351,10 @@ public class Login extends javax.swing.JFrame {
      * los de un usuario previamente registrado y si la contraseña corresponde
      * con el usuario. False en caso contrario.
      */
+    private boolean esLoginCorrecto() { //MODIFICAR COMPROBANDO
+        return true;
+    }
+/*
     private boolean esLoginCorrecto() {
         List<String> contenidoFicheroClaves;
         try {
@@ -403,15 +373,17 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GSILabs.ProyectoFinal.Login.Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
-    /**
+*/
+    
+    /** PROBABLEMENTE NO HARÁ FALTA
      * Obtención del mensaje de error ocurrido.
      * @return Texto del mensaje de error ocurrido.
      */
+/*
     private String obtenerMensajeDeTipoDeError() {
         List<String> contenidoFicheroClaves;
         try {
@@ -425,12 +397,15 @@ public class Login extends javax.swing.JFrame {
                     return CONTRASENA_NO_ES_CORRECTA;
             }
         } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GSILabs.ProyectoFinal.Login.Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
-
-    /**
+*/
+    
+    
+    
+    /** HACE FALTA SI O SI
      * Cifrado de la cadena introducida mediante el algoritmo de hash MD5.
      * @param input Cadena que se va a cifrar.
      * @return Cadena de texto cifrada con algoritmo de hash MD5.
