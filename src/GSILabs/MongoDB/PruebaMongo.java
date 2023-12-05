@@ -1,4 +1,5 @@
 package GSILabs.MongoDB;
+import GSILabs.BModel.Direccion;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
@@ -10,69 +11,80 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 public class PruebaMongo {
+    private static com.mongodb.client.MongoClient mongoClient;
+    private static final String DATABASE_NAME = "GSI";
+    
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String username = URLEncoder.encode("GSI", "UTF-8");
-        String password = URLEncoder.encode("G3GSI2023", "UTF-8");
-        String cluster = "gsi.lvvnusj.mongodb.net/";
-        String connectionString = "mongodb+srv://" + username + ":" + password + "@" + cluster +"?retryWrites=true&w=majority";
-        MongoClientSettings settings = MongoClientSettings.builder()
-                .applyConnectionString(new ConnectionString(connectionString))
-                .build();
-        // Create a new client and connect to the server
-        try (MongoClient mongoClient = MongoClients.create(settings)) {
-            try {
-                // Send a ping to confirm a successful connection
-                MongoDatabase database = mongoClient.getDatabase("GSI");
-                database.runCommand(new Document("ping", 1));
-                System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
-                
-                // OPERACIONES //
-                // Crear coleccion usuario
-                MongoCollection<Document> usuariosCollection = database.getCollection("usuarios");
-                
-                // Insertar usuario
-                Document usuario = new Document("_id", 1)
-                    .append("nombre", "John Doe")
-                    .append("edad", 30)
-                    .append("correo", "john.doe@example.com");
-                usuariosCollection.insertOne(usuario);
-                
-                // Crear coleccion tareas
-                MongoCollection<Document> tareasCollection = database.getCollection("tareas");
-                
-                // Insertar una tarea asociada al usuario con ID 1
-                Document tarea = new Document("_id", 1)
-                    .append("descripcion", "Hacer la compra")
-                    .append("fecha", "2023-01-15")
-                    .append("usuario_id", 1);
-                tareasCollection.insertOne(tarea);
-                
-                // Consultar todos los usuarios
-                FindIterable<Document> usuarios = usuariosCollection.find();
-                MongoCursor<Document> usuariosCursor = usuarios.iterator();
-                
-                // Imprimir resultados de usuarios
-                System.out.println("Usuarios:");
-                while (usuariosCursor.hasNext()) {
-                    Document usuarioResult = usuariosCursor.next();
-                    System.out.println(usuarioResult.toJson());
-                }
-
-                // Consultar todas las tareas
-                FindIterable<Document> tareas = tareasCollection.find();
-                MongoCursor<Document> tareasCursor = tareas.iterator();
-
-                // Imprimir resultados de tareas
-                System.out.println("Tareas:");
-                while (tareasCursor.hasNext()) {
-                    Document tareaResult = tareasCursor.next();
-                    System.out.println(tareaResult.toJson());
-                }
-            } catch (MongoException e) {
-                e.printStackTrace();
-            }
+        Direccion direccion = new Direccion("Pamplona","Navarra","Calle Mayor",1);
+        añadirDireccion(direccion);
+        mostrarDirecciones();
+        obtenerDirecciones();
+    }
+    
+    public static boolean añadirDireccion(Direccion direccion){
+        try{
+            // Obtener la base de datos
+            MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+            MongoDatabase database = MongoDBSingleton.getDatabase();
+            // Crear la coleccion si no existe
+            MongoCollection<Document> direccionCollection = database.getCollection("direccion");
+            // Insertar direccion
+            Document documentDireccion = new Document("_id_direccion", 1)
+                .append("localidad",direccion.getLocalidad())
+                .append("provincia",direccion.getProvincia())
+                .append("calle",direccion.getCalle())
+                .append("numero", direccion.getNumero());
+            direccionCollection.insertOne(documentDireccion);
+            return true;
         }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static List<Direccion> obtenerDirecciones()
+    {
+        // Obtener la base de datos
+            MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+            MongoDatabase database = MongoDBSingleton.getDatabase();
+            // Crear la coleccion si no existe
+            MongoCollection<Document> direccionCollection = database.getCollection("direccion");
+            // Consulto los datos introducidos
+            FindIterable<Document> BBDDdirecciones = direccionCollection.find();
+            MongoCursor<Document> direccionCursor = BBDDdirecciones.iterator();
+            // almceno las direcciones
+            List<Direccion> direcciones = new ArrayList<>();
+            while (direccionCursor.hasNext()) {
+                Document direccionResult = direccionCursor.next();
+                String localidad = (String) direccionResult.get("localidad");
+                String provincia = (String) direccionResult.get("provincia");
+                String calle = (String) direccionResult.get("localidad");
+                Integer numero = (Integer) direccionResult.get("numero");
+                Direccion direccion = new Direccion(localidad,provincia,calle,numero);
+                direcciones.add(direccion);
+            }
+            System.out.println(direcciones.toString());
+            return direcciones;
+    }
+    public static void mostrarDirecciones()
+    {
+        // Obtener la base de datos
+            MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+            MongoDatabase database = MongoDBSingleton.getDatabase();
+            // Crear la coleccion si no existe
+            MongoCollection<Document> direccionCollection = database.getCollection("direccion");
+            // Consulto los datos introducidos
+            FindIterable<Document> BBDDdirecciones = direccionCollection.find();
+            MongoCursor<Document> direccionCursor = BBDDdirecciones.iterator();
+            // Muestro las direcciones
+            System.out.println("Direcciones:");
+            while (direccionCursor.hasNext()) {
+                Document direccionResult = direccionCursor.next();
+                System.out.println(direccionResult);
+            }
     }
 }
