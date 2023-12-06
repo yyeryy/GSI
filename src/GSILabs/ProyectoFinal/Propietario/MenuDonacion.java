@@ -20,6 +20,9 @@ public class MenuDonacion extends javax.swing.JFrame {
     public MenuDonacion(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
 
     MenuDonacion(MenuPropietario aThis) {
@@ -114,7 +117,7 @@ public class MenuDonacion extends javax.swing.JFrame {
     private void botonDonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDonarActionPerformed
         String comida = this.textFieldComida.getText();
         int numComida = (int)this.spinnerUnidades.getValue();
-        System.out.println(comida+": "+numComida);
+        System.out.println(comida + ": " + numComida);
         //añadirComida(listaComida, comida, numComida); habria que crear una funcion que hiciera algo asi conectando a la BBDD
         this.dispose();
     }//GEN-LAST:event_botonDonarActionPerformed

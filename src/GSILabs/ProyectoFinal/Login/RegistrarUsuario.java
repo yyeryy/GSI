@@ -27,6 +27,9 @@ public class RegistrarUsuario extends javax.swing.JFrame {
      */
     public RegistrarUsuario() {
         initComponents();
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
 
     /**
@@ -223,7 +226,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                 //Rellenamos campos para la creación de cliente
                 String nombreCliente = this.tfNombre.getText();
                 String contrasenaCliente = Arrays.toString(this.tfContrasena.getPassword()); //Comprobar que lo devuelve bien
-                Cliente cliente = new Cliente(nombreCliente, contrasenaCliente, null);
+                Cliente cliente = new Cliente(nombreCliente, contrasenaCliente, LocalDate.of(2001, 6, 12));
                 
                 MenuCliente abrirMenuCliente = new MenuCliente(usuario);
                 this.setVisible(false);

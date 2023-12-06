@@ -121,6 +121,7 @@ public class MenuPropietario extends javax.swing.JFrame {
 
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
     private void botonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPerfilActionPerformed
@@ -139,7 +140,7 @@ public class MenuPropietario extends javax.swing.JFrame {
 
     private void botonHistorialDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialDonacionesActionPerformed
         MenuHistorialDonaciones historialDonaciones = new MenuHistorialDonaciones(this.usuario);
-        this.setVisible(false);
+        //this.setVisible(false);
         historialDonaciones.setVisible(true);
     }//GEN-LAST:event_botonHistorialDonacionesActionPerformed
 

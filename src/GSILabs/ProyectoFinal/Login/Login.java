@@ -29,6 +29,9 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
+        
 /*      PROBABLEMENTE BORRAR
         creacionDocumentoLogin();
         iniciarIcono();

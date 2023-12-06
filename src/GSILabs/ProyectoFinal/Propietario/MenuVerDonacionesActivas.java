@@ -32,6 +32,9 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         }
         
         this.usuario = usuario;
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
     
     public String devuelveComida(String comida){

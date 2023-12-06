@@ -31,6 +31,9 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         }
         
         this.usuario = usuario;
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
 
     /**

@@ -24,6 +24,9 @@ public class DetallesDonacion extends javax.swing.JFrame {
         this.textoLocal.setEditable(false);
         this.textoFecha.setEditable(false);
         this.usuario = usuario;
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
     
     /**

@@ -24,6 +24,9 @@ public class MenuCliente extends javax.swing.JFrame {
     public MenuCliente(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
 
     /**
