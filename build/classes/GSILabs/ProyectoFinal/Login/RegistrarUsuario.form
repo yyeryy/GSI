@@ -145,8 +145,14 @@
     <Component class="javax.swing.JPasswordField" name="tfContrasena">
     </Component>
     <Component class="javax.swing.JPasswordField" name="tfConfirmacionContrasena">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfConfirmacionContrasenaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfNombre">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNombreActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonCrearCuenta">
       <Properties>

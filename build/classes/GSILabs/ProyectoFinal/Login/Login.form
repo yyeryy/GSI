@@ -115,6 +115,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="UsuarioLogin">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsuarioLoginActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonLogin">
       <Properties>

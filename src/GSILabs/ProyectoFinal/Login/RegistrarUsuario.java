@@ -3,6 +3,11 @@ package GSILabs.ProyectoFinal.Login;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Usuario;
+import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
+import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
+import GSILabs.BSystem.BusinessSystem;
+import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import javax.swing.JOptionPane;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
 import java.time.LocalDate;
@@ -68,6 +73,18 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
         labConfirmacionContrasena.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         labConfirmacionContrasena.setText("Confirmación contraseña:");
+
+        tfConfirmacionContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfConfirmacionContrasenaActionPerformed(evt);
+            }
+        });
+
+        tfNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNombreActionPerformed(evt);
+            }
+        });
 
         botonCrearCuenta.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         botonCrearCuenta.setText("Crear Cuenta");
@@ -217,9 +234,28 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         } else if(!tfContrasena.getText().equals(tfConfirmacionContrasena.getText())){
             JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes, ponga 2 iguales.");
         } else {
-            System.out.println("Comprobación de la creacion de la cuenta");
-            //Hacer aqui la comprobación en la base de datos si el usuario no existe 
-            //ya y que se crea correctamente.
+            // Obtener datos usuario
+            String nick = tfNombre.getText();
+            String contrasena = tfContrasena.getText();
+            String tipoStr = (String) cBoxTipoUsuario.getSelectedItem();
+            // Añadir usuario
+            Usuario nuevoUsuario;
+            if(tipoStr.equals("Cliente"))
+                nuevoUsuario = new Usuario(nick,contrasena, LocalDate.of(2000,1,1), CLIENTE);
+            else
+                nuevoUsuario = new Usuario(nick,contrasena, LocalDate.of(2000,1,1), PROPIETARIO);
+            // Descargar BS
+            BusinessSystem bs = DescargarDatos();
+            // Comprobar si existe el usuario
+            if(bs.obtenerUsuario(nick) != null){
+                System.out.println("Este usuario ya esta en uso.");
+                return;
+            }
+            // Añado el nuevo usuario
+            bs.nuevoUsuario(nuevoUsuario);
+            
+            // Añadir a la base de datos
+            CargarDatos(bs);
             
             //Si no hay ningún error al crear
             if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Cliente")) {
@@ -228,7 +264,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                 String contrasenaCliente = Arrays.toString(this.tfContrasena.getPassword()); //Comprobar que lo devuelve bien
                 Cliente cliente = new Cliente(nombreCliente, contrasenaCliente, LocalDate.of(2001, 6, 12));
                 
-                MenuCliente abrirMenuCliente = new MenuCliente(usuario);
+                MenuCliente abrirMenuCliente = new MenuCliente(nuevoUsuario);
                 this.setVisible(false);
                 
             } else if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Propietario")) {
@@ -264,6 +300,14 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         abrirLogin.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonLoginActionPerformed
+
+    private void tfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNombreActionPerformed
+
+    private void tfConfirmacionContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfConfirmacionContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfConfirmacionContrasenaActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
