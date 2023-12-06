@@ -1,6 +1,8 @@
 package GSILabs.ProyectoFinal.Login;
 
 import GSILabs.BModel.Usuario;
+import GSILabs.BSystem.BusinessSystem;
+import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import java.math.BigInteger;
@@ -71,6 +73,12 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
+
+        UsuarioLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsuarioLoginActionPerformed(evt);
+            }
+        });
 
         botonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         botonLogin.setText("Login");
@@ -242,6 +250,10 @@ public class Login extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_botonRegistrarseActionPerformed
 
+    private void UsuarioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsuarioLoginActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField ContrasenaLogin;
@@ -331,7 +343,20 @@ public class Login extends javax.swing.JFrame {
      * con el usuario. False en caso contrario.
      */
     private boolean esLoginCorrecto() { //MODIFICAR COMPROBANDO
-        //Si el login es correcto --> Hacer this.usuario = (Introducir los datos del usuario desde la base de datos).
+        // Obtener datos usuario
+        String nick = UsuarioLogin.getText();
+        String contrasena = ContrasenaLogin.getText();
+        // Descargar BS
+        BusinessSystem bs = DescargarDatos();
+        // Comprobar contraseña
+        Usuario usuarioLogin = bs.obtenerUsuario(nick);
+        if(usuarioLogin == null){
+            System.out.println("Este usuario no existe");
+            return false;}
+        if(!usuarioLogin.getContraseña().equals(contrasena)){
+            System.out.println("Contraseña incorrecta");
+            return false;}
+        this.usuario = usuarioLogin;
         return true;
     }
 /*
