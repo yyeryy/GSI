@@ -112,6 +112,15 @@ public class Usuario implements XMLRepresentable, Serializable{
 	return tipo;
     }
     
+    public String getStringTipo() {
+        if(this.tipo == tipoUsuario.CLIENTE) {
+            return "Cliente";
+        } else if(this.tipo == tipoUsuario.PROPIETARIO) {
+            return "Propietario";
+        }
+        return "";
+    }
+    
     public void setTipo(tipoUsuario tipo) {
 	this.tipo = tipo;
     }

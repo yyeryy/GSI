@@ -1,5 +1,8 @@
 package GSILabs.ProyectoFinal.Login;
 
+import GSILabs.BModel.Usuario;
+import GSILabs.ProyectoFinal.Cliente.MenuCliente;
+import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,6 +17,11 @@ import javax.swing.JOptionPane;
  * @since 02.12.2023
  */
 public class Login extends javax.swing.JFrame {
+    
+    /**
+     * Usuario que está intentando hacer login.
+     */
+    private Usuario usuario = null;
 
     /**
      * Constructor Login.
@@ -174,22 +182,22 @@ public class Login extends javax.swing.JFrame {
             
             //Buscar en la base de datos que los datos coincidan y hacer el login.
             
-/*          HACER ESTA COMPROBACIÓN PARA ENTRAR AL CLIENTE O AL ADMINISTRADOR (MODIFICAR CÓDIGO)
+            //HACER ESTA COMPROBACIÓN PARA ENTRAR AL CLIENTE O AL ADMINISTRADOR (MODIFICAR CÓDIGO)
             //Si el usuario que intenta hacer el login es Cliente
-            if(sesionUsuario.getTipoUsuario().equals("Cliente")) {
-                new MenuCliente(sesionUsuario);
+            if(usuario.getStringTipo().equals("Cliente")) {
+                MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
                 this.setVisible(false);
             }
             //Si el usuario que intenta hacer el login es Cliente
-            else if(sesionUsuario.getTipoUsuario().equals("Administrador")) {
-                new MenuAdministrador(sesionUsuario);
+            else if(usuario.getStringTipo().equals("Propietario")) {
+                MenuPropietario abrirMenuPropietario = new MenuPropietario(this.usuario);
                 this.setVisible(false);
             }
             //Si no es ninguna de las anteriores
             else {
-                System.out.println("Error. El usuario no es ni cliente ni administrador");
+                System.out.println("Error. El usuario no es ni cliente ni propietario");
             }
-*/
+            
         //El login no se ha realizado correctamente
         } else {
             System.out.println("El login es incorrecto.");
@@ -320,6 +328,7 @@ public class Login extends javax.swing.JFrame {
      * con el usuario. False en caso contrario.
      */
     private boolean esLoginCorrecto() { //MODIFICAR COMPROBANDO
+        //Si el login es correcto --> Hacer this.usuario = (Introducir los datos del usuario desde la base de datos).
         return true;
     }
 /*

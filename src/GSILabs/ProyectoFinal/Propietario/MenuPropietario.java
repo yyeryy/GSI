@@ -1,6 +1,6 @@
 package GSILabs.ProyectoFinal.Propietario;
 
-import GSILabs.BModel.SesionUsuario;
+import GSILabs.BModel.Usuario;
 
 /**
  *
@@ -9,18 +9,17 @@ import GSILabs.BModel.SesionUsuario;
 public class MenuPropietario extends javax.swing.JFrame {
     
     /**
-     * Almacena datos de la sesión de un usuario en la aplicación.
+     * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private static SesionUsuario sesionUsuario = null;
+    private Usuario usuario = null;
 
     /**
      * Constructor MenuAdministrador
-     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
-     * aplicación.
+     * @param usuario Usuario con el que se está utilizando la aplicación.
      */
-    public MenuPropietario(SesionUsuario sesionUsuario) {
+    public MenuPropietario(Usuario usuario) {
         initComponents();
-        this.sesionUsuario = sesionUsuario;
+        this.usuario = usuario;
         super.setVisible(true);
         super.setLocationRelativeTo(null);
     }
@@ -129,17 +128,17 @@ public class MenuPropietario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPerfilActionPerformed
 
     private void botonDonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDonarActionPerformed
-        MenuDonacion menuDonacion = new MenuDonacion(this);
-        menuDonacion.setVisible(true);
+       MenuDonacion menuDonacion = new MenuDonacion(usuario); //Habrá que meterle usuario también por parámetro? 
+       menuDonacion.setVisible(true);
     }//GEN-LAST:event_botonDonarActionPerformed
 
     private void botonCrearEliminarDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEliminarDonacionesActionPerformed
-        MenuVerDonacionesActivas donacionesActivas = new MenuVerDonacionesActivas(sesionUsuario);
+        MenuVerDonacionesActivas donacionesActivas = new MenuVerDonacionesActivas(this.usuario);
         donacionesActivas.setVisible(true);
     }//GEN-LAST:event_botonCrearEliminarDonacionesActionPerformed
 
     private void botonHistorialDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialDonacionesActionPerformed
-        MenuHistorialDonaciones historialDonaciones = new MenuHistorialDonaciones(sesionUsuario);
+        MenuHistorialDonaciones historialDonaciones = new MenuHistorialDonaciones(this.usuario);
         this.setVisible(false);
         historialDonaciones.setVisible(true);
     }//GEN-LAST:event_botonHistorialDonacionesActionPerformed

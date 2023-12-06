@@ -17,6 +17,11 @@ import java.io.Serializable;
  */
 public class Propietario extends Usuario implements XMLRepresentable, Serializable{
     
+    /**
+     * Local perteneciente al propietario.
+     */
+    private Local local = null;
+    
     public Propietario(){
         super(null, null, null, null);
     }
@@ -29,6 +34,11 @@ public class Propietario extends Usuario implements XMLRepresentable, Serializab
      */
     public Propietario(String n, String c, LocalDate f) {
         super(n, c, f, tipoUsuario.PROPIETARIO);
+        this.local = null;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
     }
     
     @Override

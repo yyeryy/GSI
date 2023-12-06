@@ -1,6 +1,12 @@
 package GSILabs.ProyectoFinal.Login;
 
+import GSILabs.BModel.Cliente;
+import GSILabs.BModel.Propietario;
+import GSILabs.BModel.Usuario;
 import javax.swing.JOptionPane;
+import GSILabs.ProyectoFinal.Cliente.MenuCliente;
+import java.time.LocalDate;
+import java.util.Arrays;
 
 /**
  * Clase RegistrarUsuario
@@ -10,9 +16,14 @@ import javax.swing.JOptionPane;
  * @since 02.12.2023
  */
 public class RegistrarUsuario extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos del usuario que se está registrando.
+     */
+    private Usuario usuario = null;
 
     /**
-     * Constructor RegistrarUsuario
+     * Constructor RegistrarUsuario.
      */
     public RegistrarUsuario() {
         initComponents();
@@ -38,6 +49,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         botonSalir = new javax.swing.JButton();
         mostrarContrasena = new javax.swing.JCheckBox();
         botonLogin = new javax.swing.JButton();
+        cBoxTipoUsuario = new javax.swing.JComboBox<>();
+        labConfirmacionContrasena1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +97,11 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             }
         });
 
+        cBoxTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Propietario" }));
+
+        labConfirmacionContrasena1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        labConfirmacionContrasena1.setText("Tipo de usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,19 +124,21 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelContrasena)
                                     .addComponent(labConfirmacionContrasena)
-                                    .addComponent(labelNombre))
+                                    .addComponent(labelNombre)
+                                    .addComponent(labConfirmacionContrasena1))
                                 .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(tfContrasena)
-                                    .addComponent(tfConfirmacionContrasena)))))
+                                    .addComponent(tfConfirmacionContrasena)
+                                    .addComponent(cBoxTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,13 +157,18 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labConfirmacionContrasena)
                     .addComponent(tfConfirmacionContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mostrarContrasena)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCrearCuenta)
-                    .addComponent(botonSalir)
-                    .addComponent(botonLogin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cBoxTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonCrearCuenta)
+                            .addComponent(botonSalir)
+                            .addComponent(botonLogin)))
+                    .addComponent(labConfirmacionContrasena1))
                 .addGap(24, 24, 24))
         );
 
@@ -192,6 +217,27 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             System.out.println("Comprobación de la creacion de la cuenta");
             //Hacer aqui la comprobación en la base de datos si el usuario no existe 
             //ya y que se crea correctamente.
+            
+            //Si no hay ningún error al crear
+            if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Cliente")) {
+                //Rellenamos campos para la creación de cliente
+                String nombreCliente = this.tfNombre.getText();
+                String contrasenaCliente = Arrays.toString(this.tfContrasena.getPassword()); //Comprobar que lo devuelve bien
+                Cliente cliente = new Cliente(nombreCliente, contrasenaCliente, null);
+                
+                MenuCliente abrirMenuCliente = new MenuCliente(usuario);
+                this.setVisible(false);
+                
+            } else if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Propietario")) {
+                //Rellenamos campos para la creación de propietario
+                String nombrePropietario = this.tfNombre.getText();
+                String contrasenaPropietario = Arrays.toString(this.tfContrasena.getPassword()); //Comprobar que lo devuelve bien
+                Propietario propietario = new Propietario(nombrePropietario, contrasenaPropietario, LocalDate.of(2001, 6, 12));
+                
+                //MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                EspecificacionesLocal abrirEspecificacionesLocal = new EspecificacionesLocal(propietario);
+                this.setVisible(false);
+            }
         }
     }//GEN-LAST:event_botonCrearCuentaActionPerformed
 
@@ -221,8 +267,10 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton botonCrearCuenta;
     private javax.swing.JButton botonLogin;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JComboBox<String> cBoxTipoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labConfirmacionContrasena;
+    private javax.swing.JLabel labConfirmacionContrasena1;
     private javax.swing.JLabel labelContrasena;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JCheckBox mostrarContrasena;

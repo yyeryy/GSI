@@ -1,6 +1,6 @@
 package GSILabs.ProyectoFinal.Propietario;
 
-import GSILabs.BModel.SesionUsuario;
+import GSILabs.BModel.Usuario;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,16 +14,15 @@ import javax.swing.DefaultListModel;
 public class MenuVerDonacionesActivas extends javax.swing.JFrame {
     
     /**
-     * Almacena datos de la sesión de un usuario en la aplicación.
+     * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private static SesionUsuario sesionUsuario = null;
+    private Usuario usuario = null;
 
     /**
      * Constructor MenuVerDonacionesActivas
-     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
-     * aplicación.
+     * @param usuario usuario con la que se está utilizando la aplicación.
      */
-    public MenuVerDonacionesActivas(SesionUsuario sesionUsuario) {
+    public MenuVerDonacionesActivas(Usuario usuario) {
         initComponents();
         List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
@@ -32,7 +31,7 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
             modelo.addElement(comida);
         }
         
-        this.sesionUsuario = sesionUsuario;
+        this.usuario = usuario;
     }
     
     public String devuelveComida(String comida){
@@ -132,9 +131,7 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -162,7 +159,7 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuVerDonacionesActivas(sesionUsuario).setVisible(true);
+                //new MenuVerDonacionesActivas(sesionUsuario).setVisible(true);
             }
         });
     }

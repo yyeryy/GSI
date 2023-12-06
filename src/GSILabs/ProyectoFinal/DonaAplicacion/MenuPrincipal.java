@@ -14,7 +14,7 @@ import GSILabs.ProyectoFinal.Login.RegistrarUsuario;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-/**
+    /**
      * Constructor MenuPrincipal.
      */
     public MenuPrincipal() {

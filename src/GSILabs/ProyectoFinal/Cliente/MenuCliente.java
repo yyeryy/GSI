@@ -1,6 +1,6 @@
 package GSILabs.ProyectoFinal.Cliente;
 
-import GSILabs.BModel.SesionUsuario;
+import GSILabs.BModel.Usuario;
 
 /**
  * Clase MenuCliente
@@ -13,18 +13,17 @@ import GSILabs.BModel.SesionUsuario;
 public class MenuCliente extends javax.swing.JFrame {
     
     /**
-     * Almacena datos de la sesión de un usuario en la aplicación.
+     * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private static SesionUsuario sesionUsuario = null;
+    private Usuario usuario = null;
 
     /**
      * Constructor MenuCliente
-     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
-     * aplicación.
+     * @param usuario Usuario con la que se está utilizando la aplicación.
      */
-    public MenuCliente(SesionUsuario sesionUsuario) {
+    public MenuCliente(Usuario usuario) {
         initComponents();
-        this.sesionUsuario = sesionUsuario;
+        this.usuario = usuario;
     }
 
     /**

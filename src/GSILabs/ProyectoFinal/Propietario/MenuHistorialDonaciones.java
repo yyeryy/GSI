@@ -1,6 +1,6 @@
 package GSILabs.ProyectoFinal.Propietario;
 
-import GSILabs.BModel.SesionUsuario;
+import GSILabs.BModel.Usuario;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,16 +13,15 @@ import javax.swing.DefaultListModel;
 public class MenuHistorialDonaciones extends javax.swing.JFrame {
     
     /**
-     * Almacena datos de la sesión de un usuario en la aplicación.
+     * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private static SesionUsuario sesionUsuario = null;
+    private Usuario usuario = null;
 
     /**
      * Constructor MenuHistorialDonaciones
-     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
-     * aplicación.
+     * @param usuario Usuario con la que se está utilizando la aplicación.
      */
-    public MenuHistorialDonaciones(SesionUsuario sesionUsuario) {
+    public MenuHistorialDonaciones(Usuario usuario) {
         initComponents();
         List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
@@ -31,7 +30,7 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
             modelo.addElement(comida);
         }
         
-        this.sesionUsuario = sesionUsuario;
+        this.usuario = usuario;
     }
 
     /**
@@ -149,7 +148,7 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuHistorialDonaciones(sesionUsuario).setVisible(true);
+                //new MenuHistorialDonaciones(sesionUsuario).setVisible(true);
             }
         });
     }

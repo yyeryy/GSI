@@ -1,5 +1,12 @@
 package GSILabs.ProyectoFinal.Login;
 
+import GSILabs.BModel.Bar;
+import GSILabs.BModel.Direccion;
+import GSILabs.BModel.Local;
+import GSILabs.BModel.Propietario;
+import GSILabs.BModel.Pub;
+import GSILabs.BModel.Restaurante;
+import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,12 +18,22 @@ import javax.swing.JOptionPane;
  * @since 05.12.2023
  */
 public class EspecificacionesLocal extends javax.swing.JFrame {
+    
+    /**
+     * Almacena datos del usuario que está utilizando la aplicación.
+     */
+    private Propietario propietario = null;
 
     /**
      * Constructor EspecificacionesLocal.
+     * @param propietario Propietario del local del cual se introducen los datos.
      */
-    public EspecificacionesLocal() {
+    public EspecificacionesLocal(Propietario propietario) {
         initComponents();
+        this.propietario = propietario;
+        
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +53,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         fieldDescripcion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        boxTipo = new javax.swing.JComboBox<>();
+        cBoxTipoLocal = new javax.swing.JComboBox<>();
         botonVolver = new javax.swing.JButton();
         botonConfirmar = new javax.swing.JButton();
 
@@ -53,10 +70,10 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
 
         jLabel5.setText("Tipo local");
 
-        boxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurante", "Bar", "Pub" }));
-        boxTipo.addActionListener(new java.awt.event.ActionListener() {
+        cBoxTipoLocal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurante", "Bar", "Pub" }));
+        cBoxTipoLocal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxTipoActionPerformed(evt);
+                cBoxTipoLocalActionPerformed(evt);
             }
         });
 
@@ -94,7 +111,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(boxTipo, 0, 479, Short.MAX_VALUE))
+                            .addComponent(cBoxTipoLocal, 0, 479, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
@@ -125,7 +142,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cBoxTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
@@ -139,10 +156,10 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Creo que no es necesario hacerlo aquí, habría que hacerlo al pulsar el botón confirmar.
-    private void boxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxTipoActionPerformed
+    private void cBoxTipoLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxTipoLocalActionPerformed
         //Hacer insert a la Base de Datos
         //Pasar vista a menu Propiertario
-    }//GEN-LAST:event_boxTipoActionPerformed
+    }//GEN-LAST:event_cBoxTipoLocalActionPerformed
 
     /**
      * Función ActionPerformed para el JButton botonVolver, mediante la que se
@@ -171,19 +188,41 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una direccion al local.");
         } else if(fieldDescripcion.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una descripcion al local.");
+        } else {
+            //Rellenamos atributos para clase Local
+            String nombreLocal = this.fieldNombre.getText();
+            Direccion direccion = null;
+            String descripcion = this.fieldDescripcion.getText();
+            
+            Local local = null;
+            if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Bar")) {
+                //tipo = tipoLocal.BAR;
+                local = new Bar(nombreLocal, direccion, descripcion, this.propietario);
+            } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Restaurante")) {
+                //tipo = tipoLocal.RESTAURANTE;
+                local = new Restaurante(nombreLocal, direccion, descripcion, this.propietario, 12.0, null, null);
+            } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Pub")) {
+                //tipo = tipoLocal.PUB;
+                local = new Pub(null, null, nombreLocal, direccion, descripcion, this.propietario);
+            }
+            
+            this.propietario.setLocal(local);
+            
+            MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+            this.setVisible(false);
         }
             
         System.out.println("Nombre" + fieldNombre.getText());
         System.out.println("Direccion" + fieldDireccion.getText());
         System.out.println("Descripcion" + fieldDescripcion.getText());
-        System.out.println("Tipo" + boxTipo.getItemAt(boxTipo.getSelectedIndex()));
+        System.out.println("Tipo" + cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex()));
     }//GEN-LAST:event_botonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConfirmar;
     private javax.swing.JButton botonVolver;
-    private javax.swing.JComboBox<String> boxTipo;
+    private javax.swing.JComboBox<String> cBoxTipoLocal;
     private javax.swing.JTextField fieldDescripcion;
     private javax.swing.JTextField fieldDireccion;
     private javax.swing.JTextField fieldNombre;

@@ -1,6 +1,6 @@
 package GSILabs.ProyectoFinal.Propietario;
 
-import GSILabs.BModel.SesionUsuario;
+import GSILabs.BModel.Usuario;
 
 /**
  *
@@ -9,18 +9,17 @@ import GSILabs.BModel.SesionUsuario;
 public class MenuDonacion extends javax.swing.JFrame {
     
     /**
-     * Almacena datos de la sesión de un usuario en la aplicación.
+     * Usuario mediante el que se está ejecutando el programa.
      */
-    private static SesionUsuario sesionUsuario = null;
+    private Usuario usuario = null;
 
     /**
      * Constructor MenuDonacion
-     * @param sesionUsuario Sesión del usuario con la que se está utilizando la
-     * aplicación.
+     * @param usuario Usuario con la que se está utilizando la aplicación.
      */
-    public MenuDonacion(SesionUsuario sesionUsuario) {
+    public MenuDonacion(Usuario usuario) {
         initComponents();
-        this.sesionUsuario = sesionUsuario;
+        this.usuario = usuario;
     }
 
     MenuDonacion(MenuPropietario aThis) {
@@ -150,7 +149,7 @@ public class MenuDonacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuDonacion(sesionUsuario).setVisible(true);
+                //new MenuDonacion(sesionUsuario).setVisible(true);
             }
         });
     }
