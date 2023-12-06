@@ -1,20 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.ProyectoFinal.Login;
 
-import GSILabs.ProyectoFinal.Login.RegistrarUsuario;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author yeray
+ * Clase EspecificacionesLocal
+ * Interfaz gráfica con la que un propietario que se está registrando introduce
+ * los datos de su local.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 05.12.2023
  */
 public class EspecificacionesLocal extends javax.swing.JFrame {
 
     /**
-     * Creates new form EspecificacionesLocal
+     * Constructor EspecificacionesLocal.
      */
     public EspecificacionesLocal() {
         initComponents();
@@ -38,37 +37,19 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         fieldDescripcion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         boxTipo = new javax.swing.JComboBox<>();
-        btnVolver = new javax.swing.JButton();
-        btnConfirmar = new javax.swing.JButton();
+        botonVolver = new javax.swing.JButton();
+        botonConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
         jLabel1.setText("Especificaciones Local");
 
-        fieldNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNombreActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Nombre del local");
 
         jLabel3.setText("Dirección del local");
 
-        fieldDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldDireccionActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Descripción");
-
-        fieldDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldDescripcionActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Tipo local");
 
@@ -79,17 +60,17 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
             }
         });
 
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+        botonVolver.setText("Volver");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+                botonVolverActionPerformed(evt);
             }
         });
 
-        btnConfirmar.setText("Confirmar");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        botonConfirmar.setText("Confirmar");
+        botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
+                botonConfirmarActionPerformed(evt);
             }
         });
 
@@ -117,9 +98,9 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
@@ -149,35 +130,41 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreActionPerformed
-    }//GEN-LAST:event_fieldNombreActionPerformed
-
-    private void fieldDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDireccionActionPerformed
-    }//GEN-LAST:event_fieldDireccionActionPerformed
-
-    private void fieldDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDescripcionActionPerformed
-    }//GEN-LAST:event_fieldDescripcionActionPerformed
-
+    //Creo que no es necesario hacerlo aquí, habría que hacerlo al pulsar el botón confirmar.
     private void boxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxTipoActionPerformed
         //Hacer insert a la Base de Datos
         //Pasar vista a menu Propiertario
     }//GEN-LAST:event_boxTipoActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    /**
+     * Función ActionPerformed para el JButton botonVolver, mediante la que se
+     * vuelve a la ventana de introducción de datos del propietario.
+     * @param evt Evento recibido por la función
+     */
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         RegistrarUsuario abrirRegistrarUsuario = new RegistrarUsuario();
         abrirRegistrarUsuario.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }//GEN-LAST:event_botonVolverActionPerformed
 
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+    /**
+     * Función ActionPerformed para el boton botonConfirmar en la que en primer
+     * lugar comprobamos si todos los campos están rellenados;
+     * En caso contrario se muestra un JOptionPane de error;
+     * Si se han introducido correctamente los datos entonces se crea el nuevo
+     * perfil de propietario con las especificaciones de local y se le redirige
+     * a la ventana MenuPropietario.
+     * @param evt Evento recibido por la función
+     */
+    private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         if(fieldNombre.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre al local.");
         } else if(fieldDireccion.getText().equals("")){
@@ -190,47 +177,13 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         System.out.println("Direccion" + fieldDireccion.getText());
         System.out.println("Descripcion" + fieldDescripcion.getText());
         System.out.println("Tipo" + boxTipo.getItemAt(boxTipo.getSelectedIndex()));
-    }//GEN-LAST:event_btnConfirmarActionPerformed
+    }//GEN-LAST:event_botonConfirmarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EspecificacionesLocal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EspecificacionesLocal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EspecificacionesLocal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EspecificacionesLocal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EspecificacionesLocal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonConfirmar;
+    private javax.swing.JButton botonVolver;
     private javax.swing.JComboBox<String> boxTipo;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JTextField fieldDescripcion;
     private javax.swing.JTextField fieldDireccion;
     private javax.swing.JTextField fieldNombre;

@@ -12,7 +12,7 @@ package GSILabs.ProyectoFinal.DonaAplicacion;
 public class DonaAplicacion {
 
     public static void main(String[] args) {
-        new MenuPrincipal();
+        MenuPrincipal abrirMenuPrincipal = new MenuPrincipal();
     }
     
 }
