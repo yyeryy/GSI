@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Random;
 /*
  * COMO VER LA BASE DE DATOS *
     *1: Descargar MongoDB Compass
@@ -30,6 +31,74 @@ public class PruebaMongo {
     
     // FERMIN: Añadir más cosas, cuando este terminado donaciones, meter tbn donaciones.
     public static BusinessSystem crearBS(){
+        BusinessSystem bs = new BusinessSystem();
+
+        Random random = new Random();
+        
+        // Creación de 100 direcciones
+        for (int i = 1; i <= 100; i++) {
+            Direccion direccion = new Direccion("Ciudad" + i, "Provincia" + i, "Calle" + i, i);
+            
+            Propietario propietario = new Propietario("Propietario" + i, "1234", LocalDate.now().minusYears(i));
+            bs.nuevoUsuario(propietario);
+            
+            Cliente cliente = new Cliente("Cliente" + i, "1234", LocalDate.now().minusYears(i));
+            bs.nuevoUsuario(cliente);
+            
+            if(i < 33){ // generamos bares
+                Bar bar = new Bar("Bar" + i, direccion, "Descripción del Bar" + i, propietario);
+                bar.agregarEspecialidad("Especialidad" + i);
+                bs.nuevoLocal(bar);
+                
+                Review review = new Review(random.nextInt(11),"Comentario "+i,LocalDate.now(),bs.obtenerLocal(bar.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
+                bs.nuevaReview(review);
+                
+                if (i % 2 == 0){
+                    Contestacion contestacion = new Contestacion("Comentario "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar);
+                    bs.nuevaContestacion(contestacion, review);
+                }
+                
+                if(i % 5 == 0){
+                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(bar.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+                }
+            }
+            else if((i > 33) && (i < 66)){ // generamos restaurantes
+                Restaurante restaurante = new Restaurante("Restaurante" + i, direccion, "Descripción del Restaurante" + i, propietario, 20, 100, 5);
+                bs.nuevoLocal(restaurante);
+                
+                Review review = new Review(random.nextInt(11),"Comentario "+i,LocalDate.now(),bs.obtenerLocal(restaurante.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
+                bs.nuevaReview(review);
+                
+                if (i % 2 == 0){
+                    Contestacion contestacion = new Contestacion("Comentario "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),restaurante);
+                    bs.nuevaContestacion(contestacion, review);
+                }
+                
+                if(i % 5 == 0){
+                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(bar.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+                }
+            }
+            else{ // generamos pubs
+                Pub pub = new Pub("10:00", "2:00", "Pub" + i, direccion, "Descripción del Pub" + i, propietario);
+                bs.nuevoLocal(pub);
+                
+                Review review = new Review(random.nextInt(11),"Comentario "+i,LocalDate.now(),bs.obtenerLocal(pub.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
+                bs.nuevaReview(review);
+                
+                if (i % 2 == 0){
+                    Contestacion contestacion = new Contestacion("Comentario "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub);
+                    bs.nuevaContestacion(contestacion, review);
+                }
+                
+                if(i % 5 == 0){
+                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(bar.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+                }
+            }
+        }
+
+        return bs;
+    }
+    public static BusinessSystem crearBS2(){
         Direccion direccion1 = new Direccion("Pamplona","Navarra","Calle Mayor",1);
         Direccion direccion2 = new Direccion("Pamplona","Navarra","Calle Amaya",2);
         Direccion direccion3 = new Direccion("Pamplona","Navarra","Avenida Cataluña",3);
