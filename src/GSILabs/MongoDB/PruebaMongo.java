@@ -39,10 +39,10 @@ public class PruebaMongo {
         for (int i = 1; i <= 100; i++) {
             Direccion direccion = new Direccion("Ciudad" + i, "Provincia" + i, "Calle" + i, i);
             
-            Propietario propietario = new Propietario("Propietario" + i, "1234", LocalDate.now().minusYears(i));
+            Propietario propietario = new Propietario("Propietario" + i, "1234", LocalDate.now().minusYears(20));
             bs.nuevoUsuario(propietario);
             
-            Cliente cliente = new Cliente("Cliente" + i, "1234", LocalDate.now().minusYears(i));
+            Cliente cliente = new Cliente("Cliente" + i, "1234", LocalDate.now().minusYears(20));
             bs.nuevoUsuario(cliente);
             
             if(i < 33){ // generamos bares
@@ -75,7 +75,7 @@ public class PruebaMongo {
                 }
                 
                 if(i % 5 == 0){
-                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(bar.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(restaurante.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
                 }
             }
             else{ // generamos pubs
@@ -90,15 +90,15 @@ public class PruebaMongo {
                     bs.nuevaContestacion(contestacion, review);
                 }
                 
-                if(i % 5 == 0){
-                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(bar.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
-                }
+                /*if(i % 5 == 0){
+                    bs.nuevaReserva((Cliente) bs.obtenerUsuario(cliente.getNick()), (Reservable) bs.obtenerLocal(pub.getDireccion()), LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()), LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute()));
+                }*/
             }
         }
 
         return bs;
     }
-    public static BusinessSystem crearBS2(){
+    public static BusinessSystem crearBS2(){ // no la utilizamos pero viene bien tenerla presente, la quietaremos en la entrega
         Direccion direccion1 = new Direccion("Pamplona","Navarra","Calle Mayor",1);
         Direccion direccion2 = new Direccion("Pamplona","Navarra","Calle Amaya",2);
         Direccion direccion3 = new Direccion("Pamplona","Navarra","Avenida Cataluña",3);
