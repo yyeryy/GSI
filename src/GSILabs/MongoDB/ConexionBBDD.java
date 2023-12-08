@@ -174,7 +174,7 @@ public class ConexionBBDD {
             return true;
         }
         catch(Exception e){
-            System.out.println("ERROR: No se ha podido subir la lista de Locales");
+            System.out.println("ERROR: No se ha podido subir la lista de Usuarios");
             return false;
         }
     }
@@ -204,6 +204,24 @@ public class ConexionBBDD {
             return null;
         }
         return (ArrayList<Usuario>) usuarios;
+    }
+    
+    public static boolean cargarUsuario(Usuario usuario){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        // Subir el usuarios
+        try{
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            Document usuarioDocument = crearUsuarioDocument(usuario);
+            usuariosCollection.insertOne(usuarioDocument);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir el usuario a la lista de Usuarios");
+            return false;
+        }
     }
     
     /**
@@ -253,10 +271,28 @@ public class ConexionBBDD {
             }
         }
         catch(Exception e){
-            System.out.println("ERROR: No se ha podido obtener la lista de Usuarios");
+            System.out.println("ERROR: No se ha podido obtener la lista de Locales");
             return null;
         }
         return (ArrayList<Local>) locales;
+    }
+    
+    public static boolean cargarLocal(Local local){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        // Subir el usuarios
+        try{
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            Document localDocument = crearLocalDocument(local);
+            localesCollection.insertOne(localDocument);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir el local a la lista de Locales");
+            return false;
+        }
     }
     
     /**
@@ -310,6 +346,24 @@ public class ConexionBBDD {
             return null;
         }
         return (ArrayList<Review>) reviews;
+    }
+    
+    public static boolean cargarReview(Review review){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        // Subir el usuarios
+        try{
+            MongoCollection<Document> reviewsCollection = database.getCollection("Reviews");
+            Document reviewDocument = crearReviewDocument(review);
+            reviewsCollection.insertOne(reviewDocument);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la review a la lista de Reviews");
+            return false;
+        }
     }
     
     /* NO SE USAN */
