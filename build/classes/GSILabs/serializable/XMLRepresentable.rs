@@ -1,1 +1,0 @@
-GSILabs.serializable.XMLRepresentable
