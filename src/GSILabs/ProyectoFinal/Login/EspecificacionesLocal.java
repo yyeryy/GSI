@@ -10,6 +10,7 @@ import GSILabs.BSystem.BusinessSystem;
 import GSILabs.MongoDB.ConexionBBDD;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.cargarLocal;
+import GSILabs.ProyectoFinal.DonaAplicacion.DonaAplicacion;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -27,7 +28,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
     /**
      * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private Propietario propietario = new Propietario("Luis","1234",LocalDate.parse("2000-12-30"));
+    private Propietario propietario = (Propietario) DonaAplicacion.usuario;
 
     /**
      * Constructor EspecificacionesLocal.
@@ -54,13 +55,20 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         fieldNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        fieldDireccion = new javax.swing.JTextField();
+        fieldLocalidad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         fieldDescripcion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cBoxTipoLocal = new javax.swing.JComboBox<>();
         botonVolver = new javax.swing.JButton();
         botonConfirmar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        fieldProvincia = new javax.swing.JTextField();
+        fieldCalle = new javax.swing.JTextField();
+        fieldNumero = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +80,12 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         jLabel3.setText("Dirección del local");
 
         jLabel4.setText("Descripción");
+
+        fieldDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldDescripcionActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Tipo local");
 
@@ -96,34 +110,61 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Localidad:");
+
+        jLabel7.setText("Provincia:");
+
+        jLabel8.setText("Calle:");
+
+        jLabel9.setText("Número:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(77, 77, 77))
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fieldNombre)
-                            .addComponent(fieldDireccion)
-                            .addComponent(fieldDescripcion)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(cBoxTipoLocal, 0, 479, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cBoxTipoLocal, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(fieldNumero))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(46, 46, 46)
+                                    .addComponent(fieldCalle))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(22, 22, 22)
+                                    .addComponent(fieldProvincia))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(fieldLocalidad))
+                                .addComponent(fieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fieldDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(77, 77, 77))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106))))
+                        .addGap(169, 169, 169))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,25 +177,35 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(fieldLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cBoxTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cBoxTipoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,78 +240,92 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         if(fieldNombre.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre al local.");
-        } else if(fieldDireccion.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una direccion al local.");
+        } else if(fieldLocalidad.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una localidad al local.");
+        }else if(fieldProvincia.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una provincia al local.");
+        }else if(fieldCalle.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una calle al local.");
+        }else if(fieldNumero.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una numero al local.");
         } else if(fieldDescripcion.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una descripcion al local.");
         } else {
             //Rellenamos atributos para clase Local
             String nombreLocal = this.fieldNombre.getText();
-            Direccion direccion = new Direccion("A","B","C",1);
+            //Cambiar esto para que coja de manera correcta la direccion
+            Direccion direccion = new Direccion(this.fieldLocalidad.getText(), this.fieldProvincia.getText(), this.fieldCalle.getText(), Integer.parseInt(this.fieldNumero.getText()));
             String descripcion = this.fieldDescripcion.getText();
             
             BusinessSystem bs = DescargarDatos();
             
             //Local local = null;
             if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Bar")) {
-                //tipo = tipoLocal.BAR;
-                System.out.println("AAAAAAA");
                 Bar local = new Bar(nombreLocal, direccion, descripcion, this.propietario);
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
                 } else {
-                    System.out.println("Contenido Local" + local);
                     bs.nuevoLocal(local);
-                    bs.asociarLocal(local, this.propietario);
-
+                    //bs.asociarLocal(local, this.propietario);
                     System.out.println("Este local no existe");
                     cargarLocal(local);
-                    System.out.println("Enviado");
                 }
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Restaurante")) {
-                //tipo = tipoLocal.RESTAURANTE;
                 Restaurante local = new Restaurante(nombreLocal, direccion, descripcion, this.propietario, 12.0, null, null);
+                this.propietario.setLocal(local);
+                if (bs.obtenerLocal(local.getDireccion()) != null) {
+                    System.out.println("Este local ya existe");
+                } else {
+                    bs.nuevoLocal(local);
+                    System.out.println("Este local no existe");
+                    cargarLocal(local);
+                }
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Pub")) {
-                //tipo = tipoLocal.PUB;
                 Pub local = new Pub(null, null, nombreLocal, direccion, descripcion, this.propietario);
+                this.propietario.setLocal(local);
+                if (bs.obtenerLocal(local.getDireccion()) != null) {
+                    System.out.println("Este local ya existe");
+                } else {
+                    bs.nuevoLocal(local);
+                    System.out.println("Este local no existe");
+                    cargarLocal(local);
+                }
             }
-            
-            /*BusinessSystem bs = DescargarDatos();
-            this.propietario.setLocal(local);
-
-            if (bs.obtenerLocal(local.getDireccion()) != null) {
-                System.out.println("Este local ya existe");
-            } else {
-                bs.nuevoLocal(local);
-                bs.asociarLocal(local, this.propietario);
-                
-                System.out.println("Este local no existe");
-                CargarDatos(bs);            
-            }*/
             
             MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
             this.setVisible(false);
         }
             
         System.out.println("Nombre" + fieldNombre.getText());
-        System.out.println("Direccion" + fieldDireccion.getText());
+        System.out.println("Direccion" + fieldLocalidad.getText());
         System.out.println("Descripcion" + fieldDescripcion.getText());
         System.out.println("Tipo" + cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex()));
     }//GEN-LAST:event_botonConfirmarActionPerformed
+
+    private void fieldDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldDescripcionActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConfirmar;
     private javax.swing.JButton botonVolver;
     private javax.swing.JComboBox<String> cBoxTipoLocal;
+    private javax.swing.JTextField fieldCalle;
     private javax.swing.JTextField fieldDescripcion;
-    private javax.swing.JTextField fieldDireccion;
+    private javax.swing.JTextField fieldLocalidad;
     private javax.swing.JTextField fieldNombre;
+    private javax.swing.JTextField fieldNumero;
+    private javax.swing.JTextField fieldProvincia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

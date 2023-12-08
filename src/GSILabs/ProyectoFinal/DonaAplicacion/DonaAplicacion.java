@@ -1,5 +1,7 @@
 package GSILabs.ProyectoFinal.DonaAplicacion;
 
+import GSILabs.BModel.Usuario;
+
 /**
  * Clase DonaAplicacion
  * Clase con la que ejecutaremos el proyecto el menú principal del proyecto
@@ -11,6 +13,8 @@ package GSILabs.ProyectoFinal.DonaAplicacion;
  */
 public class DonaAplicacion {
 
+    public static Usuario usuario = null;
+    
     public static void main(String[] args) {
         MenuPrincipal abrirMenuPrincipal = new MenuPrincipal();
     }

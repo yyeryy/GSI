@@ -8,6 +8,7 @@ import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.cargarUsuario;
 import javax.swing.JOptionPane;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
 import java.time.LocalDate;
@@ -254,8 +255,10 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             // Añado el nuevo usuario
             bs.nuevoUsuario(nuevoUsuario);
             
+            usuario = nuevoUsuario;
+            
             // Añadir a la base de datos
-            CargarDatos(bs);
+            cargarUsuario(nuevoUsuario);
             
             //Si no hay ningún error al crear
             if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Cliente")) {
