@@ -102,7 +102,7 @@ public class ConexionBBDD {
         BusinessSystem bs = new BusinessSystem();
         // Obtener los datos de la base de datos
         
-// LOCALES
+        // LOCALES
         List<Local> locales = new ArrayList<>();
         try{
             MongoCollection<Document> localesCollection = database.getCollection("Locales");
@@ -221,6 +221,23 @@ public class ConexionBBDD {
         catch(Exception e){
             System.out.println("ERROR: No se ha podido subir el usuario a la lista de Usuarios");
             return false;
+        }
+    }
+    
+    public static Usuario descargarUsuario(String nick){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        try{
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            Document consulta = new Document("Nick", nick);
+            Document resultado = usuariosCollection.find().first();
+            return crearUsuarioObject(resultado);
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar el usuario indicado");
+            return null;
         }
     }
     
