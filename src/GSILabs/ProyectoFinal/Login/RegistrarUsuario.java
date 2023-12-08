@@ -248,7 +248,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             BusinessSystem bs = DescargarDatos();
             // Comprobar si existe el usuario
             if(bs.obtenerUsuario(nick) != null){
-                System.out.println("Este usuario ya esta en uso.");
+                JOptionPane.showMessageDialog(null, "Este usuario ya esta en uso.");
                 return;
             }
             // Añado el nuevo usuario

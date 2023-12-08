@@ -351,12 +351,17 @@ public class Login extends javax.swing.JFrame {
         // Comprobar contraseña
         Usuario usuarioLogin = bs.obtenerUsuario(nick);
         if(usuarioLogin == null){
-            System.out.println("Este usuario no existe");
+            JOptionPane.showMessageDialog(null, "Los datos introducidos no son correctos.");
             return false;}
         if(!usuarioLogin.getContraseña().equals(contrasena)){
-            System.out.println("Contraseña incorrecta");
+            JOptionPane.showMessageDialog(null, "Los datos introducidos no son correctos.");
             return false;}
         this.usuario = usuarioLogin;
+        if(this.usuario.getTipo().toString().equals("PROPIETARIO")){
+            System.out.println("Tipo de usuario: PROPIETARIO");
+        } else if(this.usuario.getTipo().toString().equals("CLIENTE")){
+            System.out.println("Tipo de usuario: CLIENTE");
+        }
         return true;
     }
 /*
