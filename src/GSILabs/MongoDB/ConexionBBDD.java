@@ -14,15 +14,9 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
-import org.bson.types.Binary;
 
 /**
  * ConexionBBDD: Permite la conexion entre la Base de Datos Online y BusinessSystem Local.
@@ -206,6 +200,11 @@ public class ConexionBBDD {
         return (ArrayList<Usuario>) usuarios;
     }
     
+    /**
+     * Funcion CargarUsuario
+     * @param usuario: Usuario que se quiere actualizar en la BBDD.
+     * @return boolean: Indica si la operacion se ha completado con exito.
+     */
     public static boolean cargarUsuario(Usuario usuario){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
@@ -224,15 +223,19 @@ public class ConexionBBDD {
         }
     }
     
+    /**
+     * Función DescargarUsuario.
+     * @param nick: Campo de Usuario que se utiliza para buscar el Usuario.
+     * @return: Usuario al que correponde el campo indicado.
+     */
     public static Usuario descargarUsuario(String nick){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
         MongoDatabase database = MongoDBSingleton.getDatabase();
-        
         try{
             MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
             Document consulta = new Document("Nick", nick);
-            Document resultado = usuariosCollection.find().first();
+            Document resultado = usuariosCollection.find(consulta).first();
             return crearUsuarioObject(resultado);
         }
         catch(Exception e){
@@ -242,7 +245,35 @@ public class ConexionBBDD {
     }
     
     /**
-     * Funcion CargarListaLocales
+     * Función ActualizarUsuario.
+     * @param usuario: Usuario modificado que se quiere actualizar en la BBDD.
+     * @return: Indica si se ha actualizado el Usuario con exito.
+     */
+    public static boolean actualizarUsuario(Usuario usuario){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        try{
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            Document consulta = new Document("Nick", usuario.getNick());
+            Document resultado = usuariosCollection.find(consulta).first();
+            if(resultado == null)
+            {
+                System.out.println("ERROR: No se ha encontrado al usuario indicado");
+                return false;
+            }
+            Document nuevo = new Document("$set",crearUsuarioDocument(usuario));
+            usuariosCollection.updateOne(consulta, nuevo);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar el usuario indicado");
+            return false;
+        }
+    }
+    
+    /**
+     * Función CargarListaLocales.
      * Copia el contenido del ArrayList locales local en la Base de Datos Online, borra lo que hay en locales de la Base de Datos.
      * @param locales: lista de locales Local que se quiero cargar en la Base de Datos.
      * @return boolean: Indica si se han subido los datos con exito.
@@ -294,6 +325,11 @@ public class ConexionBBDD {
         return (ArrayList<Local>) locales;
     }
     
+    /**
+     * Funcion CargarLocal
+     * @param local: Usuario que se quiere actualizar en la BBDD.
+     * @return boolean: Indica si la operacion se ha completado con exito.
+     */
     public static boolean cargarLocal(Local local){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
@@ -308,6 +344,56 @@ public class ConexionBBDD {
         }
         catch(Exception e){
             System.out.println("ERROR: No se ha podido subir el local a la lista de Locales");
+            return false;
+        }
+    }
+    
+    /**
+     * Funcion DescargarUsuario
+     * @param nombre: Campo de Local que se utiliza para buscar el Usuario.
+     * @return: Local al que correponde el campo indicado.
+     */
+    public static Local descargarLocal(String nombre){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        try{
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            Document consulta = new Document("Nombre", nombre);
+            Document resultado = localesCollection.find().first();
+            return crearLocalObject(resultado);
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar el local indicado");
+            return null;
+        }
+    }
+    
+    /**
+     * Función ActualizarLocal.
+     * @param local: Local modificado que se quiere actualizar en la BBDD.
+     * @return: Indica si se ha actualizado el Local con exito.
+     */
+    public static boolean actualizarLocal(Local local){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        try{
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            Document consulta = new Document("Nombre", local.getNombre());
+            Document resultado = localesCollection.find(consulta).first();
+            if(resultado == null)
+            {
+                System.out.println("ERROR: No se ha encontrado el local indicado");
+                return false;
+            }
+            Document nuevo = new Document("$set",crearLocalDocument(local));
+            localesCollection.updateOne(consulta, nuevo);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar el local indicado");
             return false;
         }
     }
@@ -365,6 +451,11 @@ public class ConexionBBDD {
         return (ArrayList<Review>) reviews;
     }
     
+    /**
+     * Funcion CargaReview
+     * @param review: Review que se quiere actualizar en la BBDD.
+     * @return boolean: Indica si la operacion se ha completado con exito.
+     */
     public static boolean cargarReview(Review review){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
@@ -383,52 +474,53 @@ public class ConexionBBDD {
         }
     }
     
-    /* NO SE USAN */
     /**
-     * serializeObject serializa el objeto para poder almacenarlo en la Base de Datos.
-     * @param obj: Objeto serializable que se quiere almacenar.
-     * @return: Bytes a almacenar en la BBDD
-     * @throws IOException 
+     * Funcion DescargarReview
+     * @param usuario: Campo de Review que se utiliza para buscar el Review.
+     * @return: Review al que correponde el campo indicado.
      */
-    private static byte[] serializeObject(Object obj) throws IOException {
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
-             ObjectOutputStream oos = new ObjectOutputStream(bos)) {
-            oos.writeObject(obj);
-            return bos.toByteArray();
+    public static Review descargarReview(Usuario usuario){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        try{
+            MongoCollection<Document> reviewsCollection = database.getCollection("Reviews");
+            Document consulta = new Document("Usuario", usuario);
+            Document resultado = reviewsCollection.find().first();
+            return crearReviewObject(resultado);
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar la review indicada");
+            return null;
         }
     }
     
     /**
-     * deserializeObject deserializa el objeto que se ha obtenido de la Base de Datos.
-     * @param <T>: Tipo de objeto que obtiene.
-     * @param bytes: Bytes a conevertir en Object.
-     * @param clazz: Clase del Objeto serializable que se quiere obtener.
-     * @return: Objeto deseriazado.
-     * @throws IOException
-     * @throws ClassNotFoundException 
+     * Función ActualizarReview.
+     * @param review: Review modificado que se quiere actualizar en la BBDD.
+     * @return: Indica si se ha actualizado el Review con exito.
      */
-    private static <T> T deserializeObject(byte[] bytes, Class<T> clazz) throws IOException, ClassNotFoundException {
-        try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-        ObjectInputStream ois = new ObjectInputStream(bis)) {
-            return clazz.cast(ois.readObject());
+    public static boolean actualizarReview(Review review){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        try{
+            MongoCollection<Document> reviewsCollection = database.getCollection("Reviews");
+            Document consulta = new Document("Usuario", review.getUsuario());
+            Document resultado = reviewsCollection.find(consulta).first();
+            if(resultado == null)
+            {
+                System.out.println("ERROR: No se ha encontrado la review indicada");
+                return false;
+            }
+            Document nuevo = new Document("$set",crearReviewDocument(review));
+            reviewsCollection.updateOne(consulta, nuevo);
+            return true;
         }
-    }
-
-    /**
-     * Método auxiliar para convertir Binary a array de bytes
-     * @param binary
-     * @return 
-     */
-    private static byte[] binaryToBytes(Binary binary) {
-        return binary.getData();
-    }
-
-    /**
-     * Método auxiliar para convertir array de bytes a Binary
-     * @param bytes
-     * @return 
-     */
-    private static Binary bytesToBinary(byte[] bytes) {
-        return new Binary(bytes);
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar la review indicado");
+            return false;
+        }
     }
 }

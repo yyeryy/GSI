@@ -3,6 +3,7 @@ package GSILabs.ProyectoFinal.Login;
 import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.BusinessSystem;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.descargarUsuario;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import java.math.BigInteger;
@@ -347,9 +348,9 @@ public class Login extends javax.swing.JFrame {
         String nick = UsuarioLogin.getText();
         String contrasena = ContrasenaLogin.getText();
         // Descargar BS
-        BusinessSystem bs = DescargarDatos();
+        //BusinessSystem bs = DescargarDatos();
         // Comprobar contraseña
-        Usuario usuarioLogin = bs.obtenerUsuario(nick);
+        Usuario usuarioLogin = descargarUsuario(nick);//bs.obtenerUsuario(nick);
         if(usuarioLogin == null){
             JOptionPane.showMessageDialog(null, "Los datos introducidos no son correctos.");
             return false;}

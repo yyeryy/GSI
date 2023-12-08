@@ -8,9 +8,12 @@ import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reservable;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
+import GSILabs.BModel.Usuario;
+import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.actualizarUsuario;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
@@ -28,6 +31,7 @@ public class PruebaMongo {
         BusinessSystem bsOriginal = crearBS2(); // Crea un businessSystem poblado
         CargarDatos(bsOriginal); // Sube los datos del BusinessSytem al MongoDB
         BusinessSystem bsNuevo = DescargarDatos(); // Obtiene los datos del MongoDB y los almacena en el BusinessSytem
+        actualizarUsuario(new Usuario("Antonio","0000",LocalDate.parse("1950-01-01"), PROPIETARIO));
     }
     
     // FERMIN: Añadir más cosas, cuando este terminado donaciones, meter tbn donaciones.
