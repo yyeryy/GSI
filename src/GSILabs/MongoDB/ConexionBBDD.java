@@ -1,8 +1,12 @@
 package GSILabs.MongoDB;
 
+import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Local.tipoLocal;
+import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
+import GSILabs.BModel.Usuario.tipoUsuario;
 import GSILabs.BSystem.BusinessSystem;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -13,8 +17,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import static org.apache.commons.collections.CollectionUtils.size;
 import org.bson.Document;
 import org.bson.types.Binary;
 
@@ -39,13 +45,44 @@ public class ConexionBBDD {
             // Borro lo viejo, sino se duplicara
             database.getCollection("Locales").drop();
             MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            for(Local local : bs.locales){
+                // Direccion
+                Document direccionDocument = new Document();
+                direccionDocument.append("Localidad", local.getDireccion().getLocalidad());
+                direccionDocument.append("Provincia", local.getDireccion().getProvincia());
+                direccionDocument.append("Calle", local.getDireccion().getCalle());
+                direccionDocument.append("Numero", local.getDireccion().getNumero());
+                // Local
+                Document localDocument = new Document();
+                localDocument.append("Nombre", local.getNombre());
+                localDocument.append("Direccion", direccionDocument);
+                localDocument.append("Descripcion", local.getDescripcion());
+                localDocument.append("Tipo local", local.getTipo().toString());
+                // Propietarios
+                int i = 1;
+                for(Propietario propietario:local.getPropietarios()){
+                    Document propietarioDocument = new Document();
+                    propietarioDocument.append("Nick", propietario.getNick());
+                    propietarioDocument.append("Contraseña", propietario.getContraseña());
+                    propietarioDocument.append("Fecha nacimiento", propietario.getFechaNacimiento().toString());
+                    propietarioDocument.append("Tipo usuario", propietario.getTipo().toString());
+                    localDocument.append("Propietario " + i, propietarioDocument);
+                    i++;
+                }  
+                localesCollection.insertOne(localDocument);
+            }
+        }/*
+        try{
+            // Borro lo viejo, sino se duplicara
+            database.getCollection("Locales").drop();
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
            
             for(Local local : bs.locales){
                 byte[] serializedLocal = serializeObject(local);
                 Document document = new Document("serializedLocal",bytesToBinary(serializedLocal));
                 localesCollection.insertOne(document);
             }
-        }
+        }*/
         catch(Exception e){
             System.out.println("ERROR: No se ha podido subir la lista de Locales");
             return false;
@@ -101,12 +138,48 @@ public class ConexionBBDD {
         try{
             MongoCollection<Document> localesCollection = database.getCollection("Locales");
             FindIterable<Document> iterable = localesCollection.find();
+            for(Document localDocument: iterable){
+                // Direccion
+                Document direccionDocument = (Document) localDocument.get("Direccion");
+                String localidad = direccionDocument.getString("Localidad");
+                String provincia = direccionDocument.getString("Provincia");
+                String calle = direccionDocument.getString("Calle");
+                Integer numero = direccionDocument.getInteger("Numero");
+                Direccion direccion = new Direccion(localidad,provincia,calle,numero);
+                // Propietarios
+                List<Propietario> propietarios = new ArrayList<>();
+                for(int i = 1; i <= 3; i++)
+                {
+                    try{
+                        Document propietarioDocument = (Document) localDocument.get("Propietario " + i);
+                        String nick = propietarioDocument.getString("Nick");
+                        String contrasena = propietarioDocument.getString("Contraseña");
+                        LocalDate fechaNacimiento = LocalDate.parse(propietarioDocument.getString("Fecha nacimiento"));
+                        tipoUsuario tipo = tipoUsuario.parse(propietarioDocument.getString("Tipo usuario"));
+                        Propietario propietario = new Propietario(nick,contrasena,fechaNacimiento);
+                        propietarios.add(propietario);
+                    }
+                    catch(Exception e){}
+                }
+                // Local
+                String nombre = localDocument.getString("Nombre");
+                String descripcion = localDocument.getString("Descripcion");
+                tipoLocal tipo = tipoLocal.parse(localDocument.getString("Tipo local"));
+                Local local = new Local(nombre,direccion,descripcion,tipo,propietarios.get(0));
+                for(int i = 1; i < size(propietarios); i++)
+                    local.addPropietario(propietarios.get(i));
+            }
+        }
+        /*
+        try{
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            FindIterable<Document> iterable = localesCollection.find();
             for(Document document : iterable){
                 byte[] serializedLocal = binaryToBytes((Binary)document.get("serializedLocal"));
                 Local local = deserializeObject(serializedLocal,Local.class);
                 locales.add(local);
             }
-        }
+        }*/
         catch(Exception e){
             System.out.println("ERROR: No se ha podido obtener la lista de Locales");
             return null;

@@ -24,7 +24,8 @@ import java.util.Random;
 */
 public class PruebaMongo {
     public static void main(String[] args) throws UnsupportedEncodingException, IOException, ClassNotFoundException {
-        BusinessSystem bsOriginal = crearBS(); // Crea un businessSystem poblado
+        /*CAMBIAR AL DE FERMIN CUANDO ESTE ACABADO*/
+        BusinessSystem bsOriginal = crearBS2(); // Crea un businessSystem poblado
         CargarDatos(bsOriginal); // Sube los datos del BusinessSytem al MongoDB
         BusinessSystem bsNuevo = DescargarDatos(); // Obtiene los datos del MongoDB y los almacena en el BusinessSytem
     }
