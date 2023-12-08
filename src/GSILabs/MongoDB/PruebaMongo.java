@@ -111,6 +111,13 @@ public class PruebaMongo {
         Direccion direccion9 = new Direccion("Tudela","Navarra", "Plaza Estación",9);
         Direccion direccion10 = new Direccion("Barcelona","Barcelona","Sant Adria",10);
         Direccion direccion11 = new Direccion("Madrid","Madrid","Pozuelo",11);
+        Direccion direccion12 = new Direccion("Getafe","Madrid","Avenida de la Hispanidad",11);
+        Direccion direccion13 = new Direccion("Alsasua","Navarra","Kalea Kalea",11);
+        Direccion direccion14 = new Direccion("Vigo","Pontevedra","Rias Baixas",11);
+        Direccion direccion15 = new Direccion("Logroño","La Rioja","Calle Laurel",11);
+        Direccion direccion16 = new Direccion("Burgos","Burgos","Plaza de la Catedral",11);
+        Direccion direccion17 = new Direccion("Almeria","Almeria","Boulevard Sur",11);
+        
 
         
         //Creación de propietarios
@@ -138,14 +145,14 @@ public class PruebaMongo {
         Bar bar11 = new Bar("Txola roncola", direccion11,"Luz tenue y buenos cocteles",propietario3);
         
         //Creación de restaurantes
-        Restaurante restaurante1 = new Restaurante("Sotano encantado",direccion4,"Sotano con iluminacion de velas",propietario4,20,140,4);
-        Restaurante restaurante2 = new Restaurante("Cantina estelar",direccion5,"Mejor restaurante para comer en los descansos",propietario5,8,250,10);
-        Restaurante restaurante3 = new Restaurante("La cervecería mística",direccion6,"Disfruta de tus comidas acompañadas de la mejor cerveza",propietario6,15,75,8);
+        Restaurante restaurante1 = new Restaurante("Sotano encantado",direccion12,"Sotano con iluminacion de velas",propietario4,20,140,4);
+        Restaurante restaurante2 = new Restaurante("Cantina estelar",direccion13,"Mejor restaurante para comer en los descansos",propietario5,8,250,10);
+        Restaurante restaurante3 = new Restaurante("La cervecería mística",direccion14,"Disfruta de tus comidas acompañadas de la mejor cerveza",propietario6,15,75,8);
         
         //Creación de pubs
-        Pub pub1 = new Pub("10:00","2:00","El refugio del Jazz",direccion7,"Sumergete entre copas y Jazz",propietario7);
-        Pub pub2 = new Pub("11:00","3:00","Tabanco del Río",direccion8,"Tradición española acompañada de las mejores bebidas",propietario8);
-        Pub pub3 = new Pub("10:00","13:00","Luna Roja",direccion9,"Pub con una ambientacion bohemia y encantadora",propietario9);
+        Pub pub1 = new Pub("10:00","2:00","El refugio del Jazz",direccion15,"Sumergete entre copas y Jazz",propietario7);
+        Pub pub2 = new Pub("11:00","3:00","Tabanco del Río",direccion16,"Tradición española acompañada de las mejores bebidas",propietario8);
+        Pub pub3 = new Pub("10:00","13:00","Luna Roja",direccion17,"Pub con una ambientacion bohemia y encantadora",propietario9);
         
         //Adición de Propiedades
         bar1.addPropietario(propietario2);
