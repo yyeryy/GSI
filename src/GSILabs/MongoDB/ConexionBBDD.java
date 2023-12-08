@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import static org.apache.commons.collections.CollectionUtils.size;
@@ -65,7 +66,7 @@ public class ConexionBBDD {
                     propietarioDocument.append("Nick", propietario.getNick());
                     propietarioDocument.append("Contraseña", propietario.getContraseña());
                     propietarioDocument.append("Fecha nacimiento", propietario.getFechaNacimiento().toString());
-                    propietarioDocument.append("Tipo usuario", propietario.getTipo().toString());
+                    propietarioDocument.append("Tipo usuario", propietario.getTipo().name());
                     localDocument.append("Propietario " + i, propietarioDocument);
                     i++;
                 }  
@@ -108,11 +109,24 @@ public class ConexionBBDD {
             database.getCollection("Usuarios").drop();
             MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
             for(Usuario usuario : bs.usuarios){
+                Document usuarioDocument = new Document();
+                usuarioDocument.append("Nick", usuario.getNick());
+                usuarioDocument.append("Contraseña", usuario.getContraseña());
+                usuarioDocument.append("Fecha nacimiento", usuario.getFechaNacimiento().toString());
+                usuarioDocument.append("Tipo usuario", usuario.getTipo().name());
+                usuariosCollection.insertOne(usuarioDocument);
+            }
+        }
+        /*try{
+            // Borro lo viejo, sino se duplicara
+            database.getCollection("Usuarios").drop();
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            for(Usuario usuario : bs.usuarios){
                 byte[] serializedUsuario = serializeObject(usuario);
                 Document document = new Document("serializedUsuario",bytesToBinary(serializedUsuario));
                 usuariosCollection.insertOne(document);
             }
-        }
+        }*/
         catch(Exception e){
             System.out.println("ERROR: No se ha podido subir la lista de Usuarios");
             return false;
@@ -204,14 +218,28 @@ public class ConexionBBDD {
         try{
             MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
             FindIterable<Document> iterable = usuariosCollection.find();
+            for(Document usuarioDocument : iterable){
+                String nick = usuarioDocument.getString("Nick");
+                String contrasena = usuarioDocument.getString("Contraseña");
+                LocalDate fechaNacimiento = LocalDate.parse(usuarioDocument.getString("Fecha nacimiento"));
+                tipoUsuario tipo = tipoUsuario.parse(usuarioDocument.getString("Tipo usuario"));
+                Usuario usuario = new Usuario(nick,contrasena,fechaNacimiento,tipo);
+                usuarios.add(usuario);
+            }
+        }
+        /*
+        try{
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            FindIterable<Document> iterable = usuariosCollection.find();
             for(Document document : iterable){
                 byte[] serializedUsuarios = binaryToBytes((Binary)document.get("serializedUsuario"));
                 Usuario usuario = deserializeObject(serializedUsuarios, Usuario.class);
                 usuarios.add(usuario);
             }
-        }
+        }*/
         catch(Exception e){
             System.out.println("ERROR: No se ha podido obtener la lista de Usuarios");
+            e.printStackTrace();
             return null;
         }
         // Rellenar BusinessSystem y devolver
