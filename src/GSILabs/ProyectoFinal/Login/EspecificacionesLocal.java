@@ -6,6 +6,9 @@ import GSILabs.BModel.Local;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
+import GSILabs.BSystem.BusinessSystem;
+import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import javax.swing.JOptionPane;
 
@@ -194,19 +197,43 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
             Direccion direccion = null;
             String descripcion = this.fieldDescripcion.getText();
             
-            Local local = null;
+            BusinessSystem bs = DescargarDatos();
+            
+            //Local local = null;
             if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Bar")) {
                 //tipo = tipoLocal.BAR;
-                local = new Bar(nombreLocal, direccion, descripcion, this.propietario);
+                System.out.println("AAAAAAA");
+                Bar local = new Bar(nombreLocal, direccion, descripcion, this.propietario);
+                this.propietario.setLocal(local);
+                if (bs.obtenerLocal(local.getDireccion()) != null) {
+                    System.out.println("Este local ya existe");
+                } else {
+                    bs.nuevoLocal(local);
+                    bs.asociarLocal(local, this.propietario);
+
+                    System.out.println("Este local no existe");
+                    CargarDatos(bs);            
+                }
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Restaurante")) {
                 //tipo = tipoLocal.RESTAURANTE;
-                local = new Restaurante(nombreLocal, direccion, descripcion, this.propietario, 12.0, null, null);
+                Restaurante local = new Restaurante(nombreLocal, direccion, descripcion, this.propietario, 12.0, null, null);
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Pub")) {
                 //tipo = tipoLocal.PUB;
-                local = new Pub(null, null, nombreLocal, direccion, descripcion, this.propietario);
+                Pub local = new Pub(null, null, nombreLocal, direccion, descripcion, this.propietario);
             }
             
+            /*BusinessSystem bs = DescargarDatos();
             this.propietario.setLocal(local);
+
+            if (bs.obtenerLocal(local.getDireccion()) != null) {
+                System.out.println("Este local ya existe");
+            } else {
+                bs.nuevoLocal(local);
+                bs.asociarLocal(local, this.propietario);
+                
+                System.out.println("Este local no existe");
+                CargarDatos(bs);            
+            }*/
             
             MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
             this.setVisible(false);
@@ -218,7 +245,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         System.out.println("Tipo" + cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex()));
     }//GEN-LAST:event_botonConfirmarActionPerformed
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConfirmar;
     private javax.swing.JButton botonVolver;
