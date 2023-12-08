@@ -1,15 +1,9 @@
 package GSILabs.MongoDB;
 
-import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
-import GSILabs.BModel.Local.tipoLocal;
-import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
-import GSILabs.BModel.Usuario.tipoUsuario;
 import GSILabs.BSystem.BusinessSystem;
-import static GSILabs.MongoDB.MongoDBUtils.crearDireccionDocument;
-import static GSILabs.MongoDB.MongoDBUtils.crearDireccionObject;
 import static GSILabs.MongoDB.MongoDBUtils.crearLocalDocument;
 import static GSILabs.MongoDB.MongoDBUtils.crearLocalObject;
 import static GSILabs.MongoDB.MongoDBUtils.crearReviewDocument;
@@ -25,10 +19,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import static org.apache.commons.collections.CollectionUtils.size;
 import org.bson.Document;
 import org.bson.types.Binary;
 
@@ -161,6 +153,166 @@ public class ConexionBBDD {
         return bs;
     }
     
+    /**
+     * Funcion CargarListaUsuarios
+     * Copia el contenido del ArrayList usuarios local en la Base de Datos Online, borra lo que hay en usuarios de la Base de Datos.
+     * @param usuarios: lista de usuarios Local que se quiero cargar en la Base de Datos.
+     * @return boolean: Indica si se han subido los datos con exito.
+    */
+    public static boolean CargarListaUsuarios(ArrayList<Usuario> usuarios){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Subir el contenido de la lista
+        try{
+            database.getCollection("Usuarios").drop();
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            for(Usuario usuario:usuarios){
+                Document usuarioDocument = crearUsuarioDocument(usuario);
+                usuariosCollection.insertOne(usuarioDocument);
+            }
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la lista de Locales");
+            return false;
+        }
+    }
+    
+    /**
+     * Funcion DescargarListaUsuarios
+     * Copia el contenido de usuarios la Base de Datos Online en la lista usuarios local.
+     * @return: null si se produce algun error.
+     * @return: lista usuarios Local que se ha descargado de la Base de Datos.
+     */
+    public static ArrayList<Usuario> DescargarListaUsuarios(){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Crear Lista Usuarios
+        List<Usuario> usuarios = new ArrayList<>();
+        try{
+            MongoCollection<Document> usuariosCollection = database.getCollection("Usuarios");
+            FindIterable<Document> iterable = usuariosCollection.find();
+            for(Document usuarioDocument : iterable){
+                Usuario usuario = crearUsuarioObject(usuarioDocument);
+                usuarios.add(usuario);
+            }
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido obtener la lista de Usuarios");
+            return null;
+        }
+        return (ArrayList<Usuario>) usuarios;
+    }
+    
+    /**
+     * Funcion CargarListaLocales
+     * Copia el contenido del ArrayList locales local en la Base de Datos Online, borra lo que hay en locales de la Base de Datos.
+     * @param locales: lista de locales Local que se quiero cargar en la Base de Datos.
+     * @return boolean: Indica si se han subido los datos con exito.
+    */
+    public static boolean CargarListaLocales(ArrayList<Local> locales){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Subir el contenido de la lista
+        try{
+            database.getCollection("Locales").drop();
+            MongoCollection<Document>localesCollection = database.getCollection("Locales");
+            for(Local local:locales){
+                Document localDocument = crearLocalDocument(local);
+                localesCollection.insertOne(localDocument);
+            }
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la lista de Locales");
+            return false;
+        }
+    }
+    
+    /**
+     * Funcion DescargarListaLocales
+     * Copia el contenido de locales la Base de Datos Online en la lista locales local.
+     * @return: null si se produce algun error.
+     * @return: lista locales Local que se ha descargado de la Base de Datos.
+     */
+    public static ArrayList<Local> DescargarListaLocal(){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Crear Lista Usuarios
+        List<Local> locales = new ArrayList<>();
+        try{
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            FindIterable<Document> iterable = localesCollection.find();
+            for(Document localDocument : iterable){
+                Local local = crearLocalObject(localDocument);
+                locales.add(local);
+            }
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido obtener la lista de Usuarios");
+            return null;
+        }
+        return (ArrayList<Local>) locales;
+    }
+    
+    /**
+     * Funcion CargarListaReviews
+     * Copia el contenido del ArrayList reviews local en la Base de Datos Online, borra lo que hay en reviews de la Base de Datos.
+     * @param reviews: lista de reviews Local que se quiero cargar en la Base de Datos.
+     * @return boolean: Indica si se han subido los datos con exito.
+    */
+    public static boolean CargarListaReviews(ArrayList<Review> reviews){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Subir el contenido de la lista
+        try{
+            database.getCollection("Reviews").drop();
+            MongoCollection<Document>reviewsCollection = database.getCollection("Reviews");
+            for(Review review:reviews){
+                Document reviewDocument = crearReviewDocument(review);
+                reviewsCollection.insertOne(reviewDocument);
+            }
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la lista de Locales");
+            return false;
+        }
+    }
+    
+    /**
+     * Funcion DescargarListaReviews
+     * Copia el contenido de reviews la Base de Datos Online en la lista revies local.
+     * @return: null si se produce algun error.
+     * @return: lista revies Local que se ha descargado de la Base de Datos.
+     */
+    public static ArrayList<Review> DescargarListaReview(){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Crear Lista Usuarios
+        List<Review> reviews = new ArrayList<>();
+        try{
+            MongoCollection<Document> reviewsCollection = database.getCollection("Reviews");
+            FindIterable<Document> iterable = reviewsCollection.find();
+            for(Document reviewDocument : iterable){
+                Review review = crearReviewObject(reviewDocument);
+                reviews.add(review);
+            }
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido obtener la lista de Usuarios");
+            return null;
+        }
+        return (ArrayList<Review>) reviews;
+    }
+    
+    /* NO SE USAN */
     /**
      * serializeObject serializa el objeto para poder almacenarlo en la Base de Datos.
      * @param obj: Objeto serializable que se quiere almacenar.
