@@ -1,0 +1,24 @@
+<Contestacion>
+	<comentario>Tendremos en cuenta su opinion</comentario>
+	<fecha>2023-11-13</fecha>
+	<Bar>
+		<nombre>Santa chula</nombre>
+		<Direccion>
+			<localidad>Burlada</localidad>
+			<provincia>Melilla</provincia>
+			<calle>Pereza</calle>
+			<numero>33</numero>
+		</Direccion>
+		<descripcion>Restaurante deluxe</descripcion>
+		<Propietario>
+			<nick>Juanjo</nick>
+			<contraseña>1234</contraseña>
+			<fechaNacimiento>2005-11-13</fechaNacimiento>
+		</Propietario>
+		<Propietario>
+			<nick>Pepa</nick>
+			<contraseña>4321</contraseña>
+			<fechaNacimiento>1973-11-13</fechaNacimiento>
+		</Propietario>
+	</Bar>
+</Contestacion>
