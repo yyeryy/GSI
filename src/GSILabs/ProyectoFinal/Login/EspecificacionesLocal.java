@@ -7,9 +7,11 @@ import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BSystem.BusinessSystem;
-import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
+import GSILabs.MongoDB.ConexionBBDD;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.cargarLocal;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +27,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
     /**
      * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private Propietario propietario = null;
+    private Propietario propietario = new Propietario("Luis","1234",LocalDate.parse("2000-12-30"));
 
     /**
      * Constructor EspecificacionesLocal.
@@ -194,7 +196,7 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         } else {
             //Rellenamos atributos para clase Local
             String nombreLocal = this.fieldNombre.getText();
-            Direccion direccion = null;
+            Direccion direccion = new Direccion("A","B","C",1);
             String descripcion = this.fieldDescripcion.getText();
             
             BusinessSystem bs = DescargarDatos();
@@ -208,11 +210,13 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
                 } else {
+                    System.out.println("Contenido Local" + local);
                     bs.nuevoLocal(local);
                     bs.asociarLocal(local, this.propietario);
 
                     System.out.println("Este local no existe");
-                    CargarDatos(bs);            
+                    cargarLocal(local);
+                    System.out.println("Enviado");
                 }
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Restaurante")) {
                 //tipo = tipoLocal.RESTAURANTE;
