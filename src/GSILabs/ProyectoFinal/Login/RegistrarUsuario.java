@@ -11,6 +11,9 @@ import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.cargarUsuario;
 import javax.swing.JOptionPane;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -234,10 +237,12 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una contraseña.");
         } else if(!tfContrasena.getText().equals(tfConfirmacionContrasena.getText())){
             JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes, ponga 2 iguales.");
+        } else if(tfContrasena.getText().length() < 3){
+            JOptionPane.showMessageDialog(null, "Las contraseñas debe ser de mas de 3 caracteres");
         } else {
             // Obtener datos usuario
             String nick = tfNombre.getText();
-            String contrasena = tfContrasena.getText();
+            String contrasena = getMd5(tfContrasena.getText());
             String tipoStr = (String) cBoxTipoUsuario.getSelectedItem();
             // Añadir usuario
             Usuario nuevoUsuario;
@@ -264,8 +269,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Cliente")) {
                 //Rellenamos campos para la creación de cliente
                 String nombreCliente = this.tfNombre.getText();
-                String contrasenaCliente = Arrays.toString(this.tfContrasena.getPassword()); //Comprobar que lo devuelve bien
-                Cliente cliente = new Cliente(nombreCliente, contrasenaCliente, LocalDate.of(2001, 6, 12));
+                Cliente cliente = new Cliente(nombreCliente, contrasena, LocalDate.of(2001, 6, 12));
                 
                 MenuCliente abrirMenuCliente = new MenuCliente(nuevoUsuario);
                 this.setVisible(false);
@@ -273,8 +277,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             } else if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Propietario")) {
                 //Rellenamos campos para la creación de propietario
                 String nombrePropietario = this.tfNombre.getText();
-                String contrasenaPropietario = Arrays.toString(this.tfContrasena.getPassword()); //Comprobar que lo devuelve bien
-                Propietario propietario = new Propietario(nombrePropietario, contrasenaPropietario, LocalDate.of(2001, 6, 12));
+                Propietario propietario = new Propietario(nombrePropietario, contrasena, LocalDate.of(2001, 6, 12));
                 
                 //MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
                 EspecificacionesLocal abrirEspecificacionesLocal = new EspecificacionesLocal(propietario);
@@ -328,4 +331,32 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JPasswordField tfContrasena;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
+    
+    /**
+     * Cifrado de la cadena introducida mediante el algoritmo de hash MD5.
+     * @param input Cadena que se va a cifrar.
+     * @return Cadena de texto cifrada con algoritmo de hash MD5.
+     */
+    public static String getMd5(String input) {
+        try {
+            //Instancia de MessageDigest estableciendo el algoritmo de hash MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            
+            //Calculamos el hash de la cadena de entrada.
+            byte[] messageDigest = md.digest(input.getBytes());
+ 
+            //Creación del objeto BigInteger a partir del hash (array de bytes)
+            BigInteger no = new BigInteger(1, messageDigest);
+ 
+            //Conversión de message digest a un valor hexadecimal.
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+            
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

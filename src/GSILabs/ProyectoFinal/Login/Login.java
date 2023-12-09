@@ -346,7 +346,7 @@ public class Login extends javax.swing.JFrame {
     private boolean esLoginCorrecto() { //MODIFICAR COMPROBANDO
         // Obtener datos usuario
         String nick = UsuarioLogin.getText();
-        String contrasena = ContrasenaLogin.getText();
+        String contrasena = getMd5(ContrasenaLogin.getText());
         // Descargar BS
         //BusinessSystem bs = DescargarDatos();
         // Comprobar contraseña
