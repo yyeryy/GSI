@@ -8,7 +8,9 @@ import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BSystem.BusinessSystem;
 import GSILabs.MongoDB.ConexionBBDD;
+import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.actualizarLocal;
 import static GSILabs.MongoDB.ConexionBBDD.cargarLocal;
 import GSILabs.ProyectoFinal.DonaAplicacion.DonaAplicacion;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
@@ -265,9 +267,15 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
+                    if(bs.asociarLocal(local, propietario)){
+                        System.out.println("Bar asociado correctamente");
+                    }
+                    //CargarDatos(bs);
+                    if(actualizarLocal(local)){
+                        System.out.println("Bar actualizado correctamente");
+                    }
                 } else {
                     bs.nuevoLocal(local);
-                    //bs.asociarLocal(local, this.propietario);
                     System.out.println("Este local no existe");
                     cargarLocal(local);
                 }
@@ -276,6 +284,8 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
+                    bs.asociarLocal(local, propietario);
+                    CargarDatos(bs);
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
@@ -286,6 +296,9 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
+                    bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario);
+                    //bs.actualizarLocal(local, local)
+                    CargarDatos(bs);
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
