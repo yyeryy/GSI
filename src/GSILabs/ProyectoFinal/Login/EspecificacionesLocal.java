@@ -269,14 +269,22 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                     System.out.println("Este local ya existe");
                     if(bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario)){
                         System.out.println("Bar asociado correctamente");
+                        if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
+                            System.out.println("Bar actualizado correctamente");
+                        }
+                        MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                        this.setVisible(false);
+                    }else{
+                        System.out.println("Numero maximo de propietarios alcanzado");
+                        JOptionPane.showMessageDialog(null, "Numero maximo de propietarios alcanzado");
                     }
-                    if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
-                        System.out.println("Bar actualizado correctamente");
-                    }
+                    
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
                     cargarLocal(local);
+                    MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                    this.setVisible(false);
                 }
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Restaurante")) {
                 Restaurante local = new Restaurante(nombreLocal, direccion, descripcion, this.propietario, 12.0, null, null);
@@ -285,14 +293,21 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                     System.out.println("Este local ya existe");
                     if(bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario)){
                         System.out.println("Restaurante asociado correctamente");
-                    }
-                    if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
-                        System.out.println("Restaurante actualizado correctamente");
+                        if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
+                            System.out.println("Restaurante actualizado correctamente");
+                        }
+                        MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                        this.setVisible(false);
+                    }else{
+                        System.out.println("Numero maximo de propietarios alcanzado");
+                        JOptionPane.showMessageDialog(null, "Numero maximo de propietarios alcanzado");
                     }
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
                     cargarLocal(local);
+                    MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                    this.setVisible(false);
                 }
             } else if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Pub")) {
                 Pub local = new Pub(null, null, nombreLocal, direccion, descripcion, this.propietario);
@@ -301,19 +316,23 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                     System.out.println("Este local ya existe");
                     if(bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario)){
                         System.out.println("Pub asociado correctamente");
-                    }
-                    if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
-                        System.out.println("Pub actualizado correctamente");
+                        if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
+                            System.out.println("Pub actualizado correctamente");
+                        }
+                        MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                        this.setVisible(false);
+                    }else{
+                        System.out.println("Numero maximo de propietarios alcanzado");
+                        JOptionPane.showMessageDialog(null, "Numero maximo de propietarios alcanzado");
                     }
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
                     cargarLocal(local);
+                    MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
+                    this.setVisible(false);
                 }
             }
-            
-            MenuPropietario abrirMenuPropietario = new MenuPropietario(propietario);
-            this.setVisible(false);
         }
             
         System.out.println("Nombre" + fieldNombre.getText());

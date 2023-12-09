@@ -137,7 +137,7 @@ public class Local implements XMLRepresentable, Serializable{
      */
     public boolean addPropietario(Propietario propietario) {
         if(this.propietarios.size() > 2) {
-            throw new IllegalArgumentException("Número máximo de propietarios alcanzado.");
+            return false;
         }
         this.propietarios.add(propietario);
         return true;
