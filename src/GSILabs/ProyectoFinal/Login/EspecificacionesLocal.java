@@ -267,11 +267,10 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
-                    if(bs.asociarLocal(local, propietario)){
+                    if(bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario)){
                         System.out.println("Bar asociado correctamente");
                     }
-                    //CargarDatos(bs);
-                    if(actualizarLocal(local)){
+                    if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
                         System.out.println("Bar actualizado correctamente");
                     }
                 } else {
@@ -284,8 +283,12 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
-                    bs.asociarLocal(local, propietario);
-                    CargarDatos(bs);
+                    if(bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario)){
+                        System.out.println("Restaurante asociado correctamente");
+                    }
+                    if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
+                        System.out.println("Restaurante actualizado correctamente");
+                    }
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
@@ -296,9 +299,12 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
                 this.propietario.setLocal(local);
                 if (bs.obtenerLocal(local.getDireccion()) != null) {
                     System.out.println("Este local ya existe");
-                    bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario);
-                    //bs.actualizarLocal(local, local)
-                    CargarDatos(bs);
+                    if(bs.asociarLocal(bs.obtenerLocal(local.getDireccion()), propietario)){
+                        System.out.println("Pub asociado correctamente");
+                    }
+                    if(actualizarLocal(bs.obtenerLocal(local.getDireccion()))){
+                        System.out.println("Pub actualizado correctamente");
+                    }
                 } else {
                     bs.nuevoLocal(local);
                     System.out.println("Este local no existe");
