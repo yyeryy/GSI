@@ -6,7 +6,6 @@ import GSILabs.BModel.Usuario;
 import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
-import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.cargarUsuario;
 import javax.swing.JOptionPane;
@@ -15,7 +14,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 /**
  * Clase RegistrarUsuario
@@ -231,38 +229,46 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         System.out.println("Boton login pulsado");
         if(tfNombre.getText().equals("") && tfContrasena.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario y una contraseña.");
-        } else if(tfNombre.getText().equals("")){
+        } 
+        else if(tfNombre.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario.");
-        } else if(tfContrasena.getText().equals("")){
+        } 
+        else if(tfContrasena.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una contraseña.");
-        } else if(!tfContrasena.getText().equals(tfConfirmacionContrasena.getText())){
+        } 
+        else if(!tfContrasena.getText().equals(tfConfirmacionContrasena.getText())){
             JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes, ponga 2 iguales.");
-        } else if(tfContrasena.getText().length() < 3){
+        } 
+        else if(tfContrasena.getText().length() < 3){
             JOptionPane.showMessageDialog(null, "Las contraseñas debe ser de mas de 3 caracteres");
-        } else {
-            // Obtener datos usuario
+        } 
+        else {
+            //Obtener datos usuario
             String nick = tfNombre.getText();
             String contrasena = getMd5(tfContrasena.getText());
             String tipoStr = (String) cBoxTipoUsuario.getSelectedItem();
-            // Añadir usuario
+            
+            //Añadir usuario
             Usuario nuevoUsuario;
             if(tipoStr.equals("Cliente"))
                 nuevoUsuario = new Usuario(nick,contrasena, LocalDate.of(2000,1,1), CLIENTE);
             else
                 nuevoUsuario = new Usuario(nick,contrasena, LocalDate.of(2000,1,1), PROPIETARIO);
-            // Descargar BS
+            
+            //Descargar BS
             BusinessSystem bs = DescargarDatos();
-            // Comprobar si existe el usuario
+            
+            //Comprobar si existe el usuario
             if(bs.obtenerUsuario(nick) != null){
                 JOptionPane.showMessageDialog(null, "Este usuario ya esta en uso.");
                 return;
             }
-            // Añado el nuevo usuario
+            //Adición del nuevo usuario
             bs.nuevoUsuario(nuevoUsuario);
             
             usuario = nuevoUsuario;
             
-            // Añadir a la base de datos
+            //Añadir a la base de datos
             cargarUsuario(nuevoUsuario);
             
             //Si no hay ningún error al crear
@@ -274,7 +280,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                 MenuCliente abrirMenuCliente = new MenuCliente(nuevoUsuario);
                 this.setVisible(false);
                 
-            } else if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Propietario")) {
+            } 
+            else if((cBoxTipoUsuario.getItemAt(cBoxTipoUsuario.getSelectedIndex())).equals("Propietario")) {
                 //Rellenamos campos para la creación de propietario
                 String nombrePropietario = this.tfNombre.getText();
                 Propietario propietario = new Propietario(nombrePropietario, contrasena, LocalDate.of(2001, 6, 12));

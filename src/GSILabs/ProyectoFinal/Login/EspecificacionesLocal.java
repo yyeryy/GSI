@@ -2,19 +2,15 @@ package GSILabs.ProyectoFinal.Login;
 
 import GSILabs.BModel.Bar;
 import GSILabs.BModel.Direccion;
-import GSILabs.BModel.Local;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BSystem.BusinessSystem;
-import GSILabs.MongoDB.ConexionBBDD;
-import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.actualizarLocal;
 import static GSILabs.MongoDB.ConexionBBDD.cargarLocal;
 import GSILabs.ProyectoFinal.DonaAplicacion.DonaAplicacion;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,12 +78,6 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         jLabel3.setText("Dirección del local");
 
         jLabel4.setText("Descripción");
-
-        fieldDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldDescripcionActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Tipo local");
 
@@ -261,7 +251,6 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
             
             BusinessSystem bs = DescargarDatos();
             
-            //Local local = null;
             if((cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex())).equals("Bar")) {
                 Bar local = new Bar(nombreLocal, direccion, descripcion, this.propietario);
                 this.propietario.setLocal(local);
@@ -340,10 +329,6 @@ public class EspecificacionesLocal extends javax.swing.JFrame {
         System.out.println("Descripcion" + fieldDescripcion.getText());
         System.out.println("Tipo" + cBoxTipoLocal.getItemAt(cBoxTipoLocal.getSelectedIndex()));
     }//GEN-LAST:event_botonConfirmarActionPerformed
-
-    private void fieldDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldDescripcionActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,8 +1,6 @@
 package GSILabs.ProyectoFinal.Login;
 
 import GSILabs.BModel.Usuario;
-import GSILabs.BSystem.BusinessSystem;
-import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.descargarUsuario;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
@@ -34,15 +32,6 @@ public class Login extends javax.swing.JFrame {
         
         super.setVisible(true);
         super.setLocationRelativeTo(null);
-        
-/*      PROBABLEMENTE BORRAR
-        creacionDocumentoLogin();
-        iniciarIcono();
-        pfContrasena.setEchoChar('*');
-
-        super.setVisible(true);
-        super.setLocationRelativeTo(null);
-*/
     }
 
     /**
@@ -74,12 +63,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
-
-        UsuarioLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsuarioLoginActionPerformed(evt);
-            }
-        });
 
         botonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         botonLogin.setText("Login");
@@ -181,20 +164,19 @@ public class Login extends javax.swing.JFrame {
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
         System.out.println("Boton login pulsado");
         //Si ambos campos están sin rellenar
-        if(UsuarioLogin.getText().equals("") && ContrasenaLogin.getText().equals("")){
+        if(UsuarioLogin.getText().equals("") && ContrasenaLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario y una contraseña.");
+        } 
         //Si el campo nombre de usuario está sin rellenar
-        } else if(UsuarioLogin.getText().equals("")){
+        else if(UsuarioLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca un nombre de usuario.");
+        } 
         //Si el campo contraseña está sin rellenar
-        } else if(ContrasenaLogin.getText().equals("")){
+        else if(ContrasenaLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Porfavor, introduzca una contraseña.");
+        } 
         //Si el login se ha realizado correctamente
-        } else if(esLoginCorrecto()) { //MODIFICAR esLoginCorrecto
-            
-            //Buscar en la base de datos que los datos coincidan y hacer el login.
-            
-            //HACER ESTA COMPROBACIÓN PARA ENTRAR AL CLIENTE O AL ADMINISTRADOR (MODIFICAR CÓDIGO)
+        else if(esLoginCorrecto()) {
             //Si el usuario que intenta hacer el login es Cliente
             if(usuario.getStringTipo().equals("Cliente")) {
                 MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
@@ -237,7 +219,6 @@ public class Login extends javax.swing.JFrame {
      */
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         System.exit(0);
-        //jDialogInformacion.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     /**
@@ -250,10 +231,6 @@ public class Login extends javax.swing.JFrame {
         abrirRegistrarUsuario.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonRegistrarseActionPerformed
-
-    private void UsuarioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UsuarioLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -268,73 +245,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JCheckBox mostrarContraseña;
     // End of variables declaration//GEN-END:variables
 
-    /** PROBABLEMENTE NO HAGA FALTA
-     * Creación inicial del documento claves.txt, en el que ya tiene creado un 
-     * usuario con condición de administrador con las siguientes credenciales:
-     * Nombre: admin
-     * Contrasena: admin.
-     */
-/*
-    private void creacionDocumentoLogin() {
-        try {
-            File archivoClaves = new File(System.getProperty("user.dir") + "\\claves.txt");
-            if(!archivoClaves.exists()){
-                System.out.println("Creamos fichero de claves.");
-                archivoClaves.createNewFile();             
-                insertarCuentaAdministradorPorDefecto(archivoClaves);
-            } else {
-            }
-        } catch(IOException ex) {
-            System.out.println("Error en la creación del documento de claves.");
-        }
-    }
-*/
     
-    /** PROBABLEMENTE NO HAGA FALTA
-     * Inserción de cuenta inicial con las siguientes credenciales:
-     * Nombre: admin
-     * Contrasena: admin
-     * TipoUsuario: Administrador
-     * en el archivo claves.txt que almacena todos los usuarios del sistema.
-     * @param archivoLogin Fichero que almacena las los usuarios de la aplicación
-     * con sus claves y su tipo de usuario
-     * @throws IOException Exception lanzada al encontrar un error en el manejo
-     * de ficheros
-     */
-/*
-    private void insertarCuentaAdministradorPorDefecto(File archivoLogin) throws IOException {
-        String textoAEscribir = "";
-        try (FileWriter miEscritor = new FileWriter(archivoLogin)) {
-            textoAEscribir = textoAEscribir + "admin" + ":" + getMd5("admin") + ":" + "Administrador";
-            miEscritor.write(textoAEscribir);
-        } catch(Exception e) {
-            System.out.println("Error con FileWriter.");
-        }
-    }
-*/
-    /** PROBABLEMENTE NO HAGA FALTA
-     * Muestra de un JDialog en el que se muestra el texto del error ocurrido.
-     * @param texto Texto del error ocurrido en el transcurso de la aplicación.
-     */
-/*
-    public void mostrarVentana(String texto) {
-        ePaneInformacion.setText(texto);
-        jDialogInformacion.setSize(500, 250);
-        jDialogInformacion.setLocationRelativeTo(null);
-        jDialogInformacion.setVisible(true);
-    }
-*/
-    /** PROBABLEMENTE NO HAGA FALTA
-     * Comprobación de si todos los campos de la ventana de Login están cumplimentadas.
-     * @return Booleano. True si están todos los campos rellenados y False en caso contrario.
-     */
-/*
-    private boolean estanTodosLosCamposRellenados() {
-        if(this.tfNombre.getText().isEmpty() || this.pfContrasena.getText().isEmpty())
-            return false;
-        return true;
-    }
-*/
     /** PROBABLEMENTE NO HAGA FALTA
      * Comprobación de si los datos introducidos en la ventana de login 
      * corresponden con los datos de un usuario previamente registrado y si la 
@@ -343,20 +254,26 @@ public class Login extends javax.swing.JFrame {
      * los de un usuario previamente registrado y si la contraseña corresponde
      * con el usuario. False en caso contrario.
      */
-    private boolean esLoginCorrecto() { //MODIFICAR COMPROBANDO
+    private boolean esLoginCorrecto() {
         // Obtener datos usuario
         String nick = UsuarioLogin.getText();
         String contrasena = getMd5(ContrasenaLogin.getText());
-        // Descargar BS
-        //BusinessSystem bs = DescargarDatos();
-        // Comprobar contraseña
-        Usuario usuarioLogin = descargarUsuario(nick);//bs.obtenerUsuario(nick);
-        if(usuarioLogin == null){
+
+        //Descargamos el usuario que buscamos
+        Usuario usuarioLogin = descargarUsuario(nick);
+        
+        //Comprobar contraseña
+        //Si no se ha descargado correctamente el usuario
+        if(usuarioLogin == null) {
             JOptionPane.showMessageDialog(null, "Los datos introducidos no son correctos.");
-            return false;}
-        if(!usuarioLogin.getContraseña().equals(contrasena)){
+            return false;
+        }
+        //Si la contraseña introducida en el login no coincide con la contraeña real
+        if(!usuarioLogin.getContraseña().equals(contrasena)) {
             JOptionPane.showMessageDialog(null, "Los datos introducidos no son correctos.");
-            return false;}
+            return false;
+        }
+        //Si el login es correcto
         this.usuario = usuarioLogin;
         if(this.usuario.getTipo().toString().equals("PROPIETARIO")){
             System.out.println("Tipo de usuario: PROPIETARIO");
@@ -365,58 +282,8 @@ public class Login extends javax.swing.JFrame {
         }
         return true;
     }
-/*
-    private boolean esLoginCorrecto() {
-        List<String> contenidoFicheroClaves;
-        try {
-            contenidoFicheroClaves = Files.readAllLines(Paths.get(System.getProperty("user.dir") + "\\claves.txt"));
-            for(String linea : contenidoFicheroClaves){
-                String[] trozos = linea.split(":");
-                String nombreUsuario = trozos[0];
-                String contrasena = trozos[1];
-                String rolUsuario = trozos[2].split("\n")[0];
-                if(nombreUsuario.equals(tfNombre.getText()) && contrasena.equals(getMd5(this.pfContrasena.getText()))) {
-                    sesionUsuario = new SesionUsuario(nombreUsuario, contrasena, rolUsuario);
-                    return true;
-                } else {
-                    mostrarVentana(CONTRASENA_NO_ES_CORRECTA);
-                    return false;
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(GSILabs.ProyectoFinal.Login.Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-*/
-    
-    /** PROBABLEMENTE NO HARÁ FALTA
-     * Obtención del mensaje de error ocurrido.
-     * @return Texto del mensaje de error ocurrido.
-     */
-/*
-    private String obtenerMensajeDeTipoDeError() {
-        List<String> contenidoFicheroClaves;
-        try {
-            contenidoFicheroClaves = Files.readAllLines(Paths.get(System.getProperty("user.dir") + "\\claves.txt"));
-            for(String linea : contenidoFicheroClaves){
-                String[] trozos = linea.split(":");
-                String nombreUsuario = trozos[0];
-                if(!nombreUsuario.equals(tfNombre.getText()))
-                    return NOMBRE_USUARIO_NO_ESTA_REGISTRADO;
-                else
-                    return CONTRASENA_NO_ES_CORRECTA;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(GSILabs.ProyectoFinal.Login.Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
-    }
-*/
-    
-    
-    
-    /** HACE FALTA SI O SI
+
+    /**
      * Cifrado de la cadena introducida mediante el algoritmo de hash MD5.
      * @param input Cadena que se va a cifrar.
      * @return Cadena de texto cifrada con algoritmo de hash MD5.
