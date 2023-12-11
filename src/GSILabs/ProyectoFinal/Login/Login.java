@@ -246,7 +246,7 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     
-    /** PROBABLEMENTE NO HAGA FALTA
+    /**
      * Comprobación de si los datos introducidos en la ventana de login 
      * corresponden con los datos de un usuario previamente registrado y si la 
      * contraseña introducida corresponde con el usuario introducido.
