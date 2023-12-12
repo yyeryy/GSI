@@ -28,7 +28,7 @@ import java.util.Random;
 public class PruebaMongo {
     public static void main(String[] args) throws UnsupportedEncodingException, IOException, ClassNotFoundException {
         /*CAMBIAR AL DE FERMIN CUANDO ESTE ACABADO*/
-        BusinessSystem bsOriginal = crearBS2(); // Crea un businessSystem poblado
+        BusinessSystem bsOriginal = crearBS(); // Crea un businessSystem poblado
         CargarDatos(bsOriginal); // Sube los datos del BusinessSytem al MongoDB
         BusinessSystem bsNuevo = DescargarDatos(); // Obtiene los datos del MongoDB y los almacena en el BusinessSytem
         actualizarUsuario(new Usuario("Antonio","0000",LocalDate.parse("1950-01-01"), PROPIETARIO));
@@ -39,27 +39,31 @@ public class PruebaMongo {
         BusinessSystem bs = new BusinessSystem();
 
         Random random = new Random();
+        Propietario propietario = null;
+        Cliente cliente = null;
         
         // Creación de 100 direcciones
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 150; i++) {
             Direccion direccion = new Direccion("Ciudad" + i, "Provincia" + i, "Calle" + i, i);
             
-            Propietario propietario = new Propietario("Propietario" + i, "1234", LocalDate.now().minusYears(20));
-            bs.nuevoUsuario(propietario);
-            
-            Cliente cliente = new Cliente("Cliente" + i, "1234", LocalDate.now().minusYears(20));
-            bs.nuevoUsuario(cliente);
+            if (i % 3 < 2){
+                propietario = new Propietario("Propietario" + i, "1234", LocalDate.now().minusYears(20));
+                bs.nuevoUsuario(propietario);
+
+                cliente = new Cliente("Cliente" + i, "1234", LocalDate.now().minusYears(20));
+                bs.nuevoUsuario(cliente);
+            }
             
             if(i < 33){ // generamos bares
                 Bar bar = new Bar("Bar" + i, direccion, "Descripción del Bar" + i, propietario);
                 bar.agregarEspecialidad("Especialidad" + i);
                 bs.nuevoLocal(bar);
                 
-                Review review = new Review(random.nextInt(11),"Comentario "+i,LocalDate.now(),bs.obtenerLocal(bar.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
+                Review review = new Review(random.nextInt(11),"Comentario review "+i,LocalDate.now(),bs.obtenerLocal(bar.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
                 bs.nuevaReview(review);
                 
                 if (i % 2 == 0){
-                    Contestacion contestacion = new Contestacion("Comentario "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar);
+                    Contestacion contestacion = new Contestacion("Comentario contestacion"+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),bar);
                     bs.nuevaContestacion(contestacion, review);
                 }
                 
@@ -71,11 +75,11 @@ public class PruebaMongo {
                 Restaurante restaurante = new Restaurante("Restaurante" + i, direccion, "Descripción del Restaurante" + i, propietario, 20, 100, 5);
                 bs.nuevoLocal(restaurante);
                 
-                Review review = new Review(random.nextInt(11),"Comentario "+i,LocalDate.now(),bs.obtenerLocal(restaurante.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
+                Review review = new Review(random.nextInt(11),"Comentario review "+i,LocalDate.now(),bs.obtenerLocal(restaurante.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
                 bs.nuevaReview(review);
                 
                 if (i % 2 == 0){
-                    Contestacion contestacion = new Contestacion("Comentario "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),restaurante);
+                    Contestacion contestacion = new Contestacion("Comentario contestacion "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),restaurante);
                     bs.nuevaContestacion(contestacion, review);
                 }
                 
@@ -87,11 +91,11 @@ public class PruebaMongo {
                 Pub pub = new Pub("10:00", "2:00", "Pub" + i, direccion, "Descripción del Pub" + i, propietario);
                 bs.nuevoLocal(pub);
                 
-                Review review = new Review(random.nextInt(11),"Comentario "+i,LocalDate.now(),bs.obtenerLocal(pub.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
+                Review review = new Review(random.nextInt(11),"Comentario review "+i,LocalDate.now(),bs.obtenerLocal(pub.getDireccion()),(Cliente) bs.obtenerUsuario(cliente.getNick()));
                 bs.nuevaReview(review);
                 
                 if (i % 2 == 0){
-                    Contestacion contestacion = new Contestacion("Comentario "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub);
+                    Contestacion contestacion = new Contestacion("Comentario contestacion "+i,LocalDate.of(LocalDate.now().getYear()+1,LocalDate.now().getMonth(),LocalDate.now().getDayOfMonth()),pub);
                     bs.nuevaContestacion(contestacion, review);
                 }
                 
