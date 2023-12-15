@@ -246,6 +246,9 @@ public class MongoDBUtils {
         donacionDocument.append("Local", crearLocalDocument(donacion.getLocal()));
         if(donacion.getUsuario() != null)
             donacionDocument.append("Usuario", crearUsuarioDocument(donacion.getUsuario()));
+        else{
+            donacionDocument.append("Usuario", null);
+        }
         return donacionDocument;
     }
     
@@ -254,10 +257,10 @@ public class MongoDBUtils {
         int cantidadProducto = donacionDocument.getInteger("Cantidad producto");
         Local local = crearLocalObject(donacionDocument.get("Local", Document.class));
         Donacion donacion = new Donacion(local,nombreProducto,cantidadProducto);
-        try{
+        if(donacionDocument.get("Usuario", Document.class) != null){
             Usuario usuario = crearUsuarioObject(donacionDocument.get("Usuario", Document.class));
             donacion.setUsuario(usuario);
-        }catch(Exception e){}
+        }
         return donacion;
     }
 }

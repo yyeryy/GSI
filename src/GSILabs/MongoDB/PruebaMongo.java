@@ -19,7 +19,9 @@ import GSILabs.BSystem.BusinessSystem;
 import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.CargarListaDonaciones;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.DescargarListaDonacion;
 import static GSILabs.MongoDB.ConexionBBDD.actualizarUsuario;
+import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
@@ -56,7 +58,8 @@ public class PruebaMongo {
         bsNuevo.donaciones.add(donacion2);
         // meter en la base de datos
         CargarListaDonaciones(bsNuevo.donaciones);
-        
+        System.out.println("Lista con usuario: " + descargarDonacionesDisponibles(usuario1));
+        System.out.println("Lista sin usuario: " + descargarDonacionesDisponibles(null));
         //actualizarUsuario(new Usuario("Antonio","0000",LocalDate.parse("1950-01-01"), PROPIETARIO));
     }
     

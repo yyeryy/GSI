@@ -589,23 +589,35 @@ public class ConexionBBDD {
         }
     }
     
-    public static Donacion descargarDonacion(Donacion donacion){
+    public static ArrayList<Donacion> descargarDonacionesDisponibles(Usuario usuario){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
         MongoDatabase database = MongoDBSingleton.getDatabase();
+        List<Donacion> donaciones = new ArrayList<>();
         
         try{
             MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
-            Document consulta = new Document("Donacion", donacion);
-            Document resultado = donacionesCollection.find().first();
-            return crearDonacionObject(resultado);
+            Document filtro;
+            if(null == usuario){
+                filtro = new Document("Usuario", null);
+            }
+            else{
+                filtro = new Document("Usuario", crearUsuarioDocument(usuario));
+            }
+            FindIterable<Document> iterable = donacionesCollection.find(filtro);
+            for (Document donacionDocument : iterable) {
+                Donacion donacion = crearDonacionObject(donacionDocument);
+                donaciones.add(donacion);
+            }
         }
         catch(Exception e){
             System.out.println("ERROR: No se ha podido decargar la donacion indicada");
             return null;
         }
+        return (ArrayList<Donacion>) donaciones;
     }
     
+    // OBLIGATORIO: update, se actualiza la donacion con el usuario, Local = local, nombre = nombre, cantidad = cantidad.
     public static boolean actualizarDonacion(Donacion donacion){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
