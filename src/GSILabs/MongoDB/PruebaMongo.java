@@ -20,6 +20,7 @@ import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.CargarListaDonaciones;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarListaDonacion;
+import static GSILabs.MongoDB.ConexionBBDD.actualizarDonacionUsuario;
 import static GSILabs.MongoDB.ConexionBBDD.actualizarUsuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class PruebaMongo {
         
         // Pruebas donaciones
         Usuario usuario1 = new Usuario("Prueba1", "1234", LocalDate.parse("1950-01-01"), CLIENTE);
-        //Usuario usuario2 = new Usuario("Prueba2", "1234", LocalDate.parse("1950-01-01"),CLIENTE);
+        Usuario usuario2 = new Usuario("Prueba2", "1234", LocalDate.parse("1950-01-01"),CLIENTE);
         Propietario propietario1 = new Propietario("Prueba3", "1234", LocalDate.parse("1950-01-01"));
         Propietario propietario2 = new Propietario("Prueba4", "1234", LocalDate.parse("1950-01-01"));
         Direccion direccion1 = new Direccion("A","A","A",1);
@@ -58,9 +59,14 @@ public class PruebaMongo {
         bsNuevo.donaciones.add(donacion2);
         // meter en la base de datos
         CargarListaDonaciones(bsNuevo.donaciones);
-        System.out.println("Lista con usuario: " + descargarDonacionesDisponibles(usuario1));
+        System.out.println("Lista con usuario1: " + descargarDonacionesDisponibles(usuario1));
         System.out.println("Lista sin usuario: " + descargarDonacionesDisponibles(null));
-        //actualizarUsuario(new Usuario("Antonio","0000",LocalDate.parse("1950-01-01"), PROPIETARIO));
+       
+        // Prueba actualizar
+        donacion2.setUsuario(usuario2);
+        actualizarDonacionUsuario(donacion2);
+        System.out.println("Lista con usuario2: " + descargarDonacionesDisponibles(usuario2));
+        System.out.println("Lista sin usuario: " + descargarDonacionesDisponibles(null));
     }
     
     // FERMIN: Añadir más cosas, cuando este terminado donaciones, meter tbn donaciones.

@@ -527,7 +527,6 @@ public class ConexionBBDD {
         }
     }
     
-    // FALTA UNA FUNCION
     public static boolean CargarListaDonaciones(ArrayList<Donacion> donaciones)
     {
         // Conectar a la base de datos
@@ -549,7 +548,6 @@ public class ConexionBBDD {
         }
     }
     
-    // FALTA UNA FUNCION
     public static ArrayList<Donacion> DescargarListaDonacion(){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
@@ -616,15 +614,16 @@ public class ConexionBBDD {
         }
         return (ArrayList<Donacion>) donaciones;
     }
-    
-    // OBLIGATORIO: update, se actualiza la donacion con el usuario, Local = local, nombre = nombre, cantidad = cantidad.
-    public static boolean actualizarDonacion(Donacion donacion){
+   
+    public static boolean actualizarDonacionUsuario(Donacion donacion){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
         MongoDatabase database = MongoDBSingleton.getDatabase();
         try{
             MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
-            Document consulta = new Document("Local", donacion.getLocal());
+            Document consulta = new Document("Local", crearLocalDocument(donacion.getLocal()));
+            consulta.append("Nombre producto", donacion.getNombreProducto());
+            consulta.append("Cantidad producto", donacion.getCantidadProducto());
             Document resultado = donacionesCollection.find(consulta).first();
             if(resultado == null)
             {
@@ -636,10 +635,9 @@ public class ConexionBBDD {
             return true;
         }
         catch(Exception e){
-            System.out.println("ERROR: No se ha podido decargar la review indicado");
+            System.out.println("ERROR: No se ha podido decargar la donacion indicado");
+            e.printStackTrace();
             return false;
         }
     }
-    
-    
 }
