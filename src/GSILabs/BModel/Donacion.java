@@ -47,6 +47,18 @@ public class Donacion {
         this.usuario = null; // No tiene usuario 
     }
 
+    /**
+     * Constructor Donacion
+     * @param local Local que hace la Donacion.
+     * @param nombreProducto Nombre del Producto a Donar.
+     * @param cantidadProducto Cantidad de Producto que se dona.
+     */
+    public Donacion(Local local, String nombreProducto, int cantidadProducto, Usuario usuario) {
+        this.local = local;
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.usuario = usuario;
+    }
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
     public Local getLocal() {

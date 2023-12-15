@@ -4,6 +4,7 @@ import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
+import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Local.tipoLocal;
 import static GSILabs.BModel.Local.tipoLocal.*;
@@ -55,6 +56,7 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
     public ArrayList<Usuario> usuarios = new ArrayList<>();
     public ArrayList<Review> reviews = new ArrayList<>();
     public ArrayList<Local> locales = new ArrayList<>();
+    public ArrayList<Donacion> donaciones = new ArrayList<>();
 
     /** Usuarios **/
     
@@ -1238,4 +1240,76 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
         }
         return stringBuilder.toString();
     }
+
+
+
+
+    // Luego esto hay que moverlo a antes del parser
+
+    // Donacion
+
+    /**
+     * Anota una Donacion en el sistema,
+     * con el local que realiza la donacion, nombre del producto y la cantidad,
+     * se comprueba si existe la Donacion en el local sin usuario, 
+     * en caso de existir, se le añade la cantidad, 
+     * si no existe, se crea una nueva Donacion.
+     * @param l Local que hace la Donacion
+     * @param p Nombre del producto a donar
+     * @param c Cantidad del producto a donar
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean nuevaDonacion(Local l, String p, int c){
+
+        Donacion dona = new Donacion(l, p, c);
+
+	int indice = donaciones.indexOf(dona);
+	if (indice == -1) {
+            // no habia una Donacion antes
+            donaciones.add(dona);
+	}else{
+            // ya hay una Donacion, se le añade la cantidad
+            dona = donaciones.get(indice);
+            dona.setCantidadProducto(c + dona.getCantidadProducto());
+        }
+
+        return true;
+    }
+
+
+
+    /**
+     * Anota una Donacion en el sistema con el Usuario que la reserva,
+     * con la Donacion sin usuario  
+     * y la cantidad que reserva el Usuario,
+     * se le resta la cantidad a la Donacion sin usuario y 
+     * se crea otra Donacion con esa cantidad, local, prodcuto y el usuario.
+     * @param d Donacion que el usuario reserva
+     * @param c Cantidad del producto de la Donacion a reservar por el usuario
+     * @param u Usuario que reserva la Donacion
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean reservarDonacion(Donacion d, int c, Usuario u){
+
+        d.setCantidadProducto(d.getCantidadProducto() - c);
+        Donacion dona = new Donacion(d.getLocal(), d.getNombreProducto(), c, u);
+        donaciones.add(dona);
+
+        if(d.getCantidadProducto() <= 0){
+            eliminarDonacion(d);
+        }
+
+        return true;
+    }
+
+    /**
+     * Elimina una Donacion del sistema, en caso de que esta exista
+     * @param d La donacion a eliminar.
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean eliminarDonacion(Donacion d){
+        return donaciones.remove(d);
+    }
+
 }
+
