@@ -1,9 +1,12 @@
 package GSILabs.MongoDB;
 
+import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.BusinessSystem;
+import static GSILabs.MongoDB.MongoDBUtils.crearDonacionDocument;
+import static GSILabs.MongoDB.MongoDBUtils.crearDonacionObject;
 import static GSILabs.MongoDB.MongoDBUtils.crearLocalDocument;
 import static GSILabs.MongoDB.MongoDBUtils.crearLocalObject;
 import static GSILabs.MongoDB.MongoDBUtils.crearReviewDocument;
@@ -523,4 +526,108 @@ public class ConexionBBDD {
             return false;
         }
     }
+    
+    // FALTA UNA FUNCION
+    public static boolean CargarListaDonaciones(ArrayList<Donacion> donaciones)
+    {
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Subir el contenido de la lista
+        try{
+            database.getCollection("Donaciones").drop();
+            MongoCollection<Document>donacionesCollection = database.getCollection("Donaciones");
+            for(Donacion donacion:donaciones){
+                Document donacionDocument = crearDonacionDocument(donacion);
+                donacionesCollection.insertOne(donacionDocument);
+            }
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la lista de Donaciones");
+            return false;
+        }
+    }
+    
+    // FALTA UNA FUNCION
+    public static ArrayList<Donacion> DescargarListaDonacion(){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        // Crear Lista Donaciones
+        List<Donacion> donaciones = new ArrayList<>();
+        try{
+            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
+            FindIterable<Document> iterable = donacionesCollection.find();
+            for(Document donacionDocument : iterable){
+                Donacion donacion = crearDonacionObject(donacionDocument);
+                donaciones.add(donacion);
+            }
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido obtener la lista de Donaciones");
+            return null;
+        }
+        return (ArrayList<Donacion>) donaciones;
+    }
+    
+    public static boolean cargarDonacion(Donacion donacion){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        // Subir la donacion
+        try{
+            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
+            Document donacionDocument = crearDonacionDocument(donacion);
+            donacionesCollection.insertOne(donacionDocument);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la donacion a la lista de Donaciones");
+            return false;
+        }
+    }
+    
+    public static Donacion descargarDonacion(Donacion donacion){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        try{
+            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
+            Document consulta = new Document("Donacion", donacion);
+            Document resultado = donacionesCollection.find().first();
+            return crearDonacionObject(resultado);
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar la donacion indicada");
+            return null;
+        }
+    }
+    
+    public static boolean actualizarDonacion(Donacion donacion){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        try{
+            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
+            Document consulta = new Document("Local", donacion.getLocal());
+            Document resultado = donacionesCollection.find(consulta).first();
+            if(resultado == null)
+            {
+                System.out.println("ERROR: No se ha encontrado la donacion indicada");
+                return false;
+            }
+            Document nuevo = new Document("$set",crearDonacionDocument(donacion));
+            donacionesCollection.updateOne(consulta, nuevo);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar la review indicado");
+            return false;
+        }
+    }
+    
+    
 }

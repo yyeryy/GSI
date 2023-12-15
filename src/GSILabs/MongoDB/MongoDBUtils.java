@@ -2,6 +2,7 @@ package GSILabs.MongoDB;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
+import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Propietario;
@@ -236,5 +237,26 @@ public class MongoDBUtils {
             review.setContestacion(contestacion);
         }catch(Exception e){}
         return review;
+    }
+    
+    public static Document crearDonacionDocument(Donacion donacion){
+        Document donacionDocument = new Document();
+        donacionDocument.append("Nombre producto", donacion.getNombreProducto());
+        donacionDocument.append("Cantidad producto", donacion.getCantidadProducto());
+        donacionDocument.append("Usuario", crearUsuarioDocument(donacion.getUsuario()));
+        donacionDocument.append("Local", crearLocalDocument(donacion.getLocal()));
+        return donacionDocument;
+    }
+    
+    public static Donacion crearDonacionObject(Document donacionDocument){
+        String nombreProducto = donacionDocument.getString("Nombre producto");
+        int cantidadProducto = donacionDocument.getInteger("Cantidad producto");
+        Local local = crearLocalObject(donacionDocument.get("Local", Document.class));
+        Donacion donacion = new Donacion(local,nombreProducto,cantidadProducto);
+        try{
+            Usuario usuario = crearUsuarioObject(donacionDocument.get("Usuario", Document.class));
+            donacion.setUsuario(usuario);
+        }catch(Exception e){}
+        return donacion;
     }
 }
