@@ -243,8 +243,9 @@ public class MongoDBUtils {
         Document donacionDocument = new Document();
         donacionDocument.append("Nombre producto", donacion.getNombreProducto());
         donacionDocument.append("Cantidad producto", donacion.getCantidadProducto());
-        donacionDocument.append("Usuario", crearUsuarioDocument(donacion.getUsuario()));
         donacionDocument.append("Local", crearLocalDocument(donacion.getLocal()));
+        if(donacion.getUsuario() != null)
+            donacionDocument.append("Usuario", crearUsuarioDocument(donacion.getUsuario()));
         return donacionDocument;
     }
     

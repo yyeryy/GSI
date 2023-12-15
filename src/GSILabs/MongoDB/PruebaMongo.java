@@ -3,15 +3,21 @@ import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
+import GSILabs.BModel.Donacion;
+import GSILabs.BModel.Local;
+import static GSILabs.BModel.Local.tipoLocal.BAR;
+import static GSILabs.BModel.Local.tipoLocal.RESTAURANTE;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Reservable;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
+import static GSILabs.BModel.Usuario.tipoUsuario.CLIENTE;
 import static GSILabs.BModel.Usuario.tipoUsuario.PROPIETARIO;
 import GSILabs.BSystem.BusinessSystem;
 import static GSILabs.MongoDB.ConexionBBDD.CargarDatos;
+import static GSILabs.MongoDB.ConexionBBDD.CargarListaDonaciones;
 import static GSILabs.MongoDB.ConexionBBDD.DescargarDatos;
 import static GSILabs.MongoDB.ConexionBBDD.actualizarUsuario;
 import java.io.IOException;
@@ -28,10 +34,30 @@ import java.util.Random;
 public class PruebaMongo {
     public static void main(String[] args) throws UnsupportedEncodingException, IOException, ClassNotFoundException {
         /*CAMBIAR AL DE FERMIN CUANDO ESTE ACABADO*/
-        BusinessSystem bsOriginal = crearBS(); // Crea un businessSystem poblado
+        BusinessSystem bsOriginal = crearBS2(); // Crea un businessSystem poblado
         CargarDatos(bsOriginal); // Sube los datos del BusinessSytem al MongoDB
         BusinessSystem bsNuevo = DescargarDatos(); // Obtiene los datos del MongoDB y los almacena en el BusinessSytem
-        actualizarUsuario(new Usuario("Antonio","0000",LocalDate.parse("1950-01-01"), PROPIETARIO));
+        
+        // Pruebas donaciones
+        Usuario usuario1 = new Usuario("Prueba1", "1234", LocalDate.parse("1950-01-01"), CLIENTE);
+        //Usuario usuario2 = new Usuario("Prueba2", "1234", LocalDate.parse("1950-01-01"),CLIENTE);
+        Propietario propietario1 = new Propietario("Prueba3", "1234", LocalDate.parse("1950-01-01"));
+        Propietario propietario2 = new Propietario("Prueba4", "1234", LocalDate.parse("1950-01-01"));
+        Direccion direccion1 = new Direccion("A","A","A",1);
+        Direccion direccion2 = new Direccion("Z","Z","Z",99);
+        Local local1 = new Local("Local1",direccion1,"A",BAR,propietario1);
+        Local local2 = new Local("Local2",direccion2,"Z",RESTAURANTE,propietario2);
+        Donacion donacion1 = new Donacion(local1,"ProductoA",10);
+        Donacion donacion2 = new Donacion(local2,"ProductoB",20);
+        donacion1.setUsuario(usuario1);
+        
+        // meter en el business
+        bsNuevo.donaciones.add(donacion1);
+        bsNuevo.donaciones.add(donacion2);
+        // meter en la base de datos
+        CargarListaDonaciones(bsNuevo.donaciones);
+        
+        //actualizarUsuario(new Usuario("Antonio","0000",LocalDate.parse("1950-01-01"), PROPIETARIO));
     }
     
     // FERMIN: Añadir más cosas, cuando este terminado donaciones, meter tbn donaciones.
