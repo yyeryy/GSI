@@ -4,7 +4,13 @@
  */
 package GSILabs.ProyectoFinal.Cliente;
 
+import GSILabs.BModel.Donacion;
+import GSILabs.BModel.Local;
 import GSILabs.BModel.Usuario;
+import static GSILabs.MongoDB.ConexionBBDD.actualizarDonacion;
+import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +21,11 @@ public class ReservarComida extends javax.swing.JFrame {
 
     private Usuario usuario = null;
 
+    private ArrayList<Donacion> donaciones = new ArrayList<>();
 
+    private ArrayList<Local> locales = new ArrayList<>();
+
+    private ArrayList<Donacion> donacionesDeUnLocal = new ArrayList<>();
     /**
      * Creates new form ReservarComida
      */
@@ -23,8 +33,29 @@ public class ReservarComida extends javax.swing.JFrame {
         initComponents();
         this.usuario = usuario;
 
-        super.setVisible(true);
-        super.setLocationRelativeTo(null);
+        // Descargar donaciones disponibles (donaciones con usuario = null)
+        this.donaciones = descargarDonacionesDisponibles(null);
+        this.locales.clear();
+        if(this.donaciones.size() < 1){
+            System.out.println("Fallo en Donaciones descargadas. Tamaño = "+ this.donaciones.size());
+            JOptionPane.showMessageDialog(null, "No hay Donaciones disponibles.");  
+            // Ventana anterior
+            MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
+            this.setVisible(false);
+        }else{
+            System.out.println("Donaciones descargadas. Tamaño = "+ this.donaciones.size());       
+        
+            for (Donacion dona : this.donaciones){
+                if(!this.locales.contains(dona.getLocal())){
+                    this.locales.add(dona.getLocal());
+                    jComboBox1.addItem(dona.getLocal().getNombre());
+                }
+            }
+            add(jComboBox1);
+
+            super.setVisible(true);
+            super.setLocationRelativeTo(null);
+        }
     }
 
     /**
@@ -43,24 +74,30 @@ public class ReservarComida extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        try {
+            jComboBox1 =(javax.swing.JComboBox)java.beans.Beans.instantiate(getClass().getClassLoader(), "GSILabs/ProyectoFinal/Cliente.ReservarComida_jComboBox1");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel1.setText("Comida:");
+        jLabel1.setText("Local:");
         jLabel1.setPreferredSize(new java.awt.Dimension(500, 32));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel2.setText("Local:");
+        jLabel2.setText("Comida:");
         jLabel2.setPreferredSize(new java.awt.Dimension(500, 32));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel3.setText("Tipo de Local:");
+        jLabel3.setText("Dirección");
         jLabel3.setPreferredSize(new java.awt.Dimension(500, 32));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -69,7 +106,7 @@ public class ReservarComida extends javax.swing.JFrame {
         jLabel4.setPreferredSize(new java.awt.Dimension(250, 32));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel5.setText("Unidades disponibles:");
+        jLabel5.setText("Tipo de Donación");
         jLabel5.setOpaque(true);
         jLabel5.setPreferredSize(new java.awt.Dimension(250, 32));
 
@@ -93,21 +130,27 @@ public class ReservarComida extends javax.swing.JFrame {
             }
         });
 
-        jSpinner1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jSpinner1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("0");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLabel6.setText("1");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(500, 32));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.setPreferredSize(new java.awt.Dimension(500, 32));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("jLabel7");
         jLabel7.setPreferredSize(new java.awt.Dimension(500, 32));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Completa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,19 +167,20 @@ public class ReservarComida extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))))
                         .addGap(0, 112, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -150,22 +194,19 @@ public class ReservarComida extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,12 +217,83 @@ public class ReservarComida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+                
+        // Ventana anterior
+        MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
+        this.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
+        int i = (int) jComboBox2.getSelectedIndex();
+        if(!this.donacionesDeUnLocal.isEmpty()){
+            Donacion dona = this.donacionesDeUnLocal.get(i);
+
+            dona.setUsuario(this.usuario);
+            // Actualizar
+            if(actualizarDonacion(dona)){
+                JOptionPane.showMessageDialog(null, "Reserva de la Donación realizada.");
+
+                MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
+                this.setVisible(false);
+            }
+            JOptionPane.showMessageDialog(null, "Se ha producido un error al hacer la Reserva de la Donación.");
+
+        } else{
+            JOptionPane.showMessageDialog(null, "Se ha producido un error al hacer la Reserva de la Donación.");
+        }
+
+
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        
+        int i = (int) jComboBox1.getSelectedIndex();
+        Local loca = this.locales.get(i);
+
+        // Introducir Direccion
+        jLabel7.setText(loca.getDireccion().getCalle() + ", " 
+                + loca.getDireccion().getLocalidad() + ","
+                + loca.getDireccion().getProvincia());
+
+        // Buscamos las donaciones con el mismo Local loca
+        this.donacionesDeUnLocal.clear();
+
+        int n = jComboBox2.getItemCount();
+        for (i = n-1; i > 0; i--){
+            jComboBox2.removeItemAt(i);
+        }
+        for (Donacion dona : this.donaciones){
+            if(dona.getLocal().equals(loca) && !this.donacionesDeUnLocal.contains(dona)){
+                this.donacionesDeUnLocal.add(dona);
+                jComboBox2.addItem(dona.getNombreProducto());
+            }
+        }
+        if(n > 0){
+            jComboBox2.removeItemAt(0);
+        }
+
+        if(this.donacionesDeUnLocal.size() < 1){
+            System.out.println("Fallo en Selección de Donacion. Tamaño = "+ this.donacionesDeUnLocal.size());
+        }
+
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+
+        int i = (int) jComboBox2.getSelectedIndex();
+        if(!this.donacionesDeUnLocal.isEmpty()){
+            Donacion dona = this.donacionesDeUnLocal.get(i);
+
+            // Introducir cantidad
+            jLabel6.setText(Integer.toString(dona.getCantidadProducto()));
+        }
+
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
 
 
@@ -197,6 +309,6 @@ public class ReservarComida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

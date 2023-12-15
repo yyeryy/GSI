@@ -23,7 +23,7 @@ import org.bson.Document;
 
 /**
  * ConexionBBDD: Permite la conexion entre la Base de Datos Online y BusinessSystem Local.
- * @author Javier Aranguren.
+ * @author Javier Aranguren e Iván Isusi.
  */
 public class ConexionBBDD {
     /**
@@ -623,14 +623,14 @@ public class ConexionBBDD {
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
         MongoDatabase database = MongoDBSingleton.getDatabase();
         try{
-            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
-            Document consulta = new Document("Local", donacion.getLocal());
-            Document resultado = donacionesCollection.find(consulta).first();
+            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");                
+            Document consulta = new Document("Local", donacion.getLocal());  
+            Document resultado = donacionesCollection.find(consulta).first();                
             if(resultado == null)
             {
                 System.out.println("ERROR: No se ha encontrado la donacion indicada");
                 return false;
-            }
+            }                
             Document nuevo = new Document("$set",crearDonacionDocument(donacion));
             donacionesCollection.updateOne(consulta, nuevo);
             return true;
