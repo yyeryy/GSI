@@ -266,8 +266,12 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             LocalDate fechaNacimiento = null;
 
             try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según el de tu TextField
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 fechaNacimiento = LocalDate.parse(fechaNacimientoStr, formatter);
+                if (fechaNacimiento.getYear() > LocalDate.now().getYear()-14) {
+                    JOptionPane.showMessageDialog(null, "No están permitidos usuarios menores de 14 años.");
+                    return;
+                }
             } catch (DateTimeParseException e) {
                 JOptionPane.showMessageDialog(null, "Por favor, introduzca una fecha de nacimiento válida en el formato correcto.");
                 return;
