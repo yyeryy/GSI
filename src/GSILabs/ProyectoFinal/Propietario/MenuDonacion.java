@@ -1,6 +1,10 @@
 package GSILabs.ProyectoFinal.Propietario;
 
+import GSILabs.BModel.Donacion;
+import GSILabs.BModel.Local;
 import GSILabs.BModel.Usuario;
+import static GSILabs.MongoDB.ConexionBBDD.cargarDonacion;
+import GSILabs.ProyectoFinal.Login.Login;
 
 /**
  *
@@ -12,14 +16,17 @@ public class MenuDonacion extends javax.swing.JFrame {
      * Usuario mediante el que se está ejecutando el programa.
      */
     private Usuario usuario = null;
+    private Local local = null;
 
     /**
      * Constructor MenuDonacion
      * @param usuario Usuario con la que se está utilizando la aplicación.
+     * @param local local con el que se esta utilizando la aplicacion
      */
-    public MenuDonacion(Usuario usuario) {
+    public MenuDonacion(Usuario usuario, Local local) {
         initComponents();
         this.usuario = usuario;
+        this.local = local;
         
         super.setVisible(true);
         super.setLocationRelativeTo(null);
@@ -119,6 +126,11 @@ public class MenuDonacion extends javax.swing.JFrame {
         int numComida = (int)this.spinnerUnidades.getValue();
         System.out.println(comida + ": " + numComida);
         //añadirComida(listaComida, comida, numComida); habria que crear una funcion que hiciera algo asi conectando a la BBDD
+        
+        // Donacion
+        Donacion donacion = new Donacion(local, comida, numComida);
+        cargarDonacion(donacion);
+        
         this.dispose();
     }//GEN-LAST:event_botonDonarActionPerformed
 

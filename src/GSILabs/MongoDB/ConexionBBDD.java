@@ -4,6 +4,7 @@ import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Usuario;
+import GSILabs.BModel.Propietario;
 import GSILabs.BSystem.BusinessSystem;
 import static GSILabs.MongoDB.MongoDBUtils.crearDonacionDocument;
 import static GSILabs.MongoDB.MongoDBUtils.crearDonacionObject;
@@ -13,6 +14,7 @@ import static GSILabs.MongoDB.MongoDBUtils.crearReviewDocument;
 import static GSILabs.MongoDB.MongoDBUtils.crearReviewObject;
 import static GSILabs.MongoDB.MongoDBUtils.crearUsuarioDocument;
 import static GSILabs.MongoDB.MongoDBUtils.crearUsuarioObject;
+import static GSILabs.MongoDB.MongoDBUtils.crearPropietarioDocument;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -23,7 +25,7 @@ import org.bson.Document;
 
 /**
  * ConexionBBDD: Permite la conexion entre la Base de Datos Online y BusinessSystem Local.
- * @author Javier Aranguren.
+ * @author Javier Aranguren e Iván Isusi.
  */
 public class ConexionBBDD {
     /**
@@ -338,7 +340,7 @@ public class ConexionBBDD {
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
         MongoDatabase database = MongoDBSingleton.getDatabase();
         
-        // Subir el usuarios
+        // Subir el local
         try{
             MongoCollection<Document> localesCollection = database.getCollection("Locales");
             Document localDocument = crearLocalDocument(local);
@@ -366,6 +368,31 @@ public class ConexionBBDD {
             Document consulta = new Document("Nombre", nombre);
             Document resultado = localesCollection.find().first();
             return crearLocalObject(resultado);
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido decargar el local indicado");
+            return null;
+        }
+    }
+    
+    public static Local descargarLocalPropietario(Propietario propietario){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        try{
+            MongoCollection<Document> localesCollection = database.getCollection("Locales");
+            for(int i = 1; i <= 3; i++){
+                System.out.println("Buscando propietario en Propietario " + i);
+                try{
+                    Document consulta = new Document("Propietario " + i + ".Nick", propietario.getNick());
+                    Document resultado = localesCollection.find(consulta).first();
+                    if(resultado != null)
+                        return crearLocalObject(resultado);
+                }
+                catch(Exception e){}
+            }
+            System.out.println("ERROR: Local no encontrado");
+            return null;
         }
         catch(Exception e){
             System.out.println("ERROR: No se ha podido decargar el local indicado");
@@ -616,6 +643,7 @@ public class ConexionBBDD {
     }
    
     public static boolean actualizarDonacionUsuario(Donacion donacion){
+        System.out.println("Actualizando donacion");
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();
         MongoDatabase database = MongoDBSingleton.getDatabase();
@@ -629,7 +657,7 @@ public class ConexionBBDD {
             {
                 System.out.println("ERROR: No se ha encontrado la donacion indicada");
                 return false;
-            }
+            }                
             Document nuevo = new Document("$set",crearDonacionDocument(donacion));
             donacionesCollection.updateOne(consulta, nuevo);
             return true;

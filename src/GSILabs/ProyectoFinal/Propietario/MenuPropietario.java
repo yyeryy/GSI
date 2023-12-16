@@ -1,6 +1,9 @@
 package GSILabs.ProyectoFinal.Propietario;
 
+import GSILabs.BModel.Local;
+import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Usuario;
+import static GSILabs.MongoDB.ConexionBBDD.descargarLocalPropietario;
 
 /**
  *
@@ -11,7 +14,8 @@ public class MenuPropietario extends javax.swing.JFrame {
     /**
      * Almacena datos del usuario que está utilizando la aplicación.
      */
-    private Usuario usuario = null;
+    private Usuario usuario;
+    private Local local;
 
     /**
      * Constructor MenuAdministrador
@@ -20,6 +24,7 @@ public class MenuPropietario extends javax.swing.JFrame {
     public MenuPropietario(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
+        this.local = descargarLocalPropietario(new Propietario(usuario.getNick(),usuario.getContraseña(),usuario.getFechaNacimiento()));
         super.setVisible(true);
         super.setLocationRelativeTo(null);
     }
@@ -129,7 +134,7 @@ public class MenuPropietario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPerfilActionPerformed
 
     private void botonDonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDonarActionPerformed
-       MenuDonacion menuDonacion = new MenuDonacion(usuario); //Habrá que meterle usuario también por parámetro? 
+       MenuDonacion menuDonacion = new MenuDonacion(usuario, local);
        menuDonacion.setVisible(true);
     }//GEN-LAST:event_botonDonarActionPerformed
 

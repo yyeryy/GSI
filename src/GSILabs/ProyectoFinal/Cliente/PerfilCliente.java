@@ -23,11 +23,11 @@ public class PerfilCliente extends javax.swing.JFrame {
         initComponents();
         this.usuario = usuario;
 
-        super.setVisible(true);
-        super.setLocationRelativeTo(null);
-
         jLabel2.setText(usuario.getNick());
         jLabel5.setText(usuario.getFechaNacimiento().toString());
+
+        super.setVisible(true);
+        super.setLocationRelativeTo(null);
     }
 
     /**

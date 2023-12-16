@@ -3,6 +3,7 @@ package GSILabs.ProyectoFinal.Login;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarUsuario;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
+import GSILabs.ProyectoFinal.DonaAplicacion.DonaAplicacion;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -22,7 +23,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Usuario que está intentando hacer login.
      */
-    private Usuario usuario = null;
+    public Usuario usuario = null;
 
     /**
      * Constructor Login.
