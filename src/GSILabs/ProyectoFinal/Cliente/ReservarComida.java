@@ -274,6 +274,16 @@ public class ReservarComida extends javax.swing.JFrame {
             jComboBox2.removeItemAt(0);
         }
 
+        int i2 = (int) jComboBox2.getSelectedIndex();
+        if(!this.donacionesDeUnLocal.isEmpty()){
+            Donacion dona = this.donacionesDeUnLocal.get(i2);
+
+            // Introducir cantidad
+            jLabel6.setText(Integer.toString(dona.getCantidadProducto()));
+        }
+
+
+
         if(this.donacionesDeUnLocal.size() < 1){
             System.out.println("Fallo en Selección de Donacion. Tamaño = "+ this.donacionesDeUnLocal.size());
         }
