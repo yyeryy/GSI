@@ -15,14 +15,12 @@ import GSILabs.BModel.Usuario;
 public class VerDonacionCliente extends javax.swing.JFrame {
 
     private Donacion donacion = null;
-    private Usuario usuario = null;
     /**
      * Creates new form VerDonacionCliente
      */
-    public VerDonacionCliente(Donacion donacion, Usuario usuario) {
+    public VerDonacionCliente(Donacion donacion) {
         initComponents();
         this.donacion = donacion;
-        this.usuario = usuario;
         String local = "Local";
         if(this.donacion.getLocal().getTipo() == Local.tipoLocal.BAR){
             local = "Bar";
@@ -172,7 +170,7 @@ public class VerDonacionCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HistorialDonaciones abrirHistorialDonaciones = new HistorialDonaciones(this.usuario);
+        HistorialDonaciones abrirHistorialDonaciones = new HistorialDonaciones(this.donacion.getUsuario());
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

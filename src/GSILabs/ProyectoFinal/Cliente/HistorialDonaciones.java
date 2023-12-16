@@ -30,8 +30,8 @@ public class HistorialDonaciones extends javax.swing.JFrame {
         initComponents();
         this.usuario = usuario;
 
-        // Descargar donaciones disponibles (donaciones con usuario = null)
-        this.donaciones = descargarDonacionesDisponibles(null);
+        // Descargar donaciones reservadas por el usuario(donaciones con usuario = usuario)
+        this.donaciones = descargarDonacionesDisponibles(this.usuario);
         if(this.donaciones.size() < 1){
             System.out.println("Fallo en Donaciones descargadas o esta vacía. Tamaño = "+ this.donaciones.size());
             JOptionPane.showMessageDialog(null, "No has reservado ninguna Donación.");  
@@ -137,7 +137,7 @@ public class HistorialDonaciones extends javax.swing.JFrame {
         if(jList1.getSelectedIndex() != -1){
             Donacion dona = this.donaciones.get(jList1.getSelectedIndex());
 
-            VerDonacionCliente abrirVerDonacionCliente = new VerDonacionCliente(dona, this.usuario);
+            VerDonacionCliente abrirVerDonacionCliente = new VerDonacionCliente(dona);
             this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Donación no selecionada.");

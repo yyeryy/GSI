@@ -233,8 +233,10 @@ public class ReservarComida extends javax.swing.JFrame {
 
                 MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
                 this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Se ha producido un error al hacer la Reserva de la Donación.");
             }
-            JOptionPane.showMessageDialog(null, "Se ha producido un error al hacer la Reserva de la Donación.");
+         
 
         } else{
             JOptionPane.showMessageDialog(null, "Se ha producido un error al hacer la Reserva de la Donación.");
