@@ -50,13 +50,36 @@ public class PruebaMongo {
         Direccion direccion2 = new Direccion("Z","Z","Z",99);
         Local local1 = new Local("Local1",direccion1,"A",BAR,propietario1);
         Local local2 = new Local("Local2",direccion2,"Z",RESTAURANTE,propietario2);
+
         Donacion donacion1 = new Donacion(local1,"ProductoA",10);
+        Donacion donacion10 = new Donacion(local1,"ProductoA0",11);
+        Donacion donacion11 = new Donacion(local1,"ProductoA1",12);
+        Donacion donacion12 = new Donacion(local1,"ProductoA2",13);
+        Donacion donacion13 = new Donacion(local1,"ProductoA3",14);
+        Donacion donacion14 = new Donacion(local1,"ProductoA4",15);
+
         Donacion donacion2 = new Donacion(local2,"ProductoB",20);
+        Donacion donacion20 = new Donacion(local2,"ProductoB0",21);
+        Donacion donacion21 = new Donacion(local2,"ProductoB1",22);
+        Donacion donacion22 = new Donacion(local2,"ProductoB2",23);
+        Donacion donacion23 = new Donacion(local2,"ProductoB3",24);
+        Donacion donacion24 = new Donacion(local2,"ProductoB4",25);
         donacion1.setUsuario(usuario1);
         
         // meter en el business
         bsNuevo.donaciones.add(donacion1);
+        bsNuevo.donaciones.add(donacion10);
+        bsNuevo.donaciones.add(donacion11);
+        bsNuevo.donaciones.add(donacion12);
+        bsNuevo.donaciones.add(donacion13);
+        bsNuevo.donaciones.add(donacion14);
+
         bsNuevo.donaciones.add(donacion2);
+        bsNuevo.donaciones.add(donacion20);
+        bsNuevo.donaciones.add(donacion21);
+        bsNuevo.donaciones.add(donacion22);
+        bsNuevo.donaciones.add(donacion23);
+        bsNuevo.donaciones.add(donacion24);
         // meter en la base de datos
         CargarListaDonaciones(bsNuevo.donaciones);
         System.out.println("Lista con usuario1: " + descargarDonacionesDisponibles(usuario1));
