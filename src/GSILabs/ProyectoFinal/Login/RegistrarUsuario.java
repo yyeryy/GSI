@@ -14,6 +14,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Clase RegistrarUsuario
@@ -61,6 +63,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         botonLogin = new javax.swing.JButton();
         cBoxTipoUsuario = new javax.swing.JComboBox<>();
         labConfirmacionContrasena1 = new javax.swing.JLabel();
+        tfFechaNacimiento = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +128,9 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         labConfirmacionContrasena1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         labConfirmacionContrasena1.setText("Tipo de usuario:");
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Fecha de nacimiento:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,15 +154,17 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                                     .addComponent(labelContrasena)
                                     .addComponent(labConfirmacionContrasena)
                                     .addComponent(labelNombre)
-                                    .addComponent(labConfirmacionContrasena1))
+                                    .addComponent(labConfirmacionContrasena1)
+                                    .addComponent(jLabel2))
                                 .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfContrasena)
+                                    .addComponent(tfConfirmacionContrasena)
+                                    .addComponent(cBoxTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(tfContrasena)
-                                    .addComponent(tfConfirmacionContrasena)
-                                    .addComponent(cBoxTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(tfFechaNacimiento)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jLabel1)
@@ -183,14 +192,17 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                 .addComponent(mostrarContrasena)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cBoxTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonCrearCuenta)
-                            .addComponent(botonSalir)
-                            .addComponent(botonLogin)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfFechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cBoxTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labConfirmacionContrasena1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonCrearCuenta)
+                    .addComponent(botonSalir)
+                    .addComponent(botonLogin))
                 .addGap(24, 24, 24))
         );
 
@@ -241,6 +253,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         } 
         else if(tfContrasena.getText().length() < 3){
             JOptionPane.showMessageDialog(null, "Las contraseñas debe ser de mas de 3 caracteres");
+        } else if(tfFechaNacimiento.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Porfavor, introduzca una fecha de nacimiento.");
         } 
         else {
             //Obtener datos usuario
@@ -248,12 +262,25 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             String contrasena = getMd5(tfContrasena.getText());
             String tipoStr = (String) cBoxTipoUsuario.getSelectedItem();
             
+            String fechaNacimientoStr = tfFechaNacimiento.getText();
+            LocalDate fechaNacimiento = null;
+
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según el de tu TextField
+                fechaNacimiento = LocalDate.parse(fechaNacimientoStr, formatter);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Por favor, introduzca una fecha de nacimiento válida en el formato correcto.");
+                return;
+            }
+            
+            System.out.println("Fecha de nacimiento" + fechaNacimiento);
+            
             //Añadir usuario
             Usuario nuevoUsuario;
             if(tipoStr.equals("Cliente"))
-                nuevoUsuario = new Usuario(nick,contrasena, LocalDate.of(2000,1,1), CLIENTE);
+                nuevoUsuario = new Usuario(nick,contrasena, fechaNacimiento, CLIENTE);
             else
-                nuevoUsuario = new Usuario(nick,contrasena, LocalDate.of(2000,1,1), PROPIETARIO);
+                nuevoUsuario = new Usuario(nick,contrasena, fechaNacimiento, PROPIETARIO);
             
             //Descargar BS
             BusinessSystem bs = DescargarDatos();
@@ -329,6 +356,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton botonSalir;
     private javax.swing.JComboBox<String> cBoxTipoUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labConfirmacionContrasena;
     private javax.swing.JLabel labConfirmacionContrasena1;
     private javax.swing.JLabel labelContrasena;
@@ -336,6 +364,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JCheckBox mostrarContrasena;
     private javax.swing.JPasswordField tfConfirmacionContrasena;
     private javax.swing.JPasswordField tfContrasena;
+    private javax.swing.JTextField tfFechaNacimiento;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
     
