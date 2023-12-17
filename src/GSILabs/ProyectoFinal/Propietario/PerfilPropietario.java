@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GSILabs.ProyectoFinal.Cliente;
+package GSILabs.ProyectoFinal.Propietario;
 
 import GSILabs.BModel.Usuario;
 
@@ -10,7 +10,7 @@ import GSILabs.BModel.Usuario;
  *
  * @author Ivan1
  */
-public class PerfilCliente extends javax.swing.JFrame {
+public class PerfilPropietario extends javax.swing.JFrame {
 
 
     private Usuario usuario = null;
@@ -19,7 +19,7 @@ public class PerfilCliente extends javax.swing.JFrame {
     /**
      * Creates new form PerfilUsuario
      */
-    public PerfilCliente(Usuario usuario) {
+    public PerfilPropietario(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
 
@@ -120,7 +120,7 @@ public class PerfilCliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         // Ventana anterior
-        MenuCliente abrirMenuCliente = new MenuCliente(this.usuario);
+        MenuPropietario abrirMenuPropietario = new MenuPropietario(this.usuario);
         this.setVisible(false);
 
 

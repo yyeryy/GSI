@@ -4,6 +4,8 @@ import GSILabs.BModel.Local;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarLocalPropietario;
+import GSILabs.ProyectoFinal.Cliente.PerfilCliente;
+import GSILabs.ProyectoFinal.Login.Login;
 
 /**
  *
@@ -126,11 +128,15 @@ public class MenuPropietario extends javax.swing.JFrame {
 
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        //System.exit(0);
+        Login abrirLogin = new Login();
+        abrirLogin.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
     private void botonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPerfilActionPerformed
-        // TODO add your handling code here:
+        PerfilPropietario abrirPerfilPropietario = new PerfilPropietario(this.usuario);
+        this.setVisible(false);
     }//GEN-LAST:event_botonPerfilActionPerformed
 
     private void botonDonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDonarActionPerformed
