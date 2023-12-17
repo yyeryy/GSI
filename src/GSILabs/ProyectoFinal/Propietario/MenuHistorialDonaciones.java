@@ -1,16 +1,20 @@
 package GSILabs.ProyectoFinal.Propietario;
 
 import GSILabs.BModel.Donacion;
+import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
- *
- * @author javie
+ * Clase MenuHistorialDonaciones
+ * Interfaz Gráfica mediante la que se muestra el historial de donaciones
+ * realizadas por el usuario, dando la opción de visualizar los detalles
+ * de una de las donaciones de la lista que se seleccione.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class MenuHistorialDonaciones extends javax.swing.JFrame {
     
@@ -19,7 +23,7 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
      */
     private Usuario usuario = null;
     private ArrayList<Donacion> donaciones = new ArrayList<>();
-
+    private ArrayList<Donacion> donacionesUsuario = new ArrayList<>();
 
     /**
      * Constructor MenuHistorialDonaciones
@@ -28,16 +32,31 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
     public MenuHistorialDonaciones(Usuario usuario) {
         initComponents();
         this.donaciones = descargarDonacionesDisponibles(this.usuario);
+        
         System.out.println("Donaciones descargadas. Tamaño = "+ this.donaciones.size()); 
         //List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
         this.listaDonaciones.setModel(modelo);
-
+        
         for (Donacion donacion : this.donaciones){ 
-            if((donacion.getLocal().getPropietarios().get(0).getNick()).equals(usuario.getNick())) {
-                modelo.addElement(donacion.getNombreProducto());
+            for (Propietario propietario : donacion.getLocal().getPropietarios()) {
+                if((propietario.getNick()).equals(usuario.getNick())) {
+                    modelo.addElement(donacion.getNombreProducto());
+                    donacionesUsuario.add(donacion);
+                }
             }
         }
+        
+        System.out.println("\n\nDonaciones");
+        for (Donacion donacione : donaciones) {
+            System.out.println("Donacion: " + donacione);
+        }
+        
+        System.out.println("\n\nDonacionesUsuario");
+        for (Donacion don : donacionesUsuario) {
+            System.out.println("Donacion: " + don);
+        }
+        
         this.listaDonaciones.setModel(modelo);
         this.usuario = usuario;
         
@@ -123,14 +142,27 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDetallesActionPerformed
-        int i = this.listaDonaciones.getSelectedIndex();
-        DefaultListModel modelo = (DefaultListModel) this.listaDonaciones.getModel();
-        String comida = (String) modelo.get(i);
+        int indiceLocal = this.listaDonaciones.getSelectedIndex();
+        Donacion donacionSeleccionada = this.donacionesUsuario.get(this.listaDonaciones.getSelectedIndex());
+        int indiceGeneral = -1;
+        for (int i = 0; i < this.donaciones.size(); i++) {
+            if(this.donaciones.get(i).equals(donacionSeleccionada)) {
+                indiceGeneral = i;
+            }
+        }
         
-        int cantidad = this.donaciones.get(i).getCantidadProducto();
+        System.out.println("IndiceGeneral = " + indiceGeneral);
+        
+        if(indiceGeneral == -1) {
+            System.out.println("Se ha producido un error al seleccionar donacion.");
+        }
+        DefaultListModel modelo = (DefaultListModel) this.listaDonaciones.getModel();
+        String comida = (String) modelo.get(indiceLocal); //indice
+        
+        int cantidad = this.donaciones.get(indiceGeneral).getCantidadProducto();
         String cantidadComoString = String.valueOf(cantidad);
         
-        DetallesDonacion detallesDonacion = new DetallesDonacion(comida, cantidadComoString, this.donaciones.get(i).getLocal().getNombre()/*, "1/10/1999"*/);
+        DetallesDonacion detallesDonacion = new DetallesDonacion(comida, cantidadComoString, this.donaciones.get(indiceGeneral).getLocal().getNombre()/*, "1/10/1999"*/);
         detallesDonacion.setVisible(true);
     }//GEN-LAST:event_botonDetallesActionPerformed
 
