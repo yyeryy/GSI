@@ -23,6 +23,7 @@ import static GSILabs.MongoDB.ConexionBBDD.DescargarListaDonacion;
 import static GSILabs.MongoDB.ConexionBBDD.actualizarDonacionUsuario;
 import static GSILabs.MongoDB.ConexionBBDD.actualizarUsuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
+import static GSILabs.ProyectoFinal.Login.RegistrarUsuario.getMd5;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
@@ -152,10 +153,10 @@ public class PruebaMongo {
                     nombresCalles[i%nombresCalles.length], i);
             
             if (i % 3 < 2){
-                propietario = new Propietario(nombresPersonas[i]+" jr", ""+(i+111111111), LocalDate.of(1950+((i+1)%50), (i%11)+1, (i%25)+1));
+                propietario = new Propietario(nombresPersonas[i]+" jr", ""+ getMd5(i+"111111111"), LocalDate.of(1950+((i+1)%50), (i%11)+1, (i%25)+1));
                 bs.nuevoUsuario(propietario);
 
-                cliente = new Cliente(nombresPersonas[i], ""+(i+111111111), LocalDate.of(1950+((i+1)%50), (i%11)+1, (i%25)+1));
+                cliente = new Cliente(nombresPersonas[i], ""+getMd5(i+"111111111"), LocalDate.of(1950+((i+1)%50), (i%11)+1, (i%25)+1));
                 bs.nuevoUsuario(cliente);
             }
             
