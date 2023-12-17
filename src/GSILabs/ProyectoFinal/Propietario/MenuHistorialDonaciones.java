@@ -1,6 +1,8 @@
 package GSILabs.ProyectoFinal.Propietario;
 
+import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Usuario;
+import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +18,8 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
      * Almacena datos del usuario que está utilizando la aplicación.
      */
     private Usuario usuario = null;
+    private ArrayList<Donacion> donaciones = new ArrayList<>();
+
 
     /**
      * Constructor MenuHistorialDonaciones
@@ -23,13 +27,16 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
      */
     public MenuHistorialDonaciones(Usuario usuario) {
         initComponents();
-        List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
+        this.donaciones = descargarDonacionesDisponibles(this.usuario);
+        System.out.println("Donaciones descargadas. Tamaño = "+ this.donaciones.size()); 
+        //List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
         this.listaDonaciones.setModel(modelo);
-        for (String comida: listaComidas){
-            modelo.addElement(comida);
+
+        for (Donacion dona : this.donaciones){
+            modelo.addElement(dona.getNombreProducto());
         }
-        
+        this.listaDonaciones.setModel(modelo);
         this.usuario = usuario;
         
         super.setVisible(true);
@@ -117,7 +124,11 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         int i = this.listaDonaciones.getSelectedIndex();
         DefaultListModel modelo = (DefaultListModel) this.listaDonaciones.getModel();
         String comida = (String) modelo.get(i);
-        DetallesDonacion detallesDonacion = new DetallesDonacion(comida, "0", "0", "1/10/1999");
+        
+        int cantidad = this.donaciones.get(i).getCantidadProducto();
+        String cantidadComoString = String.valueOf(cantidad);
+        
+        DetallesDonacion detallesDonacion = new DetallesDonacion(comida, cantidadComoString, this.donaciones.get(i).getLocal().getNombre(), "1/10/1999");
         detallesDonacion.setVisible(true);
     }//GEN-LAST:event_botonDetallesActionPerformed
 

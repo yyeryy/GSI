@@ -614,6 +614,24 @@ public class ConexionBBDD {
         }
     }
     
+    public static boolean eliminarDonacion(Donacion donacion){
+        // Conectar a la base de datos
+        MongoClient mongoClient = MongoDBSingleton.getMongoClient();
+        MongoDatabase database = MongoDBSingleton.getDatabase();
+        
+        // Subir la donacion
+        try{
+            MongoCollection<Document> donacionesCollection = database.getCollection("Donaciones");
+            Document donacionDocument = crearDonacionDocument(donacion);
+            donacionesCollection.deleteOne(donacionDocument);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("ERROR: No se ha podido subir la donacion a la lista de Donaciones");
+            return false;
+        }
+    }
+    
     public static ArrayList<Donacion> descargarDonacionesDisponibles(Usuario usuario){
         // Conectar a la base de datos
         MongoClient mongoClient = MongoDBSingleton.getMongoClient();

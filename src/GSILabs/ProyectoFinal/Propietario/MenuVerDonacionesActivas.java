@@ -1,6 +1,10 @@
 package GSILabs.ProyectoFinal.Propietario;
 
+import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Usuario;
+import static GSILabs.MongoDB.ConexionBBDD.cargarDonacion;
+import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
+import static GSILabs.MongoDB.ConexionBBDD.eliminarDonacion;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +21,8 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
      * Almacena datos del usuario que está utilizando la aplicación.
      */
     private Usuario usuario = null;
+    private ArrayList<Donacion> donaciones = new ArrayList<>();
+
 
     /**
      * Constructor MenuVerDonacionesActivas
@@ -24,12 +30,14 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
      */
     public MenuVerDonacionesActivas(Usuario usuario) {
         initComponents();
-        List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
+        this.donaciones = descargarDonacionesDisponibles(this.usuario);
         DefaultListModel modelo = new DefaultListModel();
         this.listaComidas.setModel(modelo);
-        for (String comida: listaComidas){
-            modelo.addElement(comida);
+
+        for (Donacion dona : this.donaciones){
+            modelo.addElement(dona.getNombreProducto());
         }
+        this.listaComidas.setModel(modelo);
         
         this.usuario = usuario;
         
@@ -131,6 +139,7 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         for (int indice: indicesAEliminar){
             System.out.println(modelo.get(indice)+" eliminado ("+indice+")");
             modelo.remove(indice);
+            eliminarDonacion(this.donaciones.get(indice));
         }
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
