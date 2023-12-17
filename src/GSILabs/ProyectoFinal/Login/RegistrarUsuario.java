@@ -273,7 +273,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                     return;
                 }
             } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduzca una fecha de nacimiento válida en el formato correcto.");
+                JOptionPane.showMessageDialog(null, "Por favor, introduzca una fecha de nacimiento válida en el formato correcto (YYYY-MM-DD).\nPor ejemplo: 1999-07-23");
                 return;
             }
             

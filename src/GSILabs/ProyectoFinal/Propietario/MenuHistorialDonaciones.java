@@ -33,8 +33,10 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         DefaultListModel modelo = new DefaultListModel();
         this.listaDonaciones.setModel(modelo);
 
-        for (Donacion dona : this.donaciones){
-            modelo.addElement(dona.getNombreProducto());
+        for (Donacion donacion : this.donaciones){ 
+            if((donacion.getLocal().getPropietarios().get(0).getNick()).equals(usuario.getNick())) {
+                modelo.addElement(donacion.getNombreProducto());
+            }
         }
         this.listaDonaciones.setModel(modelo);
         this.usuario = usuario;
@@ -128,7 +130,7 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         int cantidad = this.donaciones.get(i).getCantidadProducto();
         String cantidadComoString = String.valueOf(cantidad);
         
-        DetallesDonacion detallesDonacion = new DetallesDonacion(comida, cantidadComoString, this.donaciones.get(i).getLocal().getNombre(), "1/10/1999");
+        DetallesDonacion detallesDonacion = new DetallesDonacion(comida, cantidadComoString, this.donaciones.get(i).getLocal().getNombre()/*, "1/10/1999"*/);
         detallesDonacion.setVisible(true);
     }//GEN-LAST:event_botonDetallesActionPerformed
 

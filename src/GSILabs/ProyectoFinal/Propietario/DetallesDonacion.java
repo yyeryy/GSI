@@ -22,7 +22,7 @@ public class DetallesDonacion extends javax.swing.JFrame {
         this.textoCantidad.setEditable(false);
         this.textoComida.setEditable(false);
         this.textoLocal.setEditable(false);
-        this.textoFecha.setEditable(false);
+        //this.textoFecha.setEditable(false);
         this.usuario = usuario;
         
         super.setVisible(true);
@@ -34,9 +34,8 @@ public class DetallesDonacion extends javax.swing.JFrame {
      * @param cantidad
      * @param comida
      * @param local
-     * @param fecha
      */
-    public DetallesDonacion(String comida, String cantidad, String local, String fecha) {
+    public DetallesDonacion(String comida, String cantidad, String local /*,String fecha*/) {
         initComponents();
         this.textoCantidad.setEditable(false);
         this.textoComida.setEditable(false);
@@ -45,7 +44,7 @@ public class DetallesDonacion extends javax.swing.JFrame {
         this.textoCantidad.setText(cantidad);
         this.textoComida.setText(comida);
         this.textoLocal.setText(local);
-        this.textoFecha.setText(fecha);
+        //this.textoFecha.setText(fecha);
     }
 
     /**
@@ -61,12 +60,12 @@ public class DetallesDonacion extends javax.swing.JFrame {
         labelComida = new javax.swing.JLabel();
         labelCantidad = new javax.swing.JLabel();
         labelLocal = new javax.swing.JLabel();
-        labelFecha = new javax.swing.JLabel();
+        //labelFecha = new javax.swing.JLabel();
         botonVolver = new javax.swing.JButton();
         textoComida = new javax.swing.JTextField();
         textoCantidad = new javax.swing.JTextField();
         textoLocal = new javax.swing.JTextField();
-        textoFecha = new javax.swing.JTextField();
+        //textoFecha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +79,7 @@ public class DetallesDonacion extends javax.swing.JFrame {
 
         labelLocal.setText("Local:");
 
-        labelFecha.setText("Fecha:");
+        //labelFecha.setText("Fecha:");
 
         botonVolver.setText("Volver");
         botonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -100,13 +99,13 @@ public class DetallesDonacion extends javax.swing.JFrame {
                 textoLocalActionPerformed(evt);
             }
         });
-
+/*
         textoFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textoFechaActionPerformed(evt);
             }
         });
-
+*/
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,16 +118,16 @@ public class DetallesDonacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(labelFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelLocal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+       /*                     .addComponent(labelFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        */                    .addComponent(labelLocal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(labelCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(labelComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonVolver)
                             .addComponent(textoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+       /*                     .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        */                    .addComponent(textoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textoCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -150,10 +149,10 @@ public class DetallesDonacion extends javax.swing.JFrame {
                     .addComponent(labelLocal)
                     .addComponent(textoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+       /*         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFecha)
                     .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+       */         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(botonVolver)
                 .addContainerGap())
         );
@@ -172,22 +171,22 @@ public class DetallesDonacion extends javax.swing.JFrame {
     private void textoLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textoLocalActionPerformed
-
+/*
     private void textoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textoFechaActionPerformed
-
+*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel labelCantidad;
     private javax.swing.JLabel labelComida;
     private javax.swing.JLabel labelDonacion;
-    private javax.swing.JLabel labelFecha;
+    //private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelLocal;
     private javax.swing.JTextField textoCantidad;
     private javax.swing.JTextField textoComida;
-    private javax.swing.JTextField textoFecha;
+    //private javax.swing.JTextField textoFecha;
     private javax.swing.JTextField textoLocal;
     // End of variables declaration//GEN-END:variables
 }

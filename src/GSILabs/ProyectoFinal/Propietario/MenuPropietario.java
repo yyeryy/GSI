@@ -86,7 +86,7 @@ public class MenuPropietario extends javax.swing.JFrame {
 
         labelMenuAdministrador.setFont(new java.awt.Font("Monotype Corsiva", 2, 24)); // NOI18N
         labelMenuAdministrador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMenuAdministrador.setText("Menú Administrador");
+        labelMenuAdministrador.setText("Menú Propietario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
