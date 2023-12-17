@@ -161,20 +161,22 @@ public class Donacion {
         }
 
         //Usuario
-        partes = this.getUsuario().toXML().split("<Usuario>", 2);
-        if(partes.length == 2){
-            xmlData += "<Usuario>" + partes[1];
-        }else{
-            partes = this.getUsuario().toXML().split("<Cliente>", 2);
+        if(this.getUsuario() != null){
+            partes = this.getUsuario().toXML().split("<Usuario>", 2);
             if(partes.length == 2){
-                xmlData += "<Cliente>" + partes[1];
+                xmlData += "<Usuario>" + partes[1];
             }else{
-            partes = this.getUsuario().toXML().split("<Propietario>", 2);
-            if(partes.length == 2){
-                xmlData += "<Propietario>" + partes[1];
+                partes = this.getUsuario().toXML().split("<Cliente>", 2);
+                if(partes.length == 2){
+                    xmlData += "<Cliente>" + partes[1];
+                }else{
+                partes = this.getUsuario().toXML().split("<Propietario>", 2);
+                if(partes.length == 2){
+                    xmlData += "<Propietario>" + partes[1];
+                }
+                }
             }
-            }
-        }
+        }// Si no tiene Ususario se añade nada
 
         //Cierre
         xmlData += "</Donacion>\n";

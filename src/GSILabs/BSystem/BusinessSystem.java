@@ -21,6 +21,7 @@ import GSILabs.persistence.XMLWritingException;
 import static GSILabs.persistence.parser.obtenerContenidoEtiqueta;
 import static GSILabs.persistence.parser.parseBar;
 import static GSILabs.persistence.parser.parseCliente;
+import static GSILabs.persistence.parser.parseDonacion;
 import static GSILabs.persistence.parser.parseLocal;
 import static GSILabs.persistence.parser.parsePropietario;
 import static GSILabs.persistence.parser.parsePub;
@@ -889,6 +890,87 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
         return (Pub[])lista.toArray();
     }
     
+// Donacion
+
+    /**
+     * Anota una Donacion en el sistema,
+     * @param dona Donacion a inserta en BusinessSystem
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean nuevaDonacion(Donacion dona){
+        return donaciones.add(dona);
+    }
+
+    /**
+     * Anota una Donacion en el sistema,
+     * con el local que realiza la donacion, nombre del producto y la cantidad,
+     * el usuario de la Donacion se inicializa en null
+     * @param l Local que hace la Donacion
+     * @param p Nombre del producto a donar
+     * @param c Cantidad del producto a donar
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean nuevaDonacion(Local l, String p, int c){
+        Donacion dona = new Donacion(l, p, c);
+        return donaciones.add(dona);
+    }
+
+    /**
+     * Actualiza una Donacion con usuario null en el sistema
+     * a tener como usuario el Usuario que reserva la Donacion,
+     * @param d Donacion que el usuario reserva
+     * @param u Usuario que reserva la Donacion
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean reservarDonacion(Donacion d, Usuario u){
+        int i = donaciones.indexOf(d);
+        Donacion dona = donaciones.get(i);
+        dona.setUsuario(u);
+        return true;
+    }
+
+    /**
+     * Elimina una Donacion del sistema, en caso de que esta exista
+     * @param d La donacion a eliminar.
+     * @return True si y solo si la operacion fue completada.
+     */
+    public boolean eliminarDonacion(Donacion d){
+        return donaciones.remove(d);
+    }
+
+    /**
+     * Obtiene todas las Donaciones reservadas por un usuario
+     * @param u Usuario al que se obtine todas sus donaciones reservadas
+     * @return True si y solo si la operacion fue completada.
+     */
+    public Donacion[] obtenerDonaciones(Usuario u){
+
+        ArrayList<Donacion> lista = new ArrayList<>();
+        for(int i = 0; i < this.donaciones.size(); i++){
+            if(this.donaciones.get(i).getUsuario().equals(u)){
+                lista.add(this.donaciones.get(i));
+            }
+        }
+
+        return (Donacion[])lista.toArray();
+    }
+
+    /**
+     * Obtiene todas las Donaciones hechas por un Local
+     * @param l Local al que se obtine todas sus donaciones realizadas
+     * @return True si y solo si la operacion fue completada.
+     */
+    public Donacion[] obtenerDonaciones(Local l){
+
+        ArrayList<Donacion> lista = new ArrayList<>();
+        for(int i = 0; i < this.donaciones.size(); i++){
+            if(this.donaciones.get(i).getLocal().equals(l)){
+                lista.add(this.donaciones.get(i));
+            }
+        }
+        return (Donacion[])lista.toArray();
+    }
+
     /**
      * Importa pubs (Ejercicio 6 - Práctica 2)
      * @param f fichero
@@ -999,6 +1081,17 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
         }
         xmlData += "</Locales>\n";
 
+        // Donaciones
+        xmlData += "<Donaciones>\n";
+        //Reviews
+        for(int i = 0; i < this.donaciones.size(); i++){
+            partes = this.donaciones.get(i).toXML().split("<Donacion>", 2);
+            if(partes.length == 2){
+                xmlData += "<Donacion>" + partes[1];
+            }
+        }
+        xmlData += "</Donaciones>\n";
+
         //Cierre
         xmlData += "</BusinessSystem>\n";
         return formatearXML(xmlData);
@@ -1031,6 +1124,8 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
         List<Local> locales = new ArrayList<>();
         String strReviewsTodos = obtenerContenidoEtiqueta(str,"Reviews");
         List<Review> reviews = new ArrayList<>();
+        String strDonacionesTodos = obtenerContenidoEtiqueta(str,"Donaciones");
+        List<Donacion> donacioness = new ArrayList<>();
 
 
         //Para todos los Usuarios
@@ -1119,6 +1214,20 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
                 reviews.add(parseReview(strReview));
             }
         }
+
+        //Para todos las Reviews
+        if(strDonacionesTodos != null){
+            List<String> strDonacions = new ArrayList<>();
+            for(String strReview : strDonacionesTodos.split("<Donacion>")){
+                strDonacions.add(obtenerContenidoEtiqueta("<Donacion>"+strReview+"</Donacion>", "Donacion"));
+            }
+            strDonacions.remove(0); //El primero es un null, debido a la forma de trocear, se debe eliminar
+
+            for(String strDonacion : strDonacions){
+                donacioness.add(parseDonacion(strDonacion));
+            }
+        }
+
         //Instancia de BusinessSystem
         BusinessSystem bs = new BusinessSystem();
 
@@ -1131,8 +1240,15 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
         for(int i = 0; i < locales.size(); i++){
             bs.nuevoLocal(locales.get(i));
         }
+
+        // Añadir Reviews
         for(int i = 0; i < reviews.size(); i++){
             bs.nuevaReview(reviews.get(i));
+        }
+
+        // Añadir Donaciones
+        for(int i = 0; i < donacioness.size(); i++){
+            bs.nuevaDonacion(donacioness.get(i));
         }
 
         return bs;
@@ -1239,76 +1355,6 @@ public class BusinessSystem implements LeisureOffice, LookupService, XMLRepresen
             if (linea.matches(".*<[A-Z].*")) {tabulacion++;} //Caso de inicio objeto
         }
         return stringBuilder.toString();
-    }
-
-
-
-
-    // Luego esto hay que moverlo a antes del parser
-
-    // Donacion
-
-    /**
-     * Anota una Donacion en el sistema,
-     * con el local que realiza la donacion, nombre del producto y la cantidad,
-     * se comprueba si existe la Donacion en el local sin usuario, 
-     * en caso de existir, se le añade la cantidad, 
-     * si no existe, se crea una nueva Donacion.
-     * @param l Local que hace la Donacion
-     * @param p Nombre del producto a donar
-     * @param c Cantidad del producto a donar
-     * @return True si y solo si la operacion fue completada.
-     */
-    public boolean nuevaDonacion(Local l, String p, int c){
-
-        Donacion dona = new Donacion(l, p, c);
-
-	int indice = donaciones.indexOf(dona);
-	if (indice == -1) {
-            // no habia una Donacion antes
-            donaciones.add(dona);
-	}else{
-            // ya hay una Donacion, se le añade la cantidad
-            dona = donaciones.get(indice);
-            dona.setCantidadProducto(c + dona.getCantidadProducto());
-        }
-
-        return true;
-    }
-
-
-
-    /**
-     * Anota una Donacion en el sistema con el Usuario que la reserva,
-     * con la Donacion sin usuario  
-     * y la cantidad que reserva el Usuario,
-     * se le resta la cantidad a la Donacion sin usuario y 
-     * se crea otra Donacion con esa cantidad, local, prodcuto y el usuario.
-     * @param d Donacion que el usuario reserva
-     * @param c Cantidad del producto de la Donacion a reservar por el usuario
-     * @param u Usuario que reserva la Donacion
-     * @return True si y solo si la operacion fue completada.
-     */
-    public boolean reservarDonacion(Donacion d, int c, Usuario u){
-
-        d.setCantidadProducto(d.getCantidadProducto() - c);
-        Donacion dona = new Donacion(d.getLocal(), d.getNombreProducto(), c, u);
-        donaciones.add(dona);
-
-        if(d.getCantidadProducto() <= 0){
-            eliminarDonacion(d);
-        }
-
-        return true;
-    }
-
-    /**
-     * Elimina una Donacion del sistema, en caso de que esta exista
-     * @param d La donacion a eliminar.
-     * @return True si y solo si la operacion fue completada.
-     */
-    public boolean eliminarDonacion(Donacion d){
-        return donaciones.remove(d);
     }
 
 }

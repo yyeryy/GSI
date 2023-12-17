@@ -4,6 +4,7 @@ import GSILabs.BModel.Bar;
 import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Direccion;
+import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Propietario;
@@ -689,6 +690,90 @@ public class parser {
         return(parseUsuario(contenido));
     }
     
+    /**
+     * Crea un objeto Donacion a partir de un String XML que le represente.
+     * @param str String que contiene el XML.
+     * @return Objeto Donacion creado a partir del XML.
+     * @throws java.io.IOException problea con Usuario Local o Contestacion
+     * @throws GSILabs.persistence.XMLParsingException Exception de fallo de parseo de XML
+     */
+    public static Donacion parseDonacion(String str) throws IOException, XMLParsingException{
+        //Atributos a almacenar
+        String strNombreP = obtenerContenidoEtiqueta(str,"nombreProducto");
+        String strCantidad = obtenerContenidoEtiqueta(str,"cantidadProducto");
+
+        String strLocal = obtenerContenidoEtiqueta(str,"Local");
+
+        Local local = null;
+        if(null == strLocal){
+            strLocal = obtenerContenidoEtiqueta(str, "Bar");
+            if(null == strLocal){
+                strLocal = obtenerContenidoEtiqueta(str, "Restaurante");
+                if(null == strLocal){
+                    strLocal = obtenerContenidoEtiqueta(str, "Pub");
+                    if(null != strLocal){
+                        local = parsePub(strLocal);
+                    }
+                }else{
+                    local = parseRestaurante(strLocal);
+                }
+            }else{
+                local = parseBar(strLocal);
+            }
+        }else{
+            local = parseLocal(strLocal);
+        }
+
+        String strUsuario = obtenerContenidoEtiqueta(str,"Usuario");
+        Usuario usuario = null;
+        if(null == strUsuario){
+            strUsuario = obtenerContenidoEtiqueta(str, "Cliente");
+            if(null == strUsuario){
+                strUsuario = obtenerContenidoEtiqueta(str, "Propietario");
+                if(null != strUsuario){
+                    usuario = parsePropietario(strUsuario);
+                }
+            }else{
+                usuario = parseCliente(strUsuario);
+            }
+        }else{
+            usuario = parseUsuario(strUsuario);
+        }
+
+        //Comprobar validez XML
+        if(null == strNombreP) throw new XMLParsingException("Nombre del Producto vacio o invalido.");
+        if(null == strCantidad) throw new XMLParsingException("Cantidad del Producto vacia o invalida.");
+        if(null == strLocal) throw new XMLParsingException("Local vacio o invalido.");
+
+        //Crear objetos que se usan para crear propietario
+        Donacion donacion = new Donacion(local, strNombreP, Integer.parseInt(strCantidad));
+        if(usuario != null){
+            donacion.setUsuario(usuario);  
+        }   
+
+        //Devolver objeto
+        return donacion;
+    }
+    
+    /**
+     * Crea un objeto Donacion a partir de un Fichero XML que le represente.
+     * @param f Fichero que contiene el XML.
+     * @return Objeto Donacion creado a partir del XML.
+     * @throws java.io.IOException Problema con el fichero.
+     * @throws GSILabs.persistence.XMLParsingException Exception de fallo de parseo de XML
+     */
+    public static Donacion parseDonacion(File f) throws IOException, XMLParsingException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+        //Leer fichero
+        String contenido = "";
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {contenido += linea;}
+        //Comprobar si esta vacio
+        if(contenido.length() == 0) {throw new XMLParsingException("Fichero vacio.");}
+        return(parseDonacion(contenido));
+    }
+
+
     /**
      * Devuelve un String que contiene la etiqueta indicada como etiqueta delimitadora
      * Ejemplo:
