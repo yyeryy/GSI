@@ -26,7 +26,6 @@ public class DetallesDonacion extends javax.swing.JFrame {
         this.textoCantidad.setEditable(false);
         this.textoComida.setEditable(false);
         this.textoLocal.setEditable(false);
-        //this.textoFecha.setEditable(false);
         this.usuario = usuario;
         
         super.setVisible(true);
@@ -39,7 +38,7 @@ public class DetallesDonacion extends javax.swing.JFrame {
      * @param comida
      * @param local
      */
-    public DetallesDonacion(String comida, String cantidad, String local /*,String fecha*/) {
+    public DetallesDonacion(String comida, String cantidad, String local) {
         initComponents();
         this.textoCantidad.setEditable(false);
         this.textoComida.setEditable(false);
@@ -48,7 +47,6 @@ public class DetallesDonacion extends javax.swing.JFrame {
         this.textoCantidad.setText(cantidad);
         this.textoComida.setText(comida);
         this.textoLocal.setText(local);
-        //this.textoFecha.setText(fecha);
     }
 
     /**
@@ -175,22 +173,15 @@ public class DetallesDonacion extends javax.swing.JFrame {
     private void textoLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textoLocalActionPerformed
-/*
-    private void textoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoFechaActionPerformed
-*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel labelCantidad;
     private javax.swing.JLabel labelComida;
     private javax.swing.JLabel labelDonacion;
-    //private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelLocal;
     private javax.swing.JTextField textoCantidad;
     private javax.swing.JTextField textoComida;
-    //private javax.swing.JTextField textoFecha;
     private javax.swing.JTextField textoLocal;
     // End of variables declaration//GEN-END:variables
 }

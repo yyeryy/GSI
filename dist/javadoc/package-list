@@ -1,0 +1,12 @@
+GSILabs.BModel
+GSILabs.BSystem
+GSILabs.BTesting.P01
+GSILabs.Misc
+GSILabs.MongoDB
+GSILabs.ProyectoFinal.Cliente
+GSILabs.ProyectoFinal.DonaAplicacion
+GSILabs.ProyectoFinal.Login
+GSILabs.ProyectoFinal.Propietario
+GSILabs.connect
+GSILabs.persistence
+GSILabs.serializable
