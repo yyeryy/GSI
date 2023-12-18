@@ -4,12 +4,17 @@ import GSILabs.BModel.Local;
 import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarLocalPropietario;
-import GSILabs.ProyectoFinal.Cliente.PerfilCliente;
 import GSILabs.ProyectoFinal.Login.Login;
 
 /**
- *
- * @author javie
+ * Clase MenuPropietario
+ * Interfaz Gráfica mediante la que se muestra el menú general del
+ * propietario, dando la opción de donar comida, visualizar y eliminar
+ * donaciones, visualizar el historial de donaciones, ver el perfil de
+ * usuario y cerrar sesión.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class MenuPropietario extends javax.swing.JFrame {
     

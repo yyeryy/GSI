@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.ProyectoFinal.Cliente;
 
 import GSILabs.BModel.Donacion;
-import GSILabs.BModel.Local;
 import GSILabs.BModel.Local.tipoLocal;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
@@ -14,18 +9,25 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Ivan1
+ * Clase HistorialDonaciones
+ * Interfaz Gráfica mediante la que se visualiza la información
+ * del usuario.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class HistorialDonaciones extends javax.swing.JFrame {
 
-
+    /**
+     * Usuario de la aplicación, en este caso Cliente.
+     */
     private Usuario usuario = null;
 
-    private ArrayList<Donacion> donaciones = new ArrayList<>();
     /**
-     * Creates new form HistorialDonaciones
+     * Listado del historial de las donaciones.
      */
+    private ArrayList<Donacion> donaciones = new ArrayList<>();
+
     public HistorialDonaciones(Usuario usuario) {
         initComponents();
         this.usuario = usuario;

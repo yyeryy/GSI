@@ -1,19 +1,20 @@
 package GSILabs.ProyectoFinal.Propietario;
 
 import GSILabs.BModel.Donacion;
+import GSILabs.BModel.Propietario;
 import GSILabs.BModel.Usuario;
-import static GSILabs.MongoDB.ConexionBBDD.cargarDonacion;
 import static GSILabs.MongoDB.ConexionBBDD.descargarDonacionesDisponibles;
 import static GSILabs.MongoDB.ConexionBBDD.eliminarDonacion;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
- *
- * @author javie
+ * Clase MenuVerDonacionesActivas
+ * Interfaz Gráfica mediante la que se muestran las donaciones que todavía
+ * están sin reservar.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class MenuVerDonacionesActivas extends javax.swing.JFrame {
     
@@ -22,7 +23,7 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
      */
     private Usuario usuario = null;
     private ArrayList<Donacion> donaciones = new ArrayList<>();
-
+    private ArrayList<Donacion> comidasUsuario = new ArrayList<>();
 
     /**
      * Constructor MenuVerDonacionesActivas
@@ -34,9 +35,15 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
         DefaultListModel modelo = new DefaultListModel();
         this.listaComidas.setModel(modelo);
 
-        for (Donacion dona : this.donaciones){
-            modelo.addElement(dona.getNombreProducto());
+        for (Donacion donacion : this.donaciones){ 
+            for (Propietario propietario : donacion.getLocal().getPropietarios()) {
+                if((propietario.getNick()).equals(usuario.getNick())) {
+                    modelo.addElement(donacion.getNombreProducto());
+                    comidasUsuario.add(donacion);
+                }
+            }
         }
+      
         this.listaComidas.setModel(modelo);
         
         this.usuario = usuario;
@@ -128,19 +135,23 @@ public class MenuVerDonacionesActivas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-        int[] indices = this.listaComidas.getSelectedIndices();
-        List<Integer> indicesAEliminar = new ArrayList<>();
-        for (Integer indice: indices){
-            System.out.println(indice);
-            indicesAEliminar.add(indice);
+        int indiceLocal = this.listaComidas.getSelectedIndex();
+        Donacion comidaSeleccionada = this.comidasUsuario.get(indiceLocal);
+        int indiceGeneral = -1;
+        for (int i = 0; i < this.donaciones.size(); i++) {
+            if(this.donaciones.get(i).equals(comidaSeleccionada)) {
+                indiceGeneral = i;
+            }
         }
-        Collections.sort(indicesAEliminar, Collections.reverseOrder());
-        DefaultListModel modelo = (DefaultListModel) this.listaComidas.getModel();
-        for (int indice: indicesAEliminar){
-            System.out.println(modelo.get(indice)+" eliminado ("+indice+")");
-            modelo.remove(indice);
-            eliminarDonacion(this.donaciones.get(indice));
+        
+        //Si indiceGeneral contiene un indiceGeneral
+        if(indiceGeneral != -1) {
+            DefaultListModel modelo = (DefaultListModel) this.listaComidas.getModel();
+            System.out.println(modelo.get(indiceLocal) + " eliminado (" + indiceGeneral + ")");
+            modelo.remove(indiceLocal);
+            eliminarDonacion(this.donaciones.get(indiceGeneral));
         }
+      
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
 

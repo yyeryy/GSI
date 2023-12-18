@@ -34,7 +34,6 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
         this.donaciones = descargarDonacionesDisponibles(this.usuario);
         
         System.out.println("Donaciones descargadas. Tamaño = "+ this.donaciones.size()); 
-        //List<String> listaComidas = new ArrayList<>(Arrays.asList("Pan", "Aceite", "Huevo", "Ensalada", "Macarrones"));
         DefaultListModel modelo = new DefaultListModel();
         this.listaDonaciones.setModel(modelo);
         

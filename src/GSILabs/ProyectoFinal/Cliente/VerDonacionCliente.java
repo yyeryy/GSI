@@ -1,22 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.ProyectoFinal.Cliente;
 
 import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
-import GSILabs.BModel.Usuario;
 
 /**
- *
- * @author Ivan1
+ * Clase VerDonacionCliente
+ * Interfaz Gráfica mediante la que se visualiza la información
+ * del la donación reservada por el cliente.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class VerDonacionCliente extends javax.swing.JFrame {
 
-    private Donacion donacion = null;
     /**
-     * Creates new form VerDonacionCliente
+     * Donación reservada por el cliente.
+     */
+    private Donacion donacion = null;
+
+    /**
+     * Constructor VerDonacionCliente
+     * @param donacion Donación de la reserva realizada por el cliente.
      */
     public VerDonacionCliente(Donacion donacion) {
         initComponents();
@@ -174,9 +178,6 @@ public class VerDonacionCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,8 +3,12 @@ package GSILabs.ProyectoFinal.Propietario;
 import GSILabs.BModel.Usuario;
 
 /**
- *
- * @author javie
+ * Clase DetallesDonacion
+ * Interfaz Gráfica mediante la que se muestran los detalles
+ * de una donación seleccionada en la interfaz gráfica MenuHistorialDonaciones.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class DetallesDonacion extends javax.swing.JFrame {
     

@@ -3,7 +3,6 @@ package GSILabs.ProyectoFinal.Login;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.descargarUsuario;
 import GSILabs.ProyectoFinal.Cliente.MenuCliente;
-import GSILabs.ProyectoFinal.DonaAplicacion.DonaAplicacion;
 import GSILabs.ProyectoFinal.Propietario.MenuPropietario;
 import java.math.BigInteger;
 import java.security.MessageDigest;

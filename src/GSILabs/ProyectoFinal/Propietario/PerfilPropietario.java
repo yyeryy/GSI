@@ -1,23 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.ProyectoFinal.Propietario;
 
 import GSILabs.BModel.Usuario;
 
 /**
- *
- * @author Ivan1
+ * Clase PerfilPropietario
+ * Interfaz Gráfica mediante la que se visualiza la información
+ * del usuario.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class PerfilPropietario extends javax.swing.JFrame {
 
-
+    /**
+     * Usuario de la aplicación, en este caso Propietario.
+     */
     private Usuario usuario = null;
 
-
     /**
-     * Creates new form PerfilUsuario
+     * Constructor PerfilPropietario
+     * @param usuario Usuario de la aplicación
      */
     public PerfilPropietario(Usuario usuario) {
         initComponents();
@@ -118,12 +120,9 @@ public class PerfilPropietario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         // Ventana anterior
         MenuPropietario abrirMenuPropietario = new MenuPropietario(this.usuario);
         this.setVisible(false);
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     

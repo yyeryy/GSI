@@ -4,11 +4,15 @@ import GSILabs.BModel.Donacion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Usuario;
 import static GSILabs.MongoDB.ConexionBBDD.cargarDonacion;
-import GSILabs.ProyectoFinal.Login.Login;
 
 /**
- *
- * @author javie
+ * Clase MenuDonacion
+ * Interfaz Gráfica mediante la que se realizan las donaciones
+ * por parte del usuario introduciendo la descripción de la comida
+ * que se va a donar y las unidades.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class MenuDonacion extends javax.swing.JFrame {
     

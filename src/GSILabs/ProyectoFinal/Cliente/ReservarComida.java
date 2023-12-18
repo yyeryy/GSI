@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GSILabs.ProyectoFinal.Cliente;
 
 import GSILabs.BModel.Donacion;
@@ -13,8 +9,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Ivan1
+ * Clase HistorialDonaciones
+ * Interfaz Gráfica mediante la que se visualiza la información
+ * del usuario.
+ * @author Grupo 3 - GSI
+ * @version 1.0
+ * @since 02.12.2023
  */
 public class ReservarComida extends javax.swing.JFrame {
 
@@ -26,8 +26,10 @@ public class ReservarComida extends javax.swing.JFrame {
     private ArrayList<Local> locales = new ArrayList<>();
 
     private ArrayList<Donacion> donacionesDeUnLocal = new ArrayList<>();
+
     /**
-     * Creates new form ReservarComida
+     * Constructor ReservarComida
+     * @param usuario 
      */
     public ReservarComida(Usuario usuario) {
         initComponents();
