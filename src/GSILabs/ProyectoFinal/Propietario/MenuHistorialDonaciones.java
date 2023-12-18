@@ -46,16 +46,6 @@ public class MenuHistorialDonaciones extends javax.swing.JFrame {
             }
         }
         
-        System.out.println("\n\nDonaciones");
-        for (Donacion donacione : donaciones) {
-            System.out.println("Donacion: " + donacione);
-        }
-        
-        System.out.println("\n\nDonacionesUsuario");
-        for (Donacion don : donacionesUsuario) {
-            System.out.println("Donacion: " + don);
-        }
-        
         this.listaDonaciones.setModel(modelo);
         this.usuario = usuario;
         
